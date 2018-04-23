@@ -161,21 +161,27 @@
                         @endpermission
                         </ul>
                     </li>
+                        <li class={{ Request::segment(2) == "equipments" ? 'active' : '' }}><a href="{{route('admin.equipments.index')}}"><span>Equipos</span></a></li>
                         @permission('logs.list')
-                            <li class={{ Request::segment(2) == "logs" ? 'active' : '' }}><a href="{{route('configs.logs.index')}}"><span>Logs</span></a></li>
+                        <li class={{ Request::segment(2) == "logs" ? 'active' : '' }}><a href="{{route('configs.logs.index')}}"><span>Logs</span></a></li>
                         @endpermission
+                
 
+                        {{-- 
                         @permission('financials.list')
                             <li class={{ Request::segment(2) == "financials" ? 'active' : '' }}><a href="{{route('admin.financials.index')}}"><span>Financiamientos</span></a></li>
                         @endpermission
-
+                        --}}
+                        {{-- 
                         @permission('paymethods.list')
                             <li class={{ Request::segment(2) == "payMethods" ? 'active' : '' }}><a href="{{route('admin.payMethods.index')}}"><span>Metodos de Pago</span></a></li>
                         @endpermission
-
+                        --}}
+                        {{--
                         @permission('checkbooks.list')
                             <li class={{ Request::segment(2) == "checkbooks" ? 'active' : '' }}><a href="{{route('admin.checkbooks.index')}}"><span>Chequera</span></a></li>
                         @endpermission
+                        --}}
                 </ul>
                 </li>
             @endpermission

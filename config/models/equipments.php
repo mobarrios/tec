@@ -1,13 +1,13 @@
 <?php
 
-$model = 'orders';
+$model = 'equipments';
 
 return [
 
     'paginate'      => '50',
 
     //nombre de la seccion
-    'sectionName'   => 'Ordenes',
+    'sectionName'   => 'Equipamientos',
 
     //routes
     'indexRoute'    => 'admin.'.$model.'.index',
@@ -17,9 +17,9 @@ return [
     'editRoute'     => 'admin.'.$model.'.edit',
     'updateRoute'   => 'admin.'.$model.'.update',
     'destroyRoute'  => 'admin.'.$model.'.destroy',
-    
-    'postStoreRoute'  => 'admin.'.$model.'.index',
-    'postUpdateRoute' => 'admin.'.$model.'.index',
+
+    'postStoreRoute'  => 'admin.'.$model.'.edit',
+    'postUpdateRoute' => 'admin.'.$model.'.edit',
 
     //urls
     'destroyUrl' => 'admin/'.$model.'/destroy/',
@@ -33,28 +33,35 @@ return [
 
     //polymorphic
     'is_logueable'      => true,
-    'is_imageable'      => true,
+    'is_imageable'      => false,
     'is_brancheable'    => false,
-
-
+    
 
     //column search
-    
     'search' => [
         
             'Nombre'    => 'name',
-            'Apellido'  => 'last_name' ,
-            'Email'     => 'email'
+            //'Direccion'  => 'address' ,
+            //'Email'     => 'email',
     ],
 
     'validationsStore' => [
 
-          
-    
+            'name'          => 'required',
+            //'address'     => 'required',
+
     ],
 
     'validationsUpdate' => [
 
+            'name'          => 'required',
+            //'address'     => 'required',
+
     ],
+
+    'export' => [
+        'Nombre' => 'name',
+        'Costo extra' => 'extra_cost',
+    ]
 
 ];

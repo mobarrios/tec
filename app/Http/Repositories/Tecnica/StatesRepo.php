@@ -1,11 +1,9 @@
 <?php
-namespace App\Http\Repositories;
+namespace App\Http\Repositories\Tecnica;
 
 
 use App\Entities\Tecnica\States;
-use App\Http\Repositories\Tecnica\StatesRepo;
-
-
+use App\Http\Repositories\BaseRepo;
 class StatesRepo extends BaseRepo {
     
     public function getModel()

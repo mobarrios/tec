@@ -369,4 +369,9 @@ abstract class BaseRepo
         $model->customizables()->attach($addition_id);
     }
 
+    public function ultimo()
+    {
+        return  $this->model->orderBy('id', 'desc')->first();
+      
+    }
 }

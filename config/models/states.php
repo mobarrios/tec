@@ -7,7 +7,7 @@ return [
     'paginate'      => '50',
 
     //nombre de la seccion
-    'sectionName'   => 'States',
+    'sectionName'   => 'Estados',
 
     //routes
     'indexRoute'    => 'admin.'.$model.'.index',
@@ -42,27 +42,23 @@ return [
     
     'search' => [
         
-            'Nombre'    => 'name',
-            'Apellido'  => 'last_name' ,
-            'Email'     => 'email'
+            'Descripción'    => 'description',
+           
     ],
 
     'validationsStore' => [
 
-            'email'         => 'required|unique:users,email|email',
-            'name'          => 'required',
-            'last_name'     => 'required',
-            'password'      => 'required',
-            'roles_id'      => 'required',
-            'branches_id'   => 'required',
+           
+            'description'          => 'required',
+            'text_email'           => 'required',
+           
     ],
 
     'validationsUpdate' => [
 
-            'name'          => 'required',
-            'last_name'     => 'required',
-            'roles_id'      => 'required',
-            'branches_id'   => 'required',
+            'description'    => 'required',
+            'text_email'     => 'required',
+            
     ],
 
 ];

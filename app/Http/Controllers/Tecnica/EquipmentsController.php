@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Tecnica;
 
 use App\Http\Controllers\Controller;
-use App\Http\Repositories\Tecnica\StatesRepo;
-use App\Http\Repositories\Tecnica\StatesRepo as Repo;
+use App\Http\Repositories\Tecnica\EquipmentsRepo;
+use App\Http\Repositories\Tecnica\EquipmentsRepo as Repo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 
 
-class StatesController extends Controller
+class EquipmentsController extends Controller
 {
     public function  __construct(Request $request, Repo $repo, Route $route)
     {
@@ -18,7 +18,7 @@ class StatesController extends Controller
         $this->repo     = $repo;
         $this->route    = $route;
 
-        $this->section          = 'states';
+        $this->section          = 'equipments';
         $this->data['section']  = $this->section;
     }
 
