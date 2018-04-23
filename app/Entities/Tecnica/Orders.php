@@ -17,6 +17,8 @@ class Orders extends Entity
     	return $this->belongsTo(Clients::class, 'clients_id');
     }
 
+
+
 }
 
 

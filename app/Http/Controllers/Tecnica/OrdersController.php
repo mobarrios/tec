@@ -26,8 +26,8 @@ class OrdersController extends Controller
         $this->data['ultima_orden'] = $repo->ultimo()->id + 1;
         $this->data['brands']       = $brandsRepo->getAllWithModels();
         $this->data['clients']      = $clientsRepo->ListsData('name','id');
-        //$this->data['models']       = $modelsRepo->ListsData('name','id');
-           
+        //$this->data['models']     = $modelsRepo->ListsData('name','id');
+        //$this->data['clients']    = $clientsRepo->listForSelect();   
      
     }
 

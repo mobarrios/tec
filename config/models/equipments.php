@@ -7,7 +7,7 @@ return [
     'paginate'      => '50',
 
     //nombre de la seccion
-    'sectionName'   => 'Equipamientos',
+    'sectionName'   => 'Equipamentos',
 
     //routes
     'indexRoute'    => 'admin.'.$model.'.index',

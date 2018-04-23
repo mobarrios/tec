@@ -16,8 +16,14 @@ Route::group(['prefix'=>'orders'],function(){
         Route::get('/index/{search?}',  ['as'=>'admin.orders.index','uses'=>'Tecnica\OrdersController@index']);
         Route::get('/pdf',              ['middleware'=>'permission:'.$section.'.list','as'=>'admin.orders.pdf','uses'=>'Tecnica\OrdersController@exportListToPdf']);
         Route::get('/detail/{id?}',     ['as'=>'admin.orders.details','uses'=>'Tecnica\OrdersController@detail']);
-        Route::get('/reporte/{id}',             ['as'=>'admin.ordenes.reporte','uses'=>'Tecnica\OrdersController@reporte']);
-	/*
+        Route::get('/reporte/{id}',     ['as'=>'admin.ordenes.reporte','uses'=>'Tecnica\OrdersController@reporte']);
+	
+        Route::post('updateObservaciones',     ['as'=>'admin.ordenes.updateObservaciones','uses'=>'Tecnica\OrdersController@updateObservaciones']);
+        Route::post('updatePagos',      ['as'=>'admin.ordenes.updatePagos','uses'=>'Tecnica\OrdersController@updatePagos']);
+        Route::post('updateEstado',     ['as'=>'admin.ordenes.updateEstado','uses'=>'Tecnica\OrdersController@updateEstado']);
+                
+
+        /*
         detail
 	Route::get('/destroy/{id?}',    ['middleware'=>'permission:'.$section.'.destroy','as'=>'admin.orders.destroy','uses'=>'Tecnica\OrdersController@destroy']);
         Route::get('/edit/{id?}',       ['middleware'=>'permission:'.$section.'.edit','as'=>'admin.orders.edit','uses'=>'Tecnica\OrdersController@edit']);

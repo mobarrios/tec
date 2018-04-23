@@ -136,7 +136,7 @@
                      <hr>
                         <div class="row">  
                           {{--
-                          {!! Form::open(['route'=>('ordenes.updateEstado')]) !!}
+                          {!! Form::open(['route'=>('admin.ordenes.updateEstado')]) !!}
                             <div class="col-xs-10">
                             {!! Form::label('Estados') !!}
                             {!! Form::select('estado_id',$estados, isset($models->estado_id) ? $models->estado_id : null, ['class'=>'form-control select2', 'style' => 'width:330px;']) !!}
@@ -147,6 +147,7 @@
                             </div>
                            {!! Form::close() !!}
                           --}}
+
                         </div>  
                     </div>
                   </div>
@@ -163,8 +164,8 @@
                     <div id="collapseFive" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
                       <div class="box-body">
                           <!-- textarea -->
-                          {{--
-                          {!! Form::open(['route'=>('ordenes.updateObservaciones')]) !!}
+                       
+                          {!! Form::open(['route'=>('admin.ordenes.updateObservaciones')]) !!}
                           <div class="form-group">
                             <label>FALLA DECLARADA</label>
                             <textarea class="form-control" rows="3" name="falla_declarada" > {{$models->falla_declarada}}</textarea>
@@ -180,7 +181,7 @@
                           {!! Form::hidden('orden_id', $models->id) !!}
                           <button type="submit" class="btn btn-primary pull-right">Guardar</button>
                           {!! Form::close() !!}
-                          --}}
+                  
                       </div>
                     </div>
                 </div>
@@ -195,8 +196,8 @@
                       <div id="collapseSix" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
                         <div class="box-body">
                           <table class="table table-striped">
-                            {{--
-                            {!! Form::open(['route'=>('ordenes.updatePagos')]) !!}
+                      
+                            {!! Form::open(['route'=>('admin.ordenes.updatePagos')]) !!}
 
                             <tbody>
                               
@@ -233,7 +234,7 @@
                             </tbody>
                              {!! Form::close() !!}
                           </table>
-                            --}}
+                        
                         </div>
                       </div>
                   </div>

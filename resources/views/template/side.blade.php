@@ -103,10 +103,7 @@
                     <li class={{ Request::segment(3) == 1 ? 'active' : '' }}><a
                                 href="{{route('admin.orders.index')}}"><span>Ordenes</span></a></li>
                     </ul>
-                    <ul class="treeview-menu">
-                    <li class={{ Request::segment(3) == 1 ? 'active' : '' }}><a
-                                href="{{route('admin.states.index')}}"><span>Estados</span></a></li>
-                    </ul>
+                   
                     
             </li>
 
@@ -161,6 +158,8 @@
                         @endpermission
                         </ul>
                     </li>
+                        <li class={{ Request::segment(2) == "states" ? 'active' : '' }}><a href="{{route('admin.states.index')}}"><span>Estados</span></a></li>
+
                         <li class={{ Request::segment(2) == "equipments" ? 'active' : '' }}><a href="{{route('admin.equipments.index')}}"><span>Equipos</span></a></li>
                         @permission('logs.list')
                         <li class={{ Request::segment(2) == "logs" ? 'active' : '' }}><a href="{{route('configs.logs.index')}}"><span>Logs</span></a></li>
