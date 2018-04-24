@@ -17,7 +17,7 @@ class StatesController extends Controller
         $this->request  = $request;
         $this->repo     = $repo;
         $this->route    = $route;
-
+       
         $this->section          = 'states';
         $this->data['section']  = $this->section;
     }

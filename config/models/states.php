@@ -32,9 +32,9 @@ return [
     'imagesPath' => 'uploads/'.$model.'/images/',
 
     //polymorphic
-    'is_logueable'      => true,
-    'is_imageable'      => true,
-    'is_brancheable'    => true,
+    'is_logueable'      => false,
+    'is_imageable'      => false,
+    'is_brancheable'    => false,
 
 
 

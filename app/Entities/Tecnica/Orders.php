@@ -4,6 +4,7 @@ namespace App\Entities\Tecnica;
 
 use App\Entities\Tecnica\Orders;
 use App\Entities\Admin\Clients;
+use App\Entities\Tecnica\Equipments;
 use App\Entities\Entity;
 
 class Orders extends Entity
@@ -14,10 +15,12 @@ class Orders extends Entity
     protected $section = 'orders';
 
     public function Cliente(){
-    	return $this->belongsTo(Clients::class, 'clients_id');
+    	return $this->belongsTo(Clients::getClass(), 'clients_id');
     }
 
-
+    public function Equipo(){
+    	return $this->belongsTo(Equipments::getClass(), 'equipments_id');
+    }
 
 }
 

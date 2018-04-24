@@ -32,10 +32,10 @@
                   </div>
                   <div id="collapseOne" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
                     <div class="box-body">
-                    
+                     
                       Codigo Cliente : {{ isset($models->Cliente->id) ? $models->Cliente->id : '' }}
                       <br>
-                      Apellido y Nombre : {{ isset($models->Cliente->fullname) ? $models->Cliente->fullname : '' }}
+                      Apellido y Nombre : {{ isset($models->Cliente->last_name) ? $models->Cliente->name : '' }}
                       <br>
                       Razon Social: {{ isset($models->Cliente->razon_social) ? $models->Cliente->razon_social : '' }}
                       <br>
@@ -45,7 +45,7 @@
                       <br>
                       Direccion: {{ isset($models->Cliente->direccion) ? $models->Cliente->direccion : '' }}
                       <br>
-                      Tel / Cel: {{ isset($models->Cliente->telefono) ? $models->Cliente->telefono : '' }}
+                      Tel / Cel: {{ isset($models->Cliente->phone1) ? $models->Cliente->phone1 : '' }}
                       
                       <br>
                     </div>
@@ -59,9 +59,10 @@
                       </a>
                     </h4>
                   </div>
+
                   <div id="collapseTwo" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
                     <div class="box-body">
-                      Equipo : {{ isset($models->Equipo->descripcion) ? $models->Equipo->descripcion : '' }}
+                      Equipo : {{ isset($models->Equipo->name) ? $models->Equipo->name : '' }}
                       <br>
                       Marca : {{ isset($models->Marca->descripcion) ? $models->Marca->descripcion : '' }}
                       <br>
