@@ -113,7 +113,7 @@
                   </div>
                   <div id="collapseFour" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
                     <div class="box-body">
-                 
+                    
                     <table class="table">
                       <thead>
                         <tr>
@@ -123,31 +123,33 @@
                         </tr>
                       </thead>
                       <tbody>
-                        {{--
+                     
                       @foreach($models->OrdenEstados as $orden)
                           <tr>
-                            <td>{{$orden->created_at}}</td>
-                            <td>{{ isset($orden->User->email)  ? $orden->User->email : ''}}</td>
-                            <td>{{ isset($orden->Estado->descripcion) ? $orden->Estado->descripcion : '' }}</td>
-                            </tr>                            
+                            <td>{{ $orden->created_at }}</td>
+                            <td>{{ isset($orden->User->name)  ? $orden->User->last_name : '' }}</td>
+                            <td>{{ isset($orden->States->description) ? $orden->States->description : '' }}</td>
+                          </tr>                            
                       @endforeach
-                      --}}
+                      
                       </tbody>
                     </table>
                      <hr>
                         <div class="row">  
-                          {{--
+                       
+
                           {!! Form::open(['route'=>('admin.ordenes.updateEstado')]) !!}
                             <div class="col-xs-10">
                             {!! Form::label('Estados') !!}
-                            {!! Form::select('estado_id',$estados, isset($models->estado_id) ? $models->estado_id : null, ['class'=>'form-control select2', 'style' => 'width:330px;']) !!}
+                            {!! Form::select('estado_id',$states, isset($models->estado_id) ? $models->estado_id : null, ['class'=>'form-control select2', 'style' => 'width:330px;']) !!}
                             {!! Form::hidden('orden_id', $models->id) !!}
+
                             </div>
                             <div class="col-xs-2">
                                 <button type="submit" class="btn btn-primary btn-block btn-flat btn-xs" style='width:100px;' >Guardar</button>
                             </div>
                            {!! Form::close() !!}
-                          --}}
+                         
 
                         </div>  
                     </div>
