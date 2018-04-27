@@ -37,7 +37,7 @@ class OrdersController extends Controller
         $this->data['models_id']    = $modelsRepo->ListsData('name','id');
        
         //$this->data['models']     = $modelsRepo->ListsData('name','id');
-        //$this->data['clients']    = $clientsRepo->listForSelect();   
+        //$this->data['clients']    = $clientsRepo->listForSelect();
      
     }
 

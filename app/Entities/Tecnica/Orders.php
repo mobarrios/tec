@@ -2,6 +2,8 @@
 namespace App\Entities\Tecnica;
 
 
+use App\Entities\Admin\Brands;
+use App\Entities\Configs\User;
 use App\Entities\Tecnica\Orders;
 use App\Entities\Admin\Clients;
 use App\Entities\Admin\Models;
@@ -12,7 +14,9 @@ class Orders extends Entity
 {
 
     protected $table 	= 'orders';
-    protected $fillable = ['codigo_orden', 'fecha_inicio','fecha_final','presupuesto_id','importe_total','dto','numero_serie','serie_partes','falla_declarada','observaciones', 'observaciones_tecnicas', 'presupuesto_estimado', 'states_id', 'total', 'pagado','orden_manual','observaciones_internas', 'users_id', 'equipments_id', 'brands_id', 'models_id', 'clients_id' ];
+    protected $fillable = ['codigo_orden', 'fecha_inicio','fecha_final','presupuesto_id','importe_total','dto',
+        'numero_serie','serie_partes','falla_declarada','observaciones', 'observaciones_tecnicas', 'presupuesto_estimado',
+        'states_id', 'total', 'pagado','orden_manual','observaciones_internas', 'users_id', 'equipments_id', 'brands_id', 'models_id', 'clients_id' ];
     protected $section 	= 'orders';
 
     public function Cliente(){
@@ -28,11 +32,14 @@ class Orders extends Entity
 	}
 
 	public function User(){
-		return $this->belongsTo(User::getClass(), 'users_id');
+		return $this->belongsTo(User::getClass(),'users_id');
 	}
 
     public function Model(){
         return $this->belongsTo(Models::getClass(), 'models_id');
+    }
+    public function Brands(){
+        return $this->belongsTo(Brands::getClass());
     }
 
     public function lasTOrdenEstados(){
