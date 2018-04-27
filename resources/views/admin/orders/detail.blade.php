@@ -143,7 +143,6 @@
                             {!! Form::label('Estados') !!}
                             {!! Form::select('estado_id',$states, isset($models->estado_id) ? $models->estado_id : null, ['class'=>'form-control select2', 'style' => 'width:330px;']) !!}
                             {!! Form::hidden('orden_id', $models->id) !!}
-
                             </div>
                             <div class="col-xs-2">
                                 <button type="submit" class="btn btn-primary btn-block btn-flat btn-xs" style='width:100px;' >Guardar</button>
@@ -177,10 +176,12 @@
                             <label>OBSERVACIONES</label>
                             <textarea class="form-control" rows="3" name="observaciones"> {{$models->observaciones}}</textarea>
                           </div>
+                          {{--
                           <div class="form-group">
                             <label>OBSERVACIONES TECNICAS</label>
                             <textarea class="form-control" rows="3" name="observaciones_tecnicas"> {{$models->observaciones_tecnicas}}</textarea>
                           </div>
+                          --}}
                           {!! Form::hidden('orden_id', $models->id) !!}
                           <button type="submit" class="btn btn-primary pull-right">Guardar</button>
                           {!! Form::close() !!}

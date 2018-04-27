@@ -60,13 +60,13 @@
             <!-- small box -->
             <div class="small-box bg-red-active">
                 <div class="inner">
-                    <h3>{{\App\Entities\Admin\Sales::all()->count()}}</h3>
-                    <p>Ventas</p>
+                    <h3>{{\App\Entities\Tecnica\Orders::all()->count()}}</h3>
+                    <p>Ordenes</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-bag"></i>
                 </div>
-                <a href="{{route('admin.sales.create')}}" class="small-box-footer">Nueva Venta <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{route('admin.orders.create')}}" class="small-box-footer">Nueva Venta <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
 

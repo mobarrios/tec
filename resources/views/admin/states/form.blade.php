@@ -14,7 +14,9 @@
         <div class="col-xs-12 form-group">
           {!! Form::label('Descripción') !!}
           {!! Form::text('description', null, ['class'=>'form-control']) !!}
+          
         </div>
+
         <div class="col-xs-12 form-group">
           {!! Form::label('Texto Email') !!}
           {!! Form::textarea('text_email', null, ['class'=>'form-control']) !!}

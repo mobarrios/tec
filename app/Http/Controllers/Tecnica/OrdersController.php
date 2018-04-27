@@ -11,12 +11,14 @@ use App\Http\Repositories\Admin\BrandsRepo;
 use App\Http\Repositories\Admin\ClientsRepo;
 use App\Http\Repositories\Admin\ModelsRepo;
 use App\Http\Repositories\Tecnica\StatesRepo;
+use App\Http\Repositories\Tecnica\EquipmentsRepo;
 use App\Entities\Tecnica\OrderStates;
 use PDF;
 use Auth;
+
 class OrdersController extends Controller
 {
-    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, StatesRepo $statesRepo)
+    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, StatesRepo $statesRepo, EquipmentsRepo $equipmentsRepo)
     {
 
         $this->request  = $request;
@@ -26,10 +28,13 @@ class OrdersController extends Controller
         $this->section              = 'orders';
         $this->data['section']      = $this->section;
         $this->data['ultima_orden'] = $repo->ultimo()->id + 1;
-        $this->data['brands']       = $brandsRepo->getAllWithModels();
+        $this->data['brands']       = $brandsRepo->ListsData('name','id');
         $this->data['clients']      = $clientsRepo->ListsData('name','id');
         $this->data['states']       = $statesRepo->ListsData('description','id');
-        
+        $this->data['equipments']   = $equipmentsRepo->ListsData('name','id');
+        $this->data['users_id']     = Auth::user()->id;
+        $this->data['models_id']    = $modelsRepo->ListsData('name','id');
+       
         //$this->data['models']     = $modelsRepo->ListsData('name','id');
         //$this->data['clients']    = $clientsRepo->listForSelect();   
      
@@ -48,7 +53,7 @@ class OrdersController extends Controller
 
         $model              = new OrderStates();
         $model->orders_id   = $request->get('orden_id');
-        $model->users_id    = Auth::user()->id;
+        $model->users_id    = $this->data['users_id'];
         $model->states_id   = $request->get('estado_id');
         $model->save();
 
@@ -97,6 +102,7 @@ class OrdersController extends Controller
     }   
 
     public function updateObservaciones(Request $request){
+        
         $model                          = $this->repo->find($request->get('orden_id')); 
         $model->observaciones           = $request->get('observaciones');
         $model->falla_declarada         = $request->get('falla_declarada');
