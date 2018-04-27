@@ -27,7 +27,8 @@ class OrdersController extends Controller
 
         $this->section              = 'orders';
         $this->data['section']      = $this->section;
-        $this->data['ultima_orden'] = $repo->ultimo()->id + 1;
+        $this->data['ultima_orden'] = !is_null($repo->ultimo()) ? $repo->ultimo()->id + 1 : '1';
+
         $this->data['brands']       = $brandsRepo->ListsData('name','id');
         $this->data['clients']      = $clientsRepo->ListsData('name','id');
         $this->data['states']       = $statesRepo->ListsData('description','id');

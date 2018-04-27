@@ -3,7 +3,7 @@
     @section('form_title')
         Nueva Orden #  {{ isset($ultima_orden) ? $ultima_orden : '' }}
     @endsection
-
+    
     @section('form_inputs')
         @if(isset($models))
             {!! Form::model($models,['route'=> [config('models.'.$section.'.updateRoute'),$models->id]]) !!}
