@@ -10,11 +10,15 @@ use Illuminate\Routing\Route;
 use App\Http\Repositories\Admin\BrandsRepo;
 use App\Http\Repositories\Admin\ClientsRepo;
 use App\Http\Repositories\Admin\ModelsRepo;
+use App\Http\Repositories\Tecnica\StatesRepo;
+use App\Http\Repositories\Tecnica\EquipmentsRepo;
+use App\Entities\Tecnica\OrderStates;
 use PDF;
+use Auth;
 
 class OrdersController extends Controller
 {
-    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo)
+    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, StatesRepo $statesRepo, EquipmentsRepo $equipmentsRepo)
     {
 
         $this->request  = $request;
@@ -23,11 +27,17 @@ class OrdersController extends Controller
 
         $this->section              = 'orders';
         $this->data['section']      = $this->section;
-        $this->data['ultima_orden'] = $repo->ultimo()->id + 1;
-        $this->data['brands']       = $brandsRepo->getAllWithModels();
+        $this->data['ultima_orden'] = !is_null($repo->ultimo()) ? $repo->ultimo()->id + 1 : '1';
+
+        $this->data['brands']       = $brandsRepo->ListsData('name','id');
         $this->data['clients']      = $clientsRepo->ListsData('name','id');
+        $this->data['states']       = $statesRepo->ListsData('description','id');
+        $this->data['equipments']   = $equipmentsRepo->ListsData('name','id');
+        $this->data['users_id']     = Auth::user()->id;
+        $this->data['models_id']    = $modelsRepo->ListsData('name','id');
+       
         //$this->data['models']     = $modelsRepo->ListsData('name','id');
-        //$this->data['clients']    = $clientsRepo->listForSelect();   
+        //$this->data['clients']    = $clientsRepo->listForSelect();
      
     }
 
@@ -39,61 +49,53 @@ class OrdersController extends Controller
 
     }
 
-    public function updateEstado(Request $request, EstadosRepo $estadosRepo){
+    public function updateEstado(Request $request, StatesRepo $statesRepo){
         
-        $model = new OrdenesEstados();
-        $model->orden_id  = $request->get('orden_id');
-        $model->user_id   = Auth::user()->id;
-        $model->estado_id = $request->get('estado_id');
+
+        $model              = new OrderStates();
+        $model->orders_id   = $request->get('orden_id');
+        $model->users_id    = $this->data['users_id'];
+        $model->states_id   = $request->get('estado_id');
         $model->save();
 
         
-        $data['estado'] = $estadosRepo->find($request->get('estado_id'));
-        $data['orden']  = $this->repo->find($request->get('orden_id'));
+        $data['estado']     = $statesRepo->find($request->get('estado_id'));
+        $data['orden']      = $this->repo->find($request->get('orden_id'));
         
-        if(!empty($data['orden']->Cliente->email))    
-        {
-            //Envio de email
-            Mail::send('models.ordenes.email', ['estado'=>$data['estado']], function($message) use ($data)
-            {
-                $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');
-                $message->to($data['orden']->Cliente->email, $data['orden']->Cliente->fullname);
 
-            });
-            /*
-            Mail::send('casos.prestaciones.mails.mail_presupuesto_proveedor', [$pres], function ($message) use ($pres, $file)
-            {
-                $message->from(env('MAIL_AYUDA_DIRECTA'));
 
-                $message->to($pres->first()->Proveedores->EmailLists())->subject('COMPULSA DE MEDICAMENTOS ')
-                    ->replyTo(env('MAIL_SECTOR_PRESUPUESTOS'), 'DADSE');
+        // if(!empty($data['orden']->Cliente->email))    
+        // {
+        //     //Envio de email
+        //     Mail::send('models.ordenes.email', ['estado'=>$data['estado']], function($message) use ($data)
+        //     {
+        //         $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');
+        //         $message->to($data['orden']->Cliente->email, $data['orden']->Cliente->fullname);
 
-                if (!is_null($file))
-                    $message->attach($file);
-            });
-            */
-            return redirect()->back()->withErrors(['Regitro Agregado Correctamente. Email enviado al cliente.']);
+        //     });
+    
+        //     return redirect()->back()->withErrors(['Regitro Agregado Correctamente. Email enviado al cliente.']);
 
-        }else{
+        // }else{
          
-            return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
-        }
+        //     return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
+        // }
+        return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
        
     }
 
     public function reporte(Route $route){
         
-        $model = $this->repo->find($route->getParameter('id')); 
-        
-        $pdf = PDF::loadView('admin.orders.reportes', compact('model'));
+        $model  = $this->repo->find($route->getParameter('id')); 
+        $pdf    = PDF::loadView('admin.orders.reportes', compact('model'));
 
         return $pdf->stream();
     }
 
     public function updatePagos(Request $request){
        
-        $model = $this->repo->find($request->get('orden_id')); 
-        $model->pagado = $request->get('pagado');
+        $model          = $this->repo->find($request->get('orden_id')); 
+        $model->pagado  = $request->get('pagado');
         $model->save();
 
         return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
@@ -101,11 +103,11 @@ class OrdersController extends Controller
     }   
 
     public function updateObservaciones(Request $request){
-        $model = $this->repo->find($request->get('orden_id')); 
-        $model->observaciones = $request->get('observaciones');
-        $model->falla_declarada = $request->get('falla_declarada');
-        $model->observaciones_tecnicas = $request->get('observaciones_tecnicas');
         
+        $model                          = $this->repo->find($request->get('orden_id')); 
+        $model->observaciones           = $request->get('observaciones');
+        $model->falla_declarada         = $request->get('falla_declarada');
+        $model->observaciones_tecnicas  = $request->get('observaciones_tecnicas');
         $model->save();
 
         return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);

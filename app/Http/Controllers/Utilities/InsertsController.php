@@ -14,9 +14,15 @@ use App\Entities\Tecnica\Orders;
 use DB;
 class InsertsController extends Controller
 {
+	public function datos(){
+		$this->clients();
+
+		dd('datos');
+	}
+
 
 	public function clients(){
-    
+    clients::all()->drop();
     $clients = array(
 		  array('id' => '7','created_at' => '0000-00-00 00:00:00','updated_at' => '0000-00-00 00:00:00','deleted_at' => NULL,'name' => 'Laila','last_name' => 'Quintar','email' => 'laiquintar@yahoo.com.ar','dni' => '','sexo' => 'masculino','marital_status' => 'soltero','dob' => '1970-01-01','nacionality' => '','phone1' => '388154770713','phone2' => '','address' => '','city' => '','location' => '','province' => '','localidades_id' => NULL,'iva_conditions_id' => 2,'obs' => '','prospecto' => '0'),
 		  array('id' => '9','created_at' => '0000-00-00 00:00:00','updated_at' => '0000-00-00 00:00:00','deleted_at' => NULL,'name' => 'Enzo ','last_name' => 'Morone','email' => 'enzomorone@hotemail.com','dni' => '','sexo' => 'masculino','marital_status' => 'soltero','dob' => '1970-01-01','nacionality' => '','phone1' => '42948345','phone2' => '','address' => '','city' => '','location' => '','province' => '','localidades_id' => NULL,'iva_conditions_id' => 2,'obs' => '','prospecto' => '0'),
@@ -1967,7 +1973,6 @@ class InsertsController extends Controller
 	        clients::insert($client);
 		}
 		
-		dd('clientes insertados');   	
    	}
 
 

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Ayuda Directa</title>
+    <title>Orden {!! $model->id !!}</title>
       <style>
 
         body{
@@ -93,7 +93,7 @@
                          
                       </td>
                       <td style="font-size: 1.5em;" >
-                          <strong>Entrada</strong> {{$model->fecha_inicio}}<br />
+                          <strong>Entrada</strong> {{ date('d/m/Y',strtotime($model->fecha_inicio)) }}<br />
                           <strong>Orden de Reparacion</strong> {{$model->codigo_orden}}
                       </td>
                   </tr>

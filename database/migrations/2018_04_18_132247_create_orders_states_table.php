@@ -12,7 +12,7 @@ class CreateOrdersStatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ordenes_estados', function (Blueprint $table) {
+        Schema::create('orders_states', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('orders_id');
             $table->integer('states_id');
@@ -30,6 +30,6 @@ class CreateOrdersStatesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('ordenes_estados');
+        Schema::drop('orders_states');
     }
 }
