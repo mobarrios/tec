@@ -122,7 +122,7 @@ class OrdersController extends Controller
     
     public function busquedaServicios(){
         
-        $services = Services::paginate(1);
+        $services = Services::all();
         return $services;    
         /*
         $datarow

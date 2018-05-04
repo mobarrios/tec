@@ -239,27 +239,29 @@
            <table id="example1" class="table table-bordered table-striped">
             <thead>
             <tr>
-              <th>Rendering engine</th>
-              <th>Browser</th>
-              <th>Platform(s)</th>
-              <th>Engine version</th>
-              <th>CSS grade</th>
+              <th></th>
+              <th>Descripción </th>
+              <th>Importe</th>
+              <th>Iva</th>
+              <th>Cantidad</th>
+             
             </tr>
             </thead>
             <tbody>
             @foreach($services as $s)
             <tr>
-              <td>Other browsers</td>
-              <td>All others</td>
-              <td>-</td>
-              <td>-</td>
-              <td>U</td>
+              <td>#</td>
+              <td>{{$s->description}}</td>
+              <td>{{$s->amount}}</td>
+              <td>{{$s->iva}}</td>
+              <td>{!! Form::number('cantidad',null,['class'=>'form-control input-sm']) !!}</td>
+              <td><button class="btn btn-default btn-xs"> Guardar</button></td>
             </tr>
             @endforeach
             </tbody>
          
           </table>
-    
+          
         </div>
       
       </div>
@@ -271,36 +273,5 @@
 
 @endsection
 @section('js')
-
-<script type="text/javscript">
-$('#example1').DataTable(
-{
-
-        "language": {
-        "sProcessing":    "Procesando...",
-        "sLengthMenu":    "Mostrar _MENU_ registros",
-        "sZeroRecords":   "No se encontraron resultados",
-        "sEmptyTable":    "Ningún dato disponible en esta tabla",
-        "sInfo":          "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-        "sInfoEmpty":     "Mostrando registros del 0 al 0 de un total de 0 registros",
-        "sInfoFiltered":  "(filtrado de un total de _MAX_ registros)",
-        "sInfoPostFix":   "",
-        "sSearch":        "Buscar:",
-        "sUrl":           "",
-        "sInfoThousands":  ",",
-        "sLoadingRecords": "Cargando...",
-        "oPaginate": {
-            "sFirst":    "Primero",
-            "sLast":    "Último",
-            "sNext":    "Siguiente",
-            "sPrevious": "Anterior"
-        },
-        "oAria": {
-            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-        }
-    }
-});
-
-</script>
+<script> $('#example1').DataTable() </script>
 @endsection
