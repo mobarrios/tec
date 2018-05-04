@@ -13,7 +13,8 @@
 <link rel="stylesheet" href="vendors/LTE/plugins/datepicker/datepicker3.css">
 <!-- Bootstrap Color Picker -->
 <link rel="stylesheet" href="vendors/LTE/plugins/colorpicker/bootstrap-colorpicker.min.css">
-
+<!-- DATATABLE-->
+<link rel="stylesheet" href="vendors/LTE/plugins/datatables/dataTables.bootstrap.css">
     <!-- Bootstrap 3.3.6 -->
     <link rel="stylesheet" href="vendors/LTE/bootstrap/css/bootstrap.min.css">
     <!-- Theme style -->

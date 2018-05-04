@@ -16,7 +16,10 @@
           {!! Form::text('description', null, ['class'=>'form-control']) !!}
           
         </div>
-
+         <div class="col-xs-12 form-group">
+          {!! Form::label('Color') !!}
+          {!! Form::text('color', null, ['class'=>'form-control my-colorpicker1 colorpicker-element']) !!}
+        </div>
         <div class="col-xs-12 form-group">
           {!! Form::label('Texto Email') !!}
           {!! Form::textarea('text_email', null, ['class'=>'form-control']) !!}
@@ -24,3 +27,9 @@
 
 @endsection
 
+
+@section('js')
+  <script>
+    $('.my-colorpicker1').colorpicker()
+  </script>
+@endsection

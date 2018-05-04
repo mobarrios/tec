@@ -1,7 +1,7 @@
 @extends('template.model_form')
 
     @section('form_title')
-        Nuevo Color
+        Nuevo Equipo
     @endsection
 
     @section('form_inputs')
@@ -12,7 +12,7 @@
         @endif
 
             <div class="col-xs-12 form-group">
-              {!! Form::label('Color') !!}
+              {!! Form::label('Nombre') !!}
               {!! Form::text('name', null, ['class'=>'form-control']) !!}
             </div>
 @endsection

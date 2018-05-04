@@ -34,10 +34,24 @@
               {!! Form::select('clients_id', $clients , null ,['class'=>'select2 form-control ']) !!}
               {!! Form::hidden('users_id', $users_id) !!}
             </div>
+            {{--
             <div class="col-xs-4 form-group">
               {!! Form::label('Modelo') !!}
               {!! Form::select('models_id', $models_id , null ,['class'=>'select2 form-control ']) !!}
             </div>
+            --}}
+            <div class="col-xs-4 form-group">
+              {!! Form::label('Modelos') !!}
+              <select name='models_id' class=" select2 form-control">
+                @foreach($brands as $br)
+                    <optgroup label="{{$br->name}}">
+                        @foreach($br->Models as $m)
+                                <option value="{{$m->id}}" @if(isset($models) && ($models->models_id == $m->id)) selected="selected" @endif>{{$m->name}}</option>
+                        @endforeach
+                    </optgroup>
+                @endforeach
+              </select>
+            </div>    
             <div class="col-xs-4 form-group">
               {!! Form::label('N Serie') !!}
               {!! Form::text('numero_serie', null, ['class'=>'form-control']) !!}

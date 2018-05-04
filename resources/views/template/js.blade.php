@@ -65,6 +65,9 @@
 <script src="vendors/bootstrap-fileinput/js/locales/es.js"></script>
 
 <script src="vendors/bootstrap-checkbox-x/js/checkbox-x.min.js" type="text/javascript"></script>
+<script src="vendors/LTE/plugins/datatables/jquery.dataTables.min.js"> </script>
+<script src="vendors/LTE/plugins/datatables/dataTables.bootstrap.js"></script>
+<script src="vendors/LTE/plugins/datatables/dataTables.bootstrapPagination.js"></script>
 
 
 

@@ -9,18 +9,26 @@
       <div class="col-xs-12">
         <div class="box box-solid">
           <div class="box-header">
-            <h3 class="box-title">  Orden # {{$models->codigo_orden}}</h3>
-
-            <div class="pull-right ">
-              <a href="{{route('admin.ordenes.reporte',$models->id)}}" target="_blank" class="pull-right btn btn-default btn-sm">
-                <em class="fa fa-print"></em>
-              </a>
+            <div class="col-xs-8"><h3 class="box-title">  Orden # {{$models->codigo_orden}}</h3></div>
+            <div class="col-xs-4"><div class="btn-group pull-right">
+                  <button type="button" class="btn btn-default btn-flat">Acciones</button>
+                  <button type="button" class="btn btn-default btn-flat dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#" data-toggle="modal" data-target="#modal-default" >Servicios</a></li>
+                    <li class="divider"></li>
+                    <li><a href="{{route('admin.ordenes.reporte',$models->id)}}" target="_blank">PDF</a></li>
+                  </ul>
+                </div>
             </div>
           </div>
-
         </div>
       </div>
 
+    <div class="row">  
+    <div class="col-xs-12">  
       <div class="col-xs-4">
         <div class="box box-solid">
           <div class="box-header with-border">
@@ -53,7 +61,7 @@
           <div class="box-body">
             <span class="text-muted">Equipo : </span> <strong>{{ isset($models->Equipo) ? $models->Equipo->name : '' }}</strong>
             <br>
-            <span class="text-muted">Marca : </span> <strong>{{ isset($models->Brands) ? $models->Brands->name : '' }}</strong>
+            <span class="text-muted">Marca : </span> <strong>{{ isset($models->Model->Brands) ? $models->Model->Brands->name : '' }}</strong>
             <br>
             <span class="text-muted">Modelo : </span> <strong>{{ isset($models->Model) ? $models->Model->name : '' }}</strong>
             <br>
@@ -78,21 +86,17 @@
           </div>
           <div class="box-body">
             <span class="text-muted">Usuario  : </span> <strong>{{ isset($models->User) ? $models->User->user_name : '' }}</strong>
-            <span class="text-muted">Observaciones :</span> <strong> {{ $models->observaciones  }}</strong>
+           
+            <br><span class="text-muted">Falla Declarada :</span> <strong> {{ $models->falla_declarada  }}</strong>
             <br><span class="text-muted">Observaciones :</span> <strong> {{ $models->observaciones  }}</strong>
-            <br><span class="text-muted">Observaciones :</span> <strong> {{ $models->observaciones  }}</strong>
-            <br><span class="text-muted">Observaciones :</span> <strong> {{ $models->observaciones  }}</strong>
-            <br><span class="text-muted">Observaciones :</span> <strong> {{ $models->observaciones  }}</strong>
-            <br><span class="text-muted">Observaciones :</span> <strong> {{ $models->observaciones  }}</strong>
-            <br><span class="text-muted">Observaciones :</span> <strong> {{ $models->observaciones  }}</strong>
-            <br><span class="text-muted">Observaciones :</span> <strong> {{ $models->observaciones  }}</strong>
-            <br><span class="text-muted">Observaciones :</span> <strong> {{ $models->observaciones  }}</strong>
-            <br>
           </div>
         </div>
       </div>
+    </div>  
+  </div>
 
-
+  <div class="row">
+    <div class="col-xs-12">
       <div class="col-xs-4">
         <div class="box box-solid">
           <div class="box-header with-border">
@@ -154,12 +158,12 @@
               <label>OBSERVACIONES</label>
               <textarea class="form-control" rows="3" name="observaciones"> {{$models->observaciones}}</textarea>
             </div>
-            {{--
+            
             <div class="form-group">
               <label>OBSERVACIONES TECNICAS</label>
               <textarea class="form-control" rows="3" name="observaciones_tecnicas"> {{$models->observaciones_tecnicas}}</textarea>
             </div>
-            --}}
+            
             {!! Form::hidden('orden_id', $models->id) !!}
             <button type="submit" class="btn btn-primary pull-right">Guardar</button>
             {!! Form::close() !!}
@@ -219,5 +223,84 @@
         </div>
       </div>
 
+    </div>  
+  </div>
+</div>
+<div  class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Servicios</h4>
+        </div>
+        <div class="modal-body">
+
+           <table id="example1" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+              <th>Rendering engine</th>
+              <th>Browser</th>
+              <th>Platform(s)</th>
+              <th>Engine version</th>
+              <th>CSS grade</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($services as $s)
+            <tr>
+              <td>Other browsers</td>
+              <td>All others</td>
+              <td>-</td>
+              <td>-</td>
+              <td>U</td>
+            </tr>
+            @endforeach
+            </tbody>
+         
+          </table>
+    
+        </div>
+      
+      </div>
+      <!-- /.modal-content -->
     </div>
-  @endsection
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
+@endsection
+@section('js')
+
+<script type="text/javscript">
+$('#example1').DataTable(
+{
+
+        "language": {
+        "sProcessing":    "Procesando...",
+        "sLengthMenu":    "Mostrar _MENU_ registros",
+        "sZeroRecords":   "No se encontraron resultados",
+        "sEmptyTable":    "Ningún dato disponible en esta tabla",
+        "sInfo":          "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+        "sInfoEmpty":     "Mostrando registros del 0 al 0 de un total de 0 registros",
+        "sInfoFiltered":  "(filtrado de un total de _MAX_ registros)",
+        "sInfoPostFix":   "",
+        "sSearch":        "Buscar:",
+        "sUrl":           "",
+        "sInfoThousands":  ",",
+        "sLoadingRecords": "Cargando...",
+        "oPaginate": {
+            "sFirst":    "Primero",
+            "sLast":    "Último",
+            "sNext":    "Siguiente",
+            "sPrevious": "Anterior"
+        },
+        "oAria": {
+            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+        }
+    }
+});
+
+</script>
+@endsection
