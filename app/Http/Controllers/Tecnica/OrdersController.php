@@ -12,13 +12,16 @@ use App\Http\Repositories\Admin\ClientsRepo;
 use App\Http\Repositories\Admin\ModelsRepo;
 use App\Http\Repositories\Tecnica\StatesRepo;
 use App\Http\Repositories\Tecnica\EquipmentsRepo;
+use App\Http\Repositories\Tecnica\OrderServicesRepo;
 use App\Entities\Tecnica\OrderStates;
+use App\Http\Repositories\Tecnica\ServicesRepo;
+use App\Entities\Tecnica\Services;
 use PDF;
 use Auth;
 
 class OrdersController extends Controller
 {
-    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, StatesRepo $statesRepo, EquipmentsRepo $equipmentsRepo)
+    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, StatesRepo $statesRepo, EquipmentsRepo $equipmentsRepo, ServicesRepo $servicesRepo)
     {
 
         $this->request  = $request;
@@ -29,13 +32,17 @@ class OrdersController extends Controller
         $this->data['section']      = $this->section;
         $this->data['ultima_orden'] = !is_null($repo->ultimo()) ? $repo->ultimo()->id + 1 : '1';
 
-        $this->data['brands']       = $brandsRepo->ListsData('name','id');
+        //$this->data['brands']       = $brandsRepo->ListsData('name','id');
         $this->data['clients']      = $clientsRepo->ListsData('name','id');
         $this->data['states']       = $statesRepo->ListsData('description','id');
         $this->data['equipments']   = $equipmentsRepo->ListsData('name','id');
         $this->data['users_id']     = Auth::user()->id;
         $this->data['models_id']    = $modelsRepo->ListsData('name','id');
-       
+        $this->data['brands']       = $brandsRepo->getAllWithModels();
+        $this->data['services']     = $servicesRepo->getModel()->all();
+      
+      
+   
         //$this->data['models']     = $modelsRepo->ListsData('name','id');
         //$this->data['clients']    = $clientsRepo->listForSelect();
      
@@ -45,6 +52,7 @@ class OrdersController extends Controller
 
     	$this->data['models'] = $this->repo->find($this->route->getParameter('id'));
     	
+
     	return view('admin.orders.detail')->with($this->data);
 
     }
@@ -113,5 +121,39 @@ class OrdersController extends Controller
         return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
     }
     
-  
+    
+    public function busquedaServicios(){
+        
+        $services = Services::all();
+        return $services;    
+        /*
+        $datarow
+          while($datarow = mysqli_fetch_assoc($result)){
+             $id = $datarow['id'];
+             $title = $datarow['title'];
+             $content = $datarow['content'];
+             $shortcontent = substr($content, 0, 160)."...";
+             $link = $datarow['link'];
+             
+             $response_arr[] = array('id'=>$id,'title'=>$title,'shortcontent'=>$shortcontent,'content'=>$content,'link'=>$link);
+             
+            }
+
+            if(count($response_arr) > 0)
+            echo json_encode($response_arr);
+        */
+
+       // return json_encode($services);     
+    }
+    public function addServices(Request $request, OrderServicesRepo $orderServicesRepo)
+    {   
+        $data['orders_id']      = $request->get('orders_id');
+        $data['services_id']    = $request->get('orders_id');
+        $data['cantidad']       = $request->get('orders_id');
+        $orderServices          = $orderServicesRepo->create($data);
+        
+        return redirect()->back()->withErrors(['Registro agregado Correctamente']);
+        
+
+    }
 }

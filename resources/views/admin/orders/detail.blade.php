@@ -9,18 +9,26 @@
       <div class="col-xs-12">
         <div class="box box-solid">
           <div class="box-header">
-            <h3 class="box-title">  Orden # {{$models->codigo_orden}}</h3>
-
-            <div class="pull-right ">
-              <a href="{{route('admin.ordenes.reporte',$models->id)}}" target="_blank" class="pull-right btn btn-default btn-sm">
-                <em class="fa fa-print"></em>
-              </a>
+            <div class="col-xs-8"><h3 class="box-title">  Orden # {{$models->codigo_orden}}</h3></div>
+            <div class="col-xs-4"><div class="btn-group pull-right">
+                  <button type="button" class="btn btn-default btn-flat">Acciones</button>
+                  <button type="button" class="btn btn-default btn-flat dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#" data-toggle="modal" data-target="#modal-default" >Servicios</a></li>
+                    <li class="divider"></li>
+                    <li><a href="{{route('admin.ordenes.reporte',$models->id)}}" target="_blank">PDF</a></li>
+                  </ul>
+                </div>
             </div>
           </div>
-
         </div>
       </div>
-
+   
+    <div class="row">  
+    <div class="col-xs-12">  
       <div class="col-xs-4">
         <div class="box box-solid">
           <div class="box-header with-border">
@@ -53,7 +61,7 @@
           <div class="box-body">
             <span class="text-muted">Equipo : </span> <strong>{{ isset($models->Equipo) ? $models->Equipo->name : '' }}</strong>
             <br>
-            <span class="text-muted">Marca : </span> <strong>{{ isset($models->Brands) ? $models->Brands->name : '' }}</strong>
+            <span class="text-muted">Marca : </span> <strong>{{ isset($models->Model->Brands) ? $models->Model->Brands->name : '' }}</strong>
             <br>
             <span class="text-muted">Modelo : </span> <strong>{{ isset($models->Model) ? $models->Model->name : '' }}</strong>
             <br>
@@ -78,21 +86,17 @@
           </div>
           <div class="box-body">
             <span class="text-muted">Usuario  : </span> <strong>{{ isset($models->User) ? $models->User->user_name : '' }}</strong>
-            <span class="text-muted">Observaciones :</span> <strong> {{ $models->observaciones  }}</strong>
+           
+            <br><span class="text-muted">Falla Declarada :</span> <strong> {{ $models->falla_declarada  }}</strong>
             <br><span class="text-muted">Observaciones :</span> <strong> {{ $models->observaciones  }}</strong>
-            <br><span class="text-muted">Observaciones :</span> <strong> {{ $models->observaciones  }}</strong>
-            <br><span class="text-muted">Observaciones :</span> <strong> {{ $models->observaciones  }}</strong>
-            <br><span class="text-muted">Observaciones :</span> <strong> {{ $models->observaciones  }}</strong>
-            <br><span class="text-muted">Observaciones :</span> <strong> {{ $models->observaciones  }}</strong>
-            <br><span class="text-muted">Observaciones :</span> <strong> {{ $models->observaciones  }}</strong>
-            <br><span class="text-muted">Observaciones :</span> <strong> {{ $models->observaciones  }}</strong>
-            <br><span class="text-muted">Observaciones :</span> <strong> {{ $models->observaciones  }}</strong>
-            <br>
           </div>
         </div>
       </div>
+    </div>  
+  </div>
 
-
+  <div class="row">
+    <div class="col-xs-12">
       <div class="col-xs-4">
         <div class="box box-solid">
           <div class="box-header with-border">
@@ -154,12 +158,12 @@
               <label>OBSERVACIONES</label>
               <textarea class="form-control" rows="3" name="observaciones"> {{$models->observaciones}}</textarea>
             </div>
-            {{--
+            
             <div class="form-group">
               <label>OBSERVACIONES TECNICAS</label>
               <textarea class="form-control" rows="3" name="observaciones_tecnicas"> {{$models->observaciones_tecnicas}}</textarea>
             </div>
-            --}}
+            
             {!! Form::hidden('orden_id', $models->id) !!}
             <button type="submit" class="btn btn-primary pull-right">Guardar</button>
             {!! Form::close() !!}
@@ -219,5 +223,96 @@
         </div>
       </div>
 
+    </div>  
+  </div> 
+</div>
+<hr>
+@if(count($models->Services) > 0)
+  <div class="row">
+      <div class="col-xs-12">
+        <table class="table table-bordered table-striped">
+           <thead>
+            <tr>
+              <th></th>
+              <th>Descripción </th>
+              <th>Importe</th>
+              <th>Iva</th>
+              <th>Cantidad</th>
+             
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($models->Services as $s)
+            {!! Form::open(['route'=>'admin.ordenes.addServices']) !!}
+            <tr>
+              {!! Form::hidden('orders_id',$models->id)!!}
+              {!! Form::hidden('services_id', $s->id)!!}
+              <td>#</td>
+              <td>{{$s->description}}</td>
+              <td>{{$s->amount}}</td>
+              <td>{{$s->iva}}</td>
+              <td>{!! Form::number('cantidad',null,['class'=>'form-control input-sm']) !!}</td>
+              <td>     <button type="submit" class="btn btn-primary">Guardar</button></td>
+            </tr>
+            {!! Form::close() !!}
+       
+            @endforeach
+            </tbody>
+
+        </table>
+      </div>
+  </div>  
+ @endif 
+
+<div  class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Servicios</h4>
+        </div>
+        <div class="modal-body">
+           <table id="example1" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+              <th></th>
+              <th>Descripción </th>
+              <th>Importe</th>
+              <th>Iva</th>
+              <th>Cantidad</th>
+             
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($services as $s)
+            {!! Form::open(['route'=>'admin.ordenes.addServices']) !!}
+            <tr>
+              {!! Form::hidden('orders_id',$models->id)!!}
+              {!! Form::hidden('services_id', $s->id)!!}
+              <td>#</td>
+              <td>{{$s->description}}</td>
+              <td>{{$s->amount}}</td>
+              <td>{{$s->iva}}</td>
+              <td>{!! Form::number('cantidad',null,['class'=>'form-control input-sm']) !!}</td>
+              <td>     <button type="submit" class="btn btn-primary">Guardar</button></td>
+            </tr>
+            {!! Form::close() !!}
+       
+            @endforeach
+            </tbody>
+
+          </table>
+        </div>
+      
+      </div>
+      <!-- /.modal-content -->
     </div>
-  @endsection
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
+@endsection
+@section('js')
+<script> $('#example1').DataTable() </script>
+@endsection

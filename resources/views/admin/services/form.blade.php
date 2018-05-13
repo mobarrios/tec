@@ -1,7 +1,7 @@
 @extends('template.model_form')
 
     @section('form_title')
-        Nuevo Color
+        Nuevo Servicio
     @endsection
 
     @section('form_inputs')
@@ -12,8 +12,17 @@
         @endif
 
             <div class="col-xs-12 form-group">
-              {!! Form::label('Color') !!}
-              {!! Form::text('name', null, ['class'=>'form-control']) !!}
+              {!! Form::label('Descripción') !!}
+              {!! Form::text('description', null, ['class'=>'form-control']) !!}
             </div>
+            <div class="col-xs-12 form-group">
+              {!! Form::label('Iva') !!}
+              {!! Form::text('iva', null, ['class'=>'form-control']) !!}
+            </div>
+            <div class="col-xs-12 form-group">
+              {!! Form::label('Importe') !!}
+              {!! Form::text('amount', null, ['class'=>'form-control']) !!}
+            </div>
+
 @endsection
 

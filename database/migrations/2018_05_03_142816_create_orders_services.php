@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateServicesTable extends Migration
+class CreateOrdersServices extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,11 @@ class CreateServicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('orders_services', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->string('description');
-            $table->integer('iva');
-            $table->double('amount', 10, 2);
+            $table->integer('services_id');
+            $table->integer('orders_id');
+            $table->integer('cantidad');
             
             $table->timestamps();
             $table->softDeletes();
@@ -30,6 +30,6 @@ class CreateServicesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('services');
+        Schema::drop('orders_services');
     }
 }
