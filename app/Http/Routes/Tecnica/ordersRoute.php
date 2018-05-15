@@ -25,6 +25,7 @@ Route::group(['prefix'=>'orders'],function(){
         //Busqueda de servicios-paginate angular 
         Route::get('busquedaServicios',     ['as'=>'admin.ordenes.busquedaServicios','uses'=>'Tecnica\OrdersController@busquedaServicios']);
         Route::post('addServices',[ 'as'=>'admin.ordenes.addServices','uses'=>'Tecnica\OrdersController@addServices']);
+        Route::get('deleteServices/{id}',[ 'as'=>'admin.ordenes.deleteServices','uses'=>'Tecnica\OrdersController@deleteServices']);
                                         
 
         /*

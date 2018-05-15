@@ -43,9 +43,10 @@ class Orders extends Entity
     }
 
     public function Services(){
-        return $this->belongsToMany(Services::getClass());
+        return $this->belongsToMany(Services::getClass())->withPivot('cantidad');
     }
 
+    
     public function lasTOrdenEstados(){
         return $this->hasMany(OrderStates::class)->orderBy('id','DESC')->first();
     }

@@ -16,9 +16,18 @@
           {!! Form::text('description', null, ['class'=>'form-control']) !!}
           
         </div>
-         <div class="col-xs-12 form-group">
-          {!! Form::label('Color') !!}
-          {!! Form::text('color', null, ['class'=>'form-control my-colorpicker1 colorpicker-element']) !!}
+        <div class="col-xs-12 form-group">
+          <!-- Color Picker -->
+          <div class="form-group">
+            <label>Color picker with addon:</label>
+            <div class="input-group my-colorpicker1 colorpicker-element'">
+              {!! Form::text('color', null, ['class'=>'form-control ']) !!}
+              <div class="input-group-addon">
+                <i></i>
+              </div>
+            </div>
+            <!-- /.input group -->
+          </div>
         </div>
         <div class="col-xs-12 form-group">
           {!! Form::label('Texto Email') !!}
