@@ -243,10 +243,7 @@
             </thead>
             <tbody>
             @foreach($models->Services as $s)
-            {!! Form::open(['route'=>'admin.ordenes.addServices']) !!}
             <tr>
-              {!! Form::hidden('orders_id',$models->id)!!}
-              {!! Form::hidden('services_id', $s->id)!!}
               <td>#</td>
               <td>{{$s->description}}</td>
               <td>{{$s->amount}}</td>
@@ -254,7 +251,6 @@
               <td>{!! Form::number('cantidad',null,['class'=>'form-control input-sm']) !!}</td>
               <td>     <button type="submit" class="btn btn-primary">Guardar</button></td>
             </tr>
-            {!! Form::close() !!}
        
             @endforeach
             </tbody>
