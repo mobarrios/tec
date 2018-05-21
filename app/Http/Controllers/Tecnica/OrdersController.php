@@ -40,7 +40,7 @@ class OrdersController extends Controller
         $this->data['models_id']    = $modelsRepo->ListsData('name','id');
         $this->data['brands']       = $brandsRepo->getAllWithModels();
         $this->data['services']     = $servicesRepo->getModel()->all();
-        dd($this->data['states']);
+        
       
    
         //$this->data['models']     = $modelsRepo->ListsData('name','id');
