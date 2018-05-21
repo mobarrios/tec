@@ -106,7 +106,7 @@
             <div class="col-lg-12">
               {!! Form::open(['route'=>('admin.ordenes.updateEstado')]) !!}
               <div class="input-group">
-                {!! Form::select('estado_id',$states->description, isset($models->estado_id) ? $models->estado_id : null, ['class'=>'form-control select2']) !!}
+                {!! Form::select('estado_id',$states, isset($models->estado_id) ? $models->estado_id : null, ['class'=>'form-control select2']) !!}
                 {!! Form::hidden('orden_id', $models->id) !!}
 
                 <span class="input-group-btn">
