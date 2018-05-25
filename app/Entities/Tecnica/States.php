@@ -11,6 +11,9 @@ class States extends Entity
     protected $fillable = ['description', 'text_email','color'];
     protected $section = 'states';
 
+    public function OrdenEstados(){
+		return $this->hasMany(OrderStates::getClass());
+	}
 }
 
 

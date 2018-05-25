@@ -18,7 +18,7 @@ use App\Http\Repositories\Tecnica\ServicesRepo;
 use App\Entities\Tecnica\Services;
 use PDF;
 use Auth;
-
+use Mail;
 class OrdersController extends Controller
 {
     public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, StatesRepo $statesRepo, EquipmentsRepo $equipmentsRepo, ServicesRepo $servicesRepo)
@@ -40,7 +40,7 @@ class OrdersController extends Controller
         $this->data['models_id']    = $modelsRepo->ListsData('name','id');
         $this->data['brands']       = $brandsRepo->getAllWithModels();
         $this->data['services']     = $servicesRepo->getModel()->all();
-      
+        
       
    
         //$this->data['models']     = $modelsRepo->ListsData('name','id');
@@ -69,26 +69,27 @@ class OrdersController extends Controller
         
         $data['estado']     = $statesRepo->find($request->get('estado_id'));
         $data['orden']      = $this->repo->find($request->get('orden_id'));
-        
-
-
-        // if(!empty($data['orden']->Cliente->email))    
-        // {
-        //     //Envio de email
-        //     Mail::send('models.ordenes.email', ['estado'=>$data['estado']], function($message) use ($data)
-        //     {
-        //         $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');
-        //         $message->to($data['orden']->Cliente->email, $data['orden']->Cliente->fullname);
-
-        //     });
-    
-        //     return redirect()->back()->withErrors(['Regitro Agregado Correctamente. Email enviado al cliente.']);
-
-        // }else{
          
-        //     return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
-        // }
-        return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
+
+       
+        if(!empty($data['orden']->Cliente->email))    
+        {
+            //Envio de email
+            Mail::send('admin.orders.email', ['estado'=>$data['estado']], function($message) use ($data)
+            {
+                $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');
+                $message->to($data['orden']->Cliente->email, $data['orden']->Cliente->fullname);
+
+            });
+    
+            return redirect()->back()->withErrors(['Regitro Agregado Correctamente. Email enviado al cliente.']);
+
+        }else{
+         
+            return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
+        }
+        //return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
+        
        
     }
 
@@ -155,5 +156,9 @@ class OrdersController extends Controller
         return redirect()->back()->withErrors(['Registro agregado Correctamente']);
         
 
+    }
+
+    public function deleteServices(Request $request){
+        dd($this->route->getParameter('id'));
     }
 }

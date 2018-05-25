@@ -230,37 +230,34 @@
 @if(count($models->Services) > 0)
   <div class="row">
       <div class="col-xs-12">
-        <table class="table table-bordered table-striped">
-           <thead>
-            <tr>
-              <th></th>
-              <th>Descripción </th>
-              <th>Importe</th>
-              <th>Iva</th>
-              <th>Cantidad</th>
-             
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($models->Services as $s)
-            <tr>
-              <td>#</td>
-              <td>{{$s->description}}</td>
-              <td>{{$s->amount}}</td>
-              <td>{{$s->iva}}</td>
-              <td>{!! Form::number('cantidad',null,['class'=>'form-control input-sm']) !!}</td>
-              <td>     <button type="submit" class="btn btn-primary">Guardar</button></td>
-            </tr>
-       
-            @endforeach
-            </tbody>
+        <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Servicio adheridos</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body ">
+              <table class="table table-condensed">
+                <tbody>
+                @foreach($models->Services as $s)
+                <tr>
+                  <th>Descripción: {{$s->description}}</th>
+                  <th>Iva: {{$s->iva}}</th>
+                  <th>Precio: {{$s->amount}}</th>
+                  <th>Cantidad: {{$s->pivot->cantidad}}/$ {{$s->pivot->cantidad * $s->amount}}</th>
+                  
+                  <th><a href="{{route('admin.ordenes.deleteServices', $s->id)}}"class="btn btn-default btn-xs pull-right btn-borrar">Borrar</a></th>
+                </tr>
+                @endforeach
+              </tbody></table>
+            </div>
+            <!-- /.box-body -->
+          </div>
 
-        </table>
       </div>
   </div>  
  @endif 
 
-<div  class="modal fade" id="modal-default">
+<div class="modal fade" id="modal-default">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -277,7 +274,7 @@
               <th>Importe</th>
               <th>Iva</th>
               <th>Cantidad</th>
-             
+              <th></th>
             </tr>
             </thead>
             <tbody>
@@ -290,8 +287,8 @@
               <td>{{$s->description}}</td>
               <td>{{$s->amount}}</td>
               <td>{{$s->iva}}</td>
-              <td>{!! Form::number('cantidad',null,['class'=>'form-control input-sm']) !!}</td>
-              <td>     <button type="submit" class="btn btn-primary">Guardar</button></td>
+              <td>{!! Form::number('cantidad',null,['class'=>'form-control input-sm', 'style' => 'height:20px;']) !!}</td>
+              <td><button type="submit" class="btn btn-primary btn-xs">Guardar</button></td>
             </tr>
             {!! Form::close() !!}
        
@@ -310,5 +307,17 @@
 
 @endsection
 @section('js')
-<script> $('#example1').DataTable() </script>
+<script> 
+$('#example1').DataTable() 
+
+$('.btn-borrar').click(function (e){
+     var result = confirm('¿Desea quitar el servicio?')
+   if (result) {
+      return true;
+    } else {
+      return false;
+    }
+   e.preventDefault();
+});
+</script>
 @endsection
