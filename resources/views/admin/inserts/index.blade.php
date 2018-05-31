@@ -1,31 +1,3 @@
-<<<<<<< HEAD
-
-        @if(isset($modelItems))
-            {!! Form::model($modelItems,['route'=> ['admin.financials.updateDue', $modelItems->id,$models->id], 'files' =>'true']) !!}
-        @else
-            {!! Form::open(['route'=> ['admin.financials.addDue' ], 'files' =>'true']) !!}
-        @endif
-    <div class="col-xs-12 form-group">
-            {!! Form::label('Cuota') !!}
-            {!! Form::number('due', null, ['class'=>'form-control']) !!}
-        </div>
-        <div class="col-xs-12 form-group">
-            {!! Form::label('Coeficiente') !!}
-            {!! Form::text('coef', null, ['class'=>'form-control','step' => '0,1']) !!}
-        </div>
-        <div class="col-xs-12 form-group">
-            {!! Form::label('Porcentaje') !!}
-            {!! Form::text('porcent', null, ['class'=>'form-control','step' => '0,1']) !!}
-        </div>
-
-
-        <div class="col-xs-12 text-center form-group" style="padding-top: 2%">
-            <button type="submit" class="btn btn-primary">Agregar</button>
-            <a data-toggle="control-sidebar" class="btn btn-danger">Cancelar</a>
-        </div>
-{!! Form::close() !!}
- 
-=======
 <html>
 <head>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -44,8 +16,28 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#myPresupuesto">
-		            <i class="fa fa-upload"></i>  Subir Excel </button>
+		            <i class="fa fa-upload"></i>  Subir Servicios </button><br><br>
+
+                <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#procesarBrands">
+                <i class="fa fa-upload"></i>  Subir Marcas </button><br><br>
+
+                 <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#procesarModels">
+                <i class="fa fa-upload"></i>  Subir Modelos </button><br><br>
+
+                <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#procesarEquipos">
+                <i class="fa fa-upload"></i>  Subir Equipos </button><br><br>
+
+                                 <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#procesarClients">
+                <i class="fa fa-upload"></i>  Subir Clientes </button><br><br>
+
+                                                 <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#procesarOrders">
+                <i class="fa fa-upload"></i>  Subir Ordenes </button><br><br>
+
+                       <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#procesarOrdersClients">
+                <i class="fa fa-upload"></i>  Subir Ordenes Clientes </button><br><br>
+
 			</div>
+
 	</div>
 </div>
 
@@ -58,7 +50,7 @@
                 <h4 class="modal-title" id="myModalLabel">Subir </h4>
             </div>
             <div class="modal-body">
-            {!! Form::open(['route'=>['procesar.base'], 'files' => true]) !!}
+            {!! Form::open(['route'=>['procesarServices'], 'files' => true]) !!}
             {!! Form::file('file') !!}
 
             </div>
@@ -70,6 +62,133 @@
     </div>
 </div>
 
+<div class="modal fade" id="procesarBrands" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Subir Marcas</h4>
+            </div>
+            <div class="modal-body">
+            {!! Form::open(['route'=>['procesarBrands'], 'files' => true]) !!}
+            {!! Form::file('file') !!}
+
+            </div>
+            <div class="modal-footer">
+            {!! Form::submit('Subir', ['class'=> 'btn btn-primary']) !!}
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="procesarEquipos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Subir Equipos</h4>
+            </div>
+            <div class="modal-body">
+            {!! Form::open(['route'=>['procesarEquipos'], 'files' => true]) !!}
+            {!! Form::file('file') !!}
+
+            </div>
+            <div class="modal-footer">
+            {!! Form::submit('Subir', ['class'=> 'btn btn-primary']) !!}
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="procesarModels" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Subir Marcas</h4>
+            </div>
+            <div class="modal-body">
+            {!! Form::open(['route'=>['procesarModels'], 'files' => true]) !!}
+            {!! Form::file('file') !!}
+
+            </div>
+            <div class="modal-footer">
+            {!! Form::submit('Subir', ['class'=> 'btn btn-primary']) !!}
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="procesarClients" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Subir Clientes</h4>
+            </div>
+            <div class="modal-body">
+            {!! Form::open(['route'=>['procesarClients'], 'files' => true]) !!}
+            {!! Form::file('file') !!}
+
+            </div>
+            <div class="modal-footer">
+            {!! Form::submit('Subir', ['class'=> 'btn btn-primary']) !!}
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="procesarOrders" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Subir Clientes</h4>
+            </div>
+            <div class="modal-body">
+            {!! Form::open(['route'=>['procesarOrders'], 'files' => true]) !!}
+            {!! Form::file('file') !!}
+
+            </div>
+            <div class="modal-footer">
+            {!! Form::submit('Subir', ['class'=> 'btn btn-primary']) !!}
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="procesarOrdersClients" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Subir Clientes</h4>
+            </div>
+            <div class="modal-body">
+            {!! Form::open(['route'=>['procesarOrdersClients'], 'files' => true]) !!}
+            {!! Form::file('file') !!}
+
+            </div>
+            <div class="modal-footer">
+            {!! Form::submit('Subir', ['class'=> 'btn btn-primary']) !!}
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+</div>
+
+
 </body>
 </html>
->>>>>>> 9821d28147c97751a83b6a0cab07299bf4909b88
+

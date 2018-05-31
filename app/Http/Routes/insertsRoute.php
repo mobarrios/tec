@@ -6,7 +6,14 @@ Route::group(['prefix'=>'inserts'],function(){
 
 
 	Route::get('/',['uses'=>'Utilities\InsertsController@datos']);
-	Route::post('procesarBase',[ 'as'=>'procesar.base','uses'=>'Utilities\InsertsController@procesarBase']);
+	Route::post('procesarServices',[ 'as'=>'procesarServices','uses'=>'Utilities\InsertsController@procesarServices']);
+	Route::post('procesarBrands',[ 'as'=>'procesarBrands','uses'=>'Utilities\InsertsController@procesarBrands']);
+	Route::post('procesarModels',[ 'as'=>'procesarModels','uses'=>'Utilities\InsertsController@procesarModels']);
+	Route::post('procesarEquipos',[ 'as'=>'procesarEquipos','uses'=>'Utilities\InsertsController@procesarEquipos']);
+	
+	Route::post('procesarClients',[ 'as'=>'procesarClients','uses'=>'Utilities\InsertsController@procesarClients']);
+	Route::post('procesarOrders',[ 'as'=>'procesarOrders','uses'=>'Utilities\InsertsController@procesarOrders']);
+	Route::post('procesarOrdersClients',[ 'as'=>'procesarOrdersClients','uses'=>'Utilities\InsertsController@procesarOrdersClients']);
 	
 
 
