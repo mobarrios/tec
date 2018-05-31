@@ -13,6 +13,7 @@ use App\Entities\Admin\Models;
 use App\Entities\Tecnica\Orders;
 use App\Entities\Tecnica\Services;
 use App\Entities\Tecnica\Equipments;
+use App\Entities\Tecnica\OrderServices;
 use Maatwebsite\Excel\Excel;
 use DB;
 
@@ -202,6 +203,30 @@ class InsertsController extends Controller
             
         }
         return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
+    }
+
+    public function procesarOrderServices(Request $request, Excel $excel){
+        
+        $file           = $request->file;
+        $results        = $excel->load($file, function ($reader) {
+            $results    = $reader->get();
+        })->get();
+        
+        
+
+        $transacciones =[]; 
+        //Servicios
+        
+        foreach ($results as $result) {
+          
+            $datos['services_id'] = $result->idordenitems;
+            $datos['orders_id'] = $result->idordenitems;
+            $datos['cantidad'] = $result->idordenitems;
+            OrderServices::insert($datos)
+            
+        }
+        return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
+
     }
 
 }

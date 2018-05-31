@@ -14,8 +14,7 @@ Route::group(['prefix'=>'inserts'],function(){
 	Route::post('procesarClients',[ 'as'=>'procesarClients','uses'=>'Utilities\InsertsController@procesarClients']);
 	Route::post('procesarOrders',[ 'as'=>'procesarOrders','uses'=>'Utilities\InsertsController@procesarOrders']);
 	Route::post('procesarOrdersClients',[ 'as'=>'procesarOrdersClients','uses'=>'Utilities\InsertsController@procesarOrdersClients']);
+	Route::post('procesarOrderServices',[ 'as'=>'procesarOrderServices','uses'=>'Utilities\InsertsController@procesarOrderServices']);
 	
-
-
 
 });
