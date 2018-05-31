@@ -34,7 +34,7 @@ class OrdersController extends Controller
 
         //$this->data['brands']       = $brandsRepo->ListsData('name','id');
         $this->data['clients']      = $clientsRepo->ListsData('name','id');
-        $this->data['states']       = $statesRepo->ListsData('description','id');
+        $this->data['states']       = $statesRepo->ListsData('description ','id');
         $this->data['equipments']   = $equipmentsRepo->ListsData('name','id');
         $this->data['users_id']     = Auth::user()->id;
         $this->data['models_id']    = $modelsRepo->ListsData('name','id');
