@@ -15,7 +15,11 @@
 	<h1>Procesar Base de datos</h1>
 		<div class="row">
 			<div class="col-xs-12">
-				<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#myPresupuesto">
+
+                <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#procesarUsers">
+                    <i class="fa fa-upload"></i>  Subir Usuarios </button><br><br>
+
+				<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#procesarServices">
 		            <i class="fa fa-upload"></i>  Subir Servicios </button><br><br>
 
                 <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#procesarBrands">
@@ -37,14 +41,41 @@
                 <i class="fa fa-upload"></i>  Subir Ordenes Clientes </button><br><br>
 
                           <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#procesarOrderServices">
-                <i class="fa fa-upload"></i>  Subir Ordenes Services </button><br><br>
+                <i class="fa fa-upload"></i>  Subir Ordenes Services/Items </button><br><br>
+
+                                          <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#procesarOrderEstados">
+                <i class="fa fa-upload"></i>  Subir Ordenes Estados </button><br><br>
+
+                                          <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#procesarOrderEstados">
+                <i class="fa fa-upload"></i>  Subir Ordenes Estados </button><br><br>
 
 			</div>
 
 	</div>
 </div>
 
-<div class="modal fade" id="myPresupuesto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="procesarUsers" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Subir </h4>
+            </div>
+            <div class="modal-body">
+            {!! Form::open(['route'=>['procesarUsers'], 'files' => true]) !!}
+            {!! Form::file('file') !!}
+
+            </div>
+            <div class="modal-footer">
+            {!! Form::submit('Subir', ['class'=> 'btn btn-primary']) !!}
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="procesarServices" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -212,6 +243,26 @@
     </div>
 </div>
 
+<div class="modal fade" id="procesarOrderEstados" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Subir Clientes</h4>
+            </div>
+            <div class="modal-body">
+            {!! Form::open(['route'=>['procesarOrderEstados'], 'files' => true]) !!}
+            {!! Form::file('file') !!}
+
+            </div>
+            <div class="modal-footer">
+            {!! Form::submit('Subir', ['class'=> 'btn btn-primary']) !!}
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
