@@ -222,7 +222,7 @@ class InsertsController extends Controller
             $datos['services_id'] = $result->idordenitems;
             $datos['orders_id'] = $result->idordenitems;
             $datos['cantidad'] = $result->idordenitems;
-            OrderServices::insert($datos)
+            OrderServices::insert($datos);
             
         }
         return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
