@@ -258,6 +258,7 @@ class InsertsController extends Controller
     }
 
        public function procesarUsers(Request $request, Excel $excel){
+        
         $file           = $request->file;
         $results        = $excel->load($file, function ($reader) {
             $results    = $reader->get();
