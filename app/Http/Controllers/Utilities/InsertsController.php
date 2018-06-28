@@ -14,6 +14,8 @@ use App\Entities\Tecnica\Orders;
 use App\Entities\Tecnica\Services;
 use App\Entities\Tecnica\Equipments;
 use App\Entities\Tecnica\OrderServices;
+use App\Entities\Tecnica\OrderStates;
+use App\Entities\Configs\User;
 use Maatwebsite\Excel\Excel;
 use DB;
 
@@ -223,6 +225,60 @@ class InsertsController extends Controller
             $datos['orders_id'] = $result->idordenitems;
             $datos['cantidad'] = $result->idordenitems;
             OrderServices::insert($datos);
+
+            
+        }
+        return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
+
+    }
+
+    public function procesarOrderEstados(Request $request, Excel $excel){
+        $file           = $request->file;
+        $results        = $excel->load($file, function ($reader) {
+            $results    = $reader->get();
+        })->get();
+        
+
+        $transacciones =[]; 
+        //Servicios
+        
+        foreach ($results as $result) {
+
+            $datos['id']         = intval($result->idordenhistorial);
+            $datos['orders_id']  = intval($result->idorden);
+            $datos['states_id']  = intval($result->idestado);
+            $datos['users_id']   = intval($result->idusuario);
+            $datos['created_at'] = $result->fecha;
+            $datos['updated_at'] = $result->fecha;    
+            
+            OrderStates::insert($datos);
+            
+        }
+        return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
+
+    }
+
+       public function procesarUsers(Request $request, Excel $excel){
+        
+        $file           = $request->file;
+        $results        = $excel->load($file, function ($reader) {
+            $results    = $reader->get();
+        })->get();
+        
+
+        $transacciones =[]; 
+        //Servicios
+        
+        foreach ($results as $result) {
+           
+            $datos['id']            = intval($result->idusuario);
+            $datos['user_name']     = $result->usuario;
+            $datos['email']         = $result->usuario.'@admin.com';
+            
+            $datos['password']      = \Illuminate\Support\Facades\Hash::make('1234');  
+            
+            User::insert($datos);
+
             
         }
         return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
