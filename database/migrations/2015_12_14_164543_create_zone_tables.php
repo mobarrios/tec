@@ -12,7 +12,6 @@ class CreateZoneTables extends Migration
      */
     public function up()
     {
-        /*   
         $path = database_path().'/dumps/localidades_table.sql';
         DB::unprepared(file_get_contents($path));
 
@@ -21,7 +20,6 @@ class CreateZoneTables extends Migration
 
         $path = database_path().'/dumps/provincias_table.sql';
         DB::unprepared(file_get_contents($path));
-        */
     }
 
     /**
