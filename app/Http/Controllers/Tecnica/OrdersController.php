@@ -33,8 +33,8 @@ class OrdersController extends Controller
         $this->data['ultima_orden'] = !is_null($repo->ultimo()) ? $repo->ultimo()->id + 1 : '1';
         //$this->data['brands']       = $brandsRepo->ListsData('name','id');
         $this->data['clients']      = $clientsRepo->ListsData('name','id');
-        //$this->data['states']       = $statesRepo->ListsData('description ','id');
 
+        $this->data['states']       = $statesRepo->getModel()->lists('description','id');
         $this->data['equipments']   = $equipmentsRepo->ListsData('name','id');
         $this->data['users_id']     = Auth::user()->id;
         $this->data['models_id']    = $modelsRepo->ListsData('name','id');
