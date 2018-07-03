@@ -14,25 +14,25 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('codigo_orden');
-            $table->date('fecha_inicio');
-            $table->date('fecha_final');
-            $table->integer('presupuesto_id');
-            $table->integer('importe_total');
-            $table->integer('dto');
+            $table->string('codigo_orden')->nullable();
+            $table->date('fecha_inicio')->nullable();
+            $table->date('fecha_final')->nullable();
+            $table->integer('presupuesto_id')->nullable();
+            $table->integer('importe_total')->nullable();
+            $table->integer('dto')->nullable();
 
 
-            $table->integer('numero_serie'); 
-            $table->integer('serie_partes');
-            $table->string('falla_declarada'); 
-            $table->string('observaciones'); 
-            $table->string('observaciones_tecnicas'); 
-            $table->integer('presupuesto_estimado'); 
-            $table->integer('states_id'); 
-            $table->integer('total'); 
-            $table->integer('pagado'); 
-            $table->integer('orden_manual'); 
-            $table->string('observaciones_internas'); 
+            $table->integer('numero_serie')->nullable(); 
+            $table->integer('serie_partes')->nullable();
+            $table->string('falla_declarada')->nullable(); 
+            $table->string('observaciones')->nullable(); 
+            $table->string('observaciones_tecnicas')->nullable(); 
+            $table->integer('presupuesto_estimado')->nullable(); 
+            $table->integer('states_id')->nullable(); 
+            $table->integer('total')->nullable(); 
+            $table->integer('pagado')->nullable(); 
+            $table->integer('orden_manual')->nullable(); 
+            $table->string('observaciones_internas')->nullable(); 
             
             /*
             Relations

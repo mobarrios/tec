@@ -34,10 +34,11 @@
           <div class="box-header with-border">
             <h3 class="box-title">Cliente </h3>
           </div>
+
           <div class="box-body">
             <span class="text-muted">Codigo Cliente : </span> <strong>{{ isset($models->Cliente->id) ? $models->Cliente->id : '' }}</strong>
             <br>
-            <span class="text-muted">Apellido y Nombre :</span><strong> {{ $models->Cliente->last_name .' '. $models->Cliente->name }}</strong>
+            <span class="text-muted">Apellido y Nombre :</span><strong> {{ isset($models->Cliente->last_name) ? $models->Cliente->last_name : '',  isset($models->Cliente->name) ? $models->Cliente->name : '' }}</strong>
             <br>
            <span class="text-muted"> Razon Social: </span><strong>{{ isset($models->Cliente->razon_social) ? $models->Cliente->razon_social : '' }}</strong>
             <br>

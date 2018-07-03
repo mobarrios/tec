@@ -15,6 +15,7 @@ use App\Entities\Tecnica\Services;
 use App\Entities\Tecnica\Equipments;
 use App\Entities\Tecnica\OrderServices;
 use App\Entities\Tecnica\OrderStates;
+use App\Entities\Tecnica\States;
 use App\Entities\Configs\User;
 use Maatwebsite\Excel\Excel;
 use DB;
@@ -29,6 +30,7 @@ class InsertsController extends Controller
 	}
 
 	public function procesarServices(Request $request, Excel $excel){
+
 		$file 			= $request->file;
         $results 		= $excel->load($file, function ($reader) {
             $results	= $reader->get();
@@ -117,6 +119,8 @@ class InsertsController extends Controller
     }
 
     public function procesarClients(Request $request, Excel $excel){
+      
+
         $file           = $request->file;
         $results        = $excel->load($file, function ($reader) {
             $results    = $reader->get();
@@ -136,7 +140,7 @@ class InsertsController extends Controller
             $data['dni']        = $result->dni; 
             $data['phone1']     = $result->telefono;           
             $data['address']    = $result->direccion;              
-            $data['prospecto']  = 1;
+            $data['prospecto']  = 0;
             Clients::insert($data);
         }
         return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
@@ -283,6 +287,31 @@ class InsertsController extends Controller
         }
         return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
 
+    }
+
+    public function procesarEstados(Request $request, Excel $excel)
+    {
+        $file           = $request->file;
+        $results        = $excel->load($file, function ($reader) {
+            $results    = $reader->get();
+        })->get();
+        
+
+        $transacciones =[]; 
+        //Servicios
+        
+        foreach ($results as $result) {
+            
+            $datos['id']            = intval($result->idordenestado);
+            $datos['description']   = $result->estado;
+            $datos['text_email']    = $result->textomail;
+            $datos['color']         = $result->color; 
+            
+            States::insert($datos);
+
+            
+        }
+        return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
     }
 
 }
