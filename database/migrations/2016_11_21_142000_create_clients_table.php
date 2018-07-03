@@ -30,8 +30,8 @@ class CreateClientsTable extends Migration
             $table->string('phone1')->nullable();
             $table->string('phone2')->nullable();
 
-            $table->string('address');
-            $table->string('city');
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
             $table->string('location')->nullable();
             $table->string('province')->nullable();
 
