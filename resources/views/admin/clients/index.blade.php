@@ -5,11 +5,14 @@
         <tr>
 
             <td style="width: 1%"><input class="id_destroy" value="{{$model->id}}" type="checkbox"></td>
-            <td>{{$model->dni}}</td>
+            <td> {{ !empty($model->dni) ? 'DNI '.$model->dni : '' }} </td>
 
             <td>{{$model->last_name}} {{$model->name }}</td>
+            {{--
+            <td>{{$model->address}}, {{ isset($model->Localidades->name) ? $model->Localidades->name  : ''}}  {{$model->Localidades->Municipios->name or ''}} , {{$model->Localidades->Municipios->Provincias->name or ''}}</td>
+            --}}
 
-            <td>{{$model->address}}, {{$model->Localidades->name or ''}} , {{$model->Localidades->Municipios->name or ''}} , {{$model->Localidades->Municipios->Provincias->name or ''}}</td>
+
             <td>tel. {{$model->phone1}} <br> tel. {{$model->phone2}}</td>
             <td>{{$model->email}}</td>
             <td>
