@@ -129,9 +129,11 @@
                     <a href="#"><i class="fa fa-gear"></i> <span>Configuración</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                 <ul class="treeview-menu">
                     <li class="{{ in_array(Request::segment(2), ["branches","additionals","company"]) ? 'active' : '' }}">
+                        {{--
                         <a href="#"><span>Empresa</span>
                             <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                         </a>
+                        --}}
                     <ul class="treeview-menu">
                     <li class="{{ Request::segment(2) == "company" ? 'active' : '' }}"><a
                     href="{{route('configs.company.index')}}"><span>Datos</span> </a></li>

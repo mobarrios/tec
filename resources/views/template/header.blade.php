@@ -47,6 +47,7 @@
                         <span class="hidden-xs">{{\Illuminate\Support\Facades\Auth::user()->email}}</span>
                     </a>
                 </li>
+                {{--
                 <li class="dropdown">
                     <a class="dropdown-toggle text-black" data-toggle="dropdown" href="#" aria-expanded="false">
                         <span class="fa fa-building"></span>
@@ -59,7 +60,7 @@
                         @endforeach
                     </ul>
                 </li>
-
+                --}}
 
 
                 <!-- Control Sidebar Toggle Button -->

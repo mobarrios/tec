@@ -1,4 +1,4 @@
-@extends('template.model_index_sin_create')
+@extends('template.model_index')
 @section('table')
 
     @foreach($models as $model)
