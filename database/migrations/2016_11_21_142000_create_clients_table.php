@@ -18,22 +18,22 @@ class CreateClientsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->string('name');
-            $table->string('last_name');
-            $table->string('email');
-            $table->string('dni');
-            $table->enum('sexo',['masculino','femenino']);
-            $table->enum('marital_status',['soltero','casado','divorciado']);
-            $table->date('dob');
-            $table->string('nacionality');
+            $table->string('name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('dni')->nullable();
+            $table->enum('sexo',['masculino','femenino'])->nullable();
+            $table->enum('marital_status',['soltero','casado','divorciado'])->nullable();
+            $table->date('dob')->nullable();
+            $table->string('nacionality')->nullable();
 
-            $table->string('phone1');
-            $table->string('phone2');
+            $table->string('phone1')->nullable();
+            $table->string('phone2')->nullable();
 
-            $table->string('address');
-            $table->string('city');
-            $table->string('location');
-            $table->string('province');
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('location')->nullable();
+            $table->string('province')->nullable();
 
             $table->integer('localidades_id')->nullable()->unsigned();
             $table->foreign('localidades_id')->references('id')->on('localidades');
@@ -42,7 +42,7 @@ class CreateClientsTable extends Migration
             $table->integer('iva_conditions_id')->unsigned()->index();
             $table->foreign('iva_conditions_id')->references('id')->on('iva_conditions');
             
-            $table->text('obs');
+            $table->text('obs')->nullable();
 
             $table->boolean('prospecto')->default(1);
         });

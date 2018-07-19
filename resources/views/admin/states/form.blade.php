@@ -19,7 +19,7 @@
         <div class="col-xs-12 form-group">
           <!-- Color Picker -->
           <div class="form-group">
-            <label>Color picker with addon:</label>
+            <label>Color</label>
             <div class="input-group my-colorpicker1 colorpicker-element'">
               {!! Form::text('color', null, ['class'=>'form-control ']) !!}
               <div class="input-group-addon">
