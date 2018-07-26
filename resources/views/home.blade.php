@@ -31,7 +31,7 @@
 
             </div>
         </div>
-
+        {{--
         <div class="col-sm-3 col-xs-12">
             <!-- small box -->
             <div class="small-box bg-aqua">
@@ -55,7 +55,7 @@
                 {!! Form::close() !!}
             </div>
         </div>
-
+        --}}
         <div class="col-sm-3 col-xs-12">
             <!-- small box -->
             <div class="small-box bg-red-active">
@@ -69,6 +69,7 @@
                 <a href="{{route('admin.orders.create')}}" class="small-box-footer">Nueva Orden <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
+        {{--
 
         <div class="col-sm-3 col-xs-12">
             <!-- small box -->
@@ -83,7 +84,7 @@
                 <a href="{{route('admin.models.index')}}" class="small-box-footer">ir a Lista  <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
-
+        --}}
 
     </div>
 @endsection

@@ -35,7 +35,7 @@
      }
 
      public function getFullNameAttribute(){
-         return $this->attributes['last_name'].' '.$this->attributes['name'];
+         return  $this->attributes['last_name'].' '.$this->attributes['name'] .', DNI:'. $this->attributes['dni'] ;
      }
 
      public function getLocalidadAttribute(){

@@ -160,4 +160,16 @@ class OrdersController extends Controller
     public function deleteServices(Request $request){
         dd($this->route->getParameter('id'));
     }
+
+    public function store()
+    {
+        //validar los campos
+        $this->validate($this->request,config('models.'.$this->section.'.validationsStore'));
+        
+        //crea a traves del repo con el request
+        $model = $this->repo->create($this->request);
+
+        return redirect()->route('admin.orders.details',$model->id)->withErrors(['Regitro Agregado Correctamente']);
+    }
+
 }
