@@ -116,6 +116,7 @@ class OrdersController extends Controller
         $model->observaciones           = $request->get('observaciones');
         $model->falla_declarada         = $request->get('falla_declarada');
         $model->observaciones_tecnicas  = $request->get('observaciones_tecnicas');
+        $model->observaciones_internas  = $request->get('observaciones_internas');
         $model->save();
 
         return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);

@@ -165,6 +165,11 @@
               <textarea class="form-control" rows="3" name="observaciones_tecnicas"> {{$models->observaciones_tecnicas}}</textarea>
             </div>
             
+            <div class="form-group">
+              <label>OBSERVACIONES INTERNAS</label>
+              <textarea class="form-control" rows="3" name="observaciones_internas"> {{$models->observaciones_internas}}</textarea>
+            </div>
+
             {!! Form::hidden('orden_id', $models->id) !!}
             <button type="submit" class="btn btn-primary pull-right">Guardar</button>
             {!! Form::close() !!}
