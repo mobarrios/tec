@@ -149,8 +149,8 @@ class OrdersController extends Controller
     public function addServices(Request $request, OrderServicesRepo $orderServicesRepo)
     {   
         $data['orders_id']      = $request->get('orders_id');
-        $data['services_id']    = $request->get('orders_id');
-        $data['cantidad']       = $request->get('orders_id');
+        $data['services_id']    = $request->get('services_id');
+        $data['cantidad']       = $request->get('cantidad');
         $orderServices          = $orderServicesRepo->create($data);
         
         return redirect()->back()->withErrors(['Registro agregado Correctamente']);
@@ -161,11 +161,9 @@ class OrdersController extends Controller
     public function deleteServices(Request $request, OrderServicesRepo $orderServicesRepo){
         
         $id     = $this->route->getParameter('id');
-
+        
         $model  = $orderServicesRepo->getModel()->where('services_id',1)->get();
-        dd($model);
-
-
+       
         return redirect()->back()->withErrors(['Registro borrado correctamente']);
     }
 
