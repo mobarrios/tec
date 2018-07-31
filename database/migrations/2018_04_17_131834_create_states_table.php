@@ -17,7 +17,7 @@ class CreateStatesTable extends Migration
             $table->string('description')->nullable();
             $table->string('text_email')->nullable();
             $table->string('color')->nullable();
-            
+            $table->boolean('enviar')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

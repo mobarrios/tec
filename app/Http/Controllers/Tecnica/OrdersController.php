@@ -71,7 +71,7 @@ class OrdersController extends Controller
          
 
        
-        if(!empty($data['orden']->Cliente->email))    
+        if(!empty($data['orden']->Cliente->email) || $data['orden']->enviar == false)    
         {
             //Envio de email
             Mail::send('admin.orders.email', ['estado'=>$data['estado']], function($message) use ($data)
@@ -85,7 +85,7 @@ class OrdersController extends Controller
 
         }else{
          
-            return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
+            return redirect()->back()->withErrors(['Regitro Agregado Correctamente. El email no fue enviado al cliente.']);
         }
         //return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
         
@@ -158,8 +158,15 @@ class OrdersController extends Controller
 
     }
 
-    public function deleteServices(Request $request){
-        dd($this->route->getParameter('id'));
+    public function deleteServices(Request $request, OrderServicesRepo $orderServicesRepo){
+        
+        $id     = $this->route->getParameter('id');
+
+        $model  = $orderServicesRepo->getModel()->where('services_id',1)->get();
+        dd($model);
+
+
+        return redirect()->back()->withErrors(['Registro borrado correctamente']);
     }
 
     public function store()

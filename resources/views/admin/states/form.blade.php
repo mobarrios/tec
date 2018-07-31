@@ -29,11 +29,18 @@
             <!-- /.input group -->
           </div>
         </div>
+    
         <div class="col-xs-12 form-group">
           {!! Form::label('Texto Email') !!}
           {!! Form::textarea('text_email', null, ['class'=>'form-control']) !!}
         </div>
-   
+        
+        <div class="col-xs-12 form-group">
+          {!! Form::label('Enviar email al Usuario') !!}
+          {!! Form::checkbox('enviar') !!}
+                
+        </div>
+
 @endsection
 
 

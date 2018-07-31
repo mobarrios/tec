@@ -8,7 +8,7 @@ class States extends Entity
 {
 
     protected $table = 'states';
-    protected $fillable = ['description', 'text_email','color'];
+    protected $fillable = ['description', 'text_email','color','enviar'];
     protected $section = 'states';
 
     public function OrdenEstados(){

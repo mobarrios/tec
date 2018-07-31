@@ -2,11 +2,24 @@
 
 @section('sectionContent')
     <div class="row">
-
-
+        {{--
+         <div class="col-sm-3 col-xs-12">
+            <!-- small box -->
+            <div class="small-box bg-red-active">
+                <div class="inner">
+                    <h3>{{\App\Entities\Tecnica\Orders::all()->count()}}</h3>
+                    <p>Ordenes</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-bag"></i>
+                </div>
+                <a href="{{route('admin.orders.create')}}" class="small-box-footer">Nueva Orden <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        --}}
 
         <!-- Default box -->
-        <div class="col-xs-12 col-sm-3">
+        <div class="col-xs-12 col-sm-3 pull-right">
             <div class="box box-primary">
                 <div class="box-body box-profile">
                     <img class="profile-user-img img-responsive img-circle" src="{!! Auth::user()->images ? Auth::user()->images->path : "vendors/LTE/dist/img/avatar5.png"!!}" alt="User profile picture">
@@ -56,22 +69,11 @@
             </div>
         </div>
         --}}
-        <div class="col-sm-3 col-xs-12">
-            <!-- small box -->
-            <div class="small-box bg-red-active">
-                <div class="inner">
-                    <h3>{{\App\Entities\Tecnica\Orders::all()->count()}}</h3>
-                    <p>Ordenes</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-bag"></i>
-                </div>
-                <a href="{{route('admin.orders.create')}}" class="small-box-footer">Nueva Orden <i class="fa fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
+       
+
         {{--
 
-        <div class="col-sm-3 col-xs-12">
+      <div class="col-sm-3 col-xs-12">
             <!-- small box -->
             <div class="small-box bg-orange ">
                 <div class="inner">
@@ -86,5 +88,44 @@
         </div>
         --}}
 
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">Listado de Ordenes</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body no-padding">
+                  <table class="table table-striped">
+                    <tr>
+                      <th style="width: 10px">#</th>
+                      <th>Codigo Orden</th>
+                      <th>Name</th>
+                      <th>Observaciones</th>
+                      <th>Nombre Completo</th>
+                      <th>Ultimo Estado</th>
+                      <th></th>
+                    </tr>
+                    @foreach($models as $model)
+                      
+                        <tr>
+                            <td style="width: 1%"><input class="id_destroy" value="{{$model->id}}" type="checkbox"> </td>
+                          
+                            <td>{{$model->codigo_orden }}</td>
+                            <td>{{ isset($model->Model->name) ? $model->Model->name : '' }}</td>                
+                            <td>{{$model->observaciones_internas}}</td>
+                            <td>{{ isset($model->Cliente->fullname) ? $model->Cliente->fullname : '' }}</td>
+                            <td>{{ isset($model->lasTOrdenEstados()->States->description) ? $model->lasTOrdenEstados()->States->description : '' }}</td>
+                            <td><a href="{{route('admin.orders.details', $model->id)}}">detalles</a></td>
+                        </tr>
+                    @endforeach
+                
+                  </table>
+                </div>
+                <!-- /.box-body -->
+          </div>
+        </div>
     </div>
 @endsection

@@ -88,7 +88,7 @@ abstract class Controller extends BaseController
     {
         //validar los campos
         $this->validate($this->request,config('models.'.$this->section.'.validationsStore'));
-        
+
         //crea a traves del repo con el request
         $model = $this->repo->create($this->request);
 

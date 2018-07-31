@@ -43,7 +43,7 @@ class Orders extends Entity
     }
 
     public function Services(){
-        return $this->belongsToMany(Services::getClass())->withPivot('cantidad');
+        return $this->belongsToMany(Services::getClass())->withPivot('cantidad','id');
     }
 
     

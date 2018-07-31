@@ -245,13 +245,14 @@
               <table class="table table-condensed">
                 <tbody>
                 @foreach($models->Services as $s)
+      
                 <tr>
                   <th>Descripción: {{$s->description}}</th>
                   <th>Iva: {{$s->iva}}</th>
                   <th>Precio: {{$s->amount}}</th>
                   <th>Cantidad: {{$s->pivot->cantidad}}/$ {{$s->pivot->cantidad * $s->amount}}</th>
                   
-                  <th><a href="{{route('admin.ordenes.deleteServices', $s->id)}}"class="btn btn-default btn-xs pull-right btn-borrar">Borrar</a></th>
+                  <th><a href="{{route('admin.ordenes.deleteServices', $s->pivot->id)}}"class="btn btn-default btn-xs pull-right btn-borrar">Borrar</a></th>
                 </tr>
                 @endforeach
               </tbody></table>
@@ -285,6 +286,7 @@
             </thead>
             <tbody>
             @foreach($services as $s)
+
             {!! Form::open(['route'=>'admin.ordenes.addServices']) !!}
             <tr>
               {!! Form::hidden('orders_id',$models->id)!!}
@@ -297,7 +299,6 @@
               <td><button type="submit" class="btn btn-primary btn-xs">Guardar</button></td>
             </tr>
             {!! Form::close() !!}
-       
             @endforeach
             </tbody>
 
@@ -312,6 +313,7 @@
   <!-- /.modal -->
 
 @endsection
+{{--
 @section('js')
 <script> 
 $('#example1').DataTable() 
@@ -327,3 +329,4 @@ $('.btn-borrar').click(function (e){
 });
 </script>
 @endsection
+--}}

@@ -38,11 +38,11 @@ class CreateOrdersTable extends Migration
             Relations
             */
 
-            $table->integer('users_id');
-            $table->integer('equipments_id'); 
-            $table->integer('brands_id');
-            $table->integer('models_id'); 
-            $table->integer('clients_id'); 
+            $table->integer('users_id')->nullable(); 
+            $table->integer('equipments_id')->nullable();  
+            $table->integer('brands_id')->nullable(); 
+            $table->integer('models_id')->nullable(); 
+            $table->integer('clients_id')->nullable(); 
             
             
             $table->timestamps();

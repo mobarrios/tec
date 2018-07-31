@@ -35,11 +35,11 @@ class CreateClientsTable extends Migration
             $table->string('location')->nullable();
             $table->string('province')->nullable();
 
-            $table->integer('localidades_id')->nullable()->unsigned();
+            $table->integer('localidades_id')->nullable()->unsigned()->nullable();
             $table->foreign('localidades_id')->references('id')->on('localidades');
 
 
-            $table->integer('iva_conditions_id')->unsigned()->index();
+            $table->integer('iva_conditions_id')->unsigned()->index()->nullable();
             $table->foreign('iva_conditions_id')->references('id')->on('iva_conditions');
             
             $table->text('obs')->nullable();
