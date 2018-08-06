@@ -53,6 +53,7 @@ Route::group(['middleware'=>'auth'],function(){
         require(__DIR__ . '/Routes/Tecnica/statesRoute.php');
         require(__DIR__ . '/Routes/Tecnica/equipmentsRoute.php');    
         require(__DIR__ . '/Routes/Tecnica/servicesRoute.php');
+        require(__DIR__ . '/Routes/Tecnica/printRoute.php');
     });
 
 

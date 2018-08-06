@@ -168,7 +168,7 @@
                         @permission('logs.list')
                         <li class={{ Request::segment(2) == "logs" ? 'active' : '' }}><a href="{{route('configs.logs.index')}}"><span>Logs</span></a></li>
                         @endpermission
-                
+                         <li class={{ Request::segment(2) == "equipments" ? 'active' : '' }}><a href="{{route('admin.print.index')}}"><span>Impresión</span></a></li>
 
                         {{-- 
                         @permission('financials.list')
