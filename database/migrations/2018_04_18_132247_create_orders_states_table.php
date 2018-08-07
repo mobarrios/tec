@@ -14,9 +14,9 @@ class CreateOrdersStatesTable extends Migration
     {
         Schema::create('orders_states', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('orders_id');
-            $table->integer('states_id');
-            $table->integer('users_id');
+            $table->integer('orders_id')->nullable(); 
+            $table->integer('states_id')->nullable();
+            $table->integer('users_id')->nullable();
             //$table->integer('users_id')->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();

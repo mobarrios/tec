@@ -14,9 +14,9 @@ class CreateServicesTable extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->string('description');
-            $table->integer('iva');
-            $table->double('amount', 10, 2);
+            $table->string('description')->nullable();
+            $table->integer('iva')->nullable();
+            $table->double('amount', 10, 2)->nullable();
             
             $table->timestamps();
             $table->softDeletes();

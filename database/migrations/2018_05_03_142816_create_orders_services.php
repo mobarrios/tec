@@ -14,9 +14,9 @@ class CreateOrdersServices extends Migration
     {
         Schema::create('orders_services', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->integer('services_id');
-            $table->integer('orders_id');
-            $table->integer('cantidad');
+            $table->integer('services_id')->nullable();
+            $table->integer('orders_id')->nullable();
+            $table->integer('cantidad')->nullable();
             
             $table->timestamps();
             $table->softDeletes();
