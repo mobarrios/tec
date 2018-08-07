@@ -18,6 +18,7 @@
         </div>
         --}}
 
+        {{--
         <!-- Default box -->
         <div class="col-xs-12 col-sm-3 pull-right">
             <div class="box box-primary">
@@ -44,7 +45,6 @@
 
             </div>
         </div>
-        {{--
         <div class="col-sm-3 col-xs-12">
             <!-- small box -->
             <div class="small-box bg-aqua">
