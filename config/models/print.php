@@ -7,7 +7,7 @@ return [
     'paginate'      => '50',
 
     //nombre de la seccion
-    'sectionName'   => 'print',
+    'sectionName'   => 'Impresión',
 
     //routes
     'indexRoute'    => 'admin.'.$model.'.index',
