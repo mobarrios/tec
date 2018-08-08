@@ -126,7 +126,6 @@ abstract class Controller extends BaseController
     {
         //validar los campos
         $this->validate($this->request,config('models.'.$this->section.'.validationsUpdate'));
-
         $id = $this->route->getParameter('id');
 
         //edita a traves del repo

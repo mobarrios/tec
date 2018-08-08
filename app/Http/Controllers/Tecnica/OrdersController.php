@@ -13,6 +13,7 @@ use App\Http\Repositories\Admin\ModelsRepo;
 use App\Http\Repositories\Tecnica\StatesRepo;
 use App\Http\Repositories\Tecnica\EquipmentsRepo;
 use App\Http\Repositories\Tecnica\OrderServicesRepo;
+use App\Http\Repositories\Tecnica\ToPrintRepo;
 use App\Entities\Tecnica\OrderStates;
 use App\Http\Repositories\Tecnica\ServicesRepo;
 use App\Entities\Tecnica\Services;
@@ -92,10 +93,12 @@ class OrdersController extends Controller
        
     }
 
-    public function reporte(Route $route){
+    public function reporte(Route $route, ToPrintRepo $toPrintRepo){
         
-        $model  = $this->repo->find($route->getParameter('id')); 
-        $pdf    = PDF::loadView('admin.orders.reportes', compact('model'));
+        $model      = $this->repo->find($route->getParameter('id')); 
+        $letraChica = $toPrintRepo->ultimo();
+       
+        $pdf    = PDF::loadView('admin.orders.reportes', compact('model','letraChica'));
 
         return $pdf->stream();
     }

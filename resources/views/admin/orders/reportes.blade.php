@@ -173,9 +173,13 @@ Tel:4328-5042 - 4328-5668
 <p style="font-size: 1.2em;">Observaciones : {{$model->observaciones}}</p>
 <p style="font-size: 1.2em;">Observaciones Tecnicas: {{$model->observaciones_tecnicas}}</p> 
 
- <br/>
- <hr>
+<br/>
+<hr>
 
+{{ $letraChica->descripcion }}
+
+
+{{--
 - CONTRASEÑA .................
 - LOS PRECIOS NO INCLUYEN IVA.
 - Cargo fijo por diagnostico $400.
@@ -194,9 +198,8 @@ ellos gravamenes o derechos de terceros de ninguna indole. ISTYLE no se responsa
 estado en que se encuentran.</p>
 
 <p> Recibo conforme: .....................</p>
+--}}
 
 
-
-
-  </body>
+</body>
 </html>
