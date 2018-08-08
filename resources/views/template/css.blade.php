@@ -25,6 +25,7 @@
     {{--<link rel="stylesheet" href="vendors/LTE/plugins/iCheck/flat/_all.css">--}}
 
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{asset('css/wysihtml5.css')}}">
 
 {{--<link rel="stylesheet" href="css/docs.css">--}}
 <!-- Theme style -->

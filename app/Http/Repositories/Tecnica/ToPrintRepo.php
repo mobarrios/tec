@@ -2,13 +2,13 @@
 namespace App\Http\Repositories\Tecnica;
 
 
-use App\Entities\Tecnica\Print;
+use App\Entities\Tecnica\ToPrint;
 use App\Http\Repositories\BaseRepo;
-class PrintRepo extends BaseRepo {
+class ToPrintRepo extends BaseRepo {
     
     public function getModel()
     {
-        return new Print();
+        return new ToPrint();
     }
 
 }

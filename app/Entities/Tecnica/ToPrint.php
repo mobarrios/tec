@@ -1,10 +1,10 @@
 <?php
 namespace App\Entities\Tecnica;
 
-use App\Entities\Tecnica\Print;
+use App\Entities\Tecnica\ToPrint;
 use App\Entities\Entity;
 
-class Print extends Entity
+class ToPrint extends Entity
 {
 
     protected $table = 'print';

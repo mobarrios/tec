@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Tecnica;
 
 use App\Http\Controllers\Controller;
-use App\Http\Repositories\Tecnica\PrintRepo as Repo;
+use App\Http\Repositories\Tecnica\ToPrintRepo as Repo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 
 
-class PrintController extends Controller
+class ToPrintController extends Controller
 {
     public function  __construct(Request $request, Repo $repo, Route $route)
     {
