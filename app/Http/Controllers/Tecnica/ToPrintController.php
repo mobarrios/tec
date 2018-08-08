@@ -21,6 +21,18 @@ class ToPrintController extends Controller
         $this->data['section']  = $this->section;
     }
 
+    public function index()
+    {   
+        
+        //breadcrumb activo
+        $this->data['activeBread'] = 'Listar';
+
+        $this->data['models'] = $this->repo->getModel()->all()->first();
+        
+        //return view($this->getConfig()->indexRoute)->with($this->data);
+        return view(config('models.'.$this->section.'.storeView'))->with($this->data);
+    }
+
   	public function store()
     {
         //validar los campos
