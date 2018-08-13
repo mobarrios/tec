@@ -16,6 +16,7 @@ use App\Http\Repositories\Tecnica\OrderServicesRepo;
 use App\Http\Repositories\Tecnica\ToPrintRepo;
 use App\Http\Repositories\Configs\UsersRepo;
 use App\Entities\Tecnica\OrderStates;
+use App\Entities\Tecnica\OrderServices;
 use App\Http\Repositories\Tecnica\ServicesRepo;
 use App\Entities\Tecnica\Services;
 use PDF;
@@ -23,7 +24,7 @@ use Auth;
 use Mail;
 class OrdersController extends Controller
 {
-    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, StatesRepo $statesRepo, EquipmentsRepo $equipmentsRepo, ServicesRepo $servicesRepo, UsersRepo $usersRepo)
+    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, StatesRepo $statesRepo, EquipmentsRepo $equipmentsRepo, ServicesRepo $servicesRepo, UsersRepo $usersRepo, OrderServices $orderServices)
     {
 
         $this->request  = $request;
@@ -49,8 +50,8 @@ class OrdersController extends Controller
      
     }
 
-    public function detail(UsersRepo $usersRepo){
-
+    public function detail(UsersRepo $usersRepo, OrderServices $orderServices){
+         
     	$this->data['models'] = $this->repo->find($this->route->getParameter('id'));
     	$this->data['users']  = $usersRepo->ListsData('name','id');
         
