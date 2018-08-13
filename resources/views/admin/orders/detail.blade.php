@@ -86,6 +86,19 @@
             <h3 class="box-title">  Técnico </h3>
           </div>
           <div class="box-body">
+
+              {!! Form::open(['route'=>('admin.ordenes.updateUser')]) !!}
+              <div class="input-group">
+                {!! Form::select('users_id',$users, isset($models->users_id) ? $models->users_id : null, ['class'=>'form-control select2']) !!}
+                {!! Form::hidden('orden_id', $models->id) !!}
+
+                <span class="input-group-btn">
+                <button class="btn btn-default" type="submit"><span class="fa fa-edit"></span></button>
+                </span>
+                {!! Form::close() !!}
+
+          
+            </div>
             <span class="text-muted">Usuario  : </span> <strong>{{ isset($models->User) ? $models->User->user_name : '' }}</strong>
            
             <br><span class="text-muted">Falla Declarada :</span> <strong> {{ $models->falla_declarada  }}</strong>
@@ -112,7 +125,7 @@
 
                 <span class="input-group-btn">
                 <button class="btn btn-default" type="submit"><span class="fa fa-plus"></span></button>
-            </span>
+                </span>
                 {!! Form::close() !!}
 
               </div>

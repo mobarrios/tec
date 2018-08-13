@@ -14,7 +14,7 @@ class CreatePrintTable extends Migration
     {
         Schema::create('print', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->integer('descripcion');
+            $table->text('descripcion');
             
             $table->timestamps();
             $table->softDeletes();

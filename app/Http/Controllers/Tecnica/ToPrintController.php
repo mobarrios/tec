@@ -46,10 +46,11 @@ class ToPrintController extends Controller
     }
   	
   	public function update()
+
     {
         //validar los campos
         $this->validate($this->request,config('models.'.$this->section.'.validationsUpdate'));
-
+        
         $id = $this->route->getParameter('id');
        
         $data = $this->request->all();

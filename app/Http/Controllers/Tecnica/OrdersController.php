@@ -14,6 +14,7 @@ use App\Http\Repositories\Tecnica\StatesRepo;
 use App\Http\Repositories\Tecnica\EquipmentsRepo;
 use App\Http\Repositories\Tecnica\OrderServicesRepo;
 use App\Http\Repositories\Tecnica\ToPrintRepo;
+use App\Http\Repositories\Configs\UsersRepo;
 use App\Entities\Tecnica\OrderStates;
 use App\Http\Repositories\Tecnica\ServicesRepo;
 use App\Entities\Tecnica\Services;
@@ -22,7 +23,7 @@ use Auth;
 use Mail;
 class OrdersController extends Controller
 {
-    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, StatesRepo $statesRepo, EquipmentsRepo $equipmentsRepo, ServicesRepo $servicesRepo)
+    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, StatesRepo $statesRepo, EquipmentsRepo $equipmentsRepo, ServicesRepo $servicesRepo, UsersRepo $usersRepo)
     {
 
         $this->request  = $request;
@@ -33,7 +34,7 @@ class OrdersController extends Controller
         $this->data['section']      = $this->section;
         $this->data['ultima_orden'] = !is_null($repo->ultimo()) ? $repo->ultimo()->id + 1 : '1';
         //$this->data['brands']       = $brandsRepo->ListsData('name','id');
-        $this->data['clients']      = $clientsRepo->ListsData('name','id');
+        $this->data['clients']      = $clientsRepo->getModel()->all()->lists('fullname','id');
 
         $this->data['states']       = $statesRepo->getModel()->lists('description','id');
         $this->data['equipments']   = $equipmentsRepo->ListsData('name','id');
@@ -41,19 +42,30 @@ class OrdersController extends Controller
         $this->data['models_id']    = $modelsRepo->ListsData('name','id');
         $this->data['brands']       = $brandsRepo->getAllWithModels();
         $this->data['services']     = $servicesRepo->getModel()->all();
-      
+             
    
         //$this->data['models']     = $modelsRepo->ListsData('name','id');
         //$this->data['clients']    = $clientsRepo->listForSelect();
      
     }
 
-    public function detail(){
+    public function detail(UsersRepo $usersRepo){
 
     	$this->data['models'] = $this->repo->find($this->route->getParameter('id'));
-    	
+    	$this->data['users']  = $usersRepo->ListsData('name','id');
+        
 
     	return view('admin.orders.detail')->with($this->data);
+
+    }
+
+    public function updateUser(Request $request){
+        
+        $model            = $this->repo->find($request->get('orden_id')); 
+        $model->users_id  = $request->get('users_id');
+        $model->save();
+
+        return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
 
     }
 
@@ -165,8 +177,9 @@ class OrdersController extends Controller
         
         $id     = $this->route->getParameter('id');
         
-        $model  = $orderServicesRepo->getModel()->where('services_id',1)->get();
-       
+        $model  = $orderServicesRepo->find($id);
+        $model->delete();
+        
         return redirect()->back()->withErrors(['Registro borrado correctamente']);
     }
 
