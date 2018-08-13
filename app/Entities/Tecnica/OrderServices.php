@@ -12,9 +12,9 @@ use App\Entities\Entity;
 class OrderServices extends Entity
 {
 
-    protected $table = 'orders_services';
+    protected $table 	= 'orders_services';
     protected $fillable = ['orders_id','services_id','cantidad' ];
-    protected $section = 'orders';
+    protected $section 	= 'orders';
    
 
     /*
