@@ -96,9 +96,7 @@
                 <button class="btn btn-default" type="submit"><span class="fa fa-edit"></span></button>
                 </span>
                 {!! Form::close() !!}
-
-          
-            </div>
+              </div>
             <span class="text-muted">Usuario  : </span> <strong>{{ isset($models->User) ? $models->User->user_name : '' }}</strong>
            
             <br><span class="text-muted">Falla Declarada :</span> <strong> {{ $models->falla_declarada  }}</strong>
@@ -215,6 +213,10 @@
 
                     <span class="input-group-addon">.00</span>
                   </div>
+                  
+                  @if(count($models->Services) > 0)
+                  <code>+ Servicio = {{ $models->presupuesto_estimado + $models->Services->sum('amount') * $models->Services->sum('cantidad')  }} </code>
+                  @endif
                 </td>
               </tr>
               <tr>

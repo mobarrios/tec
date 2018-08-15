@@ -83,9 +83,8 @@ class OrdersController extends Controller
         $data['estado']     = $statesRepo->find($request->get('estado_id'));
         $data['orden']      = $this->repo->find($request->get('orden_id'));
          
-
-       
-        if(!empty($data['orden']->Cliente->email) || $data['orden']->enviar == false)    
+        
+        if(!empty($data['orden']->Cliente->email) || $data['estado']->enviar == false)    
         {
             //Envio de email
             Mail::send('admin.orders.email', ['estado'=>$data['estado']], function($message) use ($data)

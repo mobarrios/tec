@@ -107,7 +107,7 @@
                     
             </li>
 
-
+            {{--
             @permission('smallboxes.list')
             <li class="treeview {{ in_array(Request::segment(2), ["smallBoxes"]) ? 'active' : '' }}">
                 <a href="#">
@@ -122,6 +122,7 @@
                 </ul>
             </li>
             @endpermission
+            --}}
 
 
             @permission('roles.list|permissions.list|users.list|logs.list|additionals.list|company.list|branches.list|additionals.list')
