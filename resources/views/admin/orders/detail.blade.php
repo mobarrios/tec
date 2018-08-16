@@ -308,7 +308,7 @@
               {!! Form::hidden('services_id', $s->id)!!}
               <td>#</td>
               <td>{{$s->description}}</td>
-              <td>{{$s->amount}}</td>
+              <td>$ {{$s->amount}}</td>
               <td>{{$s->iva}}</td>
               <td>{!! Form::number('cantidad',null,['class'=>'form-control input-sm', 'style' => 'height:20px;']) !!}</td>
               <td><button type="submit" class="btn btn-primary btn-xs">Guardar</button></td>
