@@ -45,8 +45,8 @@ class InsertsController extends Controller
         	
         	$data['id']                = $result->idservicio;
             $data['description']       = $result->descripcion;	 
-            $data['iva']               = $result->importe;	 
-            $data['amount']            = $result->iva; 	 
+            $data['iva']               = $result->iva;	 
+            $data['amount']            = $result->importe; 	 
             Services::insert($data);
         }
         return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
