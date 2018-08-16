@@ -35,7 +35,7 @@
                 <i class="fa fa-upload"></i>  Subir Clientes </button><br><br>
 
                                                  <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#procesarOrders">
-                <i class="fa fa-upload"></i>  Subir Ordenes </button><br><br>
+                <i class="fa fa-upload"></i>  Subir Ordenes/cabaceraorden </button><br><br>
 
                        <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#procesarOrdersClients">
                 <i class="fa fa-upload"></i>  Subir Ordenes Clientes </button><br><br>
@@ -44,7 +44,7 @@
                 <i class="fa fa-upload"></i>  Subir Ordenes Services/Items </button><br><br>
 
                                           <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#procesarOrderEstados">
-                <i class="fa fa-upload"></i>  Subir Ordenes Estados </button><br><br>
+                <i class="fa fa-upload"></i>  Subir Ordenes Estados/Historial </button><br><br>
 
 
                                           <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#procesarEstados">
@@ -62,7 +62,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Subir </h4>
+                <h4 class="modal-title" id="myModalLabel">Subir Usuario</h4>
             </div>
             <div class="modal-body">
             {!! Form::open(['route'=>['procesarUsers'], 'files' => true]) !!}
@@ -83,7 +83,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Subir </h4>
+                <h4 class="modal-title" id="myModalLabel">Subir Servicios</h4>
             </div>
             <div class="modal-body">
             {!! Form::open(['route'=>['procesarServices'], 'files' => true]) !!}
@@ -146,7 +146,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Subir Marcas</h4>
+                <h4 class="modal-title" id="myModalLabel">Subir Modelos</h4>
             </div>
             <div class="modal-body">
             {!! Form::open(['route'=>['procesarModels'], 'files' => true]) !!}
@@ -188,7 +188,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Subir Clientes</h4>
+                <h4 class="modal-title" id="myModalLabel">Subir Ordenes</h4>
             </div>
             <div class="modal-body">
             {!! Form::open(['route'=>['procesarOrders'], 'files' => true]) !!}
@@ -209,7 +209,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Subir Clientes</h4>
+                <h4 class="modal-title" id="myModalLabel">Subir Ordenes Clientes</h4>
             </div>
             <div class="modal-body">
             {!! Form::open(['route'=>['procesarOrdersClients'], 'files' => true]) !!}
@@ -230,7 +230,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Subir Clientes</h4>
+                <h4 class="modal-title" id="myModalLabel">Subir Ordenes Servicios/Items</h4>
             </div>
             <div class="modal-body">
             {!! Form::open(['route'=>['procesarOrderServices'], 'files' => true]) !!}
@@ -245,6 +245,28 @@
     </div>
 </div>
 
+<div class="modal fade" id="procesarOrderEstados" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Subir Ordenes Estados/Historial</h4>
+            </div>
+            <div class="modal-body">
+            {!! Form::open(['route'=>['procesarOrderEstados'], 'files' => true]) !!}
+            {!! Form::file('file') !!}
+
+            </div>
+            <div class="modal-footer">
+            {!! Form::submit('Subir', ['class'=> 'btn btn-primary']) !!}
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+</div>
+
+
 
 
 <div class="modal fade" id="procesarEstados" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -253,7 +275,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Subir Clientes</h4>
+                <h4 class="modal-title" id="myModalLabel">Subir Estados</h4>
             </div>
             <div class="modal-body">
             {!! Form::open(['route'=>['procesarEstados'], 'files' => true]) !!}
