@@ -197,14 +197,10 @@
             <table class="table table-striped">
 
               {!! Form::open(['route'=>('admin.ordenes.updatePagos')]) !!}
-
               <tbody>
-
               <tr>
 
-                <td width="45%">Presupuesto 
-                </td>
-
+                <td width="45%">Presupuesto</td>
                 <td>
                   <div class="input-group">
                     <span class="input-group-addon">$</span>
@@ -212,8 +208,6 @@
 
                     <span class="input-group-addon">.00</span>
                   </div>
-                  
-
                   @if(count($models->Services) > 0)
                     <?php $con = 0; ?>
 
@@ -223,16 +217,10 @@
 
                     <code>Presupuesto + Servicio = ${{ $models->presupuesto_estimado + $con }} </code>
                   @endif
-
-                
-
-
                 </td>
               </tr>
               <tr>
-
                 <td width="45%">Abonado</td>
-
                 <td>
                   <div class="input-group">
                     <span class="input-group-addon">$</span>
@@ -257,6 +245,8 @@
     </div>  
   </div> 
 </div>
+
+
 <hr>
 @if(count($models->Services) > 0)
   <div class="row">

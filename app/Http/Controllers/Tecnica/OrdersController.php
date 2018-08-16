@@ -50,11 +50,11 @@ class OrdersController extends Controller
      
     }
 
-    public function detail(UsersRepo $usersRepo, OrderServices $orderServices){
+    public function detail(UsersRepo $usersRepo, OrderServices $orderServices, ToPrintRepo $toPrintRepo){
          
     	$this->data['models'] = $this->repo->find($this->route->getParameter('id'));
     	$this->data['users']  = $usersRepo->ListsData('name','id');
-        
+        $this->data['letraChica'] = $toPrintRepo->ultimo();
 
     	return view('admin.orders.detail')->with($this->data);
 

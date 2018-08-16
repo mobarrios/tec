@@ -12,7 +12,7 @@
         @endif
         <div class="box-header">
           <!-- tools box -->
-          {{--
+          
 
           <div class="pull-right box-tools">
             <button type="button" class="btn btn-default btn-sm" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -20,7 +20,7 @@
             <button type="button" class="btn btn-default btn-sm" data-widget="remove" data-toggle="tooltip" title="Remove">
               <i class="fa fa-times"></i></button>
           </div>
-          --}}
+         
           <!-- /. tools -->
         </div>
         <!-- /.box-header -->
@@ -29,7 +29,6 @@
         </div>            
     @endsection
 @section('js')
-{{--
 
 <script>
   $(function () {
@@ -38,5 +37,5 @@
     $('.textarea').wysihtml5()
   })
 </script>
---}}
+
 @endsection

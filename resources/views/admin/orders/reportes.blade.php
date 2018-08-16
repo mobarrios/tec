@@ -176,7 +176,7 @@ Tel:4328-5042 - 4328-5668
 <br/>
 <hr>
 
-{{ $letraChica->descripcion }}
+{!! $letraChica->descripcion !!}
 
 
 {{--
