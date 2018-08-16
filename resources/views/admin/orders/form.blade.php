@@ -90,7 +90,7 @@
             </div>
 
             <div class="col-xs-4 form-group">
-              {!! Form::label('Presupuesto Estimado') !!}
+              {!! Form::label('Presupuesto') !!}
               {!! Form::text('presupuesto_estimado', null, ['class'=>'form-control']) !!}
             </div>
           </div>

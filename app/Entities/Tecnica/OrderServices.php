@@ -8,8 +8,8 @@ use App\Entities\Tecnica\OrderStates;
 use App\Entities\Tecnica\States;
 use App\Entities\Tecnica\OrderServices;
 use App\Entities\Entity;
-
-class OrderServices extends Entity
+use Illuminate\Database\Eloquent\Model;
+class OrderServices extends Model
 {
 
     protected $table 	= 'orders_services';

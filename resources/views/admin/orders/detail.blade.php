@@ -86,21 +86,19 @@
             <h3 class="box-title">  Técnico </h3>
           </div>
           <div class="box-body">
-
               {!! Form::open(['route'=>('admin.ordenes.updateUser')]) !!}
               <div class="input-group">
                 {!! Form::select('users_id',$users, isset($models->users_id) ? $models->users_id : null, ['class'=>'form-control select2']) !!}
                 {!! Form::hidden('orden_id', $models->id) !!}
-
                 <span class="input-group-btn">
                 <button class="btn btn-default" type="submit"><span class="fa fa-edit"></span></button>
                 </span>
-                {!! Form::close() !!}
               </div>
-            <span class="text-muted">Usuario  : </span> <strong>{{ isset($models->User) ? $models->User->user_name : '' }}</strong>
-           
-            <br><span class="text-muted">Falla Declarada :</span> <strong> {{ $models->falla_declarada  }}</strong>
-            <br><span class="text-muted">Observaciones :</span> <strong> {{ $models->observaciones  }}</strong>
+              {!! Form::close() !!}
+              <br>
+              <span class="text-muted">Usuario  : </span> <strong>{{ isset($models->User) ? $models->User->user_name : '' }}</strong>
+              <br><span class="text-muted">Falla Declarada :</span> <strong> {{ $models->falla_declarada  }}</strong>
+              <br><span class="text-muted">Observaciones :</span> <strong> {{ $models->observaciones  }}</strong>
           </div>
         </div>
       </div>
@@ -204,7 +202,8 @@
 
               <tr>
 
-                <td width="45%">Presupuesto Estimado</td>
+                <td width="45%">Presupuesto 
+                </td>
 
                 <td>
                   <div class="input-group">
@@ -214,9 +213,20 @@
                     <span class="input-group-addon">.00</span>
                   </div>
                   
+
                   @if(count($models->Services) > 0)
-                  <code>+ Servicio = {{ $models->presupuesto_estimado + $models->Services->sum('amount') * $models->Services->sum('cantidad')  }} </code>
+                    <?php $con = 0; ?>
+
+                    @foreach($models->Services as $s)
+                    <?php $con += $s->pivot->cantidad * $s->amount ?>
+                    @endforeach
+
+                    <code>Presupuesto + Servicio = ${{ $models->presupuesto_estimado + $con }} </code>
                   @endif
+
+                
+
+
                 </td>
               </tr>
               <tr>
