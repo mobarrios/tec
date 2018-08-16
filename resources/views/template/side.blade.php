@@ -44,7 +44,7 @@
               </span>
                 </a>
                 <ul class="treeview-menu">
-
+                    {{--
                     @permission('items.list')
                     <li class={{ Request::segment(2) == "items" ? 'active' : '' }}><a
                                 href="{{route('admin.items.index')}}"><span>Stock</span></a></li>
@@ -54,6 +54,7 @@
                                 href="{{route('admin.modelsListsPrices.index')}}"><span> Listas de Precios </span></a>
                     </li>
                     @endpermission
+                    --}}
 
                     @permission('additionals.list | brands.list | categories.list | models.list | colors.list | additionals.list')
                     <li class="treeview {{ in_array(Request::segment(2), ["brands", "categories","models","colors","additionals"]) ? 'active' : '' }}">
