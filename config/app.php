@@ -12,6 +12,7 @@ return [
     | application. If disabled, a simple generic error page is shown.
     |
     */
+    'version' => '18.08.17',
 
     'debug' => env('APP_DEBUG', false),
 
