@@ -110,7 +110,7 @@
                     <tbody>
                     @foreach($models as $model)
                         <tr>
-                           <td>{{$model->codigo_orden }}</td>
+                           <td>ist-{{$model->id }}</td>
                            <td>{{ isset($model->Cliente->fullname) ? $model->Cliente->fullname : '' }}</td>
                            <td>{{ isset($model->Model->name) ? $model->Model->name : '' }}</td>                
                            <td>{{$model->observaciones_internas}}</td>
@@ -119,7 +119,7 @@
                             {{ isset($model->lasTOrdenEstados()->States->description) ? $model->lasTOrdenEstados()->States->description : '' }}
                         </span>
                             </td>
-                           <td><a href="{{route('admin.orders.details', $model->id)}}" class="btn btn-xs btn-success" ><span class="fa  fa-info-circle"></span> </a></td>
+                           <td><a href="{{route('admin.orders.details', $model->id)}}" class="btn btn-xs btn-success" ><span class="fa fa-info-circle"></span> </a></td>
                         </tr>
                     @endforeach
                     </tbody>

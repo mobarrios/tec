@@ -1,7 +1,7 @@
 @extends('template')
 
     @section('form_title')
-       Orden # {{$models->codigo_orden}}
+       Orden # {{$models->id}}
     @endsection
 
  	@section('sectionContent')
@@ -9,7 +9,7 @@
       <div class="col-xs-12">
         <div class="box box-solid">
           <div class="box-header">
-            <div class="col-xs-8"><h3 class="box-title">  Orden # {{$models->codigo_orden}}</h3></div>
+            <div class="col-xs-8"><h3 class="box-title">  Orden # ist-{{$models->id}}</h3></div>
             <div class="col-xs-4"><div class="btn-group pull-right">
                   <button type="button" class="btn btn-default btn-flat">Acciones</button>
                   <button type="button" class="btn btn-default btn-flat dropdown-toggle" data-toggle="dropdown">
