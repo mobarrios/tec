@@ -75,6 +75,8 @@
 @if(Auth::user())
 <script>
 
+    $('#dataTable').dataTable();
+
     $('.table').addClass('table-striped  table-hover');
 
     $.fn.modal.Constructor.prototype.enforceFocus = function () {};

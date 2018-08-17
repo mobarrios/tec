@@ -54,7 +54,6 @@
                         <tbody>
                             @yield('table')
                         </tbody>
-
                     </table>
                     @yield('footTable')
                 </div>
