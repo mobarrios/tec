@@ -32,7 +32,7 @@
     
         <div class="col-xs-12 form-group">
           {!! Form::label('Texto Email') !!}
-          {!! Form::textarea('text_email', null, ['class'=>'form-control']) !!}
+          {!! Form::textarea('text_email', null, ['class'=>'form-control textarea']) !!}
         </div>
         
         <div class="col-xs-12 form-group">
@@ -47,5 +47,6 @@
 @section('js')
   <script>
     $('.my-colorpicker1').colorpicker()
+    $('.textarea').wysihtml5()
   </script>
 @endsection

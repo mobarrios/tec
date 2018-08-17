@@ -104,18 +104,22 @@
                       <th>Cliente</th>
                       <th>Modelo</th>
                       <th>Observ. Int.</th>
-                      <th>Estado</th>
+                      <th>Estado Actual</th>
                       <th></th>
                     </thead>
                     <tbody>
                     @foreach($models as $model)
                         <tr>
-                            <td>{{$model->codigo_orden }}</td>
-                            <td>{{ isset($model->Cliente->fullname) ? $model->Cliente->fullname : '' }}</td>
-                            <td>{{ isset($model->Model->name) ? $model->Model->name : '' }}</td>                
-                            <td>{{$model->observaciones_internas}}</td>
-                            <td>{{ isset($model->lasTOrdenEstados()->States->description) ? $model->lasTOrdenEstados()->States->description : '' }}</td>
-                            <td><a href="{{route('admin.orders.details', $model->id)}}" class="btn btn-sm btn-success" ><span class="fa  fa-info-circle"></span> </a></td>
+                           <td>{{$model->codigo_orden }}</td>
+                           <td>{{ isset($model->Cliente->fullname) ? $model->Cliente->fullname : '' }}</td>
+                           <td>{{ isset($model->Model->name) ? $model->Model->name : '' }}</td>                
+                           <td>{{$model->observaciones_internas}}</td>
+                           <td>
+                            <span class="label" style="background-color:{{ isset($model->lasTOrdenEstados()->States->color) ? $model->lasTOrdenEstados()->States->color : '' }} ">
+                            {{ isset($model->lasTOrdenEstados()->States->description) ? $model->lasTOrdenEstados()->States->description : '' }}
+                        </span>
+                            </td>
+                           <td><a href="{{route('admin.orders.details', $model->id)}}" class="btn btn-xs btn-success" ><span class="fa  fa-info-circle"></span> </a></td>
                         </tr>
                     @endforeach
                     </tbody>

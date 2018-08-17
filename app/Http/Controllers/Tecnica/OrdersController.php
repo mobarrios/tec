@@ -83,10 +83,9 @@ class OrdersController extends Controller
         $data['estado']     = $statesRepo->find($request->get('estado_id'));
         $data['orden']      = $this->repo->find($request->get('orden_id'));
         
-        //Si el cliente no tiene email o enviar es false
-        if(!empty($data['orden']->Cliente->email) || $data['estado']->enviar == true)    
-        {
-    
+        //Si el cliente tiene email o enviar es verdadero
+        if(!empty($data['orden']->Cliente->email) && $data['estado']->enviar == true)    
+        {   
             //Envio de email
             Mail::send('admin.orders.email', ['estado'=>$data['estado']], function($message) use ($data)
             {
@@ -99,8 +98,7 @@ class OrdersController extends Controller
 
         }else{
          
-          
-            return redirect()->back()->withErrors(['Regitro Agregado Correctamente. El email no fue enviado al cliente.']);
+            return redirect()->back()->withErrors(['Regitro Agregado Correctamente. El Email no fue enviado al cliente.']);
         }
         //return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
        
