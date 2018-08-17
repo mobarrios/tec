@@ -94,34 +94,32 @@
         <div class="col-sm-12 col-xs-12">
             <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">Listado de Ordenes</h3>
+                  <h3 class="box-title">Mis de Ordenes</h3>
                 </div>
                 <!-- /.box-header -->
-                <div class="box-body no-padding">
-                  <table class="table table-striped">
-                    <tr>
-                      <th style="width: 10px">#</th>
+                <div class="box-body">
+                  <table class="table table-striped" id="dataTable">
+                    <thead>
                       <th>Codigo Orden</th>
-                      <th>Name</th>
-                      <th>Observaciones</th>
-                      <th>Nombre Completo</th>
-                      <th>Ultimo Estado</th>
+                      <th>Cliente</th>
+                      <th>Modelo</th>
+                      <th>Observ. Int.</th>
+                      <th>Estado</th>
                       <th></th>
-                    </tr>
+                    </thead>
+                    <tbody>
                     @foreach($models as $model)
-                      
                         <tr>
-                            <td style="width: 1%"><input class="id_destroy" value="{{$model->id}}" type="checkbox"> </td>
-                          
                             <td>{{$model->codigo_orden }}</td>
+                            <td>{{ isset($model->Cliente->fullname) ? $model->Cliente->fullname : '' }}</td>
                             <td>{{ isset($model->Model->name) ? $model->Model->name : '' }}</td>                
                             <td>{{$model->observaciones_internas}}</td>
-                            <td>{{ isset($model->Cliente->fullname) ? $model->Cliente->fullname : '' }}</td>
                             <td>{{ isset($model->lasTOrdenEstados()->States->description) ? $model->lasTOrdenEstados()->States->description : '' }}</td>
-                            <td><a href="{{route('admin.orders.details', $model->id)}}">detalles</a></td>
+                            <td><a href="{{route('admin.orders.details', $model->id)}}" class="btn btn-sm btn-success" ><span class="fa  fa-info-circle"></span> </a></td>
                         </tr>
                     @endforeach
-                
+                    </tbody>
+
                   </table>
                 </div>
                 <!-- /.box-body -->
