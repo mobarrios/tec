@@ -10,7 +10,7 @@
                 <td>{{ isset($model->Model->name) ? $model->Model->name : '' }}</td>                
                 <td>{{$model->observaciones_internas}}</td>
                 <td>{{ isset($model->Cliente->fullname) ? $model->Cliente->fullname : '' }}</td>
-                <td>{{ isset($model->lasTOrdenEstados()->States->description) ? $model->lasTOrdenEstados()->States->description : '' }}</td>
+                <td><span class="label" style="background-color:{{ isset($model->lasTOrdenEstados()->States->color) ? $model->lasTOrdenEstados()->States->color : '' }} "> {{ isset($model->lasTOrdenEstados()->States->description) ? $model->lasTOrdenEstados()->States->description : '' }} </span></td>
                 <td><a href="{{route('admin.orders.details', $model->id)}}">detalles</a></td>
             </tr>
         @endforeach

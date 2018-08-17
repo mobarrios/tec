@@ -264,8 +264,8 @@
                 <tr>
                   <th>Descripción: {{$s->description}}</th>
                   <th>Iva: {{$s->iva}}</th>
-                  <th>Precio: {{$s->amount}}</th>
-                  <th>Cantidad: {{$s->pivot->cantidad}}/$ {{$s->pivot->cantidad * $s->amount}}</th>
+                  <th>Precio: ${{$s->amount}}</th>
+                  <th>Cantidad: {{$s->pivot->cantidad}}/ ${{$s->pivot->cantidad * $s->amount}}</th>
                   
                   <th><a href="{{route('admin.ordenes.deleteServices', $s->pivot->id)}}"class="btn btn-default btn-xs pull-right btn-borrar">Borrar</a></th>
                 </tr>
