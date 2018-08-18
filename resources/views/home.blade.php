@@ -91,6 +91,22 @@
     </div>
 
     <div class="row">
+        <div class="col-sm-2 col-xs-2">
+            <div class="box no-border">
+                <div class="box-body">
+                    <a href="{{route('admin.orders.create')}}" class="btn btn-app ">
+                        <i class="fa fa-wrench"></i>
+                        Nueva Orden
+                    </a>
+
+                    <a href="{{route('admin.clients.create')}}" class="btn btn-app">
+                        <i class="fa fa-group"></i>
+                        Nuevo Cliente
+                    </a>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
         <div class="col-sm-12 col-xs-12">
             <div class="box">
                 <div class="box-header">
@@ -120,6 +136,7 @@
                         </span>
                             </td>
                            <td><a href="{{route('admin.orders.details', $model->id)}}" class="btn btn-xs btn-success" ><span class="fa fa-info-circle"></span> </a></td>
+
                         </tr>
                     @endforeach
                     </tbody>
