@@ -33,7 +33,7 @@ class OrdersController extends Controller
 
         $this->section              = 'orders';
         $this->data['section']      = $this->section;
-        $this->data['ultima_orden'] = !is_null($repo->ultimo()) ? $repo->ultimo()->id + 1 : '1';
+        //$this->data['ultima_orden'] = !is_null($repo->ultimo()) ? $repo->ultimo()->id + 1 : '1';
         //$this->data['brands']       = $brandsRepo->ListsData('name','id');
         $this->data['clients']      = $clientsRepo->getModel()->all()->lists('fullname','id');
 
@@ -82,10 +82,10 @@ class OrdersController extends Controller
         
         $data['estado']     = $statesRepo->find($request->get('estado_id'));
         $data['orden']      = $this->repo->find($request->get('orden_id'));
-         
         
-        if(!empty($data['orden']->Cliente->email) || $data['estado']->enviar == false)    
-        {
+        //Si el cliente tiene email o enviar es verdadero
+        if(!empty($data['orden']->Cliente->email) && $data['estado']->enviar == true)    
+        {   
             //Envio de email
             Mail::send('admin.orders.email', ['estado'=>$data['estado']], function($message) use ($data)
             {
@@ -98,10 +98,9 @@ class OrdersController extends Controller
 
         }else{
          
-            return redirect()->back()->withErrors(['Regitro Agregado Correctamente. El email no fue enviado al cliente.']);
+            return redirect()->back()->withErrors(['Regitro Agregado Correctamente. El Email no fue enviado al cliente.']);
         }
         //return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
-        
        
     }
 
@@ -109,8 +108,7 @@ class OrdersController extends Controller
         
         $model      = $this->repo->find($route->getParameter('id')); 
         $letraChica = $toPrintRepo->ultimo();
-       
-        $pdf    = PDF::loadView('admin.orders.reportes', compact('model','letraChica'));
+        $pdf        = PDF::loadView('admin.orders.reportes', compact('model','letraChica'));
 
         return $pdf->stream();
     }
@@ -176,7 +174,6 @@ class OrdersController extends Controller
     public function deleteServices(Request $request, OrderServicesRepo $orderServicesRepo){
         
         $id     = $this->route->getParameter('id');
-        
         $model  = $orderServicesRepo->find($id);
         $model->delete();
         

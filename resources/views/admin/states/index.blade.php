@@ -4,10 +4,10 @@
             <tr>
                 <td style="width: 1%"><input class="id_destroy" value="{{$model->id}}" type="checkbox"></td>
                 <td>{{$model->id}}</td>
-                <td>{{$model->description }}</td>
-                <td>{{$model->text_email}}</td>  
-                <td><div style="widht:5px; height:20px; background-color:{{$model->color}};" ></div> </td>   
-                <td></td>           
+                <td><span class="label" style="background-color: {{ $model->color}}">{{$model->description }}</span></td>
+                <td style="width: 60%" >{!! $model->text_email !!}</td>  
+                <td>@if($model->enviar == 1) Se envia al cliente @else No se envia al cliente @endif </td>           
+                  
             </tr>
         @endforeach
     @endsection

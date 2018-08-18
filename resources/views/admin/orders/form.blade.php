@@ -1,7 +1,7 @@
 @extends('template.model_form')
 
     @section('form_title')
-        Nueva Orden #  {{ isset($ultima_orden) ? $ultima_orden : '' }}
+        Nueva Orden # 
     @endsection
     
     @section('form_inputs')
@@ -14,7 +14,7 @@
           <div class="row">
             <div class="col-xs-4 form-group">
               {!! Form::label('Numero de orden') !!}
-              {!! Form::text('codigo_orden', 'ist-'.$ultima_orden, ['class'=>'form-control']) !!}
+              {!! Form::text('codigo_orden', 'ist-', ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-4 form-group">
               {!! Form::label('Fecha Inicio') !!}
