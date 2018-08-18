@@ -187,6 +187,14 @@ class OrdersController extends Controller
         
         //crea a traves del repo con el request
         $model = $this->repo->create($this->request);
+        
+        //Estado iniciado
+        $state              = new OrderStates();
+        $state->orders_id   = $model->id;
+        $state->users_id    = $this->data['users_id'];
+        $state->states_id   = 1;
+        $state->save();
+
 
         return redirect()->route('admin.orders.details',$model->id)->withErrors(['Regitro Agregado Correctamente']);
     }
