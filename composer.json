@@ -13,9 +13,7 @@
         "barryvdh/laravel-dompdf": "0.7.*",
         "nesbot/carbon": "~1.18",
         "bican/roles": "2.1.*",
-        "milon/barcode": "^5.1",
-        "kartik-v/bootstrap-fileinput": "@dev"
-
+        "milon/barcode": "^5.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
