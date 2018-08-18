@@ -108,7 +108,7 @@
 
 	</table>
   	<hr>
-	<p>{{$estado->text_email}}</p>
+	<p>{!! $estado->text_email !!}</p>
 
 
   </body>
