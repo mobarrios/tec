@@ -94,7 +94,7 @@
                       </td>
                       <td style="font-size: 1.5em;" >
                           <strong>Entrada</strong> {{ date('d/m/Y',strtotime($model->fecha_inicio)) }}<br />
-                          <strong>Orden de Reparacion</strong> {{$model->codigo_orden}}
+                          <strong>Orden de Reparacion</strong> ist-{{$model->id}}
                       </td>
                   </tr>
               </table>
