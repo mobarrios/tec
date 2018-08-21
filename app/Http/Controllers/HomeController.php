@@ -22,8 +22,7 @@ class HomeController extends Controller
         $this->data['section'] = 'home';
         $this->data['activeBread'] = '';
         // $this->data['config'] = (object)['sectionName'=>'Home', 'indexRoute'=>'home'];
- 		$this->data['models']	= $this->ordersRepo->getModel()->where('users_id', Auth::user()->id)->get();
-
+ 		$this->data['models']	= $this->ordersRepo->getModel()->where('users_id', Auth::user()->id)->orderBy('updated_at','ASC')->get();
 
         return view('home')->with($this->data);
     }

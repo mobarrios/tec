@@ -6,27 +6,24 @@
         <ul class="sidebar-menu">
             <li class="header">MENU PRINCIPAL</li>
 
-            <li class="{{ Request::is('home') ? 'active' : '' }}">
-                <a href="{{route('home')}}">
-                    <i class="fa fa-home"></i> <span>Home </span>
-                    <span class="pull-right-container">
-                        <small class="label pull-right bg-green">1</small>
-                    </span>
+            <li>
+                <a class="menu" href="{{route('home')}}">
+                    <i class="fa fa-home"></i><span>Home</span>
                 </a>
             </li>
 
             @permission('clients.list|budgets.list')
-            <li class="treeview {{ in_array(Request::segment(2), ["clients","prospectos"]) ? 'active' : ''  }}">
+            <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-group "></i> <span>Clientes</span>
+                    <i class="fa fa-group " ></i>
+                    <span>Clientes</span>
                     <span class="pull-right-container">
                       <i class="fa fa-angle-left pull-right"></i>
                   </span>
                 </a>
                 <ul class="treeview-menu">
                     @permission('clients.list')
-                         <li class={{ Request::segment(2) == "clients" ? 'active' : '' }}><a
-                                href="{{route('admin.clients.index')}}"><span>Lista de Clientes</span></a></li>
+                         <li><a href="{{route('admin.clients.index')}}" class="menu"><span>Lista de Clientes</span></a></li>
                     {{--<li class={{ Request::segment(2) == "prospectos" ? 'active' : '' }}><a--}}
                                 {{--href="{{route('admin.prospectos.index')}}"><span>Lista de Prospectos</span></a></li>--}}
                     @endpermission
@@ -36,7 +33,7 @@
 
 
             @permission('items.list|modelslistsprices.list|additionals.list | brands.list | categories.list | models.list | colors.list | additionals.list')
-            <li class="treeview {{ in_array(Request::segment(2), ["items","modelsListsPrices"]) ? 'active' : '' }}">
+            <li class="treeview">
                 <a href="#">
                     <i class="fa fa-briefcase "></i> <span>Articulos</span>
                 <span class="pull-right-container">
@@ -57,7 +54,7 @@
                     --}}
 
                     @permission('additionals.list | brands.list | categories.list | models.list | colors.list | additionals.list')
-                    <li class="treeview {{ in_array(Request::segment(2), ["brands", "categories","models","colors","additionals"]) ? 'active' : '' }}">
+                    <li class="treeview">
                         <a href="#">
                             <span>Definiciones</span>
                             <span class="pull-right-container">
@@ -66,16 +63,15 @@
                         </a>
                         <ul class="treeview-menu">
                             @permission('categories.list')
-                            <li class={{ Request::segment(2) == "categories" ? 'active' : '' }}><a
-                                        href="{{route('admin.categories.index')}}"><span> Categorias</span></a></li>
+                            <li><a href="{{route('admin.categories.index')}}" class="menu"><span> Categorias</span></a></li>
                             @endpermission
                             @permission('brands.list')
-                            <li class={{ Request::segment(2) == "brands" ? 'active' : '' }}><a
-                                        href="{{route('admin.brands.index')}}"><span> Marcas</span></a></li>
+                            <li><a
+                                        href="{{route('admin.brands.index')}}" class="menu"><span> Marcas</span></a></li>
                             @endpermission
                             @permission('models.list')
-                            <li class={{ Request::segment(2) == "models" ? 'active' : '' }}><a
-                                        href="{{route('admin.models.index')}}"><span> Modelos</span></a></li>
+                            <li><a
+                                        href="{{route('admin.models.index')}}" class="menu"><span> Modelos</span></a></li>
                             @endpermission
                             {{--@permission('colors.list')--}}
                             {{--<li class={{ Request::segment(2) == "colors" ? 'active' : '' }}><a--}}
@@ -93,7 +89,7 @@
             </li>
             @endpermission
 
-            <li class="treeview {{ in_array(Request::segment(2), ["tecnica"]) ? 'active' : '' }}">
+            <li class="treeview">
                     <a href="#">
                         <i class="fa fa-wrench "></i> <span>Tecnica</span>
                         <span class="pull-right-container">
@@ -101,8 +97,7 @@
                       </span>
                     </a>
                     <ul class="treeview-menu">
-                    <li class={{ Request::segment(3) == 1 ? 'active' : '' }}><a
-                                href="{{route('admin.orders.index')}}"><span>Ordenes</span></a></li>
+                    <li><a href="{{route('admin.orders.index')}}" class="menu"><span>Ordenes</span></a></li>
                     </ul>
                    
                     
@@ -127,50 +122,45 @@
 
 
             @permission('roles.list|permissions.list|users.list|logs.list|additionals.list|company.list|branches.list|additionals.list')
-                <li class="treeview {{ in_array(Request::segment(2), ["branches","roles","permissions","users","logs", "checkbooks","additionals","company"]) ? 'active' : '' }}">
+                <li class="treeview">
                     <a href="#"><i class="fa fa-gear"></i> <span>Configuración</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                 <ul class="treeview-menu">
-                    <li class="{{ in_array(Request::segment(2), ["branches","additionals","company"]) ? 'active' : '' }}">
-                 
+                    <li>
                         <a href="#"><span>Empresa</span>
                             <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                         </a>
                     
                     <ul class="treeview-menu">
-                    <li class="{{ Request::segment(2) == "company" ? 'active' : '' }}"><a
-                    href="{{route('configs.company.index')}}"><span>Datos</span> </a></li>
-                    <li class={{ Request::segment(2) == "branches" ? 'active' : '' }}><a
-                    href="{{route('configs.branches.index')}}"><span> Sucursales</span></a></li>
-
+                    <li><a href="{{route('configs.company.index')}}" class="menu"><span>Datos</span> </a></li>
+                    <li><a href="{{route('configs.branches.index')}}" class="menu"><span> Sucursales</span></a></li>
                     </ul>
                     </li>
-                    <li class="{{ (Request::segment(2) == "roles" || Request::segment(2) == "permissions" || Request::segment(2) == "users")  ? 'active' : '' }}">
-                    <a href="#"><span> Accesos </span>
+                    <li><a href="#"><span> Accesos </span>
                     <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
+                        <i class="fa fa-angle-left pull-right"></i>
                     </span>
                     </a>
                         <ul class="treeview-menu">
                         @permission('roles.list')
-                            <li class={{ Request::segment(2) == "roles" ? 'active' : '' }}><a href="{{route('configs.roles.index')}}"><span>Roles</span> </a></li>
+                            <li><a href="{{route('configs.roles.index')}}" class="menu"><span>Roles</span> </a></li>
                         @endpermission
                         @permission('permissions.list')
-                            <li class={{ Request::segment(2) == "permissions" ? 'active' : '' }}><a href="{{route('configs.permissions.index')}}"><span> Permisos</span> </a></li>
+                            <li><a href="{{route('configs.permissions.index')}}" class="menu"><span> Permisos</span> </a></li>
                         @endpermission
                         @permission('users.list')
-                            <li class={{ Request::segment(2) == "users" ? 'active' : '' }}><a href="{{route("configs.users.index")}}"><span> Usuarios</span> </a></li>
+                            <li ><a href="{{route("configs.users.index")}}" class="menu"><span> Usuarios</span> </a></li>
                         @endpermission
                         </ul>
                     </li>
-                        <li class={{ Request::segment(2) == "states" ? 'active' : '' }}><a href="{{route('admin.states.index')}}"><span>Estados</span></a></li>
+                        <li ><a href="{{route('admin.states.index')}}" class="menu"><span>Estados</span></a></li>
 
-                         <li class={{ Request::segment(2) == "states" ? 'active' : '' }}><a href="{{route('admin.services.index')}}"><span>Servicios</span></a></li>
+                         <li ><a href="{{route('admin.services.index')}}" class="menu"><span>Servicios</span></a></li>
 
-                        <li class={{ Request::segment(2) == "equipments" ? 'active' : '' }}><a href="{{route('admin.equipments.index')}}"><span>Equipos</span></a></li>
+                        <li ><a href="{{route('admin.equipments.index')}}" class="menu"><span>Equipos</span></a></li>
                         @permission('logs.list')
-                        <li class={{ Request::segment(2) == "logs" ? 'active' : '' }}><a href="{{route('configs.logs.index')}}"><span>Logs</span></a></li>
+                        <li ><a href="{{route('configs.logs.index')}}" class="menu"><span>Logs</span></a></li>
                         @endpermission
-                         <li class={{ Request::segment(2) == "equipments" ? 'active' : '' }}><a href="{{route('admin.print.index')}}"><span>Impresión</span></a></li>
+                         <li ><a href="{{route('admin.print.index')}}" class="menu"><span>Impresión</span></a></li>
 
                         {{-- 
                         @permission('financials.list')

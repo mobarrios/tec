@@ -91,14 +91,13 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-2 col-xs-2">
+        <div class="col-sm-2 ">
             <div class="box no-border">
                 <div class="box-body">
                     <a href="{{route('admin.orders.create')}}" class="btn btn-app ">
                         <i class="fa fa-wrench"></i>
                         Nueva Orden
                     </a>
-
                     <a href="{{route('admin.clients.create')}}" class="btn btn-app">
                         <i class="fa fa-group"></i>
                         Nuevo Cliente
@@ -114,34 +113,38 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                  <table class="table table-striped" id="dataTable">
-                    <thead>
-                      <th>Codigo Orden</th>
-                      <th>Cliente</th>
-                      <th>Modelo</th>
-                      <th>Observ. Int.</th>
-                      <th>Estado Actual</th>
-                      <th></th>
-                    </thead>
-                    <tbody>
-                    @foreach($models as $model)
-                        <tr>
-                           <td>ist-{{$model->id }}</td>
-                           <td>{{ isset($model->Cliente->fullname) ? $model->Cliente->fullname : '' }}</td>
-                           <td>{{ isset($model->Model->name) ? $model->Model->name : '' }}</td>                
-                           <td>{{$model->observaciones_internas}}</td>
-                           <td>
-                            <span class="label" style="background-color:{{ isset($model->lasTOrdenEstados()->States->color) ? $model->lasTOrdenEstados()->States->color : '' }} ">
-                            {{ isset($model->lasTOrdenEstados()->States->description) ? $model->lasTOrdenEstados()->States->description : '' }}
-                        </span>
-                            </td>
-                           <td><a href="{{route('admin.orders.details', $model->id)}}" class="btn btn-xs btn-success" ><span class="fa fa-info-circle"></span> </a></td>
+                    <div class="table-responsive">
+                          <table class="table table-striped" id="dataTable">
+                            <thead>
+                              <th>Codigo Orden</th>
+                              <th>Cliente</th>
+                              <th>Modelo</th>
+                              <th>Observ. Int.</th>
+                              <th>Estado Actual</th>
+                              <th>Ultima Act.</th>
+                              <th></th>
+                            </thead>
+                            <tbody>
+                            @foreach($models as $model)
+                                <tr>
+                                   <td>ist-{{$model->id }}</td>
+                                   <td>{{ isset($model->Cliente->fullname) ? $model->Cliente->fullname : '' }}</td>
+                                   <td>{{ isset($model->Model->name) ? $model->Model->name : '' }}</td>
+                                   <td>{{$model->observaciones_internas}}</td>
+                                   <td>
+                                        <span class="label" style="background-color:{{ isset($model->lasTOrdenEstados()->States->color) ? $model->lasTOrdenEstados()->States->color : '' }} ">
+                                             {{ isset($model->lasTOrdenEstados()->States->description) ? $model->lasTOrdenEstados()->States->description : '' }}
+                                        </span>
+                                    </td>
+                                    <td><small>{{$model->updated_at}}</small></td>
 
-                        </tr>
-                    @endforeach
-                    </tbody>
+                                    <td><a href="{{route('admin.orders.details', $model->id)}}" class="btn btn-xs btn-success" ><span class="fa fa-info-circle"></span> </a></td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                          </table>
+                    </div>
 
-                  </table>
                 </div>
                 <!-- /.box-body -->
           </div>

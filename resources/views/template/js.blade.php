@@ -75,6 +75,23 @@
 @if(Auth::user())
 <script>
 
+    // guarda en localstorage el nombre del menu para luego volver a abrirlo
+    var menu = localStorage.getItem('menu');
+
+    $('.sidebar-menu li a').each(function(){
+        if($(this).text() == menu)
+            $(this).parents().addClass('active');
+    });
+
+
+    $('.menu').on('click',function()
+    {
+        localStorage.setItem('menu',$(this).text());
+    });
+
+
+
+
     $('#dataTable').dataTable();
 
     $('.table').addClass('table-striped  table-hover');
