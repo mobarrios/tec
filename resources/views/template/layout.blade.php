@@ -49,7 +49,7 @@
     <!-- para js extras en cada seccion -->
     @yield('js')
 
-    <script>
+    {{--<script>
         $(".control-sidebar").css("right",'-'+$(".control-sidebar").css("width"));
 
         $("a[data-toggle='control-sidebar']").on("click",function (ev) {
@@ -70,7 +70,7 @@
             $(".control-sidebar").css("right",0);
         }
 
-    </script>
+    </script>--}}
     {{--<script src="vendors/LTE/plugins/iCheck/icheck.js"></script>--}}
     <script>
 //        $(document).ready(function(){

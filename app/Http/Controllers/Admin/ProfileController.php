@@ -7,7 +7,7 @@ use App\Http\Repositories\Configs\BranchesRepo;
 use App\Http\Repositories\Configs\RolesRepo;
 use App\Http\Repositories\Configs\ProfilesRepo as Repo;
 use App\Http\Repositories\Configs\UsersRepo;
-
+use App\Http\Repositories\Tecnica\EquipmentsRepo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 class ProfileController extends Controller
 {
 
-    public function  __construct(Repo $repo, Route $route , RolesRepo $rolesRepo , Request $request, BranchesRepo $branchesRepo,UsersRepo $usersRepo)
+    public function  __construct(Repo $repo, Route $route , RolesRepo $rolesRepo , Request $request, BranchesRepo $branchesRepo,UsersRepo $usersRepo, EquipmentsRepo $equipmentsRepo)
     {
 
         $this->request      = $request;
@@ -27,9 +27,10 @@ class ProfileController extends Controller
 
         //data select
         $this->data['roles']    = $rolesRepo->listsData('name','id');
+
         $this->data['branches'] = $branchesRepo->listsData('name', 'id');
 
-        $this->data['section'] = $this->section;
+        $this->data['section']  = $this->section;
 
     }
 
@@ -39,7 +40,6 @@ class ProfileController extends Controller
         $this->data['activeBread'] = 'Perfil';
 
         $this->data['model'] = Auth::user();
-
         $this->data['avatares'] = config('models.'.$this->section.'.avatares');
 
         return view(config('models.'.$this->section.'.indexRoute'))->with($this->data);

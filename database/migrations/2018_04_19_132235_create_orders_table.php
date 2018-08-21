@@ -22,8 +22,8 @@ class CreateOrdersTable extends Migration
             $table->integer('dto')->nullable();
 
 
-            $table->integer('numero_serie')->nullable(); 
-            $table->integer('serie_partes')->nullable();
+            $table->string('numero_serie')->nullable(); 
+            $table->string('serie_partes')->nullable();
             $table->string('falla_declarada')->nullable(); 
             $table->string('observaciones')->nullable(); 
             $table->string('observaciones_tecnicas')->nullable(); 
@@ -31,8 +31,9 @@ class CreateOrdersTable extends Migration
             $table->integer('states_id')->nullable(); 
             $table->integer('total')->nullable(); 
             $table->integer('pagado')->nullable(); 
-            $table->integer('orden_manual')->nullable(); 
+            $table->string('orden_manual')->nullable(); 
             $table->string('observaciones_internas')->nullable(); 
+            $table->string('partes')->nullable(); 
             
             /*
             Relations

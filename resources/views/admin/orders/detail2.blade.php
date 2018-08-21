@@ -76,8 +76,10 @@
                       <br>
                       Presupuesto : $ {{ $models->presupuesto_estimado  }}
                       <br>
+                      {{--
                       Observaciones : {{ $models->observaciones  }}
                       <br>
+                        --}}
 
                     </div>
                   </div>

@@ -10,6 +10,7 @@
         <div class="box box-solid">
           <div class="box-header">
             <div class="col-xs-8"><h3 class="box-title">  Orden # ist-{{$models->id}}</h3></div>
+            {{--
             <div class="col-xs-4"><div class="btn-group pull-right">
                   <button type="button" class="btn btn-default btn-flat">Acciones</button>
                   <button type="button" class="btn btn-default btn-flat dropdown-toggle" data-toggle="dropdown">
@@ -23,6 +24,8 @@
                   </ul>
                 </div>
             </div>
+            --}}
+            <a href="{{route('admin.ordenes.reporte',$models->id)}}" target="_blank" class="btn btn-default pull-right">Reporte</a>  
           </div>
         </div>
       </div>
@@ -38,7 +41,11 @@
           <div class="box-body">
             <span class="text-muted">Codigo Cliente : </span> <strong>{{ isset($models->Cliente->id) ? $models->Cliente->id : '' }}</strong>
             <br>
-            <span class="text-muted">Apellido y Nombre :</span><strong> {{ isset($models->Cliente->last_name) ? $models->Cliente->last_name : '',  isset($models->Cliente->name) ? $models->Cliente->name : '' }}</strong>
+            <span class="text-muted">Apellido y Nombre :</span><strong> {{ isset($models->Cliente->last_name) ? $models->Cliente->last_name : '' }}
+
+             {{ isset($models->Cliente) ? $models->Cliente->name : '' }} 
+
+            </strong>
             <br>
            <span class="text-muted"> Razon Social: </span><strong>{{ isset($models->Cliente->razon_social) ? $models->Cliente->razon_social : '' }}</strong>
             <br>
@@ -68,14 +75,18 @@
             <br>
             <span class="text-muted">Número Serie : </span> <strong>{{ $models->numero_serie  }}</strong>
             <br>
+            <span class="text-muted">Parte : </span> <strong>{{ $models->partes  }}</strong>
+            <br>
             <span class="text-muted">Partes Serie : </span> <strong>{{ $models->serie_partes  }}</strong>
             <br>
             <span class="text-muted">Falla :</span> <strong> {{ $models->numero_serie  }}</strong>
             <br>
             <span class="text-muted">Presupuesto : </span> <strong>$ {{ $models->presupuesto_estimado  }}</strong>
             <br>
+            {{--
             <span class="text-muted">Observaciones :</span> <strong> {{ $models->observaciones  }}</strong>
             <br>
+              --}}
           </div>
         </div>
       </div>
@@ -98,7 +109,9 @@
               <br>
               <span class="text-muted">Usuario  : </span> <strong>{{ isset($models->User) ? $models->User->user_name : '' }}</strong>
               <br><span class="text-muted">Falla Declarada :</span> <strong> {{ $models->falla_declarada  }}</strong>
+              {{--
               <br><span class="text-muted">Observaciones :</span> <strong> {{ $models->observaciones  }}</strong>
+                --}}
           </div>
         </div>
       </div>
@@ -107,7 +120,7 @@
 
   <div class="row">
     <div class="col-xs-12">
-      <div class="col-xs-4">
+      <div class="col-xs-6">
         <div class="box box-solid">
           <div class="box-header with-border">
             <h3 class="box-title">  Estados </h3>
@@ -151,44 +164,7 @@
         </div>
       </div>
 
-
-      <div class="col-xs-4">
-        <div class="box box-solid">
-          <div class="box-header with-border">
-            <h3 class="box-title"> Observaciones Tecnicas </h3>
-          </div>
-          <div class="box-body">
-            <!-- textarea -->
-            {!! Form::open(['route'=>('admin.ordenes.updateObservaciones')]) !!}
-            <div class="form-group">
-              <label>FALLA DECLARADA</label>
-              <textarea class="form-control" rows="3" name="falla_declarada" > {{$models->falla_declarada}}</textarea>
-            </div>
-            <div class="form-group">
-              <label>OBSERVACIONES</label>
-              <textarea class="form-control" rows="3" name="observaciones"> {{$models->observaciones}}</textarea>
-            </div>
-            
-            <div class="form-group">
-              <label>OBSERVACIONES TECNICAS</label>
-              <textarea class="form-control" rows="3" name="observaciones_tecnicas"> {{$models->observaciones_tecnicas}}</textarea>
-            </div>
-            
-            <div class="form-group">
-              <label>OBSERVACIONES INTERNAS</label>
-              <textarea class="form-control" rows="3" name="observaciones_internas"> {{$models->observaciones_internas}}</textarea>
-            </div>
-
-            {!! Form::hidden('orden_id', $models->id) !!}
-            <button type="submit" class="btn btn-primary pull-right">Guardar</button>
-            {!! Form::close() !!}
-
-          </div>
-        </div>
-      </div>
-
-
-      <div class="col-xs-4">
+      <div class="col-xs-6">
         <div class="box box-solid">
           <div class="box-header with-border">
             <h3 class="box-title"> Pagos </h3>
@@ -244,20 +220,56 @@
 
     </div>  
   </div> 
-</div>
 
 
-<hr>
-@if(count($models->Services) > 0)
   <div class="row">
-      <div class="col-xs-12">
-        <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">Servicio adheridos</h3>
+    <div class="col-xs-12">
+      <div class="col-xs-6">
+        <div class="box box-solid">
+          <div class="box-header with-border">
+            <h3 class="box-title"> Observaciones Tecnicas </h3>
+          </div>
+          <div class="box-body">
+            <!-- textarea -->
+            {!! Form::open(['route'=>('admin.ordenes.updateObservaciones')]) !!}
+            <div class="form-group">
+              <label>FALLA DECLARADA</label>
+              <textarea class="form-control" rows="3" name="falla_declarada" > {{$models->falla_declarada}}</textarea>
             </div>
-            <!-- /.box-header -->
-            <div class="box-body ">
-              <table class="table table-condensed">
+            <div class="form-group">
+              <label>OBSERVACIONES</label>
+              <textarea class="form-control" rows="3" name="observaciones"> {{$models->observaciones}}</textarea>
+            </div>
+            
+            <div class="form-group">
+              <label>OBSERVACIONES TECNICAS</label>
+              <textarea class="form-control" rows="3" name="observaciones_tecnicas"> {{$models->observaciones_tecnicas}}</textarea>
+            </div>
+            
+            <div class="form-group">
+              <label>OBSERVACIONES INTERNAS</label>
+              <textarea class="form-control" rows="3" name="observaciones_internas"> {{$models->observaciones_internas}}</textarea>
+            </div>
+
+            {!! Form::hidden('orden_id', $models->id) !!}
+            <button type="submit" class="btn btn-primary pull-right">Guardar</button>
+            {!! Form::close() !!}
+          </div>
+        </div>
+    </div>
+
+    <div class="col-xs-6">
+        <div class="box box-solid">
+          <div class="box-header with-border">
+            <h3 class="box-title"> Servicios
+
+             </h3>
+              <a href="#" data-toggle="modal" data-target="#modal-default" class="btn btn-default pull-right">   <i class="fa fa-plus" ></i></a>
+              
+
+          </div>
+          <div class="box-body">
+           <table class="table table-condensed">
                 <tbody>
                 @foreach($models->Services as $s)
       
@@ -267,17 +279,20 @@
                   <th>Precio: ${{$s->amount}}</th>
                   <th>Cantidad: {{$s->pivot->cantidad}}/ ${{$s->pivot->cantidad * $s->amount}}</th>
                   
-                  <th><a href="{{route('admin.ordenes.deleteServices', $s->pivot->id)}}"class="btn btn-default btn-xs pull-right btn-borrar">Borrar</a></th>
+                  <th><a href="{{route('admin.ordenes.deleteServices', $s->pivot->id)}}"class="btn btn-default btn-xs pull-right btn-borrar">
+                    <i class="fa fa-trash"></i> Borrar</a></th>
                 </tr>
                 @endforeach
               </tbody></table>
-            </div>
-            <!-- /.box-body -->
+            </table>
           </div>
+        </div>
+    </div>
 
-      </div>
-  </div>  
- @endif 
+  </div>
+</div>
+
+</div>
 
 <div class="modal fade" id="modal-default">
     <div class="modal-dialog">
@@ -328,6 +343,13 @@
   <!-- /.modal -->
 
 @endsection
+
+@section('js')
+<script> 
+$('#example1').DataTable() 
+</script>
+@endsection
+
 {{--
 @section('js')
 <script> 
