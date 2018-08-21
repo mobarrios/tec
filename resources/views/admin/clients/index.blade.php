@@ -24,6 +24,7 @@
 
                 </div>
             </td>
+            <td><a href="{{route('admin.orders.create', $model->id)}}" class="btn btn-default btn-xs"><i class="fa fa-plus"></i> Nueva orden</a></td>
 
 
     @endforeach

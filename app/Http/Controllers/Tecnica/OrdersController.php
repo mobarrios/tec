@@ -27,27 +27,36 @@ class OrdersController extends Controller
     public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, StatesRepo $statesRepo, EquipmentsRepo $equipmentsRepo, ServicesRepo $servicesRepo, UsersRepo $usersRepo, OrderServices $orderServices)
     {
 
-        $this->request  = $request;
-        $this->repo     = $repo;
-        $this->route    = $route;
+        $this->request      = $request;
+        $this->repo         = $repo;
+        $this->route        = $route;
+        $this->clienteRepo  = $clientsRepo;
 
         $this->section              = 'orders';
         $this->data['section']      = $this->section;
         //$this->data['ultima_orden'] = !is_null($repo->ultimo()) ? $repo->ultimo()->id + 1 : '1';
         //$this->data['brands']       = $brandsRepo->ListsData('name','id');
+        //$this->data['models']     = $modelsRepo->ListsData('name','id');
+        //$this->data['clients']    = $clientsRepo->listForSelect();
         $this->data['clients']      = $clientsRepo->getModel()->all()->lists('fullname','id');
-
         $this->data['states']       = $statesRepo->getModel()->lists('description','id');
         $this->data['equipments']   = $equipmentsRepo->ListsData('name','id');
         $this->data['users_id']     = Auth::user()->id;
         $this->data['models_id']    = $modelsRepo->ListsData('name','id');
         $this->data['brands']       = $brandsRepo->getAllWithModels();
         $this->data['services']     = $servicesRepo->getModel()->all();
-             
-   
-        //$this->data['models']     = $modelsRepo->ListsData('name','id');
-        //$this->data['clients']    = $clientsRepo->listForSelect();
      
+    }
+
+    public function create(){
+
+
+        $this->data['activeBread']  = 'Nuevo';
+        if($this->route->getParameter('cliente'))
+            $this->data['clientSelect'] = $this->clienteRepo->find($this->route->getParameter('cliente'));
+    
+
+        return view(config('models.'.$this->section.'.storeView'))->with($this->data);
     }
 
     public function detail(UsersRepo $usersRepo, OrderServices $orderServices, ToPrintRepo $toPrintRepo){

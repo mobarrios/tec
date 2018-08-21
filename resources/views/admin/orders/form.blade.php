@@ -1,7 +1,11 @@
 @extends('template.model_form')
 
     @section('form_title')
-        Nueva Orden # 
+        Nueva Orden 
+          <small> 
+          {{isset($clientSelect) ? $clientSelect->name .','. $clientSelect->last_name  : ''}}
+           </small>
+         
     @endsection
     
     @section('form_inputs')
@@ -31,7 +35,7 @@
 
             <div class="col-xs-4 form-group">
               {!! Form::label('Cliente') !!}
-              {!! Form::select('clients_id', $clients , null ,['class'=>'select2 form-control ']) !!}
+              {!! Form::select('clients_id', $clients , isset($clientSelect) ? $clientSelect->id : '' ,['class'=>'select2 form-control ']) !!}
               {!! Form::hidden('users_id', $users_id) !!}
             </div>
             {{--
@@ -88,6 +92,7 @@
               {!! Form::label('Observaciones') !!}
               {!! Form::textarea('observaciones', null, ['class'=>'form-control', 'rows' => 2, 'cols' => 40]) !!}
             </div>
+
 
             <div class="col-xs-4 form-group">
               {!! Form::label('Presupuesto') !!}
