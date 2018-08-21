@@ -5,6 +5,8 @@
         <tr>
 
             <td style="width: 1%"><input class="id_destroy" value="{{$model->id}}" type="checkbox"></td>
+            <td> Cod: {{ $model->id }} </td>
+
             <td> {{ !empty($model->dni) ? 'DNI '.$model->dni : '' }} </td>
 
             <td>{{$model->last_name}} {{$model->name }}</td>

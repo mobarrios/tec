@@ -88,62 +88,48 @@ class ClientsController extends Controller
 
 
         //pagina el query
-        $this->data['models'] = $model->paginate(config('models.'.$this->section.'.paginate'));
-
+        $this->data['models'] = $model->orderBy('id', 'desc')->paginate(config('models.'.$this->section.'.paginate'));
+        
 
         if(\Illuminate\Support\Facades\Request::segment(2) == $this->section){
             //return view($this->getConfig()->indexRoute)->with($this->data);
+           
             return view(config('models.'.$this->section.'.indexRoute'))->with($this->data);
 
         }else
+            
             return view('admin.clients.prospectosIndex')->with($this->data);
 
     }
 
 
-    public function store()
+     public function store()
     {
-        //if(!$this->request->get('budgets')) {
-            
-        //validar los campos
-        $this->validate($this->request, config('models.' . $this->data['section'] . '.validationsStore'));
-        //crea a traves del repo con el request
-        if($this->data['section'] == 'prospectos')
-            $model = $this->repo->create($this->request,1);
-        else
-            $model = $this->repo->create($this->request,0);
-
-        // $data['clientSelect'] = $model;
-
-        //if(str_contains(URL::previous(),'sales'))
-            //return redirect()->back()->with('client',$model)->withErrors(['Cliente creado Correctamente']);
-        //else
-
-        return redirect()->route('admin.orders.create',$model)->withErrors(['Regitro Agregado Correctamente']);
-
-        //}else{
-            
+        if(!$this->request->get('budgets')) {
             //validar los campos
-        //    $this->validate($this->request,config('models.prospectos.validationsStore'));
-
+            $this->validate($this->request, config('models.' . $this->data['section'] . '.validationsStore'));
             //crea a traves del repo con el request
-        //    $model = $this->repo->create($this->request,1);
-
-
-        //    if($this->data['section'] == 'technicalServices'){
-
-        //        $technicalService = $this->technicalServicesRepo->create(collect(['clients_id' => $model->id]));
-
-        //        return redirect()->route(config('models.technicalServices.createRoute'),$technicalService->id);
-        //    }else{
-
-        //        $budget = $this->externalRepo->create(collect(['date' => date('Y-m-d H:i:s',time()),'clients_id' => $model->id]));
-
-        //        return redirect()->route(config('models.budgets.createRoute'),$budget->id);
-        //    }
-        //}
-
-        //return redirect()->route(config('admin.orders.create'),$model->id)->withErrors(['Regitro Agregado Correctamente']);
+            if($this->data['section'] == 'prospectos')
+                $model = $this->repo->create($this->request,1);
+            else
+                $model = $this->repo->create($this->request,0);
+            if(str_contains(URL::previous(),'sales'))
+                return redirect()->back()->with('client',$model)->withErrors(['Cliente creado Correctamente']);
+            else
+                return redirect()->route(config('models.' . $this->data['section'] . '.postStoreRoute'), $model->id)->withErrors(['Regitro Agregado Correctamente']);
+        }else{
+            //validar los campos
+            $this->validate($this->request,config('models.prospectos.validationsStore'));
+            //crea a traves del repo con el request
+            $model = $this->repo->create($this->request,1);
+            if($this->data['section'] == 'technicalServices'){
+                $technicalService = $this->technicalServicesRepo->create(collect(['clients_id' => $model->id]));
+                return redirect()->route(config('models.technicalServices.createRoute'),$technicalService->id);
+            }else{
+                $budget = $this->externalRepo->create(collect(['date' => date('Y-m-d H:i:s',time()),'clients_id' => $model->id]));
+                return redirect()->route(config('models.budgets.createRoute'),$budget->id);
+            }
+        }
     }
 
     public function edit()

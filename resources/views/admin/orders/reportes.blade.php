@@ -109,8 +109,10 @@
                   <tr valign="top">
                    
                       <td style="font-size: 1.2em;">
-                         Dir: Florida 537 PB. Loc. 372 / 396 - Capital Federal - C1049AAL
-Tel:4328-5042 - 4328-5668 
+                         Dir: {{$company->direccion}} <br>
+                         Tel: {{$company->telefono}} <br>
+                         Cuit: {{$company->cuit}}
+
                          
                       </td>
                   </tr>
@@ -125,15 +127,15 @@ Tel:4328-5042 - 4328-5668
       <table style="width: 100%; font-size: 1.2em;" >
       <tr>
           <td>
-          Cliente : {{ isset($model->Cliente->fullname) ? $model->Cliente->fullname : '' }}
+          Cliente: {{ isset($model->Cliente->fullname) ? $model->Cliente->fullname : '' }}
           </td>
          <td>
-          Direccion : {{ isset($model->Cliente->direccion) ? $model->Cliente->direccion : '' }}
+          Direccion: {{ isset($model->Cliente->fullAddress) ? $model->Cliente->fullAddress : '' }}
           </td>
       </tr>
       <tr>
-        <td>Telefono : {{ isset($model->Cliente->telefono) ? $model->Cliente->telefono : '' }}</td>
-        <td>Localidad : {{ isset($model->Cliente->localidad) ? $model->Cliente->localidad : '' }}</td>
+        <td>Telefono: {{ isset($model->Cliente->phone1) ? $model->Cliente->phone1 : '' }}</td>
+        
       </tr>
 
   </table>
@@ -145,19 +147,19 @@ Tel:4328-5042 - 4328-5668
       <table style="width: 100%; font-size: 1.2em;" >
       <tr>
           <td>
-          Articulo :  {{ isset($model->Equipo->descripcion) ? $model->Equipo->descripcion : '' }}
+          Articulo :  {{ isset($model->Equipo->name) ? $model->Equipo->name : '' }}
           </td>
          <td>
-         Modelo : {{ isset($model->Modelo->descripcion) ? $model->Modelo->descripcion : '' }}
+         Modelo : {{ isset($model->Model->Brands) ? $model->Model->Brands->name : '' }}
           </td>
            <td>
-         Serie : {{ $model->serie_partes  }}
+         Número Serie :  {{ $model->numero_serie  }}
           </td>
       </tr>
       <tr>
-        <td>Parte : {{ $model->numero_serie  }} </td>
+        <td>Parte : {{ $model->partes  }} </td>
         <td></td>  
-        <td>Serie :  {{ $model->serie_partes  }} </td>
+        <td>Serie partes : {{ $model->serie_partes  }}</td>
       </tr>
        <tr>
         <td>Falla Declarada : {{ $model->falla_declarada  }} </td>
@@ -169,7 +171,7 @@ Tel:4328-5042 - 4328-5668
  <br/>
  <hr>
 
-<p style="font-size: 1.2em;">Presupuesto Estimado : {{$model->presupuesto_estimado}}</p>
+<p style="font-size: 1.2em;">Presupuesto Estimado : ${{$model->presupuesto_estimado}}</p>
 <p style="font-size: 1.2em;">Observaciones : {{$model->observaciones}}</p>
 <p style="font-size: 1.2em;">Observaciones Tecnicas: {{$model->observaciones_tecnicas}}</p> 
 

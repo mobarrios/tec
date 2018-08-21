@@ -15,6 +15,7 @@ use App\Http\Repositories\Tecnica\EquipmentsRepo;
 use App\Http\Repositories\Tecnica\OrderServicesRepo;
 use App\Http\Repositories\Tecnica\ToPrintRepo;
 use App\Http\Repositories\Configs\UsersRepo;
+use App\Http\Repositories\Configs\CompanyRepo;
 use App\Entities\Tecnica\OrderStates;
 use App\Entities\Tecnica\OrderServices;
 use App\Http\Repositories\Tecnica\ServicesRepo;
@@ -113,11 +114,12 @@ class OrdersController extends Controller
        
     }
 
-    public function reporte(Route $route, ToPrintRepo $toPrintRepo){
+    public function reporte(Route $route, ToPrintRepo $toPrintRepo, CompanyRepo $companyRepo){
         
-        $model      = $this->repo->find($route->getParameter('id')); 
+        $model      = $this->repo->find($route->getParameter('id'));
+        $company    = $companyRepo->getModel()->first();
         $letraChica = $toPrintRepo->ultimo();
-        $pdf        = PDF::loadView('admin.orders.reportes', compact('model','letraChica'));
+        $pdf        = PDF::loadView('admin.orders.reportes', compact('model','letraChica','company'));
 
         return $pdf->stream();
     }
@@ -208,4 +210,5 @@ class OrdersController extends Controller
         return redirect()->route('admin.orders.details',$model->id)->withErrors(['Regitro Agregado Correctamente']);
     }
 
+    
 }
