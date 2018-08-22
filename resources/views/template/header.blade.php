@@ -15,11 +15,10 @@
         <!-- logo for regular state and mobile devices -->
         <span class="logo-lg">
             <span class="fa-stack fa-lg">
-
                 @if(auth()->user()->branchesActive->company->images->count() > 0)
                     <img src="{!! auth()->user()->branchesActive->company->images->first()->path !!}" alt="logo" class="img-responsive">
                 @else
-                    <i class="fa  fa-paperclip "></i>
+                    <i class="fa fa-battery-2"></i>
                 @endif
             </span>
 
