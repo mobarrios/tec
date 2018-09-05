@@ -89,8 +89,7 @@
              <table style="width: 100%;">
                   <tr>
                       <td style="width: 50%;">
-                        <img width="200px" src="{{ $company->images->first()->path }}">
-                         
+                        <img width="200px" src="{{ $company->images->first()->path }}">                         
                       </td>
                       <td style="font-size: 1.5em;" >
                           <strong>Entrada</strong> {{ date('d/m/Y',strtotime($model->fecha_inicio)) }}<br />
