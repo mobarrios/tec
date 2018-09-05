@@ -89,12 +89,14 @@
              <table style="width: 100%;">
                   <tr>
                       <td style="width: 50%;">
+                        @if($company->images->count() > 0)
                         <img width="200px" src="{{ $company->images->first()->path }}">
+                        @endif
                          
                       </td>
                       <td style="font-size: 1.5em;" >
                           <strong>Entrada</strong> {{ date('d/m/Y',strtotime($model->fecha_inicio)) }}<br />
-                          <strong>Orden de Reparacion</strong> ist-{{$model->id}}
+                          <strong>Orden de Reparacion</strong> {{$model->id}}
                       </td>
                   </tr>
               </table>
