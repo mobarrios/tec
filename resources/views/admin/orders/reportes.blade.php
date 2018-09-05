@@ -89,7 +89,7 @@
              <table style="width: 100%;">
                   <tr>
                       <td style="width: 50%;">
-                        <img width="200px" src="../public/images/tecnica/istyle.png">
+                        <img width="200px" src="{{ $company->images->first()->path }}">
                          
                       </td>
                       <td style="font-size: 1.5em;" >
