@@ -149,18 +149,6 @@
                 <!-- /.box-body -->
           </div>
         </div>
-
-        <div class="col-sm-12 col-xs-12">
-            <div class="box">
-                <div class="box-header">
-                  <h3 class="box-title">Reportes</h3>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <div id="donut-chart" style="height: 300px;"></div>
-                </div>
-                <!-- /.box-body -->
-          </div>
-        </div>
     </div>
 @endsection
+

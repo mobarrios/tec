@@ -48,3 +48,4 @@
 
 <link href="vendors/bootstrap-checkbox-x/css/theme-krajee-flatblue.min.css" media="all" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="css/preloader.css">
+

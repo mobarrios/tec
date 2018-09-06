@@ -9,7 +9,7 @@
       <div class="col-xs-12">
         <div class="box box-solid">
           <div class="box-header">
-            <div class="col-xs-8"><h3 class="box-title">  Orden # ist-{{$models->id}}</h3></div>
+            <div class="col-xs-8"><h3 class="box-title">  Orden # {{$models->id}}</h3></div>
             {{--
             <div class="col-xs-4"><div class="btn-group pull-right">
                   <button type="button" class="btn btn-default btn-flat">Acciones</button>
