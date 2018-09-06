@@ -88,16 +88,15 @@
 	      <td>
 	         <table style="width: 100%;">
 	              <tr>
-	                  <td style="font-size: 1.5em;" align="left">
-	                       Dirección: {{ $company->razon_social }} <br>
-	                       {{ $company->direccion }} <br>
-						             Tel:{{ $company->telefono }} <br>
+                      <td style="font-size: 1.5em;" align="left">
+                            <h1>{{$company->nombre_fantasia}}</h1>
+	                       Dirección: {{ $company->direccion }} <br>
+						   Tel:{{ $company->telefono }} <br>
 	                  </td>
 
-	                  <td style="width: 50%;" align="right">
+	                  {{-- <td style="width: 50%;" align="right">
 	                    <img width="200px" src="{{ $company->images->first()->path }}">
-	                     
-	                  </td>
+	                  </td> --}}
 	                  
 	              </tr>
 	          </table>
