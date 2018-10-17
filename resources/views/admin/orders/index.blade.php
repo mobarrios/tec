@@ -6,7 +6,6 @@
                 
                 <td style="width: 1%"><input class="id_destroy" value="{{$model->id}}" type="checkbox"></td>
                 <td>{{$model->id}}</td>
-                <td>ist-{{$model->id}}</td>
                 <td>
                     {{ isset($model->Model->name) ? $model->Model->name : '' }} 
                 <strong>{{ isset($model->Model->Brands->name) ? ': '.$model->Model->Brands->name : ''  }} </strong>

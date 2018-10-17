@@ -1,8 +1,9 @@
 @extends('template')
 
 @section('sectionContent')
-    <div class="row">
         {{--
+                <div class="row">
+
          <div class="col-sm-3 col-xs-12">
             <!-- small box -->
             <div class="small-box bg-red-active">
@@ -88,7 +89,6 @@
         </div>
         --}}
 
-    </div>
 
     <div class="row">
         <div class="col-sm-2 ">
@@ -151,3 +151,4 @@
         </div>
     </div>
 @endsection
+

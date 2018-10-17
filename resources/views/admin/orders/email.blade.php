@@ -88,16 +88,15 @@
 	      <td>
 	         <table style="width: 100%;">
 	              <tr>
-	                  <td style="font-size: 1.5em;" align="left">
-	                       Dirección: Florida 537 PB. Loc. 372 / 396 <br>
-	                       Capital Federal - C1049AAL <br>
-						   Tel:4328-5042 - 4328-5668 <br>
+                      <td style="font-size: 1.5em;" align="left">
+                            <h1>{{$company->nombre_fantasia}}</h1>
+	                       Dirección: {{ $company->direccion }} <br>
+						   Tel:{{ $company->telefono }} <br>
 	                  </td>
 
-	                  <td style="width: 50%;" align="right">
-	                    <img width="200px" src="../public/images/tecnica/istyle.png">
-	                     
-	                  </td>
+	                  {{-- <td style="width: 50%;" align="right">
+	                    <img width="200px" src="{{ $company->images->first()->path }}">
+	                  </td> --}}
 	                  
 	              </tr>
 	          </table>

@@ -18,7 +18,7 @@
           <div class="row">
             <div class="col-xs-4 form-group">
               {!! Form::label('Numero de orden') !!}
-              {!! Form::text('codigo_orden', 'ist-', ['class'=>'form-control']) !!}
+              {!! Form::text('codigo_orden', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-4 form-group">
               {!! Form::label('Fecha Inicio') !!}

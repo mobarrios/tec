@@ -69,8 +69,7 @@
 <script src="vendors/LTE/plugins/datatables/dataTables.bootstrap.js"></script>
 <script src="{{asset('js/wysihtml5.js')}}" type="text/javascript"></script>
 
-
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 
 @if(Auth::user())
 <script>
