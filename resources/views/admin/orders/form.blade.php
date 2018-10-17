@@ -57,7 +57,7 @@
               </select>
             </div>    
             <div class="col-xs-4 form-group">
-              {!! Form::label('N Serie') !!}
+              {!! Form::label('Serie/IMEI') !!}
               {!! Form::text('numero_serie', null, ['class'=>'form-control']) !!}
             </div>
           </div>
@@ -69,7 +69,7 @@
             </div>
            
              <div class="col-xs-4 form-group">
-              {!! Form::label('Partes') !!}
+              {!! Form::label('Repuesto') !!}
               {!! Form::text('partes', null, ['class'=>'form-control']) !!}
             </div>
 
@@ -84,7 +84,7 @@
           <div class="row">  
            
              <div class="col-xs-4 form-group">
-              {!! Form::label('Falla Declarada') !!}
+              {!! Form::label('Falla a Reparar') !!}
               {!! Form::textarea('falla_declarada', null, ['class'=>'form-control', 'rows' => 2, 'cols' => 40 ]) !!}
             </div>
          
