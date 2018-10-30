@@ -89,8 +89,8 @@
         </div>
         --}}
 
-
     <div class="row">
+        
         <div class="col-sm-2 ">
             <div class="box no-border">
                 <div class="box-body">
@@ -106,6 +106,34 @@
                 <!-- /.box-body -->
             </div>
         </div>
+
+        <div class="col-md-3">
+            <div class="small-box bg-aqua">
+            <div class="inner">
+            <h3>{{$orders_iniciadas->count()}}</h3>
+            <p>Ordenes Iniciadas</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-wrench"></i>
+            </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+                <div class="small-box bg-red">
+                <div class="inner">
+                <h3>{{$orders_cerradas->count()}}</h3>
+                <p>Ordenes Entregadas</p>
+                
+                </div>
+                <div class="icon">
+                <i class="ion ion-wrench"></i>
+                </div>
+                </div>
+            </div>
+                            
+        
+    
         <div class="col-sm-12 col-xs-12">
             <div class="box">
                 <div class="box-header">
@@ -127,7 +155,7 @@
                             <tbody>
                             @foreach($models as $model)
                                 <tr>
-                                   <td>ist-{{$model->id }}</td>
+                                   <td>#{{$model->id }}</td>
                                    <td>{{ isset($model->Cliente->fullname) ? $model->Cliente->fullname : '' }}</td>
                                    <td>{{ isset($model->Model->name) ? $model->Model->name : '' }}</td>
                                    <td>{{$model->observaciones_internas}}</td>
