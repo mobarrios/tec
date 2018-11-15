@@ -110,7 +110,9 @@
         <div class="col-md-3">
             <div class="small-box bg-aqua">
             <div class="inner">
-            <h3>{{$orders_iniciadas->count()}}</h3>
+            {{-- <h3>{{$orders_iniciadas->count()}}</h3> --}}
+            <h3>0</h3>
+
             <p>Ordenes Iniciadas</p>
             </div>
             <div class="icon">
@@ -122,7 +124,8 @@
         <div class="col-md-3">
                 <div class="small-box bg-red">
                 <div class="inner">
-                <h3>{{$orders_cerradas->count()}}</h3>
+                {{-- <h3>{{$orders_cerradas->count()}}</h3> --}}
+                <h3>0</h3>
                 <p>Ordenes Entregadas</p>
                 
                 </div>
