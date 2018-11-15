@@ -42,7 +42,7 @@ return [
     
     'search' => [
         
-            'Codigo'    => 'codigo_orden',
+            'Codigo' => 'codigo_orden',
             // 'Apellido'  => 'last_name' ,
             // 'Email'     => 'email'
     ],
