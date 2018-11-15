@@ -42,9 +42,9 @@ return [
     
     'search' => [
         
-            'Nombre'    => 'name',
-            'Apellido'  => 'last_name' ,
-            'Email'     => 'email'
+            'Codigo'    => 'codigo_orden',
+            // 'Apellido'  => 'last_name' ,
+            // 'Email'     => 'email'
     ],
 
     'validationsStore' => [
