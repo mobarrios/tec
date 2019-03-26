@@ -22,11 +22,20 @@
             </div>
             <div class="col-xs-4 form-group">
               {!! Form::label('Fecha Inicio') !!}
-              {!! Form::text('fecha_inicio', null, ['class'=>'form-control datePicker']) !!}
+              @if(isset($models))
+                {!! Form::text('fecha_inicio', null, ['class'=>'form-control datePicker']) !!}
+              @else
+                {!! Form::text('fecha_inicio',  date('d-m-Y'), ['class'=>'form-control datePicker']) !!}
+              @endif
+
             </div>
             <div class="col-xs-4 form-group">
               {!! Form::label('Fecha Final') !!}
+            @if(isset($models))
               {!! Form::text('fecha_final', null, ['class'=>'form-control datePicker']) !!}
+            @else
+              {!! Form::text('fecha_final',  date('d-m-Y'), ['class'=>'form-control datePicker']) !!}
+            @endif
             </div>
           
           </div>

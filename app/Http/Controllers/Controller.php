@@ -52,7 +52,7 @@ abstract class Controller extends BaseController
         //Session::put('customs',$model->getClass());
 
         //pagina el query
-        $this->data['models'] = $model->paginate(config('models.'.$this->section.'.paginate'));
+        $this->data['models'] = $model->orderBy('id','DESC')->paginate(config('models.'.$this->section.'.paginate'));
         
         //return view($this->getConfig()->indexRoute)->with($this->data);
         return view(config('models.'.$this->section.'.indexRoute'))->with($this->data);

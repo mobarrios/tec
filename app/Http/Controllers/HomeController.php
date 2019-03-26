@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Milon\Barcode\DNS1D;
 use App\Http\Repositories\Tecnica\OrdersRepo;
+use Illuminate\Support\Facades\DB;
+ 
 use Auth;
 
 class HomeController extends Controller
@@ -26,7 +28,8 @@ class HomeController extends Controller
          
         //  $this->data['orders_iniciadas'] = $this->ordersRepo->getModel()->whereHas('OrdenEstados',function ($q){
         //      $q->where('states_id',1)->limit(1)->orderBy('created_at','DESC');
-        //  })->get();  
+        //  })->get(); 
+
 
         //  $this->data['orders_cerradas'] = $this->ordersRepo->getModel()->whereHas('OrdenEstados',function ($q){
         //     $q->where('states_id',2);

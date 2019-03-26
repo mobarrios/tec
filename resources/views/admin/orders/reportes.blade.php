@@ -115,8 +115,6 @@
                          Dir: {{$company->direccion}} <br>
                          Tel: {{$company->telefono}} <br>
                          Cuit: {{$company->cuit}}
-
-                         
                       </td>
                   </tr>
               </table>
@@ -153,7 +151,7 @@
           Articulo :  {{ isset($model->Equipo->name) ? $model->Equipo->name : '' }}
           </td>
          <td>
-         Modelo : {{ isset($model->Model->Brands) ? $model->Model->Brands->name : '' }}
+         Modelo : {{ isset($model->Model->Brands) ? $model->Model->Brands->name : '' }} {{ isset($model->Model) ? $model->Model->name : '' }}
           </td>
            <td>
          Número Serie :  {{ $model->numero_serie  }}
@@ -178,7 +176,6 @@
 <p style="font-size: 1.2em;">Observaciones : {{$model->observaciones}}</p>
 <p style="font-size: 1.2em;">Observaciones Tecnicas: {{$model->observaciones_tecnicas}}</p> 
 
-<br/>
 <hr>
 @if(!is_null($letraChica))
   {!! $letraChica->descripcion !!}
