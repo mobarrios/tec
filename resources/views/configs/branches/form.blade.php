@@ -31,6 +31,10 @@
         {!! Form::label('Punto de Venta') !!}
         {!! Form::text('punto_venta', null, ['class'=>'form-control']) !!}
     </div>
+    <div class="col-xs-4 form-group">
+        {!! Form::label('Email') !!}
+        {!! Form::text('email', null, ['class'=>'form-control']) !!}
+    </div>
 
 
 

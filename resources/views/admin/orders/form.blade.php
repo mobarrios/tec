@@ -72,9 +72,13 @@
           </div>
 
            <div class="row">  
-            <div class="col-xs-4 form-group">
+            <div class="col-xs-2 form-group">
               {!! Form::label('Equipo') !!}
               {!! Form::select('equipments_id',$equipments, isset($models->equipments_id) ? $models->equipments_id : null, ['class'=>'form-control select2']) !!}
+            </div>
+             <div class="col-xs-2 form-group">
+              {!! Form::label('Clave del Equipo') !!}
+              {!! Form::text('clave_equipo', null, ['class'=>'form-control']) !!}
             </div>
            
              <div class="col-xs-4 form-group">
@@ -93,7 +97,7 @@
           <div class="row">  
            
              <div class="col-xs-4 form-group">
-              {!! Form::label('Falla a Reparar') !!}
+              {!! Form::label('Descripción de la Falla') !!}
               {!! Form::textarea('falla_declarada', null, ['class'=>'form-control', 'rows' => 2, 'cols' => 40 ]) !!}
             </div>
          
@@ -104,7 +108,7 @@
 
 
             <div class="col-xs-4 form-group">
-              {!! Form::label('Presupuesto') !!}
+              {!! Form::label('Presupuesto Estimado') !!}
               {!! Form::text('presupuesto_estimado', null, ['class'=>'form-control']) !!}
             </div>
           </div>

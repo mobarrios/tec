@@ -69,6 +69,8 @@
           <div class="box-body">
             <span class="text-muted">Equipo : </span> <strong>{{ isset($models->Equipo) ? $models->Equipo->name : '' }}</strong>
             <br>
+            <span class="text-muted">Clave Equipo : </span> <strong>{{ $models->clave_equipo }}</strong>
+            <br>
             <span class="text-muted">Marca : </span> <strong>{{ isset($models->Model->Brands) ? $models->Model->Brands->name : '' }}</strong>
             <br>
             <span class="text-muted">Modelo : </span> <strong>{{ isset($models->Model) ? $models->Model->name : '' }}</strong>
@@ -176,7 +178,7 @@
               <tbody>
               <tr>
 
-                <td width="45%">Presupuesto</td>
+                <td width="45%">Presupuesto Estimado</td>
                 <td>
                   <div class="input-group">
                     <span class="input-group-addon">$</span>

@@ -9,7 +9,7 @@
 
      protected $table = 'branches';
 
-     protected $fillable = ['name', 'phone','address','type','company_id','punto_venta'];
+     protected $fillable = ['name', 'phone','address','type','company_id','punto_venta', 'email'];
 
      protected $section = 'branches';
 
