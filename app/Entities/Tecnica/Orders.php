@@ -46,9 +46,17 @@ class Orders extends Entity
         return $this->belongsToMany(Services::getClass())->withPivot('cantidad','id');
     }
 
-    
     public function lasTOrdenEstados(){
         return $this->hasMany(OrderStates::class)->orderBy('id','DESC')->first();
+    }
+
+    public function Tasks(){
+        return $this->belongsToMany(Tasks::getClass(), 'tasks_orders')->withPivot('estado');
+    }
+
+    public function findTasks($id){
+        return $this->Tasks()->where('tasks_id', $id)->first();
+
     }
 
     public function setFechaInicioAttribute($value){

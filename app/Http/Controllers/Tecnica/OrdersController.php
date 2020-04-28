@@ -17,6 +17,8 @@ use App\Http\Repositories\Tecnica\ToPrintRepo;
 use App\Http\Repositories\Configs\UsersRepo;
 use App\Http\Repositories\Configs\CompanyRepo;
 use App\Entities\Tecnica\OrderStates;
+use App\Entities\Tecnica\Tasks;
+use App\Entities\Tecnica\TasksOrders;
 use App\Entities\Tecnica\OrderServices;
 use App\Http\Repositories\Tecnica\ServicesRepo;
 use App\Entities\Tecnica\Services;
@@ -39,6 +41,8 @@ class OrdersController extends Controller
         //$this->data['brands']       = $brandsRepo->ListsData('name','id');
         //$this->data['models']     = $modelsRepo->ListsData('name','id');
         //$this->data['clients']    = $clientsRepo->listForSelect();
+        //$this->data['tasks']        = Task::all()->lists('descripcion','id');
+        $this->data['tasks']        = Tasks::all();
         $this->data['clients']      = $clientsRepo->getModel()->all()->lists('fullname','id');
         $this->data['states']       = $statesRepo->getModel()->lists('description','id');
         $this->data['equipments']   = $equipmentsRepo->ListsData('name','id');
@@ -53,6 +57,7 @@ class OrdersController extends Controller
 
 
         $this->data['activeBread']  = 'Nuevo';
+
         if($this->route->getParameter('cliente'))
             $this->data['clientSelect'] = $this->clienteRepo->find($this->route->getParameter('cliente'));
     
@@ -199,6 +204,22 @@ class OrdersController extends Controller
         //crea a traves del repo con el request
         $model = $this->repo->create($this->request);
         
+        //Tareas
+        //$model->tasks()->sync($this->request->tareas);
+        if($this->request->estado){
+
+            foreach ($this->request->estado as $key => $value) {
+                
+                $tasksOrders = new TasksOrders();
+
+                $tasksOrders->orders_id = $model->id;
+                $tasksOrders->tasks_id  = $key;
+                $tasksOrders->estado    = $value;
+                $tasksOrders->save();
+
+            }
+        }
+
         //Estado iniciado
         $state              = new OrderStates();
         $state->orders_id   = $model->id;
@@ -208,6 +229,37 @@ class OrdersController extends Controller
 
 
         return redirect()->route('admin.orders.details',$model->id)->withErrors(['Regitro Agregado Correctamente']);
+    }
+
+    public function updateTasks(){
+
+        //$model = $this->repo->create($this->request);
+        
+        $model = $this->repo->find($this->request->orden_id);
+
+        foreach ($model->Tasks as $t) {
+            $t->pivot->delete();
+        }
+        //dd('ada');
+
+        //Tareas
+        //$model->tasks()->sync($this->request->tareas);
+        if($this->request->estado){
+
+            foreach ($this->request->estado as $key => $value) {
+                //dd($this->request->estado);
+                //$tasksOrders = TasksOrders::where('orders_id', $model->id)->where('tasks_id', $key)->first();
+                $tasksOrders = new TasksOrders();
+                $tasksOrders->orders_id = $model->id;
+                $tasksOrders->tasks_id  = $key;
+                $tasksOrders->estado    = $value;
+                $tasksOrders->save();
+
+            }
+        }
+
+         return redirect()->route('admin.orders.details',$model->id)->withErrors(['Regitro Editado Correctamente']);
+
     }
 
     

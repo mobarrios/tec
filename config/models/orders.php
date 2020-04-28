@@ -50,8 +50,8 @@ return [
     'validationsStore' => [
 
           'codigo_orden'    => 'required',
-          'clients_id'      => 'required',
-          'equipments_id'   => 'required',
+          //'clients_id'      => 'required',
+          //'equipments_id'   => 'required',
           'clave_equipo'    => 'required',
     
     ],

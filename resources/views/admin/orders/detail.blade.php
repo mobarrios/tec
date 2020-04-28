@@ -67,8 +67,10 @@
             <h3 class="box-title">  Equipo </h3>
           </div>
           <div class="box-body">
+            {{--
             <span class="text-muted">Equipo : </span> <strong>{{ isset($models->Equipo) ? $models->Equipo->name : '' }}</strong>
             <br>
+              --}}
             <span class="text-muted">Clave Equipo : </span> <strong>{{ $models->clave_equipo }}</strong>
             <br>
             <span class="text-muted">Marca : </span> <strong>{{ isset($models->Model->Brands) ? $models->Model->Brands->name : '' }}</strong>
@@ -76,8 +78,10 @@
             <span class="text-muted">Modelo : </span> <strong>{{ isset($models->Model) ? $models->Model->name : '' }}</strong>
             <br>
             <span class="text-muted">Número Serie : </span> <strong>{{ $models->numero_serie  }}</strong>
+            {{--
             <br>
             <span class="text-muted">Parte : </span> <strong>{{ $models->partes  }}</strong>
+            --}}
             <br>
             <span class="text-muted">Partes Serie : </span> <strong>{{ $models->serie_partes  }}</strong>
             <br>
@@ -244,12 +248,17 @@
             </div>
             
             <div class="form-group">
-              <label>OBSERVACIONES TECNICAS</label>
+              <label>INFORME TECNICO INICIAL</label>
               <textarea class="form-control" rows="3" name="observaciones_tecnicas"> {{$models->observaciones_tecnicas}}</textarea>
             </div>
             
             <div class="form-group">
-              <label>OBSERVACIONES INTERNAS</label>
+              <label>INFORME TECNICO FINAL</label>
+              <textarea class="form-control" rows="3" name="observaciones_internas"> {{$models->partes}}</textarea>
+            </div>
+
+            <div class="form-group">
+              <label>REPARACION</label>
               <textarea class="form-control" rows="3" name="observaciones_internas"> {{$models->observaciones_internas}}</textarea>
             </div>
 
@@ -263,12 +272,8 @@
     <div class="col-xs-6">
         <div class="box box-solid">
           <div class="box-header with-border">
-            <h3 class="box-title"> Servicios
-
-             </h3>
-              <a href="#" data-toggle="modal" data-target="#modal-default" class="btn btn-default pull-right">   <i class="fa fa-plus" ></i></a>
-              
-
+            <h3 class="box-title"> Servicios </h3>
+            <a href="#" data-toggle="modal" data-target="#modal-default" class="btn btn-default pull-right"><i class="fa fa-plus" ></i></a>
           </div>
           <div class="box-body">
            <table class="table table-condensed">
@@ -285,12 +290,50 @@
                     <i class="fa fa-trash"></i> Borrar</a></th>
                 </tr>
                 @endforeach
-              </tbody></table>
+              </tbody>
             </table>
           </div>
         </div>
     </div>
 
+  </div>
+</div>
+
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="col-xs-6">
+
+        <div class="box box-solid">
+          <div class="box-header with-border">
+            <h3 class="box-title"> Testeos </h3>
+          </div>
+          <div class="box-body">
+            
+            {!! Form::model($models,['route'=>('admin.ordenes.updateTasks')]) !!}
+            
+          
+              @foreach($tasks as $task)
+
+              <div class="col-xs-2 form-group">
+                {!! $task->descripcion !!}
+              </div>
+              <div class="col-xs-2 form-group">
+    <input type="checkbox" name="estado[{{$task->id}}]" value="1" {{ !is_null($models->findTasks($task->id)) && $models->findTasks($task->id)->pivot->estado == 1 ? 'checked' : ''  }} >
+              
+
+
+              </div>           
+
+              @endforeach
+
+            {!! Form::hidden('orden_id', $models->id) !!}
+
+            <button type="submit" class="btn btn-primary pull-right">Guardar</button>
+            {!! Form::close() !!}
+          </div>
+        </div>
+    </div>
   </div>
 </div>
 

@@ -72,45 +72,82 @@
           </div>
 
            <div class="row">  
+            {{--
             <div class="col-xs-2 form-group">
               {!! Form::label('Equipo') !!}
               {!! Form::select('equipments_id',$equipments, isset($models->equipments_id) ? $models->equipments_id : null, ['class'=>'form-control select2']) !!}
             </div>
-             <div class="col-xs-2 form-group">
+            --}}
+             <div class="col-xs-4 form-group">
               {!! Form::label('Clave del Equipo') !!}
               {!! Form::text('clave_equipo', null, ['class'=>'form-control']) !!}
             </div>
            
-             <div class="col-xs-4 form-group">
-              {!! Form::label('Repuesto') !!}
-              {!! Form::text('partes', null, ['class'=>'form-control']) !!}
-            </div>
-
-         
             <div class="col-xs-4 form-group">
               {!! Form::label('Numero serie partes') !!}
               {!! Form::text('serie_partes', null, ['class'=>'form-control']) !!}
             </div>
-           
-          </div>
-
-          <div class="row">  
-           
-             <div class="col-xs-4 form-group">
+            <div class="col-xs-4 form-group">
               {!! Form::label('Descripción de la Falla') !!}
               {!! Form::textarea('falla_declarada', null, ['class'=>'form-control', 'rows' => 2, 'cols' => 40 ]) !!}
             </div>
          
+           
+          </div>
+
+          <div class="row">  
+         
+            <div class="col-xs-4 form-group">
+              {!! Form::label('Informe tecnico inicial') !!}
+              {!! Form::textarea('observaciones_tecnicas', null, ['class'=>'form-control', 'rows' => 2, 'cols' => 40]) !!}
+            </div>
+
+            <div class="col-xs-4 form-group">
+              {!! Form::label('Informe tecnico final') !!}
+              {!! Form::textarea('partes', null, ['class'=>'form-control', 'rows' => 2, 'cols' => 40]) !!}
+            </div>
+
             <div class="col-xs-4 form-group">
               {!! Form::label('Observaciones') !!}
               {!! Form::textarea('observaciones', null, ['class'=>'form-control', 'rows' => 2, 'cols' => 40]) !!}
             </div>
-
-
-            <div class="col-xs-4 form-group">
+          
+          </div>
+          
+          <div class="row">
+              <div class="col-xs-4 form-group">
               {!! Form::label('Presupuesto Estimado') !!}
               {!! Form::text('presupuesto_estimado', null, ['class'=>'form-control']) !!}
             </div>
+          </div>
+
+          <h3 class="box-title">Testeos  </h3>
+          <hr>
+
+          <div class="row">
+            <div class="col-xs-2 form-group">
+              <strong> Controles</strong>
+            </div>
+            <div class="col-xs-2 form-group">
+              <strong> Testeo</strong>
+            </div>
+          </div>
+          <div class="row">
+         
+            @foreach($tasks as $task)
+            <div class="col-xs-2 form-group">
+              {!! $task->descripcion !!}
+
+            </div>
+            <div class="col-xs-2 form-group">
+
+
+              <input type="checkbox" name="estado[{{ $task->id }}]" value="1" >
+
+            </div>
+            
+            @endforeach
+          
           </div>
           
 @endsection
