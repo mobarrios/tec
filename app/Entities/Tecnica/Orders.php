@@ -56,7 +56,10 @@ class Orders extends Entity
 
     public function findTasks($id){
         return $this->Tasks()->where('tasks_id', $id)->first();
+    }
 
+    public function Movements(){
+        return $this->hasOne(Movements::getClass());
     }
 
     public function setFechaInicioAttribute($value){

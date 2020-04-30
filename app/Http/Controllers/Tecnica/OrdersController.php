@@ -14,12 +14,14 @@ use App\Http\Repositories\Tecnica\StatesRepo;
 use App\Http\Repositories\Tecnica\EquipmentsRepo;
 use App\Http\Repositories\Tecnica\OrderServicesRepo;
 use App\Http\Repositories\Tecnica\ToPrintRepo;
+use App\Http\Repositories\Tecnica\MovementsRepo;
 use App\Http\Repositories\Configs\UsersRepo;
 use App\Http\Repositories\Configs\CompanyRepo;
 use App\Entities\Tecnica\OrderStates;
 use App\Entities\Tecnica\Tasks;
 use App\Entities\Tecnica\TasksOrders;
 use App\Entities\Tecnica\OrderServices;
+use App\Entities\Tecnica\Movements;
 use App\Http\Repositories\Tecnica\ServicesRepo;
 use App\Entities\Tecnica\Services;
 use PDF;
@@ -27,14 +29,14 @@ use Auth;
 use Mail;
 class OrdersController extends Controller
 {
-    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, StatesRepo $statesRepo, EquipmentsRepo $equipmentsRepo, ServicesRepo $servicesRepo, UsersRepo $usersRepo, OrderServices $orderServices)
+    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, StatesRepo $statesRepo, EquipmentsRepo $equipmentsRepo, ServicesRepo $servicesRepo, UsersRepo $usersRepo, OrderServices $orderServices, MovementsRepo $movementsRepo)
     {
 
         $this->request      = $request;
         $this->repo         = $repo;
         $this->route        = $route;
         $this->clienteRepo  = $clientsRepo;
-
+        $this->movementsRepo= $movementsRepo;
         $this->section              = 'orders';
         $this->data['section']      = $this->section;
         //$this->data['ultima_orden'] = !is_null($repo->ultimo()) ? $repo->ultimo()->id + 1 : '1';
@@ -260,6 +262,33 @@ class OrdersController extends Controller
 
          return redirect()->route('admin.orders.details',$model->id)->withErrors(['Regitro Editado Correctamente']);
 
+    }
+
+
+    public function getMovimientos(){
+        $this->data['models']      = $this->repo->find($this->route->getParameter('id'));
+        return view('admin.orders.movimientos')->with($this->data);
+    }
+
+    public function postMovimientos(){
+        
+        $id     = $this->route->getParameter('id');
+        $model  = $this->repo->find($id);
+
+        if($model->Movements){
+            //$model->Movements()->update($this->request->all());
+
+            $m = $this->movementsRepo->find($model->Movements->id);
+            $m->fill($this->request->all());
+            $m->save();
+
+
+        }else{
+            $model->Movements()->create($this->request->all());
+        }
+        
+        return redirect()->back()->withErrors(['Regitro Creado Correctamente']);
+        
     }
 
     

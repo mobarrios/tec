@@ -14,7 +14,9 @@
                 <td>{{$model->observaciones_internas}}</td>
                 <td>{{ isset($model->Cliente->fullname) ? $model->Cliente->fullname : '' }}</td>
                 <td><span class="label" style="background-color:{{ isset($model->lasTOrdenEstados()->States->color) ? $model->lasTOrdenEstados()->States->color : '' }} "> {{ isset($model->lasTOrdenEstados()->States->description) ? $model->lasTOrdenEstados()->States->description : '' }} </span></td>
-                <td><a href="{{route('admin.orders.details', $model->id)}}" class="btn btn-xs btn-success" ><span class="fa  fa-info-circle"></span> </a></td>
+                <td><a href="{{route('admin.ordenes.movimientos', $model->id)}}" class="btn btn-xs btn-success" ><span class="fa fa-cubes"></span></a>
+
+                <a href="{{route('admin.orders.details', $model->id)}}" class="btn btn-xs btn-success" ><span class="fa  fa-info-circle"></span></a></td>
 
             </tr>
         @endforeach
