@@ -1,10 +1,7 @@
 @extends('template.model_form')
 
     @section('form_title')
-        Movimientos
-          <small> 
-          
-           </small>
+        <strong>Orden #  {{$models->id}}</strong>
          
     @endsection
     
@@ -18,11 +15,13 @@
 
           <div class="row">
 
-            <div class="col-xs-6">
+            <div class="col-xs-5">
 
+              <h1 class="text-center text-muted">Entrada  </h1>
+              <hr>
               <div class="col-xs-6 form-group">
                 {!! Form::label('Fecha entrada') !!}
-                {!! Form::date('fecha_entrada', null, ['class'=>'form-control']) !!}
+                {!! Form::text('fecha_entrada', null, ['class'=>'datePicker form-control']) !!}
 
               </div>
             
@@ -31,7 +30,7 @@
                 {!! Form::text('codigo_entrada', null, ['class'=>'form-control']) !!}
               </div>
             
-            <div class="col-xs-6 form-group">
+            <div class="col-xs-12 form-group">
                 {!! Form::label('Nombre de persona') !!}
                 {!! Form::text('nombre_traslado_entrada', null, ['class'=>'form-control']) !!}
               </div>
@@ -47,12 +46,17 @@
         
             
             </div>
+            <div class="col-xs-1">
+                  <h1 class="text-muted"><span class="fa fa-sign-out"></span></h1>
+            </div>
 
-            <div class="col-xs-6">
+            <div class="col-xs-5">
+              <h1 class="text-center text-muted">Salida  </h1>
+              <hr>
 
               <div class="col-xs-6 form-group">
                 {!! Form::label('Fecha salida') !!}
-                {!! Form::date('fecha_salida', null, ['class'=>'form-control']) !!}
+                {!! Form::text('fecha_salida', null, ['class'=>'datePicker form-control']) !!}
               </div>
             
               <div class="col-xs-6 form-group">
@@ -60,7 +64,7 @@
                 {!! Form::text('codigo_salida', null, ['class'=>'form-control']) !!}
               </div>
             
-            <div class="col-xs-6 form-group">
+            <div class="col-xs-12 form-group">
                 {!! Form::label('Nombre de persona') !!}
                 {!! Form::text('nombre_traslado_salida', null, ['class'=>'form-control']) !!}
               </div>
