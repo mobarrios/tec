@@ -291,5 +291,16 @@ class OrdersController extends Controller
         
     }
 
+    public function remito(Route $route, ToPrintRepo $toPrintRepo, CompanyRepo $companyRepo){
+        
+
+        $model      = $this->repo->find($route->getParameter('id'));
+        $company    = $companyRepo->getModel()->first();
+        //dd($company);
+        $pdf        = PDF::loadView('admin.orders.remito', compact('model','company'));
+
+        return $pdf->stream();
+    }
+
     
 }

@@ -16,6 +16,7 @@
                 <a href="{{route('admin.ordenes.reporte',$models->id)}}" target="_blank" class="pull-right btn btn-default btn-sm">
                   <em class="fa fa-print"></em>
                 </a>
+                
               </div>
             </div>
             <!-- /.box-header -->
