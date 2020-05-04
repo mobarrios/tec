@@ -34,7 +34,7 @@ return [
     //polymorphic
     'is_logueable'      => true,
     'is_imageable'      => true,
-    'is_brancheable'    => false,
+    'is_brancheable'    => true,
 
 
 
@@ -49,7 +49,7 @@ return [
 
     'validationsStore' => [
 
-          'codigo_orden'    => 'required',
+          //'codigo_orden'    => 'required',
           //'clients_id'      => 'required',
           //'equipments_id'   => 'required',
           'clave_equipo'    => 'required',
