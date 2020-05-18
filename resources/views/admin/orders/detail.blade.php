@@ -189,7 +189,7 @@
                 <td>
                   <div class="input-group">
                     <span class="input-group-addon">$</span>
-                    <input type="text" class="form-control input-sm" disabled value="{{$models->presupuesto_estimado}}">
+                    <input type="text" class="form-control input-sm" name="presupuesto_estimado" value="{{$models->presupuesto_estimado}}">
 
                     <span class="input-group-addon">.00</span>
                   </div>
@@ -295,6 +295,8 @@
                 @endforeach
               </tbody>
             </table>
+
+
           </div>
         </div>
     </div>
@@ -351,7 +353,7 @@
           <h4 class="modal-title">Servicios</h4>
         </div>
         <div class="modal-body">
-           <table id="example1" class="table table-bordered table-striped">
+           <table class="table table-bordered table-striped">
             <thead>
             <tr>
               <th></th>
@@ -373,7 +375,7 @@
               <td>{{$s->description}}</td>
               <td>$ {{$s->amount}}</td>
               <td>{{$s->iva}}</td>
-              <td>{!! Form::number('cantidad',null,['class'=>'form-control input-sm', 'style' => 'height:20px;']) !!}</td>
+              <td>{!! Form::number('cantidad',null,['class'=>'form-control input-sm', 'style' => 'height:20px;', 'required'=>true]) !!}</td>
               <td><button type="submit" class="btn btn-primary btn-xs">Guardar</button></td>
             </tr>
             {!! Form::close() !!}
