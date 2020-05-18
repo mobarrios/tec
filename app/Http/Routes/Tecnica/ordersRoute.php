@@ -28,7 +28,8 @@ Route::group(['prefix'=>'orders'],function(){
         Route::get('deleteServices/{id}',[ 'as'=>'admin.ordenes.deleteServices','uses'=>'Tecnica\OrdersController@deleteServices']);
         Route::post('updateTasks',[ 'as'=>'admin.ordenes.updateTasks','uses'=>'Tecnica\OrdersController@updateTasks']);
         Route::get('movimientos/{id}',[ 'as'=>'admin.ordenes.movimientos','uses'=>'Tecnica\OrdersController@getMovimientos']);
-        Route::post('postMovimientos/{id}',[ 'as'=>'admin.ordenes.postMovimientos','uses'=>'Tecnica\OrdersController@postMovimientos']);                                  
+        Route::post('postMovimientos/{id}',[ 'as'=>'admin.ordenes.postMovimientos','uses'=>'Tecnica\OrdersController@postMovimientos']);
+        Route::get('/remito/{id}',     ['as'=>'admin.ordenes.remito','uses'=>'Tecnica\OrdersController@remito']);                                        
 
         /*
         detail

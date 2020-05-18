@@ -25,7 +25,10 @@
                 </div>
             </div>
             --}}
-            <a href="{{route('admin.ordenes.reporte',$models->id)}}" target="_blank" class="btn btn-default pull-right">Reporte</a>  
+            <a href="{{route('admin.ordenes.reporte',$models->id)}}" target="_blank" class="btn btn-default pull-right" style="margin-left: 10px;" >Reporte</a>  
+
+            <a href="{{route('admin.ordenes.remito',$models->id)}}" target="_blank" class="btn btn-default pull-right ">Remito</a>  
+            
           </div>
         </div>
       </div>

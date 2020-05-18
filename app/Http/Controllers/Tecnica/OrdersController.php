@@ -46,7 +46,7 @@ class OrdersController extends Controller
         //$this->data['tasks']        = Task::all()->lists('descripcion','id');
         $this->data['tasks']        = Tasks::all();
         $this->data['clients']      = $clientsRepo->getModel()->all()->lists('fullname','id');
-        $this->data['states']       = $statesRepo->getModel()->lists('description','id');
+        $this->data['states']       = $statesRepo->getModel()->orderBy('description','ASC')->lists('description','id');
         $this->data['equipments']   = $equipmentsRepo->ListsData('name','id');
         $this->data['users_id']     = Auth::user()->id;
         $this->data['models_id']    = $modelsRepo->ListsData('name','id');
@@ -289,6 +289,17 @@ class OrdersController extends Controller
         
         return redirect()->back()->withErrors(['Regitro Creado Correctamente']);
         
+    }
+
+    public function remito(Route $route, ToPrintRepo $toPrintRepo, CompanyRepo $companyRepo){
+        
+
+        $model      = $this->repo->find($route->getParameter('id'));
+        $company    = $companyRepo->getModel()->first();
+        //dd($company);
+        $pdf        = PDF::loadView('admin.orders.remito', compact('model','company'));
+
+        return $pdf->stream();
     }
 
     
