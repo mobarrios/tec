@@ -100,16 +100,24 @@ class OrdersController extends Controller
         $data['estado']     = $statesRepo->find($request->get('estado_id'));
         $data['orden']      = $this->repo->find($request->get('orden_id'));
         $data['company']    = $companyRepo->getModel()->first();
+        //dd($data['estado']->enviar == true);
+
         //Si el cliente tiene email o enviar es verdadero
         if(!empty($data['orden']->Cliente->email) && $data['estado']->enviar == true)    
         {   
-            //Envio de email
-            Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company']], function($message) use ($data)
-            {
-                $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');
-                $message->to($data['orden']->Cliente->email, $data['orden']->Cliente->fullname);
+            try{
+                //Envio de email
+                Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company']], function($message) use ($data)
+                {
+                    $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');
+                    $message->to($data['orden']->Cliente->email, $data['orden']->Cliente->fullname);
 
-            });
+                });
+
+            }catch(Exception $e){
+
+                return redirect()->back()->withErrors(['No se ha podido enviar el email']);
+            }
     
             return redirect()->back()->withErrors(['Regitro Agregado Correctamente. Email enviado al cliente.']);
 

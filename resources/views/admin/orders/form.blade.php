@@ -44,7 +44,7 @@
 
             <div class="col-xs-4 form-group">
               {!! Form::label('Cliente') !!}
-              {!! Form::select('clients_id', $clients , isset($clientSelect) ? $clientSelect->id : '' ,['class'=>'select2 form-control ']) !!}
+              {!! Form::select('clients_id', $clients , isset($models->Cliente) ? $models->Cliente->id : '' ,['class'=>'select2 form-control ']) !!}
               {!! Form::hidden('users_id', $users_id) !!}
             </div>
             {{--
