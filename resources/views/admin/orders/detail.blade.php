@@ -243,26 +243,26 @@
             {!! Form::open(['route'=>('admin.ordenes.updateObservaciones')]) !!}
             <div class="form-group">
               <label>FALLA DECLARADA</label>
-              <textarea class="form-control" rows="3" name="falla_declarada" > {{$models->falla_declarada}}</textarea>
+              <textarea class="form-control" rows="3" name="falla_declarada" >{{$models->falla_declarada}}</textarea>
             </div>
             <div class="form-group">
               <label>OBSERVACIONES</label>
-              <textarea class="form-control" rows="3" name="observaciones"> {{$models->observaciones}}</textarea>
+              <textarea class="form-control" rows="3" name="observaciones">{{$models->observaciones}}</textarea>
             </div>
             
             <div class="form-group">
               <label>INFORME TECNICO INICIAL</label>
-              <textarea class="form-control" rows="3" name="observaciones_tecnicas"> {{$models->observaciones_tecnicas}}</textarea>
+              <textarea class="form-control" rows="3" name="observaciones_tecnicas">{{$models->observaciones_tecnicas}}</textarea>
             </div>
             
             <div class="form-group">
               <label>INFORME TECNICO FINAL</label>
-              <textarea class="form-control" rows="3" name="observaciones_internas"> {{$models->partes}}</textarea>
+              <textarea class="form-control" rows="3" name="partes">{{$models->partes}}</textarea>
             </div>
 
             <div class="form-group">
               <label>REPARACION</label>
-              <textarea class="form-control" rows="3" name="observaciones_internas"> {{$models->observaciones_internas}}</textarea>
+              <textarea class="form-control" rows="3" name="observaciones_internas">{{$models->observaciones_internas}}</textarea>
             </div>
 
             {!! Form::hidden('orden_id', $models->id) !!}

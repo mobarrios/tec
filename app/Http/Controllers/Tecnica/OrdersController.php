@@ -156,6 +156,7 @@ class OrdersController extends Controller
         $model->observaciones           = $request->get('observaciones');
         $model->falla_declarada         = $request->get('falla_declarada');
         $model->observaciones_tecnicas  = $request->get('observaciones_tecnicas');
+        $model->partes                  = $request->get('partes');
         $model->observaciones_internas  = $request->get('observaciones_internas');
         $model->save();
 
@@ -211,7 +212,7 @@ class OrdersController extends Controller
     {
         //validar los campos
         $this->validate($this->request,config('models.'.$this->section.'.validationsStore'));
-        
+        //dd($this->request->all());
         //crea a traves del repo con el request
         $model = $this->repo->create($this->request);
         
