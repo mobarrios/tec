@@ -5,7 +5,9 @@
             <tr>
                 
                 <td style="width: 1%"><input class="id_destroy" value="{{$model->id}}" type="checkbox"></td>
-                <td>{{$model->id}}</td>
+                <td>{{$model->id}} <br> 
+                    <small class="text-muted">{{$model->codigo_orden}}</small>
+                    </td>
                 <td>
                     {{ isset($model->Model->name) ? $model->Model->name : '' }} 
                 <strong>{{ isset($model->Model->Brands->name) ? ': '.$model->Model->Brands->name : ''  }} </strong>

@@ -100,7 +100,7 @@
                       </td>
                       <td style="font-size: 1.5em;" >
                           <strong>Fecha</strong> {{ date('d/m/Y',strtotime($model->fecha_inicio)) }}<br />
-                          <strong>Sucursal</strong> {{ $company->nombre_fantasia }}
+                          <strong>Sucursal</strong> {{ $model->Brancheables() ?  $model->Brancheables()->first()->branches->name : 'sin sucursal' }}
                       </td>
                   </tr>
               </table>
@@ -108,7 +108,6 @@
          
       </tr>
   
-   
       <tr>
           <td>
               <table style="width: 100%;">

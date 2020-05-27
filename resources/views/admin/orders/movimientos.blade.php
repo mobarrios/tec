@@ -27,7 +27,7 @@
             
               <div class="col-xs-6 form-group">
                 {!! Form::label('Codigo entrada') !!}
-                {!! Form::text('codigo_entrada', null, ['class'=>'form-control']) !!}
+                {!! Form::text('cod_entrada', null, ['class'=>'form-control']) !!}
               </div>
             
             <div class="col-xs-12 form-group">
@@ -61,7 +61,7 @@
             
               <div class="col-xs-6 form-group">
                 {!! Form::label('Codigo salida') !!}
-                {!! Form::text('codigo_salida', null, ['class'=>'form-control']) !!}
+                {!! Form::text('cod_salida', null, ['class'=>'form-control']) !!}
               </div>
             
             <div class="col-xs-12 form-group">

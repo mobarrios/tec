@@ -96,7 +96,8 @@
                       <td style="font-size: 1.5em;" >
 
                           <strong>Fecha de Ingreso</strong> {{ date('d/m/Y',strtotime($model->fecha_inicio)) }}<br />
-                          <strong>Orden de Reparacion</strong> {{$model->id}}
+                          <strong>Orden de Reparacion</strong> {{$model->id}}<br />
+                          <strong>Sucursal </strong> {{ $model->Brancheables() ?  $model->Brancheables()->first()->branches->name : 'sin sucursal' }}
 
                       </td>
                   </tr>
@@ -105,7 +106,6 @@
          
       </tr>
   
-   
       <tr>
           <td>
               <table style="width: 100%;">
