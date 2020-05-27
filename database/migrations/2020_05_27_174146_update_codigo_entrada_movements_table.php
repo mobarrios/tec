@@ -13,8 +13,8 @@ class UpdateCodigoEntradaMovementsTable extends Migration
     public function up()
     {
         Schema::table('movements', function (Blueprint $table) {
-            $table->string('codigo_entrada')->change();
-            $table->string('codigo_salida')->change();
+            $table->string('cod_entrada');
+            $table->string('cod_salida');
             
 
         });
@@ -29,8 +29,8 @@ class UpdateCodigoEntradaMovementsTable extends Migration
     public function down()
     {
         Schema::table('movements', function (Blueprint $table) {
-            $table->dropColumn('codigo_entrada');
-            $table->dropColumn('codigo_salida');
+            $table->dropColumn('cod_entrada');
+            $table->dropColumn('cod_salida');
         });
     }
 }

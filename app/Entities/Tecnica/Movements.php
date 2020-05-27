@@ -8,7 +8,7 @@ class Movements extends Entity
 {
 
     protected $table = 'movements';
-    protected $fillable = ['fecha_entrada','codigo_entrada', 'nombre_traslado_entrada','hora_solicitud_entrada','hora_entrada','fecha_salida','codigo_salida','nombre_traslado_salida','hora_solicitud_salida','hora_salida'];
+    protected $fillable = ['fecha_entrada','cod_entrada', 'nombre_traslado_entrada','hora_solicitud_entrada','hora_entrada','fecha_salida','cod_salida','nombre_traslado_salida','hora_solicitud_salida','hora_salida'];
     protected $section = 'movements';
 
     public function setFechaEntradaAttribute($value){
