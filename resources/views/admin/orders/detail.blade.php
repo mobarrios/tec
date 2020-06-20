@@ -317,7 +317,31 @@
             
             {!! Form::model($models,['route'=>('admin.ordenes.updateTasks')]) !!}
             
-          
+
+
+            <div class="col-xs-12 table-responsive">
+              <table class="table-condensed">
+                {{-- <thead>                  
+                  <th></th>
+                  <th>Control</th>
+                </thead> --}}
+                <tbody>
+                  @foreach($tasks as $task)
+                    <tr>
+                      <td>
+                          <input type="checkbox" name="estado[{{$task->id}}]" value="1" {{ !is_null($models->findTasks($task->id)) && $models->findTasks($task->id)->pivot->estado == 1 ? 'checked' : ''  }} >
+                      </td>
+                      <td>{!! $task->descripcion !!}</td>
+                    </tr>
+                  @endforeach
+                </tbody>
+              </table>
+
+            </div>
+
+
+
+          {{-- 
               @foreach($tasks as $task)
 
               <div class="col-xs-2 form-group">
@@ -330,7 +354,7 @@
 
               </div>           
 
-              @endforeach
+              @endforeach --}}
 
             {!! Form::hidden('orden_id', $models->id) !!}
 
