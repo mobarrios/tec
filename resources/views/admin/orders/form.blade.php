@@ -44,7 +44,7 @@
 
             <div class="col-xs-4 form-group">
               {!! Form::label('Cliente') !!}
-              {!! Form::select('clients_id', $clients , isset($models->Cliente) ? $models->Cliente->id : '' ,['class'=>'select2 form-control ']) !!}
+              {!! Form::select('clients_id', $clients , isset($models->Cliente) ? $models->Cliente->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Cliente']) !!}
               {!! Form::hidden('users_id', $users_id) !!}
             </div>
             {{--
@@ -55,7 +55,7 @@
             --}}
             <div class="col-xs-4 form-group">
               {!! Form::label('Modelos') !!}
-              <select name='models_id' class=" select2 form-control">
+              <select name='models_id' class="select2 form-control" placeholder="seleccionar Cliente" >
                 @foreach($brands as $br)
                     <optgroup label="{{$br->name}}">
                         @foreach($br->Models as $m)
@@ -125,14 +125,34 @@
           <hr>
 
           <div class="row">
-            <div class="col-xs-2 form-group">
+
+            <div class="col-xs-12 table-responsive">
+              <table class="table-condensed">
+                {{-- <thead>                  
+                  <th></th>
+                  <th>Control</th>
+                </thead> --}}
+                <tbody>
+                  @foreach($tasks as $task)
+                    <tr>
+                      <td><input class="checkbox" type="checkbox" name="estado[{{ $task->id }}]" value="1"></td>
+                      <td>{!! $task->descripcion !!}</td>
+                    </tr>
+                  @endforeach
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+
+{{--             <div class="col-xs-2 form-group">
               <strong> Controles</strong>
             </div>
             <div class="col-xs-2 form-group">
               <strong> Testeo</strong>
             </div>
-          </div>
-          <div class="row">
+          </div> --}}
+          {{-- div class="row">
          
             @foreach($tasks as $task)
             <div class="col-xs-2 form-group">
@@ -141,14 +161,13 @@
             </div>
             <div class="col-xs-2 form-group">
 
-
-              <input type="checkbox" name="estado[{{ $task->id }}]" value="1" >
+              <input class="checkbox" type="checkbox" name="estado[{{ $task->id }}]" value="1" >
 
             </div>
             
             @endforeach
           
-          </div>
+          </div> --}}
           
 @endsection
 
