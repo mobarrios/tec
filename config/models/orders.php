@@ -43,6 +43,8 @@ return [
     'search' => [
         
             'Codigo' => 'codigo_orden',
+            'ID'     => 'id'
+
             // 'Apellido'  => 'last_name' ,
             // 'Email'     => 'email'
     ],
