@@ -254,10 +254,11 @@ class OrdersController extends Controller
                 //Envio de email
                 Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company']], function($message) use ($data,$model,$letraChica,$company)
                 {
-                    $pdf        = PDF::loadView('admin.orders.reportes', compact('model','letraChica','company'));
+                    //$pdf        = PDF::loadView('admin.orders.reportes', compact('model','letraChica','company'));
+                    $pdf        = PDF::loadView('admin.orders.remito', compact('model','company'));
                     $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');
                     $message->to($model->Cliente->email, $model->Cliente->fullname);
-                    $message->attachData($pdf->output(), 'test.pdf', ['mime' => 'application/pdf',]);
+                    $message->attachData($pdf->output(), 'remito.pdf', ['mime' => 'application/pdf',]);
 
                 });
 
