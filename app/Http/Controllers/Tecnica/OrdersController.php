@@ -29,7 +29,7 @@ use Auth;
 use Mail;
 class OrdersController extends Controller
 {
-    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, StatesRepo $statesRepo, EquipmentsRepo $equipmentsRepo, ServicesRepo $servicesRepo, UsersRepo $usersRepo, OrderServices $orderServices, MovementsRepo $movementsRepo)
+    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, StatesRepo $statesRepo, EquipmentsRepo $equipmentsRepo, ServicesRepo $servicesRepo, UsersRepo $usersRepo, OrderServices $orderServices, MovementsRepo $movementsRepo, CompanyRepo $companyRepo)
     {
 
         $this->request      = $request;
@@ -37,6 +37,8 @@ class OrdersController extends Controller
         $this->route        = $route;
         $this->clienteRepo  = $clientsRepo;
         $this->movementsRepo= $movementsRepo;
+        $this->statesRepo   = $statesRepo;
+        $this->companyRepo  = $companyRepo;
         $this->section              = 'orders';
         $this->data['section']      = $this->section;
         //$this->data['ultima_orden'] = !is_null($repo->ultimo()) ? $repo->ultimo()->id + 1 : '1';
@@ -239,6 +241,24 @@ class OrdersController extends Controller
         $state->states_id   = 1;
         $state->save();
 
+        $data['estado']     = $this->statesRepo->find(22);
+        $data['company']    = $this->companyRepo->getModel()->first();
+        //Envio de mail
+        if(!empty($model->Cliente->email) && $data['estado']->enviar == true){   
+            try{
+                //Envio de email
+                Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company']], function($message) use ($data,$model)
+                {
+                    $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');
+                    $message->to($model->Cliente->email, $model->Cliente->fullname);
+
+                });
+
+            }catch(Exception $e){
+
+                return redirect()->route('admin.orders.details',$model->id)->withErrors(['No se ha podido enviar el email']);
+            }   
+        }
 
         return redirect()->route('admin.orders.details',$model->id)->withErrors(['Regitro Agregado Correctamente']);
     }

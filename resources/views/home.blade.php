@@ -180,6 +180,13 @@
                 <!-- /.box-body -->
           </div>
         </div>
+
+        <div class="col-sm-12">
+        <iframe src="http://coders.com.ar:3000/public/dashboard/dbb92d9a-82a3-44a0-b649-1b7b7ec86bcb" frameborder="0"  width="100%"  height="600" allowtransparency>
+            
+        </iframe>
+            
+        </div>
     </div>
 @endsection
 
