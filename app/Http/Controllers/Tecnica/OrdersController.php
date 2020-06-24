@@ -29,7 +29,7 @@ use Auth;
 use Mail;
 class OrdersController extends Controller
 {
-    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, StatesRepo $statesRepo, EquipmentsRepo $equipmentsRepo, ServicesRepo $servicesRepo, UsersRepo $usersRepo, OrderServices $orderServices, MovementsRepo $movementsRepo, CompanyRepo $companyRepo)
+    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, StatesRepo $statesRepo, EquipmentsRepo $equipmentsRepo, ServicesRepo $servicesRepo, UsersRepo $usersRepo, OrderServices $orderServices, MovementsRepo $movementsRepo, CompanyRepo $companyRepo, ToPrintRepo $toPrintRepo)
     {
 
         $this->request      = $request;
@@ -39,6 +39,7 @@ class OrdersController extends Controller
         $this->movementsRepo= $movementsRepo;
         $this->statesRepo   = $statesRepo;
         $this->companyRepo  = $companyRepo;
+        $this->toPrintRepo  = $toPrintRepo;
         $this->section              = 'orders';
         $this->data['section']      = $this->section;
         //$this->data['ultima_orden'] = !is_null($repo->ultimo()) ? $repo->ultimo()->id + 1 : '1';
@@ -243,14 +244,21 @@ class OrdersController extends Controller
 
         $data['estado']     = $this->statesRepo->find(22);
         $data['company']    = $this->companyRepo->getModel()->first();
+        $letraChica         = $this->toPrintRepo->ultimo();
+        $company            = $this->companyRepo->getModel()->first();
+        
+
         //Envio de mail
         if(!empty($model->Cliente->email) && $data['estado']->enviar == true){   
             try{
                 //Envio de email
-                Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company']], function($message) use ($data,$model)
+                Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company']], function($message) use ($data,$model,$letraChica,$company)
                 {
+                    $pdf        = PDF::loadView('admin.orders.reportes', compact('model','letraChica','company'));
+                    //$pdf        = PDF::loadView('admin.orders.remito', compact('model','company'));
                     $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');
                     $message->to($model->Cliente->email, $model->Cliente->fullname);
+                    $message->attachData($pdf->output(), 'remito.pdf', ['mime' => 'application/pdf',]);
 
                 });
 
