@@ -93,27 +93,35 @@ class OrdersController extends Controller
     public function updateEstado(Request $request, StatesRepo $statesRepo, CompanyRepo $companyRepo){
         
 
-        $model              = new OrderStates();
-        $model->orders_id   = $request->get('orden_id');
-        $model->users_id    = $this->data['users_id'];
-        $model->states_id   = $request->get('estado_id');
-        $model->save();
+        $state              = new OrderStates();
+        $state->orders_id   = $request->get('orden_id');
+        $state->users_id    = $this->data['users_id'];
+        $state->states_id   = $request->get('estado_id');
+        $state->save();
 
         
         $data['estado']     = $statesRepo->find($request->get('estado_id'));
-        $data['orden']      = $this->repo->find($request->get('orden_id'));
+        $model              = $this->repo->find($request->get('orden_id'));
         $data['company']    = $companyRepo->getModel()->first();
-        //dd($data['estado']->enviar == true);
+
+        $letraChica         = $this->toPrintRepo->ultimo();
+        $company            = $this->companyRepo->getModel()->first();
 
         //Si el cliente tiene email o enviar es verdadero
-        if(!empty($data['orden']->Cliente->email) && $data['estado']->enviar == true)    
-        {   
+        if(!empty($model->Cliente->email) && $data['estado']->enviar == true){
+
             try{
                 //Envio de email
-                Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company']], function($message) use ($data)
-                {
+                Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company']], function($message) use ($data,$model,$letraChica,$company)
+                {   
+
                     $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');
-                    $message->to($data['orden']->Cliente->email, $data['orden']->Cliente->fullname);
+                    $message->to($model->Cliente->email, $model->Cliente->fullname);
+
+                    if($data['estado']->id == 14){
+                    $pdf        = PDF::loadView('admin.orders.reportes', compact('model','letraChica','company'));
+                    $message->attachData($pdf->output(), 'remito.pdf', ['mime' => 'application/pdf']);
+                    }
 
                 });
 
@@ -258,7 +266,7 @@ class OrdersController extends Controller
                     //$pdf        = PDF::loadView('admin.orders.remito', compact('model','company'));
                     $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');
                     $message->to($model->Cliente->email, $model->Cliente->fullname);
-                    $message->attachData($pdf->output(), 'remito.pdf', ['mime' => 'application/pdf',]);
+                    $message->attachData($pdf->output(), 'remito.pdf', ['mime' => 'application/pdf']);
 
                 });
 
