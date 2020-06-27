@@ -15,10 +15,9 @@ class CreatePurchasesTable extends Migration
         Schema::create('purcharses', function (Blueprint $table) {
             $table->increments('id')->unsigned();
 
-            $table->string('descripcion');
+            $table->string('observacion');
             $table->integer('precio_unitario');
             $table->integer('total');
-            $table->string('condicion_venta');
             $table->integer('cantidad');
 
 
@@ -27,6 +26,10 @@ class CreatePurchasesTable extends Migration
 
             $table->integer('clients_id')->unsigned();
             $table->foreign('clients_id')->references('id')->on('clients')->onDelete('cascade');
+            
+            $table->integer('models_id')->unsigned();
+            $table->foreign('models_id')->references('id')->on('models')->onDelete('cascade');
+
             /*
             Relations
 
@@ -40,8 +43,6 @@ class CreatePurchasesTable extends Migration
             $table->integer('brands_id')->unsigned();
             $table->foreign('brands_id')->references('id')->on('brands')->onDelete('cascade');
 
-            $table->integer('models_id')->unsigned();
-            $table->foreign('models_id')->references('id')->on('models')->onDelete('cascade');
 
             */
 
