@@ -93,9 +93,10 @@
                             <img width="200px" src="{{ $company->images->first()->path }}">
                         @endif 
                       </td>
+
                       <td style="font-size: 1.5em;" >
 
-                          <strong>Fecha de Ingreso</strong> {{ date('d/m/Y',strtotime($model->fecha_inicio)) }}<br />
+                          <strong>Fecha de Ingreso</strong> {{ date('d/m/Y',strtotime($model->created_at)) }}<br />
                           <strong>Orden de Compra</strong> {{$model->id}}<br />
                           <strong>Sucursal </strong> {{ $model->Brancheables() ?  $model->Brancheables()->first()->branches->name : 'sin sucursal' }}
 
@@ -116,7 +117,15 @@
                          Tel: {{$company->telefono}} <br>
                          Cuit: {{$company->cuit}}
                       </td>
-                  </tr>
+                 
+                   
+                      <td style="font-size: 1.2em;">
+                        Condición Frente al IVA: {{ isset($company->IvaConditions) ?  $company->IvaConditions->name : '' }} <br>
+                        Ingresos Brutos Nº: {{$company->ingresos_brutos}} <br>
+                        Inicio de Actividades: {{$company->inicio_actividades}} <br>
+                         
+                      </td>
+              </tr>
               </table>
           </td>
       </tr>
@@ -184,7 +193,6 @@
 <p style="text-align:center;">_______________________________________________</p>
 <p style="text-align:center;">FIRMA DEL VENDEDOR PRESTANDO CONFORMIDAD</p>
 </body>
-
 
 {{--
 @if(!is_null($letraChica))
