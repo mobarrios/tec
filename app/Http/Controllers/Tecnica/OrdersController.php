@@ -58,14 +58,14 @@ class OrdersController extends Controller
      
     }
 
+
+
     public function create(){
 
 
         $this->data['activeBread']  = 'Nuevo';
-
         if($this->route->getParameter('cliente'))
             $this->data['clientSelect'] = $this->clienteRepo->find($this->route->getParameter('cliente'));
-    
 
         return view(config('models.'.$this->section.'.storeView'))->with($this->data);
     }
@@ -118,7 +118,7 @@ class OrdersController extends Controller
                     $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');
                     $message->to($model->Cliente->email, $model->Cliente->fullname);
 
-                    if($data['estado']->id == 14){
+                    if($data['estado']->id == 9){
                     $pdf        = PDF::loadView('admin.orders.reportes', compact('model','letraChica','company'));
                     $message->attachData($pdf->output(), 'remito.pdf', ['mime' => 'application/pdf']);
                     }
@@ -347,6 +347,8 @@ class OrdersController extends Controller
 
         return $pdf->stream();
     }
+
+    
 
     
 }

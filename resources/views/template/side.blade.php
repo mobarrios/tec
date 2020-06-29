@@ -97,10 +97,8 @@
                       </span>
                     </a>
                     <ul class="treeview-menu">
-                    <li><a href="{{route('admin.orders.index')}}" class="menu"><span>Ordenes Reparación</span></a></li>
-                    {{--
-                    <li><a href="{{route('admin.orders.index')}}" class="menu"><span>Ordenes Compra</span></a></li>
-                        --}}
+                    <li><a href="{{route('admin.orders.index' )}}" class="menu"><span>Ordenes Reparación</span></a></li>
+                    <li><a href="{{route('admin.purcharses.index' )}}" class="menu"><span>Ordenes Compra</span></a></li>
                     </ul>
                    
                     
