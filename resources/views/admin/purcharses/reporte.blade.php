@@ -96,7 +96,7 @@
                       <td style="font-size: 1.5em;" >
 
                           <strong>Fecha de Ingreso</strong> {{ date('d/m/Y',strtotime($model->fecha_inicio)) }}<br />
-                          <strong>Orden de Reparacion</strong> {{$model->id}}<br />
+                          <strong>Orden de Compra</strong> {{$model->id}}<br />
                           <strong>Sucursal </strong> {{ $model->Brancheables() ?  $model->Brancheables()->first()->branches->name : 'sin sucursal' }}
 
                       </td>
@@ -180,7 +180,7 @@
 
 </table>
 </fieldset>
-<legend style="font-size: 1.2em;"></legend>
+<legend style="font-size: 1.2em;"></legend> <br/><br/><br/><br/>
 <p style="text-align:center;">_______________________________________________</p>
 <p style="text-align:center;">FIRMA DEL VENDEDOR PRESTANDO CONFORMIDAD</p>
 </body>
