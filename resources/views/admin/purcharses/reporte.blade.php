@@ -89,7 +89,8 @@
              <table style="width: 100%;">
                   <tr>
                       <td style="width: 50%;">
-                        @if($company->images->count() > 0)
+
+                        @if($model->Company->images->count() > 0)
                             <img width="200px" src="{{ $company->images->first()->path }}">
                         @endif 
                       </td>
@@ -98,7 +99,7 @@
 
                           <strong>Fecha de Ingreso</strong> {{ date('d/m/Y',strtotime($model->created_at)) }}<br />
                           <strong>Orden de Compra</strong> {{$model->id}}<br />
-                          <strong>Sucursal </strong> {{ $model->Brancheables() ?  $model->Brancheables()->first()->branches->name : 'sin sucursal' }}
+                          <strong>Sucursal </strong> {{ isset($model->Company->razon_social) ?  $model->Company->razon_social : '' }}
 
                       </td>
                   </tr>
@@ -113,24 +114,23 @@
                   <tr valign="top">
                    
                       <td style="font-size: 1.2em;">
-                         Dir: {{$company->direccion}} <br>
-                         Tel: {{$company->telefono}} <br>
-                         Cuit: {{$company->cuit}}
+                         Dir: {{$model->Company->direccion}} <br>
+                         Tel: {{$model->Company->telefono}} <br>
+                         Cuit: {{$model->Company->cuit}}
                       </td>
                  
                    
                       <td style="font-size: 1.2em;">
-                        Condición Frente al IVA: {{ isset($company->IvaConditions) ?  $company->IvaConditions->name : '' }} <br>
-                        Ingresos Brutos Nº: {{$company->ingresos_brutos}} <br>
-                        Inicio de Actividades: {{$company->inicio_actividades}} <br>
-                         
+                        Condición Frente al IVA: {{ isset($model->Company->IvaConditions) ?  $model->Company->IvaConditions->name : '' }} <br>
+                        Ingresos Brutos Nº: {{$model->Company->ingresos_brutos}} <br>
+                        Inicio de Actividades: {{$model->Company->inicio_actividades}} <br>
                       </td>
               </tr>
               </table>
           </td>
       </tr>
   </table>
-  <br/>
+  <br/> 
   <br/>
   <fieldset style="font-size: 1.2em;">
     <legend>IDENTIFICACIÓN DEL VENDEDOR</legend>

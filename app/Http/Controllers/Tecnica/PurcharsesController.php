@@ -31,8 +31,10 @@ class PurcharsesController extends Controller
         $this->data['clients']      = $clientsRepo->getModel()->all()->lists('fullname','id');
         $this->data['users_id']     = Auth::user()->id;
         $this->data['models_id']    = $modelsRepo->ListsData('name','id');
+        $this->data['companies']    = $companyRepo->getModel()->all()->lists('razon_social','id');
         $this->data['brands']       = $brandsRepo->getAllWithModels();
         $this->companyRepo          = $companyRepo;
+
     }
 
 
