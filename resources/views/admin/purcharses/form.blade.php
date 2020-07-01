@@ -13,6 +13,7 @@
 
 
 
+
             <div class="col-xs-12">
             <h4> Identificación del vendedor</h4>
             </div>
@@ -23,11 +24,19 @@
               {!! Form::hidden('users_id', $users_id) !!}
             </div>
 
+            <div class="col-xs-6 form-group">
+              {!! Form::label('Compañia') !!}
+              {!! Form::select('companies_id', $companies , isset($models->Company) ? $models->Company->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Compañia']) !!}
+            
+            </div>
+
+
+
             <div class="col-xs-12">
             <h4> Datos de la operación</h4>
             </div>
 
-            <div class="col-xs-6 form-group">
+            <div class="col-xs-4 form-group">
               {!! Form::label('Modelos') !!}
                <select name='models_id' class="select2 form-control" placeholder="seleccionar Cliente" >
                 @foreach($brands as $br)
@@ -39,6 +48,12 @@
                 @endforeach
               </select>
             </div>
+
+            <div class="col-xs-2 form-group">
+              {!! Form::label('Serie/IMEI') !!}
+              {!! Form::text('numero_serie', null, ['class'=>'form-control']) !!}
+            </div>
+
 
             <div class="col-xs-2 form-group">
               {!! Form::label('Cantidad') !!}
