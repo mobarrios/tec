@@ -89,9 +89,9 @@
              <table style="width: 100%;">
                   <tr>
                       <td style="width: 50%;">
-
+                        
                         @if($model->Company->images->count() > 0)
-                            <img width="200px" src="{{ $company->images->first()->path }}">
+                            <img width="200px" src="{{ $model->Company->images->first()->path }}">
                         @endif 
                       </td>
 
@@ -159,6 +159,10 @@
          <td>
          Modelo : {{ isset($model->Model->Brands) ? $model->Model->Brands->name : '' }} {{ isset($model->Model) ? $model->Model->name : '' }}
          </td>
+         <td>
+         Serie/IMEI :  {{ $model->numero_serie }}
+         </td>
+         
       </tr>
       
       <tr>
@@ -167,7 +171,7 @@
 
   </table>
  </fieldset>
- 
+
 <br/>
 <br/>
 <fieldset>
