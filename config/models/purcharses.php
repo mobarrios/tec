@@ -42,8 +42,14 @@ return [
     
     'search' => [
         
-            'Codigo' => 'codigo_orden',
-            'ID'     => 'id'
+            //'Codigo' => 'codigo_orden',
+            'ID'        => 'id',
+            'Nombre'  => ['Cliente','name'],
+            'Apellido'  => ['Cliente','last_name'],
+            'DNI'  => ['Cliente','dni']
+            //'Nombre'    => 'name',
+            //'Apellido'  => 'last_name',
+            //'DNI'       => 'dni'
 
             // 'Apellido'  => 'last_name' ,
             // 'Email'     => 'email'
