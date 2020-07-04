@@ -127,16 +127,15 @@
     <legend>Datos del Cliente</legend>
       <table style="width: 100%; font-size: 1.2em;" >
       <tr>
-          <td>
-          Cliente: {{ isset($model->Cliente->fullname) ? $model->Cliente->fullname : '' }}
-          </td>
-         <td>
-          Direccion: {{ isset($model->Cliente->fullAddress) ? $model->Cliente->fullAddress : '' }}
-          </td>
+          <td>Cliente: {{ isset($model->Cliente->fullname) ? $model->Cliente->fullname : '' }}</td>
+         <td>Dirección: {{ isset($model->Cliente->fullAddress) ? $model->Cliente->fullAddress : '' }} - </td>
       </tr>
       <tr>
-        <td>Telefono: {{ isset($model->Cliente->phone1) ? $model->Cliente->phone1 : '' }}</td>
-        
+        <td>Teléfono: {{ isset($model->Cliente->phone1) ? $model->Cliente->phone1 : '' }} - {{ isset($model->Cliente->phone2) ? $model->Cliente->phone2 : '' }}</td>
+        <td>Email: {{ isset($model->Cliente->email) ? $model->Cliente->email : '' }}</td>  
+      </tr>
+      <tr>
+        <td>Condición IVA: {{ isset($model->Cliente->IvaConditions->name ) ? $model->Cliente->IvaConditions->name : '' }} </td> 
       </tr>
 
   </table>
@@ -170,17 +169,54 @@
  </fieldset>
  
  <br/>
- <hr>
+ <fieldset>
+  <legend style="font-size: 1.2em;">Testeos</legend>
+   <table style="width: 100%; font-size: 1.2em;" >
+    <tbody>
+      @foreach($tasks->chunk(3) as $tas)
+        <tr>
+        @foreach($tas as $task)
+          <td> {!! $task->descripcion !!} </td>
+          <td> {{ !is_null($model->findTasks($task->id)) && $model->findTasks($task->id)->pivot->estado == 1 ? 'si' : 'no'  }} </td>
+        @endforeach
+        </tr>
+      @endforeach
+    </tbody>
+  </table>
+  </fieldset>
 
-<p style="font-size: 1.2em;">Presupuesto Estimado : ${{$model->presupuesto_estimado}}</p>
-<p style="font-size: 1.2em;">Observaciones : {{$model->observaciones}}</p>
-<p style="font-size: 1.2em;">Observaciones Tecnicas: {{$model->observaciones_tecnicas}}</p> 
+<br/>
+
+ <fieldset>
+  <legend style="font-size: 1.2em;">Técnico</legend>
+   <table style="width: 100%; font-size: 1.2em;" >
+    <tbody>
+        <tr>
+          <td> Técnico: {!! $model->User->fullname !!} </td>
+          <td> Vendedor: {!! $model->User->fullname  !!} </td>
+        </tr>
+    </tbody>
+  </table>
+  </fieldset>
+
+<br/>
 
 <hr>
+
+
+<p style="font-size: 1.2em;">Presupuesto Estimado : ${{$model->presupuesto_estimado}}</p>
+<p style="font-size: 1.2em;">Presupuesto Abonado : ${{$model->pagado}}</p>
+<p style="font-size: 1.2em;">Observaciones : {{$model->observaciones}}</p>
+<p style="font-size: 1.2em;">Informe técnico inicial: {{$model->observaciones_tecnicas}}</p> 
+<p style="font-size: 1.2em;">Informe técnico final: {{$model->partes}}</p> 
+<p style="font-size: 1.2em;">Reparación: {{$model->observaciones_internas}}</p> 
+
+<hr>
+
+
 @if(!is_null($letraChica))
   {!! $letraChica->descripcion !!}
 @endif
-
 
 {{--
 - CONTRASEÑA .................
