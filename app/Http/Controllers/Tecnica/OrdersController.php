@@ -145,7 +145,9 @@ class OrdersController extends Controller
         $model      = $this->repo->find($route->getParameter('id'));
         $company    = $companyRepo->getModel()->first();
         $letraChica = $toPrintRepo->ultimo();
-        $pdf        = PDF::loadView('admin.orders.reportes', compact('model','letraChica','company'));
+        $tasks      = Tasks::all();
+        $vendedor   = Auth::user();
+        $pdf        = PDF::loadView('admin.orders.reportes', compact('model','letraChica','company','tasks', 'vendedor'));
 
         return $pdf->stream();
     }
