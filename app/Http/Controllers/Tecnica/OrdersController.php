@@ -103,7 +103,8 @@ class OrdersController extends Controller
         $data['estado']     = $statesRepo->find($request->get('estado_id'));
         $model              = $this->repo->find($request->get('orden_id'));
         $data['company']    = $companyRepo->getModel()->first();
-
+        $tasks              = Tasks::all();
+        $vendedor           = Auth::user();
         $letraChica         = $this->toPrintRepo->ultimo();
         $company            = $this->companyRepo->getModel()->first();
 
@@ -112,14 +113,14 @@ class OrdersController extends Controller
 
             try{
                 //Envio de email
-                Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company']], function($message) use ($data,$model,$letraChica,$company)
+                Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company']], function($message) use ($data,$model,$letraChica,$company, $tasks, $vendedor)
                 {   
 
                     $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');
                     $message->to($model->Cliente->email, $model->Cliente->fullname);
 
                     if($data['estado']->id == 9){
-                    $pdf        = PDF::loadView('admin.orders.reportes', compact('model','letraChica','company'));
+                    $pdf        = PDF::loadView('admin.orders.reportes', compact('model','letraChica','company', 'tasks', 'vendedor'));
                     $message->attachData($pdf->output(), 'remito.pdf', ['mime' => 'application/pdf']);
                     }
 
