@@ -22,6 +22,8 @@ Route::group(['prefix'=>'orders'],function(){
         Route::post('updatePagos',      ['as'=>'admin.ordenes.updatePagos','uses'=>'Tecnica\OrdersController@updatePagos']);
         Route::post('updateEstado',     ['as'=>'admin.ordenes.updateEstado','uses'=>'Tecnica\OrdersController@updateEstado']);
         Route::post('updateUser',     ['as'=>'admin.ordenes.updateUser','uses'=>'Tecnica\OrdersController@updateUser']);
+        Route::post('updateVendedor',     ['as'=>'admin.ordenes.updateVendedor','uses'=>'Tecnica\OrdersController@updateVendedor']);
+
         //Busqueda de servicios-paginate angular 
         Route::get('busquedaServicios',     ['as'=>'admin.ordenes.busquedaServicios','uses'=>'Tecnica\OrdersController@busquedaServicios']);
         Route::post('addServices',[ 'as'=>'admin.ordenes.addServices','uses'=>'Tecnica\OrdersController@addServices']);

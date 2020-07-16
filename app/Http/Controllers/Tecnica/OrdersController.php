@@ -113,7 +113,7 @@ class OrdersController extends Controller
 
             try{
                 //Envio de email
-                Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company']], function($message) use ($data,$model,$letraChica,$company, $tasks, $vendedor)
+                Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company'], 'models_id' => $model->id ], function($message) use ($data,$model,$letraChica,$company, $tasks, $vendedor)
                 {   
 
                     $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');
@@ -263,7 +263,7 @@ class OrdersController extends Controller
         if(!empty($model->Cliente->email) && $data['estado']->enviar == true){   
             try{
                 //Envio de email
-                Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company']], function($message) use ($data,$model,$letraChica,$company)
+                Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company'], 'models_id' => $model->id ], function($message) use ($data,$model,$letraChica,$company)
                 {
                     $pdf        = PDF::loadView('admin.orders.reportes', compact('model','letraChica','company'));
                     //$pdf        = PDF::loadView('admin.orders.remito', compact('model','company'));
@@ -351,7 +351,29 @@ class OrdersController extends Controller
         return $pdf->stream();
     }
 
-    
+    public function confirm(){
+        //dd('adas');
 
-    
+        $id = crypt(1);
+
+
+        if (Hash::check($this->route->getParameter('id'), $id))
+        {
+            dd('ok');
+            // Realizar operaciones si la contraseña es la misma.
+        }
+
+    }
+
+    public function updateVendedor(){
+
+        $model               = $this->repo->find($this->request->get('orden_id')); 
+        $model->vendedor_id  = $this->request->get('vendedor_id');
+        $model->save();
+
+        return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
+
+    }
+
+
 }
