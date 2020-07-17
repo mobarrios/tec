@@ -57,6 +57,8 @@
             <br><br>
             <span class="text-muted">Modelo : </span> <strong>{{ isset($models->Model) ? $models->Model->name : '' }}</strong>
             <br><br>
+            <span class="text-muted">IMEI: </span> <strong>{{ $models->numero_serie }}</strong>
+            <br><br>
             <span class="text-muted">Cantidad : </span> <strong>{{ $models->cantidad }}</strong>
             <br><br>
             <span class="text-muted">Precio unitario : </span> <strong>{{ $models->precio_unitario }}</strong>

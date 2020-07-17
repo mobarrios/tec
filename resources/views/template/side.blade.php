@@ -91,7 +91,7 @@
 
             <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-wrench "></i> <span>Tecnica</span>
+                        <i class="fa fa-wrench "></i> <span>Órdenes</span>
                         <span class="pull-right-container">
                           <i class="fa fa-angle-left pull-right"></i>
                       </span>
