@@ -193,16 +193,14 @@
     <tbody>
         <tr>
           <td> Técnico: {!! $model->User->fullname !!} </td>
-          <td> Vendedor: {!! $model->User->fullname  !!} </td>
+          <td> Vendedor: {!! $model->Vendedor->fullname  !!} </td>
         </tr>
     </tbody>
   </table>
   </fieldset>
 
 <br/>
-
 <hr>
-
 
 <p style="font-size: 1.2em;">Presupuesto Estimado : ${{$model->presupuesto_estimado}}</p>
 <p style="font-size: 1.2em;">Presupuesto Abonado : ${{$model->pagado}}</p>

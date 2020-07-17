@@ -123,6 +123,8 @@
                 --}}
           </div>
         </div>
+
+
       </div>
     </div>  
   </div>
@@ -174,6 +176,25 @@
       </div>
 
       <div class="col-xs-6">
+        <div class="box box-solid">
+          <div class="box-header with-border">
+            <h3 class="box-title"> Vendedor </h3>
+          </div>
+          <div class="box-body">
+              {!! Form::open(['route'=>('admin.ordenes.updateVendedor')]) !!}
+              <div class="input-group">
+                {!! Form::select('vendedor_id',$users, isset($models->vendedor_id) ? $models->vendedor_id : null, ['class'=>'form-control select2']) !!}
+                {!! Form::hidden('orden_id', $models->id) !!}
+                <span class="input-group-btn">
+                <button class="btn btn-default" type="submit"><span class="fa fa-edit"></span></button>
+                </span>
+              </div>
+              {!! Form::close() !!}
+              <br>
+              <span class="text-muted">Vendedor  : </span> <strong>{{ isset($models->Vendedor) ? $models->Vendedor->user_name : '' }}</strong>
+          </div>
+        </div>
+
         <div class="box box-solid">
           <div class="box-header with-border">
             <h3 class="box-title"> Pagos </h3>

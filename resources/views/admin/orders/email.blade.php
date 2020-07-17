@@ -16,13 +16,26 @@ rel='stylesheet' type='text/css'>
 
 <style>
 
-		 	.headbar{ width: 100%; min-height:150px; background-color: black; margin:0% 2% 2% 0%; float:left; box-sizing: border-box}
+.headbar{ width: 100%; min-height:150px; background-color: black; margin:0% 2% 2% 0%; float:left; box-sizing: border-box}
 
-		 	.headbar-logo-img {
-    max-width: 100%;
-    max-height: 150px;
-    float: left!important;
+.headbar-logo-img {
+max-width: 100%;
+max-height: 150px;
+float: left!important;
 }
+.button {
+  background-color: black;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
  </style> 
 
 
@@ -61,12 +74,18 @@ rel='stylesheet' type='text/css'>
                 {!! $estado->text_email !!}
                 <br>
             </p>
+            <br>
+            <p>
+            <a href="http://icase.coders.com.ar/confirmar-reparacion-y-confirmar-compra/{{ bcrypt($models_id) }} " target="_blank" class="button">Confirmar recepción del equipo
+            </a>
+            </p>
 
             <br>
             <br>
             <p1>¡Gracias por preferirnos!</p1>
             <br>
             <br>
+
             <style>
                 p { font-family: 'Roboto'; sans-serif; font-weight: normal;  color: #000000; }
 
@@ -200,7 +219,6 @@ rel='stylesheet' type='text/css'>
     </ul></div></div>
 
      </div>
-
 
 
 <div class="footer-legal">
