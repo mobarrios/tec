@@ -5,7 +5,7 @@
     @endsection
 
  	@section('sectionContent')
-    <div class="row">
+  <div class="row">
       <div class="col-xs-12">
         <div class="box box-solid">
           <div class="box-header">
@@ -131,7 +131,7 @@
 
   <div class="row">
     <div class="col-xs-12">
-      <div class="col-xs-6">
+      <div class="col-xs-4">
         <div class="box box-solid">
           <div class="box-header with-border">
             <h3 class="box-title">  Estados </h3>
@@ -175,7 +175,36 @@
         </div>
       </div>
 
-      <div class="col-xs-6">
+    <div class="col-xs-4">
+        <div class="box box-solid">
+          <div class="box-header with-border">
+            <h3 class="box-title"> Servicios </h3>
+            <a href="#" data-toggle="modal" data-target="#modal-default" class="btn btn-default pull-right"><i class="fa fa-plus" ></i></a>
+          </div>
+          <div class="box-body">
+           <table class="table table-condensed">
+                <tbody>
+                @foreach($models->Services as $s)
+      
+                <tr>
+                  <th>Descripción: {{$s->description}}</th>
+                  <th>Iva: {{$s->iva}}</th>
+                  <th>Precio: ${{$s->amount}}</th>
+                  <th>Cantidad: {{$s->pivot->cantidad}}/ ${{$s->pivot->cantidad * $s->amount}}</th>
+                  
+                  <th><a href="{{route('admin.ordenes.deleteServices', $s->pivot->id)}}"class="btn btn-default btn-xs pull-right btn-borrar">
+                    <i class="fa fa-trash"></i> Borrar</a></th>
+                </tr>
+                @endforeach
+              </tbody>
+            </table>
+
+
+          </div>
+        </div>
+    </div>
+
+      <div class="col-xs-4">
         <div class="box box-solid">
           <div class="box-header with-border">
             <h3 class="box-title"> Vendedor </h3>
@@ -194,67 +223,14 @@
               <span class="text-muted">Vendedor  : </span> <strong>{{ isset($models->Vendedor) ? $models->Vendedor->user_name : '' }}</strong>
           </div>
         </div>
-
-        <div class="box box-solid">
-          <div class="box-header with-border">
-            <h3 class="box-title"> Pagos </h3>
-          </div>
-          <div class="box-body">
-            <table class="table table-striped">
-
-              {!! Form::open(['route'=>('admin.ordenes.updatePagos')]) !!}
-              <tbody>
-              <tr>
-
-                <td width="45%">Presupuesto Estimado</td>
-                <td>
-                  <div class="input-group">
-                    <span class="input-group-addon">$</span>
-                    <input type="text" class="form-control input-sm" name="presupuesto_estimado" value="{{$models->presupuesto_estimado}}">
-
-                    <span class="input-group-addon">.00</span>
-                  </div>
-                  @if(count($models->Services) > 0)
-                    <?php $con = 0; ?>
-
-                    @foreach($models->Services as $s)
-                    <?php $con += $s->pivot->cantidad * $s->amount ?>
-                    @endforeach
-
-                    <code>Presupuesto + Servicio = ${{ $models->presupuesto_estimado + $con }} </code>
-                  @endif
-                </td>
-              </tr>
-              <tr>
-                <td width="45%">Abonado</td>
-                <td>
-                  <div class="input-group">
-                    <span class="input-group-addon">$</span>
-                    <input type="text" class="form-control input-sm" value="{{$models->pagado}}" name="pagado">
-                    <span class="input-group-addon">.00</span>
-                    {!! Form::hidden('orden_id', $models->id) !!}
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td></td>
-                <td><button type="submit" class="btn btn-primary pull-right">Guardar</button></td>
-              </tr>
-              </tbody>
-              {!! Form::close() !!}
-            </table>
-
-          </div>
-        </div>
       </div>
-
     </div>  
   </div> 
 
 
   <div class="row">
     <div class="col-xs-12">
-      <div class="col-xs-6">
+      <div class="col-xs-4">
         <div class="box box-solid">
           <div class="box-header with-border">
             <h3 class="box-title"> Observaciones Tecnicas </h3>
@@ -293,42 +269,7 @@
         </div>
     </div>
 
-    <div class="col-xs-6">
-        <div class="box box-solid">
-          <div class="box-header with-border">
-            <h3 class="box-title"> Servicios </h3>
-            <a href="#" data-toggle="modal" data-target="#modal-default" class="btn btn-default pull-right"><i class="fa fa-plus" ></i></a>
-          </div>
-          <div class="box-body">
-           <table class="table table-condensed">
-                <tbody>
-                @foreach($models->Services as $s)
-      
-                <tr>
-                  <th>Descripción: {{$s->description}}</th>
-                  <th>Iva: {{$s->iva}}</th>
-                  <th>Precio: ${{$s->amount}}</th>
-                  <th>Cantidad: {{$s->pivot->cantidad}}/ ${{$s->pivot->cantidad * $s->amount}}</th>
-                  
-                  <th><a href="{{route('admin.ordenes.deleteServices', $s->pivot->id)}}"class="btn btn-default btn-xs pull-right btn-borrar">
-                    <i class="fa fa-trash"></i> Borrar</a></th>
-                </tr>
-                @endforeach
-              </tbody>
-            </table>
-
-
-          </div>
-        </div>
-    </div>
-
-  </div>
-</div>
-
-
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="col-xs-6">
+    <div class="col-xs-4">
 
         <div class="box box-solid">
           <div class="box-header with-border">
@@ -381,6 +322,60 @@
 
             <button type="submit" class="btn btn-primary pull-right">Guardar</button>
             {!! Form::close() !!}
+          </div>
+        </div>
+    </div>
+
+    <div class="col-xs-4">
+    <div class="box box-success box-solid">
+          <div class="box-header with-border">
+            <h3 class="box-title"> Pagos </h3>
+          </div>
+          <div class="box-body">
+            <table class="table table-striped">
+
+              {!! Form::open(['route'=>('admin.ordenes.updatePagos')]) !!}
+              <tbody>
+              <tr>
+
+                <td width="45%">Presupuesto Estimado</td>
+                <td>
+                  <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <input type="text" class="form-control input-sm" name="presupuesto_estimado" value="{{$models->presupuesto_estimado}}">
+
+                    <span class="input-group-addon">.00</span>
+                  </div>
+                  @if(count($models->Services) > 0)
+                    <?php $con = 0; ?>
+
+                    @foreach($models->Services as $s)
+                    <?php $con += $s->pivot->cantidad * $s->amount ?>
+                    @endforeach
+
+                    <code>Presupuesto + Servicio = ${{ $models->presupuesto_estimado + $con }} </code>
+                  @endif
+                </td>
+              </tr>
+              <tr>
+                <td width="45%">Abonado</td>
+                <td>
+                  <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <input type="text" class="form-control input-sm" value="{{$models->pagado}}" name="pagado">
+                    <span class="input-group-addon">.00</span>
+                    {!! Form::hidden('orden_id', $models->id) !!}
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td><button type="submit" class="btn btn-primary pull-right">Guardar</button></td>
+              </tr>
+              </tbody>
+              {!! Form::close() !!}
+            </table>
+
           </div>
         </div>
     </div>
