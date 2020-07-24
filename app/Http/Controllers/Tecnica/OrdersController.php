@@ -287,7 +287,8 @@ class OrdersController extends Controller
                 return redirect()->route('admin.orders.details',$model->id)->withErrors(['No se ha podido enviar el email']);
             }   
 
-            return redirect()->back()->withErrors(['Regitro Agregado Correctamente. Email enviado al cliente.']);
+            return redirect()->route('admin.orders.details',$model->id)->withErrors(['Regitro Agregado Correctamente. Email enviado al cliente.']);
+            //return redirect()->back()->withErrors(['Regitro Agregado Correctamente. Email enviado al cliente.']);
 
 
         }else{
