@@ -27,6 +27,8 @@ use App\Entities\Tecnica\Services;
 use PDF;
 use Auth;
 use Mail;
+use Crypt;
+
 class OrdersController extends Controller
 {
     public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, StatesRepo $statesRepo, EquipmentsRepo $equipmentsRepo, ServicesRepo $servicesRepo, UsersRepo $usersRepo, OrderServices $orderServices, MovementsRepo $movementsRepo, CompanyRepo $companyRepo, ToPrintRepo $toPrintRepo)
@@ -99,7 +101,6 @@ class OrdersController extends Controller
         $state->states_id   = $request->get('estado_id');
         $state->save();
 
-        
         $data['estado']     = $statesRepo->find($request->get('estado_id'));
         $model              = $this->repo->find($request->get('orden_id'));
         $data['company']    = $companyRepo->getModel()->first();
@@ -107,21 +108,23 @@ class OrdersController extends Controller
         $vendedor           = Auth::user();
         $letraChica         = $this->toPrintRepo->ultimo();
         $company            = $this->companyRepo->getModel()->first();
+        $idCrypt            = Crypt::encrypt($model->id);
+        $tipo               = 'Reparacion';
 
         //Si el cliente tiene email o enviar es verdadero
         if(!empty($model->Cliente->email) && $data['estado']->enviar == true){
 
             try{
                 //Envio de email
-                Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company'], 'models_id' => $model->id ], function($message) use ($data,$model,$letraChica,$company, $tasks, $vendedor)
+                Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company'], 'models_id' => $idCrypt, 'tipo' => $tipo ], function($message) use ($data,$model,$letraChica,$company, $tasks, $vendedor)
                 {   
 
                     $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');
                     $message->to($model->Cliente->email, $model->Cliente->fullname);
 
                     if($data['estado']->id == 9){
-                    $pdf        = PDF::loadView('admin.orders.reportes', compact('model','letraChica','company', 'tasks', 'vendedor'));
-                    $message->attachData($pdf->output(), 'remito.pdf', ['mime' => 'application/pdf']);
+                        $pdf        = PDF::loadView('admin.orders.reportes', compact('model','letraChica','company', 'tasks', 'vendedor'));
+                        $message->attachData($pdf->output(), 'remito.pdf', ['mime' => 'application/pdf']);
                     }
 
                 });
@@ -253,19 +256,25 @@ class OrdersController extends Controller
         $state->states_id   = 1;
         $state->save();
 
-        $data['estado']     = $this->statesRepo->find(22);
+        //Envio de mail
+        $data['estado']     = $this->statesRepo->find(1);
         $data['company']    = $this->companyRepo->getModel()->first();
         $letraChica         = $this->toPrintRepo->ultimo();
         $company            = $this->companyRepo->getModel()->first();
-        
+        $idCrypt            = Crypt::encrypt($model->id);
+        $tasks              = Tasks::all();
+        $vendedor           = Auth::user();
+        $letraChica         = $this->toPrintRepo->ultimo();
+      
 
         //Envio de mail
         if(!empty($model->Cliente->email) && $data['estado']->enviar == true){   
+            
             try{
                 //Envio de email
-                Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company'], 'models_id' => $model->id ], function($message) use ($data,$model,$letraChica,$company)
+                Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company'], 'models_id' => $idCrypt ], function($message) use ($data,$model,$letraChica,$company,$tasks, $vendedor)
                 {
-                    $pdf        = PDF::loadView('admin.orders.reportes', compact('model','letraChica','company'));
+                    $pdf        = PDF::loadView('admin.orders.reportes', compact('model','letraChica','company','tasks','vendedor'));
                     //$pdf        = PDF::loadView('admin.orders.remito', compact('model','company'));
                     $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');
                     $message->to($model->Cliente->email, $model->Cliente->fullname);
@@ -277,9 +286,16 @@ class OrdersController extends Controller
 
                 return redirect()->route('admin.orders.details',$model->id)->withErrors(['No se ha podido enviar el email']);
             }   
+
+            return redirect()->back()->withErrors(['Regitro Agregado Correctamente. Email enviado al cliente.']);
+
+
+        }else{
+         
+            return redirect()->back()->withErrors(['Regitro Agregado Correctamente. El Email no fue enviado al cliente.']);
         }
 
-        return redirect()->route('admin.orders.details',$model->id)->withErrors(['Regitro Agregado Correctamente']);
+        //return redirect()->route('admin.orders.details',$model->id)->withErrors(['Regitro Agregado Correctamente']);
     }
 
     public function updateTasks(){
@@ -309,7 +325,7 @@ class OrdersController extends Controller
             }
         }
 
-         return redirect()->route('admin.orders.details',$model->id)->withErrors(['Regitro Editado Correctamente']);
+        return redirect()->route('admin.orders.details',$model->id)->withErrors(['Regitro Editado Correctamente']);
 
     }
 
@@ -351,19 +367,7 @@ class OrdersController extends Controller
         return $pdf->stream();
     }
 
-    public function confirm(){
-        //dd('adas');
 
-        $id = crypt(1);
-
-
-        if (Hash::check($this->route->getParameter('id'), $id))
-        {
-            dd('ok');
-            // Realizar operaciones si la contraseña es la misma.
-        }
-
-    }
 
     public function updateVendedor(){
 
