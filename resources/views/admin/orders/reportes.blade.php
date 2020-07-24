@@ -192,8 +192,8 @@
    <table style="width: 100%; font-size: 1.2em;" >
     <tbody>
         <tr>
-          <td> Técnico: {!! $model->User->fullname !!} </td>
-          <td> Vendedor: {!! $model->Vendedor->fullname  !!} </td>
+          <td> Técnico: {!! isset($model->User->fullname) ? $model->User->fullname : '' !!} </td>
+          <td> Vendedor: {!! isset($model->Vendedor->fullname) ? $model->Vendedor->fullname : ''  !!} </td>
         </tr>
     </tbody>
   </table>

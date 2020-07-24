@@ -75,11 +75,12 @@ float: left!important;
                 <br>
             </p>
             <br>
-            <p>
-            <a href="http://icase.coders.com.ar/confirmar-reparacion-y-confirmar-compra/{{ bcrypt($models_id) }} " target="_blank" class="button">Confirmar recepción del equipo
-            </a>
-            </p>
-
+            @if( $estado->id === 9 || $estado->id === 23 )
+                <p>
+                    <a href="{{ route('admin.ordenes.confirm', [ 'id' => $models_id, 'tipo' => $tipo ] )}}" target="_blank" class="button">Confirmar recepción del equipo
+                    </a>
+                </p>
+            @endif
             <br>
             <br>
             <p1>¡Gracias por preferirnos!</p1>

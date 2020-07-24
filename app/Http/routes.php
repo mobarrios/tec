@@ -77,4 +77,4 @@ Route::group(['prefix'=>'auth'],function(){
 
 });
 
- Route::get('/confirm/{id}',     ['as'=>'admin.ordenes.confirm','uses'=>'Tecnica\OrdersController@confirm']); 
+ Route::get('/confirm/{id}/{tipo}',     ['as'=>'admin.ordenes.confirm','uses'=>'Tecnica\ApiController@confirm']); 

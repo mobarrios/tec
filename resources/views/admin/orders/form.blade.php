@@ -46,6 +46,7 @@
               {!! Form::label('Cliente') !!}
               {!! Form::select('clients_id', $clients , isset($models->Cliente) ? $models->Cliente->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Cliente']) !!}
               {!! Form::hidden('users_id', $users_id) !!}
+              {!! Form::hidden('vendedor_id', $users_id) !!}
             </div>
             {{--
             <div class="col-xs-4 form-group">
