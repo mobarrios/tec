@@ -36,9 +36,18 @@
         </div>
         
         <div class="col-xs-12 form-group">
-          {!! Form::label('Enviar email al Usuario') !!}
           {!! Form::checkbox('enviar') !!}
-                
+          {!! Form::label('Enviar email al Cliente') !!}            
+        </div>
+
+         <div class="col-xs-12 form-group">
+          {!! Form::checkbox('enviar_remito') !!}
+          {!! Form::label('Enviar remito al Cliente') !!}            
+        </div>
+
+         <div class="col-xs-12 form-group">
+          {!! Form::checkbox('confirmar_cliente') !!}
+          {!! Form::label('Confirmar cliente') !!}            
         </div>
 
 @endsection

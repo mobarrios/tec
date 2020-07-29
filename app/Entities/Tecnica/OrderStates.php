@@ -12,7 +12,7 @@ class OrderStates extends Entity
 {
 
     protected $table = 'orders_states';
-    protected $fillable = ['orders_id','states_id','users_id' ];
+    protected $fillable = ['orders_id','states_id','users_id', 'confirmar_cliente' ];
     protected $section = 'orders';
 
   	public function States(){

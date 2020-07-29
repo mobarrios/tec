@@ -7,9 +7,9 @@ use App\Entities\Entity;
 class States extends Entity
 {
 
-    protected $table = 'states';
-    protected $fillable = ['description', 'text_email','color','enviar'];
-    protected $section = 'states';
+    protected $table 	= 'states';
+    protected $fillable = ['description', 'text_email','color','enviar', 'confirmar_cliente', 'enviar_remito'];
+    protected $section 	= 'states';
 
     public function OrdenEstados(){
 		return $this->hasMany(OrderStates::getClass());

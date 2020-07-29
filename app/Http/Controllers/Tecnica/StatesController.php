@@ -28,7 +28,10 @@ class StatesController extends Controller
         $this->validate($this->request,config('models.'.$this->section.'.validationsStore'));
        	
        	$data = $this->request->all();
-        $data['enviar'] = $this->request->has('enviar') ? '1' : '0';
+        $data['enviar']             = $this->request->has('enviar') ? '1' : '0';
+        $data['confirmar_cliente']  = $this->request->has('confirmar_cliente') ? '1' : '0';
+        $data['enviar_remito']      = $this->request->has('enviar_remito') ? '1' : '0';
+
         //crea a traves del repo con el request
         $model = $this->repo->create($data);
 
@@ -42,8 +45,10 @@ class StatesController extends Controller
 
         $id = $this->route->getParameter('id');
        
-        $data = $this->request->all();
-        $data['enviar'] = $this->request->has('enviar') ? '1' : '0';
+        $data   = $this->request->all();
+        $data['enviar']             = $this->request->has('enviar') ? '1' : '0';
+        $data['confirmar_cliente']  = $this->request->has('confirmar_cliente') ? '1' : '0';
+        $data['enviar_remito']      = $this->request->has('enviar_remito') ? '1' : '0';
         //edita a traves del repo
         $model = $this->repo->update($id,$data);
 

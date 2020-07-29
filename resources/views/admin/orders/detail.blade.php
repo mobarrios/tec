@@ -161,10 +161,16 @@
                   </thead>
                   <tbody>
                   @foreach($models->OrdenEstados as $orden)
+    
                     <tr>
                       <td>{{ $orden->created_at }}</td>
                       <td>{{ isset($orden->User)  ? $orden->User->user_name : '' }}</td>
                       <td>{{ isset($orden->States->description) ? $orden->States->description : '' }}</td>
+                      <td>
+                        @if($orden->confirmar_cliente == 1)
+                          <span class="label" style="background-color:green "> Confirmado por el cliente </span>
+                        @endif
+                      </td>
                     </tr>
                   @endforeach
                   </tbody>
