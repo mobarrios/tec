@@ -122,7 +122,7 @@ class OrdersController extends Controller
                     $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');
                     $message->to($model->Cliente->email, $model->Cliente->fullname);
 
-                    if($data['estado']->id == 9){
+                    if($data['estado']->enviar_remito == true){
                         $pdf        = PDF::loadView('admin.orders.reportes', compact('model','letraChica','company', 'tasks', 'vendedor'));
                         $message->attachData($pdf->output(), 'remito.pdf', ['mime' => 'application/pdf']);
                     }
@@ -274,11 +274,14 @@ class OrdersController extends Controller
                 //Envio de email
                 Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company'], 'models_id' => $idCrypt ], function($message) use ($data,$model,$letraChica,$company,$tasks, $vendedor)
                 {
-                    $pdf        = PDF::loadView('admin.orders.reportes', compact('model','letraChica','company','tasks','vendedor'));
                     //$pdf        = PDF::loadView('admin.orders.remito', compact('model','company'));
                     $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');
                     $message->to($model->Cliente->email, $model->Cliente->fullname);
-                    $message->attachData($pdf->output(), 'remito.pdf', ['mime' => 'application/pdf']);
+
+                    if($data['estado']->enviar_remito == true ){
+                        $pdf = PDF::loadView('admin.orders.reportes', compact('model','letraChica','company','tasks','vendedor'));
+                        $message->attachData($pdf->output(), 'remito.pdf', ['mime' => 'application/pdf']);
+                    }
 
                 });
 
@@ -292,11 +295,12 @@ class OrdersController extends Controller
 
 
         }else{
-         
-            return redirect()->back()->withErrors(['Regitro Agregado Correctamente. El Email no fue enviado al cliente.']);
+            
+
+            //return redirect()->back()->withErrors(['Regitro Agregado Correctamente. El Email no fue enviado al cliente.']);
+            return redirect()->route('admin.orders.details',$model->id)->withErrors(['Regitro Agregado Correctamente. El email no fue enviado al cliente']);
         }
 
-        //return redirect()->route('admin.orders.details',$model->id)->withErrors(['Regitro Agregado Correctamente']);
     }
 
     public function updateTasks(){

@@ -75,9 +75,9 @@ float: left!important;
                 <br>
             </p>
             <br>
-            @if( $estado->id === 9 || $estado->id === 23 )
+            @if( $estado->confirmar_cliente === 1 )
                 <p>
-                    <a href="{{ route('admin.ordenes.confirm', [ 'id' => $models_id, 'tipo' => $tipo ] )}}" target="_blank" class="button">Confirmar recepción del equipo
+                    <a href="{{ route('admin.ordenes.confirm', [ 'id' => $models_id, 'estado' => $estado->id ] )}}" target="_blank" class="button">Confirmar recepción del equipo
                     </a>
                 </p>
             @endif

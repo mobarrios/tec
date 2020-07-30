@@ -51,24 +51,23 @@
 <div class="login-box">
 
     <div class="login-logo">
-        <a href=""> <span class="fa-stack ">
-                <i class="fa fa-shekel fa-stack-2x"></i>
-            </span></a>
+        <a href=""> <span class="fa-stack "><i class="fa fa-shekel fa-stack-2x"></i></span></a>
     </div>
-    <div class="login-box-body col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3">
 
+    <div class="login-box-body col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3">
+        @if(isset($message['msgOk']) || session()->has($message['msgOk']))
         <div class="login-logo texto-red">
             <i class="fa fa-check"></i>
             Exito
         </div>
         <hr>
-        <p class="login-box-msg">&iexcl;Gracias por confirmar la recepción del equipo!<br>
+        <p class="login-box-msg">{!! $message['msgOk'] !!} <br>
         &mdash; iCase
         </p>
 
         <hr>
-       
-
+        @endif
+    
     </div>
 
 </div>
