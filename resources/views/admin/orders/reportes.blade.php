@@ -209,8 +209,9 @@
 <p style="font-size: 1.2em;">Informe técnico final: {{$model->partes}}</p> 
 <p style="font-size: 1.2em;">Reparación: {{$model->observaciones_internas}}</p> 
 
-<hr>
 
+<br>
+<br>
 
 @if(!is_null($letraChica))
   {!! $letraChica->descripcion !!}
@@ -234,8 +235,8 @@ Declaro bajo juramento que los objetos detallados precedentemente son de mi unic
 ellos gravamenes o derechos de terceros de ninguna indole. ISTYLE no se responsabiliza por el soft incluido en los equipos ni por el
 estado en que se encuentran.</p>
 
-<p> Recibo conforme: .....................</p>
 --}}
+<p style="text-align: center;"> PRESTO CONFORMIDAD</p>
 
 
 </body>

@@ -138,9 +138,32 @@
           </div>
           <div class="box-body">
             <div class="col-lg-12">
+
+              
               {!! Form::open(['route'=>('admin.ordenes.updateEstado')]) !!}
               <div class="input-group">
-                {!! Form::select('estado_id',$states, isset($models->estado_id) ? $models->estado_id : null, ['class'=>'form-control select2']) !!}
+                
+                <select class="form-control select2" name="estado_id">
+                  <option value="">Seleccionar Estado</option>
+                  
+                  @foreach($states as $key => $estado)
+                 
+                    @if( is_array(config('models.roles.estados.'.$key)) && in_array ( Auth::user()->Roles()->first()->slug, config('models.roles.estados.'.$key), true ) ) 
+
+                      <option value="{{ $key }}"> {{ $estado }} </option>
+                    @else
+                       <option value="{{ $key }}" disabled > {{ $estado }} </option>
+                    @endif
+
+                  @endforeach
+
+                </select>
+
+                {{--
+                {!! Form::select('estado_id',$states, in_array($models->estado_id) ? $models->estado_id : null, ['class'=>'form-control select2']) !!}
+                --}}
+
+
                 {!! Form::hidden('orden_id', $models->id) !!}
 
                 <span class="input-group-btn">
