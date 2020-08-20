@@ -35,11 +35,11 @@ return [
     'is_logueable'      => true,
     'is_imageable'      => false,
     'is_brancheable'    => false,
-    
+
 
     //column search
     'search' => [
-        
+
             'Nombre'    => 'name',
             'Slug'  => 'slug' ,
     ],
@@ -92,11 +92,19 @@ return [
         '28' => ['digital','vendedor', 'tecnico central', 'serviciotecnico', 'mecanico', 'admin', 'root'],
         '29' => ['digital','vendedor', 'tecnico central', 'serviciotecnico', 'mecanico', 'admin', 'root'],
         '30' => ['digital','vendedor', 'tecnico central', 'serviciotecnico', 'mecanico', 'admin', 'root'],
-
-  
+        '31' => ['digital','vendedor', 'tecnico central', 'serviciotecnico', 'mecanico', 'admin', 'root'],
+        '32' => ['digital','vendedor', 'tecnico central', 'serviciotecnico', 'mecanico', 'admin', 'root'],
+        '33' => ['digital','vendedor', 'tecnico central', 'serviciotecnico', 'mecanico', 'admin', 'root'],
+        '34' => ['digital','vendedor', 'tecnico central', 'serviciotecnico', 'mecanico', 'admin', 'root'],
+        '35' => ['digital','vendedor', 'tecnico central', 'serviciotecnico', 'mecanico', 'admin', 'root'],
+        '36' => ['digital','vendedor', 'tecnico central', 'serviciotecnico', 'mecanico', 'admin', 'root'],
+        '37' => ['digital','vendedor', 'tecnico central', 'serviciotecnico', 'mecanico', 'admin', 'root'],
+        '38' => ['digital','vendedor', 'tecnico central', 'serviciotecnico', 'mecanico', 'admin', 'root'],
+        '39' => ['digital','vendedor', 'tecnico central', 'serviciotecnico', 'mecanico', 'admin', 'root'],
+        '40' => ['digital','vendedor', 'tecnico central', 'serviciotecnico', 'mecanico', 'admin', 'root'],
     ],
 
-  
+
 
 
 ];
