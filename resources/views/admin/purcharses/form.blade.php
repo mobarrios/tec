@@ -22,7 +22,7 @@
               {!! Form::label('Cliente') !!}
 
               @if(isset($ordenCompra))
-
+                {!! Form::hidden('orders_id', $ordenCompra->id) !!}
                 {!! Form::select('clients_id', $clients , isset($ordenCompra->Cliente) ? $ordenCompra->Cliente->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Cliente']) !!}
                 {!! Form::hidden('users_id', $users_id) !!}
 

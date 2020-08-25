@@ -13,7 +13,7 @@ class Purcharses extends Entity
 {
 
     protected $table = 'purcharses';
-    protected $fillable = ['cantidad','precio_unitario','total', 'users_id', 'clients_id', 'models_id', 'observacion','numero_serie','companies_id'];
+    protected $fillable = ['cantidad','precio_unitario','total', 'users_id', 'clients_id', 'models_id', 'observacion','numero_serie','companies_id','orders_id'];
     protected $section = 'purcharses';
 
     public function Cliente(){
@@ -30,5 +30,10 @@ class Purcharses extends Entity
     public function Company(){
         return $this->belongsTo(Company::getClass(), 'companies_id');
     }
+
+    public function Orden(){
+        return $this->belongsTo(Orders::getClass(), 'orders_id');
+    }
+
 }
 
