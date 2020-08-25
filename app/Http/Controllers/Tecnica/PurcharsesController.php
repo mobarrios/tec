@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Tecnica;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\Tecnica\PurcharsesRepo;
 use App\Http\Repositories\Tecnica\PurcharsesRepo as Repo;
+use App\Http\Repositories\Tecnica\OrdersRepo;
 use App\Http\Repositories\Admin\ClientsRepo;
 use App\Http\Repositories\Admin\ModelsRepo;
 use App\Http\Repositories\Admin\BrandsRepo;
@@ -16,7 +17,7 @@ use PDF;
 
 class PurcharsesController extends Controller
 {
-    public function  __construct(Request $request, Repo $repo, Route $route, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, BrandsRepo $brandsRepo, CompanyRepo $companyRepo)
+    public function  __construct(Request $request, Repo $repo, Route $route, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, BrandsRepo $brandsRepo, CompanyRepo $companyRepo, OrdersRepo $ordersRepo)
     {
 
         $this->request  = $request;
@@ -34,6 +35,7 @@ class PurcharsesController extends Controller
         $this->data['companies']    = $companyRepo->getModel()->all()->lists('razon_social','id');
         $this->data['brands']       = $brandsRepo->getAllWithModels();
         $this->companyRepo          = $companyRepo;
+        $this->ordersRepo           = $ordersRepo;
 
     }
 
@@ -60,6 +62,15 @@ class PurcharsesController extends Controller
         
     
     }
+
+    public function ordenCompra(){
+
+        $this->data['ordenCompra']      = $this->ordersRepo->find($this->route->getParameter('id'));
+      
+        return view('admin.purcharses.form')->with($this->data);
+    }
+
+
 
 
 }

@@ -20,8 +20,17 @@
 
             <div class="col-xs-6 form-group">
               {!! Form::label('Cliente') !!}
-              {!! Form::select('clients_id', $clients , isset($models->Cliente) ? $models->Cliente->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Cliente']) !!}
-              {!! Form::hidden('users_id', $users_id) !!}
+
+              @if(isset($ordenCompra))
+
+                {!! Form::select('clients_id', $clients , isset($ordenCompra->Cliente) ? $ordenCompra->Cliente->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Cliente']) !!}
+                {!! Form::hidden('users_id', $users_id) !!}
+
+              @else
+                {!! Form::select('clients_id', $clients , isset($models->Cliente) ? $models->Cliente->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Cliente']) !!}
+                {!! Form::hidden('users_id', $users_id) !!}
+              @endif
+
             </div>
 
             <div class="col-xs-6 form-group">
@@ -42,7 +51,11 @@
                 @foreach($brands as $br)
                     <optgroup label="{{$br->name}}">
                         @foreach($br->Models as $m)
-                                <option value="{{$m->id}}" @if(isset($models) && ($models->models_id == $m->id)) selected="selected" @endif>{{$m->name}}</option>
+                          @if(isset($ordenCompra))
+                            <option value="{{$m->id}}" @if(isset($ordenCompra) && ($ordenCompra->models_id == $m->id)) selected="selected" @endif>{{$m->name}}</option>
+                          @else
+                            <option value="{{$m->id}}" @if(isset($models) && ($models->models_id == $m->id)) selected="selected" @endif>{{$m->name}}</option>
+                          @endif
                         @endforeach
                     </optgroup>
                 @endforeach
@@ -51,7 +64,12 @@
 
             <div class="col-xs-2 form-group">
               {!! Form::label('Serie/IMEI') !!}
-              {!! Form::text('numero_serie', null, ['class'=>'form-control']) !!}
+              @if(isset($ordenCompra))
+                {!! Form::text('numero_serie', $ordenCompra->numero_serie, ['class'=>'form-control']) !!}
+              @else
+                {!! Form::text('numero_serie', null, ['class'=>'form-control']) !!}
+              @endif
+
             </div>
 
 
