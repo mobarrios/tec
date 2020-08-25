@@ -414,10 +414,11 @@
 
     <div class="col-xs-12">
        <div class="box box-solid">
-          <div class="box-header">
-      
-          <a href="{{ route('admin.purcharses.compra', $models->id )}}" type="submit" class="btn btn-success btn-lg pull-right">
+         <div class="box box-solid">
+          <div class="box-body">
+          <a href="{{ route('admin.purcharses.compra', $models->id )}}" type="submit" class="btn btn-success btn-md pull-right">
           <i class="fa fa-shopping-cart"></i> Generar orden de compra</a>
+          </div>
         </div>
       </div>
     </div>
