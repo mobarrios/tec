@@ -9,7 +9,7 @@ use App\Entities\Admin\Clients;
 use App\Entities\Admin\Models;
 use App\Entities\Tecnica\Equipments;
 use App\Entities\Entity;
-
+use DB;
 class Orders extends Entity
 {
 
@@ -73,6 +73,17 @@ class Orders extends Entity
     public function setFechaFinalAttribute($value){
         $this->attributes['fecha_final']  = date('Y-m-d', strtotime($value));
     }	
+
+    public function estadoCompra($ordersId, $statesId)
+    {
+        return ! is_null(
+            DB::table('orders_states')
+              ->where('orders_id', $ordersId)
+              ->where('states_id', $statesId)
+              ->first()
+        );
+    }
+
 }
 
 

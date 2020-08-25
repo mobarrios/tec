@@ -411,18 +411,18 @@
   </div>
 </div>
 
-
-    <div class="col-xs-12">
-       <div class="box box-solid">
-         <div class="box box-solid">
-          <div class="box-body">
-          <a href="{{ route('admin.purcharses.compra', $models->id )}}" type="submit" class="btn btn-success btn-md pull-right">
-          <i class="fa fa-shopping-cart"></i> Generar orden de compra</a>
-          </div>
-        </div>
+@if( $models->estadoCompra($models->id, 35) )
+<div class="col-xs-12">
+   <div class="box box-solid">
+     <div class="box box-solid">
+      <div class="box-body">
+      <a href="{{ route('admin.purcharses.compra', $models->id )}}" type="submit" class="btn btn-success btn-md pull-right">
+      <i class="fa fa-shopping-cart"></i> Generar orden de compra</a>
       </div>
     </div>
-
+  </div>
+</div>
+@endif
 
 
 
