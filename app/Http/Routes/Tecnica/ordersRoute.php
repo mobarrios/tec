@@ -31,7 +31,8 @@ Route::group(['prefix'=>'orders'],function(){
         Route::post('updateTasks',[ 'as'=>'admin.ordenes.updateTasks','uses'=>'Tecnica\OrdersController@updateTasks']);
         Route::get('movimientos/{id}',[ 'as'=>'admin.ordenes.movimientos','uses'=>'Tecnica\OrdersController@getMovimientos']);
         Route::post('postMovimientos/{id}',[ 'as'=>'admin.ordenes.postMovimientos','uses'=>'Tecnica\OrdersController@postMovimientos']);
-        Route::get('/remito/{id}',     ['as'=>'admin.ordenes.remito','uses'=>'Tecnica\OrdersController@remito']);                                        
+        Route::get('/remito/{id}',     ['as'=>'admin.ordenes.remito','uses'=>'Tecnica\OrdersController@remito']);
+        //Route::get('/compra/{id}',     ['as'=>'admin.ordenes.compra','uses'=>'Tecnica\OrdersController@compra']);                                        
 
         /*
         detail

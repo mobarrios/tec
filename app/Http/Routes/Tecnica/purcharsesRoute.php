@@ -17,5 +17,6 @@ Route::group(['prefix'=>'purcharses'],function(){
         Route::get('/pdf',              ['middleware'=>'permission:'.$section.'.list','as'=>'admin.purcharses.pdf','uses'=>'Tecnica\PurcharsesController@exportListToPdf']);
         
         Route::get('/reporte/{id}',              ['as'=>'admin.purcharses.reporte','uses'=>'Tecnica\PurcharsesController@reporte']);
+        Route::get('/compra/{id}',              ['as'=>'admin.purcharses.compra','uses'=>'Tecnica\PurcharsesController@ordenCompra']);
         
 });
