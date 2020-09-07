@@ -52,20 +52,35 @@
             <h3 class="box-title">  Compra </h3>
           </div>
           <div class="box-body">
-            
+
+            <span class="text-muted">Sucursal : </span> <strong>{{ isset($models->Company->razon_social) ? $models->Company->razon_social : '' }}</strong>
+            <br><br> 
+            <span class="text-muted">ID Reparación : </span> <strong>{{ $models->Orden->id }}</strong>
+            <br><br> 
+            <span class="text-muted">ID Compra : </span> <strong>{{ $models->id }}</strong>
+            <br><br>  
             <span class="text-muted">Marca : </span> <strong>{{ isset($models->Model->Brands) ? $models->Model->Brands->name : '' }}</strong>
             <br><br>
             <span class="text-muted">Modelo : </span> <strong>{{ isset($models->Model) ? $models->Model->name : '' }}</strong>
             <br><br>
             <span class="text-muted">IMEI: </span> <strong>{{ $models->numero_serie }}</strong>
             <br><br>
+            <span class="text-muted">Capacidad: </span> <strong>{{ $models->capacidad }}</strong>
+            <br><br>
+            <span class="text-muted">Color: </span> <strong>{{ $models->color }}</strong>
+            <br><br>
+            <span class="text-muted">Accesorios extras: </span> <strong>{{ $models->accesorios }}</strong>
+            <br><br>
+            <span class="text-muted">Estado: </span> <strong>{{ $models->estado }}</strong>
+            <br><br>
+
             <span class="text-muted">Cantidad : </span> <strong>{{ $models->cantidad }}</strong>
             <br><br>
-            <span class="text-muted">Precio unitario : </span> <strong>{{ $models->precio_unitario }}</strong>
+            <span class="text-muted">Precio Compra : </span> <strong>{{ $models->precio_unitario }}</strong>
             <br><br>
-            <span class="text-muted">Total : </span> <strong>{{ $models->total  }}</strong>
+            <span class="text-muted">Precio Venta : </span> <strong>{{ $models->precio_venta  }}</strong>
             <br><br>
-            <span class="text-muted">Descripción: </span> <strong>{{ $models->observacion }}</strong>
+            <span class="text-muted">Condición u Observaciones para venta: </span> <strong>{{ $models->observacion }}</strong>
             <br>
           </div>
         </div>

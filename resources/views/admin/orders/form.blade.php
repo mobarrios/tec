@@ -116,8 +116,12 @@
           </div>
           
           <div class="row">
-              <div class="col-xs-4 form-group">
-              {!! Form::label('Presupuesto Estimado') !!}
+            <div class="col-xs-4 form-group">
+              {!! Form::label('Insumos') !!}
+              {!! Form::text('insumos', null, ['class'=>'form-control']) !!}
+            </div>
+            <div class="col-xs-4 form-group">
+              {!! Form::label('$ Presupuesto Estimado') !!}
               {!! Form::text('presupuesto_estimado', null, ['class'=>'form-control']) !!}
             </div>
           </div>

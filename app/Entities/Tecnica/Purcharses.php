@@ -13,7 +13,7 @@ class Purcharses extends Entity
 {
 
     protected $table = 'purcharses';
-    protected $fillable = ['cantidad','precio_unitario','total', 'users_id', 'clients_id', 'models_id', 'observacion','numero_serie','companies_id','orders_id'];
+    protected $fillable = ['cantidad','precio_unitario','total', 'users_id', 'clients_id', 'models_id', 'observacion','numero_serie','companies_id','orders_id', 'capacidad', 'color', 'accesorios','precio_venta', 'vendedor_id', 'estado', 'insumos'];
     protected $section = 'purcharses';
 
     public function Cliente(){

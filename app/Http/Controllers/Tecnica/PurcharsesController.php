@@ -10,6 +10,7 @@ use App\Http\Repositories\Admin\ClientsRepo;
 use App\Http\Repositories\Admin\ModelsRepo;
 use App\Http\Repositories\Admin\BrandsRepo;
 use App\Http\Repositories\Configs\CompanyRepo;
+use App\Http\Repositories\Configs\UsersRepo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Auth;
@@ -17,7 +18,7 @@ use PDF;
 
 class PurcharsesController extends Controller
 {
-    public function  __construct(Request $request, Repo $repo, Route $route, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, BrandsRepo $brandsRepo, CompanyRepo $companyRepo, OrdersRepo $ordersRepo)
+    public function  __construct(Request $request, Repo $repo, Route $route, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, BrandsRepo $brandsRepo, CompanyRepo $companyRepo, OrdersRepo $ordersRepo, UsersRepo $usersRepo)
     {
 
         $this->request  = $request;
@@ -34,6 +35,7 @@ class PurcharsesController extends Controller
         $this->data['models_id']    = $modelsRepo->ListsData('name','id');
         $this->data['companies']    = $companyRepo->getModel()->all()->lists('razon_social','id');
         $this->data['brands']       = $brandsRepo->getAllWithModels();
+        $this->data['users']        = $usersRepo->ListsData('name','id');
         $this->companyRepo          = $companyRepo;
         $this->ordersRepo           = $ordersRepo;
 
