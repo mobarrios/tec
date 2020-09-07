@@ -90,6 +90,8 @@
             <br>
             <span class="text-muted">Falla :</span> <strong> {{ $models->numero_serie  }}</strong>
             <br>
+            <span class="text-muted">Insumos : </span> <strong>{{ $models->insumos  }}</strong>
+            <br>
             <span class="text-muted">Presupuesto : </span> <strong>$ {{ $models->presupuesto_estimado  }}</strong>
             <br>
             {{--

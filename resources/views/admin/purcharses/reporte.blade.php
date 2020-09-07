@@ -164,6 +164,15 @@
          </td>
          
       </tr>
+      <tr>
+         <td>
+         Capacidad : {{  $model->capacidad }}
+         </td>
+         <td>
+         Color :  {{ $model->color }}
+         </td>
+         
+      </tr>
       
       <tr>
         <td>Observaciones : {{ $model->observacion  }} </td>
@@ -179,15 +188,25 @@
   <table style="width: 100%; font-size: 1.2em;" >
   <tr>
      <td>
+     Accesorios Extras : {{ $model->accesorios }}
+     </td>
+
+     <td>
+     Estado : $ {{ $model->estado }}
+     </td>
+
+  </tr>
+  <tr>
+     <td>
      Cantidad : {{ $model->cantidad }}
      </td>
 
      <td>
-     Precio Unitario : $ {{ $model->precio_unitario }}
+     Precio Venta : $ {{ $model->precio_venta }}
      </td>
 
      <td>
-     Total : $ {{ $model->total }}
+     Precio Compra : $ {{ $model->precio_unitario }}
      </td>
   </tr>
 
@@ -223,7 +242,6 @@ estado en que se encuentran.</p>
 
 <p> Recibo conforme: .....................</p>
 --}}
-
 
 </body>
 </html>
