@@ -55,7 +55,7 @@
 
             <span class="text-muted">Sucursal : </span> <strong>{{ isset($models->Company->razon_social) ? $models->Company->razon_social : '' }}</strong>
             <br><br> 
-            <span class="text-muted">ID Reparación : </span> <strong>{{ $models->Orden->id }}</strong>
+            <span class="text-muted">ID Reparación : </span> <strong>{{ isset($models->Orden) ? $models->Orden->id : '' }}</strong>
             <br><br> 
             <span class="text-muted">ID Compra : </span> <strong>{{ $models->id }}</strong>
             <br><br>  
