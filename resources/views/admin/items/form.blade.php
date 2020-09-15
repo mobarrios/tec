@@ -13,68 +13,88 @@
 
         {!! Form::hidden('status','1') !!}
 
-        <div class="row">
+         <div class="col-xs-12">
+    <h4> Detalles de la venta</h4>
+    </div>
 
-            @if(config('models.'.$section.'.is_brancheable'))
-                <div class="col-xs-6 form-group">
-                    {!! Form::label('Sucursal') !!}
-                    {!! Form::select('branches_id[]',\Illuminate\Support\Facades\Auth::user()->getBranchName() , null, ['class'=>' select2  form-control']) !!}
-                </div>
-            @endif
+    <div class="col-xs-3 form-group">
+        {!! Form::label('Cliente') !!}
+    
+        {!! Form::select('clients_id', $clients , isset($models->Cliente) ? $models->Cliente->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Cliente']) !!}
+ 
+    </div>
+
+    <div class="col-xs-3 form-group">
+      {!! Form::label('Vendedor') !!}
+
+      {!! Form::select('users_id', $users , isset($models->Vendedor) ? $models->Vendedor->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Vendedor']) !!}
+    
+    </div>
+
+    <div class="col-xs-6 form-group">
+      {!! Form::label('Compañia') !!}
+      {!! Form::select('companies_id', $companies , isset($models->Company) ? $models->Company->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Compañia']) !!}
+    
+    </div>
+
+    <div class="col-xs-12">
+    <h4> Datos del producto</h4>
+    </div>
+
+    <div class="col-xs-3 form-group">
+      {!! Form::label('Modelos') !!}
+       <select name='models_id' class="select2 form-control" placeholder="seleccionar Cliente" >
+        @foreach($brands as $br)
+            <optgroup label="{{$br->name}}">
+                @foreach($br->Models as $m)
+                    <option value="{{$m->id}}" @if(isset($models) && ($models->models_id == $m->id)) selected="selected" @endif>{{$m->name}}</option>
+                @endforeach
+            </optgroup>
+        @endforeach
+      </select>
+    </div>
+
+    <div class="col-xs-3 form-group">
+    {!! Form::label('Serie/IMEI') !!}
+    {!! Form::text('numero_serie', isset($models->Compra) ? $models->Compra->numero_serie : '', ['class'=>'form-control']) !!}
+  
+    
+    </div>
+
+    <div class="col-xs-3 form-group">
+      {!! Form::label('Capacidad') !!}
+      {!! Form::text('capacidad', isset($models->Compra) ? $models->Compra->capacidad : '', ['class'=>'form-control']) !!}
+    </div>
+
+    <div class="col-xs-3 form-group">
+      {!! Form::label('Color') !!}
+      {!! Form::text('color', isset($models->Compra) ? $models->Compra->color : '', ['class'=>'form-control']) !!}
+    </div>
+
+    <div class="col-xs-12">
+    <h4> Datos de la operación</h4>
+    </div>
 
 
-            <div class="col-xs-6  form-group">
-                {!! Form::label('Modelo') !!}
-                <select name='models_id' class=" select2 form-control">
-                    @foreach($brands as $br)
-                        <optgroup label="{{$br->name}}">
-                            @foreach($br->Models as $m)
-                                    <option value="{{$m->id}}" @if(isset($models) && ($models->models_id == $m->id)) selected="selected" @endif>{{$m->name}}</option>
-                            @endforeach
-                        </optgroup>
-                    @endforeach
-                </select>
-            </div>
+    <div class="col-xs-2 form-group">
+      {!! Form::label('Accesorios Extras') !!}
+      {!! Form::text('accesorios', isset($models->Compra) ? $models->Compra->accesorios : '', ['class'=>'form-control']) !!}
+    </div>
 
-            <div class="col-xs-6 form-group">
-                {!! Form::label('Nombre') !!}
-                {!! Form::text('name', null, ['class'=>'form-control']) !!}
-            </div>
+    <div class="col-xs-2 form-group">
+      {!! Form::label('Estado') !!}
+      {!! Form::text('status', null, ['class'=>'form-control']) !!}
+    </div>
 
-        </div>
+    <div class="col-xs-3 form-group">
+      {!! Form::label('Precio Venta') !!}
+      {!! Form::text('precio_venta', isset($models->Compra) ? $models->Compra->precio_venta : '', ['class'=>'form-control']) !!}
+    </div>
 
-
-        @if(isset($models))
-        <div class="col-xs-6">
-            <h3>Movimientos</h3>
-
-            <table class="table">
-            <thead>
-                <th>Fecha</th>
-                <th>Estado</th>
-            </thead>
-                <tr>
-                    <td>{{date('d-m-Y h:i',strtotime($models->created_at))}}</td>
-                    <td>Ingresó</td>
-                </tr>
-                    @foreach($models->Updateables as $update)
-
-                        @if($update->column == 'status')
-                            <tr>
-                            <td>{{date('d-m-Y h:i',strtotime($update->created_at))}}</td>
-                            <td>{{config('status.items.'.$update->data_old)}}</td>
-                            </tr>
-                        @endif
-
-                    @endforeach
-
-            </table>
-        </div>
-        @endif
-
-
-
-
+     <div class="col-xs-12 form-group">
+      {!! Form::label('Condición u Observaciones para venta') !!}
+      {!! Form::textarea('observacion', isset($models->Compra) ? $models->Compra->observacion : '', ['class'=>'form-control', 'rows' => '5' ]) !!}
+    </div>
 
 @endsection
 

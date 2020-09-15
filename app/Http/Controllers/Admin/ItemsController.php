@@ -10,18 +10,21 @@ use App\Http\Repositories\Admin\CertificatesRepo;
 use App\Http\Repositories\Admin\ColorsRepo;
 use App\Http\Repositories\Admin\ItemsRepo as Repo;
 use App\Http\Repositories\Admin\ModelsRepo;
+use App\Http\Repositories\Configs\UsersRepo;
+use App\Http\Repositories\Admin\ClientsRepo;
+use App\Http\Repositories\Configs\CompanyRepo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Session;
 use League\Flysystem\Config;
-
+use PDF;
 
 class ItemsController extends Controller
 {
 
     protected  $certificatesRepo;
 
-    public function  __construct(Request $request, Repo $repo, Route $route, ModelsRepo $modelsRepo, ColorsRepo $colorsRepo ,  BrandsRepo $brandsRepo)
+    public function  __construct(Request $request, Repo $repo, Route $route, ModelsRepo $modelsRepo, ColorsRepo $colorsRepo ,  BrandsRepo $brandsRepo, UsersRepo $usersRepo, ClientsRepo $clientsRepo,  CompanyRepo $companyRepo)
     {
         $this->request  = $request;
         $this->repo     = $repo;
@@ -35,6 +38,11 @@ class ItemsController extends Controller
         $this->data['colors']       = $colorsRepo->ListsData('name','id');
 
         $this->data['brands']   = $brandsRepo->getAllWithModels();
+        $this->data['users']    = $usersRepo->ListsData('name','id');
+        $this->data['clients']  = $clientsRepo->getModel()->all()->lists('fullname','id');
+        $this->data['companies']    = $companyRepo->getModel()->all()->lists('razon_social','id');
+
+
 
        // $this->certificatesRepo = $certificatesRepo;
     }
@@ -93,7 +101,16 @@ class ItemsController extends Controller
         $id = $this->route->getParameter('id');
 
         //edita a traves del repo
-        $model = $this->repo->update($id,$this->request);
+        //$model = $this->repo->update($id,$this->request);
+        //dd($this->request->all());
+        $model = $this->repo->getModel()->find($id);
+
+        $model->fill($this->request->all());
+        $model->save();
+
+        $data = $this->request->only('color', 'accesorios', 'capacidad', 'precio_venta','observacion');
+        $model->Compra()->update($data);
+  
 
         return redirect()->route(config('models.'.$this->section.'.postUpdateRoute'))->withErrors(['Regitro Editado Correctamente']);
     }
@@ -136,6 +153,26 @@ class ItemsController extends Controller
             return response()->json(false);
     }
 
+    public function show(){
+        $this->data['models']       = $this->repo->find($this->route->getParameter('id'));
+    
+        
+        return view('admin.items.details')->with($this->data);
 
+    }
+
+
+    public function reporte(CompanyRepo $companyRepo){
+
+        //$this->data['models']       = $this->repo->find($this->route->getParameter('id'));
+        $model      = $this->repo->find($this->route->getParameter('id'));
+        $company    = $companyRepo->getModel()->first();
+        //$letraChica = $toPrintRepo->ultimo();
+        $pdf        = PDF::loadView('admin.items.reporte', compact('model','company'));
+
+        return $pdf->stream();
+        
+    
+    }
     
 }

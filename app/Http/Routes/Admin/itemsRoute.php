@@ -10,10 +10,11 @@ Route::group(['prefix'=>'items'],function(){
 
         Route::get('/create',           ['middleware'=>'permission:'.$section.'.create','as'=>'admin.items.create','uses'=>'Admin\ItemsController@create']);
         Route::post('/store',           ['middleware'=>'permission:'.$section.'.create','as'=>'admin.items.store','uses'=>'Admin\ItemsController@store']);
-        Route::get('/show',             ['middleware'=>'permission:'.$section.'.show','as'=>'admin.items.show','uses'=>'Admin\ItemsController@show']);
+        Route::get('/show/{id?}',             ['middleware'=>'permission:'.$section.'.show','as'=>'admin.items.show','uses'=>'Admin\ItemsController@show']);
         Route::get('/index/{search?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'admin.items.index','uses'=>'Admin\ItemsController@index']);
 
         Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'admin.items.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
+        Route::get('/reporte/{id}',              ['as'=>'admin.items.reporte','uses'=>'Admin\ItemsController@reporte']);
 
 });
 

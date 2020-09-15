@@ -1,16 +1,20 @@
 <?php
- namespace App\Entities\Admin;
+namespace App\Entities\Admin;
 
 
- use App\Entities\Entity;
- use Illuminate\Database\Eloquent\Model;
+use App\Entities\Entity;
+use App\Entities\Tecnica\Purcharses;
+use App\Entities\Configs\User;
+use Illuminate\Database\Eloquent\Model;
+use App\Entities\Configs\Company;
+
 
  class Items extends Entity
  {
 
      protected $table = 'items';
 
-     protected $fillable = ['name','models_id','status'];
+     protected $fillable = ['name','models_id','status', 'clients_id', 'purcharses_id', 'users_id', 'companies_id', 'users_id'];
      protected $section = 'items';
      
 
@@ -23,6 +27,14 @@
      {
          return $this->belongsTo(Models::class);
      }
+
+    public function Cliente(){
+        return $this->belongsTo(Clients::getClass(), 'clients_id');
+    }
+
+    public function Vendedor(){
+        return $this->belongsTo(User::getClass(),'users_id');
+    }
 
      public function Dispatches()
      {
@@ -53,6 +65,15 @@
      {
          return config('status.items.' . $this->attributes['status']);
      }
+
+     public function Compra(){
+         return $this->belongsTo(Purcharses::class, 'purcharses_id');
+     }
+
+     public function Company(){
+        return $this->belongsTo(Company::getClass(), 'companies_id');
+    }
+
  }
 
 
