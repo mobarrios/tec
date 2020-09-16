@@ -82,7 +82,7 @@ class PurcharsesController extends Controller
         
         //dd($this->request->all());
         $model = $this->repo->create($this->request->all());
-
+        /*
         $items = $this->itemsRepo->create([
 
             'name' => 'prueba',
@@ -92,13 +92,15 @@ class PurcharsesController extends Controller
             'clients_id' => $model->clients_id,
             'users_id' => $model->users_id
         ]);
-
+        */
         return redirect()->route(config('models.'.$this->section.'.postStoreRoute'),$model->id)->withErrors(['Regitro Agregado Correctamente']);
 
         //return view('admin.purcharses.index')->with($this->data);
 
 
     }
+
+
 
 
 }

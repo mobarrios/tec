@@ -125,6 +125,17 @@
               {!! Form::text('presupuesto_estimado', null, ['class'=>'form-control']) !!}
             </div>
           </div>
+          <hr>
+          <div class="row">
+            <div class="col-xs-4 form-group">
+              {!! Form::label('Vendedor') !!}
+              {!! Form::select('vendedor_id',$users, isset($models->vendedor_id) ? $models->vendedor_id : null, ['class'=>'form-control select2']) !!}
+            </div>
+            <div class="col-xs-4 form-group">
+              {!! Form::label('Técnico') !!}
+              {!! Form::select('users_id',$users, isset($models->users_id) ? $models->users_id : null, ['class'=>'form-control select2']) !!}
+            </div>
+          </div>
 
           <h3 class="box-title">Testeos  </h3>
           <hr>

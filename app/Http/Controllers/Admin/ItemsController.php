@@ -9,6 +9,7 @@ use App\Http\Repositories\Admin\BrandsRepo;
 use App\Http\Repositories\Admin\CertificatesRepo;
 use App\Http\Repositories\Admin\ColorsRepo;
 use App\Http\Repositories\Admin\ItemsRepo as Repo;
+use App\Http\Repositories\Tecnica\PurcharsesRepo;
 use App\Http\Repositories\Admin\ModelsRepo;
 use App\Http\Repositories\Configs\UsersRepo;
 use App\Http\Repositories\Admin\ClientsRepo;
@@ -24,7 +25,7 @@ class ItemsController extends Controller
 
     protected  $certificatesRepo;
 
-    public function  __construct(Request $request, Repo $repo, Route $route, ModelsRepo $modelsRepo, ColorsRepo $colorsRepo ,  BrandsRepo $brandsRepo, UsersRepo $usersRepo, ClientsRepo $clientsRepo,  CompanyRepo $companyRepo)
+    public function  __construct(Request $request, Repo $repo, Route $route, ModelsRepo $modelsRepo, ColorsRepo $colorsRepo ,  BrandsRepo $brandsRepo, UsersRepo $usersRepo, ClientsRepo $clientsRepo,  CompanyRepo $companyRepo, PurcharsesRepo $purcharsesRepo)
     {
         $this->request  = $request;
         $this->repo     = $repo;
@@ -41,6 +42,7 @@ class ItemsController extends Controller
         $this->data['users']    = $usersRepo->ListsData('name','id');
         $this->data['clients']  = $clientsRepo->getModel()->all()->lists('fullname','id');
         $this->data['companies']    = $companyRepo->getModel()->all()->lists('razon_social','id');
+        $this->purcharsesRepo = $purcharsesRepo;
 
 
 
@@ -172,6 +174,25 @@ class ItemsController extends Controller
 
         return $pdf->stream();
         
+    
+    }
+
+    public function compra(){
+
+
+    $purcharse      = $this->purcharsesRepo->find($this->route->getParameter('id'));
+
+    $items = $this->repo->create([
+        'name' => 'venta',
+        'status' => '1',
+        'models_id' => $purcharse->models_id,
+        'purcharses_id' => $purcharse->id,
+        'clients_id' => $purcharse->clients_id,
+        'users_id' => $purcharse->users_id
+    ]);
+
+
+    return redirect()->route('admin.items.index')->withErrors(['Regitro Agregado Correctamente']);
     
     }
     

@@ -15,6 +15,7 @@ Route::group(['prefix'=>'items'],function(){
 
         Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'admin.items.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
         Route::get('/reporte/{id}',              ['as'=>'admin.items.reporte','uses'=>'Admin\ItemsController@reporte']);
+        Route::get('/compra/{id}',              ['as'=>'admin.items.compra','uses'=>'Admin\ItemsController@compra']);
 
 });
 

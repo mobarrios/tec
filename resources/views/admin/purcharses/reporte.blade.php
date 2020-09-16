@@ -213,8 +213,8 @@
 </table>
 </fieldset>
 <legend style="font-size: 1.2em;"></legend> <br/><br/><br/><br/>
-<p style="text-align:center;">_______________________________________________</p>
-<p style="text-align:center;">FIRMA DEL VENDEDOR PRESTANDO CONFORMIDAD</p>
+
+<p style="text-align:center;">En conformidad</p>
 </body>
 
 {{--
