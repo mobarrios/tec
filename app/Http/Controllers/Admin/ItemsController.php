@@ -192,7 +192,7 @@ class ItemsController extends Controller
     ]);
 
 
-    return redirect()->route('admin.items.index')->withErrors(['Regitro Agregado Correctamente']);
+    return redirect()->route('admin.items.edit', $items->id);
     
     }
     

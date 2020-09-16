@@ -90,6 +90,7 @@
       {!! Form::text('precio_unitario', null, ['class'=>'form-control']) !!}
     </div>
 
+    {{--
     <div class="col-xs-12">
     <h4> Datos de pago</h4>
     </div>
@@ -109,6 +110,7 @@
       {!! Form::label('Datos de la cuenta') !!}
       {!! Form::text('precio_unitario', null, ['class'=>'form-control']) !!}
     </div>
+      --}}
             
 @endsection
 
