@@ -18,6 +18,7 @@ class CreateAddModuloVentasTable extends Migration
             $table->integer('clients_id')->nullable();
             $table->integer('users_id')->nullable();
             $table->integer('companies_id')->nullable();   
+            $table->integer('sucursales_id')->nullable();   
         });
     }
 
@@ -34,6 +35,7 @@ class CreateAddModuloVentasTable extends Migration
             $table->dropColumn('clients_id');
             $table->dropColumn('users_id');
             $table->dropColumn('companies_id');
+            $table->dropColumn('sucursales_id');
         });
     }
 }

@@ -4,7 +4,10 @@ namespace App\Entities\Admin;
 
 use App\Entities\Entity;
 use App\Entities\Tecnica\Purcharses;
+use App\Entities\Tecnica\ItemsStates;
+use App\Entities\Tecnica\States;
 use App\Entities\Configs\User;
+use App\Entities\Configs\Branches;
 use Illuminate\Database\Eloquent\Model;
 use App\Entities\Configs\Company;
 
@@ -14,7 +17,7 @@ use App\Entities\Configs\Company;
 
      protected $table = 'items';
 
-     protected $fillable = ['name','models_id','status', 'clients_id', 'purcharses_id', 'users_id', 'companies_id', 'users_id'];
+     protected $fillable = ['name','models_id','status', 'clients_id', 'purcharses_id', 'users_id', 'companies_id', 'users_id', 'sucursales_id'];
      protected $section = 'items';
      
 
@@ -72,6 +75,23 @@ use App\Entities\Configs\Company;
 
      public function Company(){
         return $this->belongsTo(Company::getClass(), 'companies_id');
+    }
+
+    public function Sucursal(){
+        return $this->belongsTo(Branches::getClass(), 'sucursales_id');
+    }
+
+    public function Estados(){
+        return $this->belongsToMany(States::getClass())->withPivot('users_id');
+
+    }
+
+    public function ItemsEstados(){
+        return $this->hasMany(ItemsStates::getClass());
+    }
+
+    public function lastItemsEstados(){
+        return $this->hasMany(ItemsStates::getClass())->orderBy('id','DESC')->first();
     }
 
  }

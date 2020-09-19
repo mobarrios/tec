@@ -82,7 +82,7 @@
    <div class="box box-solid">
      <div class="box box-solid">
       <div class="box-body">
-      <a href="{{ route('admin.items.compra', $models->id )}}" type="submit" class="btn btn-success btn-md pull-right">
+      <a href="{{ route('admin.items.compra', $models->id )}}" class="btn btn-success btn-md pull-right btnVenta {{ $models->Venta ? 'disabled' : '' }}">
       <i class="fa fa-shopping-cart"></i> Generar venta</a>
       </div>
     </div>
@@ -92,3 +92,20 @@
 
 
 @endsection
+@section('js')
+<script type="text/javascript">
+  $('.btnVenta').on('click', function(e){
+
+    $(".btnVenta").attr("disabled", true);
+
+  });
+</script>
+@endsection
+
+
+
+
+
+
+
+

@@ -17,6 +17,10 @@ Route::group(['prefix'=>'items'],function(){
         Route::get('/reporte/{id}',              ['as'=>'admin.items.reporte','uses'=>'Admin\ItemsController@reporte']);
         Route::get('/compra/{id}',              ['as'=>'admin.items.compra','uses'=>'Admin\ItemsController@compra']);
 
+        Route::post('/updateEstado/{id?}',              ['as'=>'admin.items.updateEstado','uses'=>'Admin\ItemsController@updateEstado']);
+
+
+
 });
 
 Route::group(['prefix'=>'certificates'],function(){

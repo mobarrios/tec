@@ -5,6 +5,7 @@ namespace App\Entities\Tecnica;
 use App\Entities\Admin\Brands;
 use App\Entities\Configs\User;
 use App\Entities\Tecnica\Orders;
+use App\Entities\Tecnica\Purcharses;
 use App\Entities\Admin\Clients;
 use App\Entities\Admin\Models;
 use App\Entities\Tecnica\Equipments;
@@ -73,6 +74,10 @@ class Orders extends Entity
     public function setFechaFinalAttribute($value){
         $this->attributes['fecha_final']  = date('Y-m-d', strtotime($value));
     }	
+
+    public function Compra(){
+        return $this->hasOne(Purcharses::getClass());
+    }
 
     public function estadoCompra($ordersId, $statesId)
     {

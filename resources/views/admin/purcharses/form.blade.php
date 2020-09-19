@@ -110,7 +110,8 @@
       {!! Form::label('Datos de la cuenta') !!}
       {!! Form::text('precio_unitario', null, ['class'=>'form-control']) !!}
     </div>
-      --}}
+    --}}
+     
             
 @endsection
 

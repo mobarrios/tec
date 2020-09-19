@@ -6,6 +6,7 @@ use App\Entities\Configs\User;
 use App\Entities\Tecnica\Orders;
 use App\Entities\Admin\Clients;
 use App\Entities\Admin\Models;
+use App\Entities\Admin\Items;
 use App\Entities\Configs\Company;
 use App\Entities\Entity;
 
@@ -33,6 +34,11 @@ class Purcharses extends Entity
 
     public function Orden(){
         return $this->belongsTo(Orders::getClass(), 'orders_id');
+    }
+
+    public function Venta(){
+        return $this->hasOne(Items::getClass(), 'purcharses_id');
+
     }
 
 }

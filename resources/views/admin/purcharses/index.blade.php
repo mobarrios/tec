@@ -7,9 +7,7 @@
                 <td>{{$model->Cliente->name }} {{$model->Cliente->last_name }} <br> DNI: {{$model->Cliente->dni }}  </td>
                 <td>Cantidad: {{$model->cantidad}} </td>
                 <td>Precio Unitario: $ {{$model->precio_unitario}}</td>
-                <td>Total: $ {{$model->total}}</td>
                 <td><a href="{{route('admin.purcharses.show', $model->id)}}" class="btn btn-sm btn-success" ><span class="fa  fa-info-circle"></span></a></td>
-
             </tr>
         @endforeach
     @endsection
