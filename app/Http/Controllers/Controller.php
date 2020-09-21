@@ -122,7 +122,9 @@ abstract class Controller extends BaseController
     */
     //post de editar
     public function update()
-    {
+    {   
+
+
         //validar los campos
         $this->validate($this->request,config('models.'.$this->section.'.validationsUpdate'));
         $id = $this->route->getParameter('id');

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Orden Compra {!! $model->id !!}</title>
+    <title>Orden Venta {!! $model->id !!}</title>
       <style>
 
         body{
@@ -97,8 +97,7 @@
 
                       <td style="font-size: 1.5em;" >
 
-                          <strong>Fecha de Ingreso</strong> {{ date('d/m/Y',strtotime($model->created_at)) }}<br />
-                          <strong>Orden de Compra</strong> {{$model->id}}<br />
+                          <strong>Fecha </strong> {{ date('d/m/Y',strtotime($model->created_at)) }}<br />
                           <strong>Sucursal </strong> {{ isset($model->Company->razon_social) ?  $model->Company->razon_social : '' }}
 
                       </td>
@@ -166,16 +165,16 @@
       </tr>
       <tr>
          <td>
-         Capacidad : {{  $model->capacidad }}
+         Capacidad : {{  $model->Compra->capacidad }}
          </td>
          <td>
-         Color :  {{ $model->color }}
+         Color :  {{ $model->Compra->color }}
          </td>
          
       </tr>
       
       <tr>
-        <td>Observaciones : {{ $model->observacion  }} </td>
+        <td>Observaciones : {{ $model->Compra->observacion  }} </td>
       </tr>
 
   </table>
@@ -188,33 +187,29 @@
   <table style="width: 100%; font-size: 1.2em;" >
   <tr>
      <td>
-     Accesorios Extras : {{ $model->accesorios }}
+     Accesorios Extras : {{ $model->Compra->accesorios }}
      </td>
 
-     <td>
-     Estado : $ {{ $model->estado }}
+      <td>
+     Cantidad : {{ $model->Compra->cantidad }}
      </td>
 
   </tr>
   <tr>
+    
      <td>
-     Cantidad : {{ $model->cantidad }}
+     Precio Venta : $ {{ $model->Compra->precio_venta }}
      </td>
-
      <td>
-     Precio Venta : $ {{ $model->precio_venta }}
-     </td>
-
-     <td>
-     Precio Compra : $ {{ $model->precio_unitario }}
+     Precio Compra : $ {{ $model->Compra->precio_unitario }}
      </td>
   </tr>
 
 </table>
 </fieldset>
 <legend style="font-size: 1.2em;"></legend> <br/><br/><br/><br/>
-
-<p style="text-align:center;">En conformidad</p>
+<p style="text-align:center;">_______________________________________________</p>
+<p style="text-align:center;">FIRMA DEL VENDEDOR PRESTANDO CONFORMIDAD</p>
 </body>
 
 {{--

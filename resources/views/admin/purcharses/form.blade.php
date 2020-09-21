@@ -21,8 +21,7 @@
       @if(isset($ordenCompra))
         {!! Form::hidden('orders_id', $ordenCompra->id) !!}
         {!! Form::select('clients_id', $clients , isset($ordenCompra->Cliente) ? $ordenCompra->Cliente->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Cliente']) !!}
-        {!! Form::hidden('users_id', $users_id) !!}
-
+  
       @else
         {!! Form::select('clients_id', $clients , isset($models->Cliente) ? $models->Cliente->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Cliente']) !!}
       @endif
@@ -75,51 +74,44 @@
       @endif
     </div>
 
-    <div class="col-xs-3 form-group">
-      {!! Form::label('Capacidad') !!}
-      {!! Form::text('capacidad', null, ['class'=>'form-control']) !!}
-    </div>
-
-    <div class="col-xs-3 form-group">
-      {!! Form::label('Color') !!}
-      {!! Form::text('color', null, ['class'=>'form-control']) !!}
-    </div>
-
     <div class="col-xs-12">
     <h4> Datos de la operación</h4>
     </div>
 
    
-    <div class="col-xs-2 form-group">
+    <div class="col-xs-3 form-group">
       {!! Form::label('Cantidad') !!}
       {!! Form::text('cantidad', null, ['class'=>'form-control']) !!}
     </div>
 
-
-    <div class="col-xs-2 form-group">
-      {!! Form::label('Accesorios Extras') !!}
-      {!! Form::text('accesorios', null, ['class'=>'form-control']) !!}
-    </div>
-
-    <div class="col-xs-2 form-group">
-      {!! Form::label('Estado') !!}
-      {!! Form::text('estado', null, ['class'=>'form-control']) !!}
-    </div>
 
     <div class="col-xs-3 form-group">
       {!! Form::label('Precio Compra') !!}
       {!! Form::text('precio_unitario', null, ['class'=>'form-control']) !!}
     </div>
 
-    <div class="col-xs-3 form-group">
-      {!! Form::label('Precio Venta') !!}
-      {!! Form::text('precio_venta', null, ['class'=>'form-control']) !!}
+    {{--
+    <div class="col-xs-12">
+    <h4> Datos de pago</h4>
+    </div>
+   
+   <div class="col-xs-3 form-group">
+      {!! Form::label('Fecha y Hora') !!}
+      {!! Form::text('cantidad', null, ['class'=>'form-control']) !!}
     </div>
 
-     <div class="col-xs-12 form-group">
-      {!! Form::label('Condición u Observaciones para venta') !!}
-      {!! Form::textarea('observacion', null, ['class'=>'form-control', 'rows' => '5' ]) !!}
+
+    <div class="col-xs-3 form-group">
+      {!! Form::label('Forma de Pago') !!}
+      {!! Form::text('precio_unitario', null, ['class'=>'form-control']) !!}
     </div>
+
+    <div class="col-xs-3 form-group">
+      {!! Form::label('Datos de la cuenta') !!}
+      {!! Form::text('precio_unitario', null, ['class'=>'form-control']) !!}
+    </div>
+    --}}
+     
             
 @endsection
 

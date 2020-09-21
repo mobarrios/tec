@@ -9,19 +9,27 @@ use App\Http\Repositories\Admin\BrandsRepo;
 use App\Http\Repositories\Admin\CertificatesRepo;
 use App\Http\Repositories\Admin\ColorsRepo;
 use App\Http\Repositories\Admin\ItemsRepo as Repo;
+use App\Http\Repositories\Tecnica\StatesRepo;
+use App\Entities\Tecnica\ItemsStates;
+use App\Http\Repositories\Tecnica\PurcharsesRepo;
 use App\Http\Repositories\Admin\ModelsRepo;
+use App\Http\Repositories\Configs\UsersRepo;
+use App\Http\Repositories\Configs\BranchesRepo;
+use App\Http\Repositories\Admin\ClientsRepo;
+use App\Http\Repositories\Configs\CompanyRepo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Session;
 use League\Flysystem\Config;
-
+use PDF;
+use Auth;
 
 class ItemsController extends Controller
 {
 
     protected  $certificatesRepo;
 
-    public function  __construct(Request $request, Repo $repo, Route $route, ModelsRepo $modelsRepo, ColorsRepo $colorsRepo ,  BrandsRepo $brandsRepo)
+    public function  __construct(Request $request, Repo $repo, Route $route, ModelsRepo $modelsRepo, ColorsRepo $colorsRepo ,  BrandsRepo $brandsRepo, UsersRepo $usersRepo, ClientsRepo $clientsRepo,  CompanyRepo $companyRepo, PurcharsesRepo $purcharsesRepo, BranchesRepo $branchesRepo, StatesRepo $statesRepo)
     {
         $this->request  = $request;
         $this->repo     = $repo;
@@ -35,6 +43,15 @@ class ItemsController extends Controller
         $this->data['colors']       = $colorsRepo->ListsData('name','id');
 
         $this->data['brands']   = $brandsRepo->getAllWithModels();
+        $this->data['users']    = $usersRepo->ListsData('name','id');
+        $this->data['clients']  = $clientsRepo->getModel()->all()->lists('fullname','id');
+        $this->data['companies']    = $companyRepo->getModel()->all()->lists('razon_social','id');
+        $this->data['branches'] = $branchesRepo->listsData('name', 'id');
+        $this->data['states'] = $statesRepo->getModel()->orderBy('description','ASC')->lists('description','id');
+
+        $this->purcharsesRepo = $purcharsesRepo;
+
+
 
        // $this->certificatesRepo = $certificatesRepo;
     }
@@ -93,7 +110,16 @@ class ItemsController extends Controller
         $id = $this->route->getParameter('id');
 
         //edita a traves del repo
-        $model = $this->repo->update($id,$this->request);
+        //$model = $this->repo->update($id,$this->request);
+        //dd($this->request->all());
+        $model = $this->repo->getModel()->find($id);
+
+        $model->fill($this->request->all());
+        $model->save();
+
+        $data = $this->request->only('color', 'accesorios', 'capacidad', 'precio_venta','observacion');
+        $model->Compra()->update($data);
+  
 
         return redirect()->route(config('models.'.$this->section.'.postUpdateRoute'))->withErrors(['Regitro Editado Correctamente']);
     }
@@ -135,6 +161,115 @@ class ItemsController extends Controller
         else
             return response()->json(false);
     }
+
+    public function show(){
+        $this->data['models']       = $this->repo->find($this->route->getParameter('id'));
+    
+        
+        return view('admin.items.details')->with($this->data);
+
+    }
+
+
+    public function reporte(CompanyRepo $companyRepo){
+
+        //$this->data['models']       = $this->repo->find($this->route->getParameter('id'));
+        $model      = $this->repo->find($this->route->getParameter('id'));
+        $company    = $companyRepo->getModel()->first();
+        //$letraChica = $toPrintRepo->ultimo();
+        $pdf        = PDF::loadView('admin.items.reporte', compact('model','company'));
+
+        return $pdf->stream();
+        
+    
+    }
+
+    public function compra(){
+
+
+    $purcharse      = $this->purcharsesRepo->find($this->route->getParameter('id'));
+
+    if(!$purcharse->Venta){
+
+        $items = $this->repo->create([
+            'name' => 'venta',
+            'status' => '1',
+            'models_id' => $purcharse->models_id,
+            'purcharses_id' => $purcharse->id,
+            'clients_id' => $purcharse->clients_id,
+            'users_id' => $purcharse->users_id
+
+        ]);
+    }else{
+
+        $items = $this->repo->getModel()->orderBy('id','desc')->first();
+    }
+
+
+    return redirect()->route('admin.items.edit', $items->id);
+    
+    }
+
+
+    public function updateEstado(Request $request, StatesRepo $statesRepo, CompanyRepo $companyRepo){
+        
+        //dd($request->all());
+
+        $item = $this->repo->find($this->request->items_id);
+
+        $state              = new ItemsStates();
+        $state->items_id   = $request->get('items_id');
+        $state->users_id    = Auth::user()->id;
+        $state->states_id   = $request->get('estado_id');
+        $state->save();
+
+        /*
+        $data['estado']     = $statesRepo->find($request->get('estado_id'));
+        $model              = $this->repo->find($request->get('orden_id'));
+        $data['company']    = $companyRepo->getModel()->first();
+        $tasks              = Tasks::all();
+        $vendedor           = Auth::user();
+        $letraChica         = $this->toPrintRepo->ultimo();
+        $company            = $this->companyRepo->getModel()->first();
+        $idCrypt            = Crypt::encrypt($model->id);
+        $tipo               = 'Reparacion';
+
+        //Si el cliente tiene email o enviar es verdadero
+        if(!empty($model->Cliente->email) && $data['estado']->enviar == true){
+
+            try{
+                //Envio de email
+                Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company'], 'models_id' => $idCrypt, 'tipo' => $tipo ], function($message) use ($data,$model,$letraChica,$company, $tasks, $vendedor)
+                {   
+
+                    $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');
+                    $message->to($model->Cliente->email, $model->Cliente->fullname);
+
+                    if($data['estado']->enviar_remito == true){
+                        $pdf        = PDF::loadView('admin.orders.reportes', compact('model','letraChica','company', 'tasks', 'vendedor'));
+                        $message->attachData($pdf->output(), 'remito.pdf', ['mime' => 'application/pdf']);
+                    }
+
+                });
+
+            }catch(Exception $e){
+
+                return redirect()->back()->withErrors(['No se ha podido enviar el email']);
+            }
+    
+            return redirect()->back()->withErrors(['Regitro Agregado Correctamente. Email enviado al cliente.']);
+
+        }else{
+         
+            return redirect()->back()->withErrors(['Regitro Agregado Correctamente. El Email no fue enviado al cliente.']);
+        }
+
+        */
+
+        return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
+       
+    }
+
 
 
     
