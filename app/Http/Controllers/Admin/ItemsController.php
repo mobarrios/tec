@@ -201,6 +201,14 @@ class ItemsController extends Controller
             'users_id' => $purcharse->users_id
 
         ]);
+
+        $state              = new ItemsStates();
+        $state->items_id    = $items->id;
+        $state->users_id    = Auth::user()->id;
+        $state->states_id   = 41;
+        $state->save();
+
+
     }else{
 
         $items = $this->repo->getModel()->orderBy('id','desc')->first();
@@ -219,7 +227,7 @@ class ItemsController extends Controller
         $item = $this->repo->find($this->request->items_id);
 
         $state              = new ItemsStates();
-        $state->items_id   = $request->get('items_id');
+        $state->items_id    = $request->get('items_id');
         $state->users_id    = Auth::user()->id;
         $state->states_id   = $request->get('estado_id');
         $state->save();
