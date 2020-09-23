@@ -102,6 +102,13 @@ return [
         '38' => ['digital','vendedor', 'tecnico central', 'serviciotecnico', 'mecanico', 'admin', 'root'],
         '39' => ['digital','vendedor', 'tecnico central', 'serviciotecnico', 'mecanico', 'admin', 'root'],
         '40' => ['digital','vendedor', 'tecnico central', 'serviciotecnico', 'mecanico', 'admin', 'root'],
+        '41' => ['digital','vendedor', 'tecnico central', 'serviciotecnico', 'mecanico', 'admin', 'root'],
+        '42' => ['digital','vendedor', 'tecnico central', 'serviciotecnico', 'mecanico', 'admin', 'root'],
+        '43' => ['digital','vendedor', 'tecnico central', 'serviciotecnico', 'mecanico', 'admin', 'root'],
+        '44' => ['digital','vendedor', 'tecnico central', 'serviciotecnico', 'mecanico', 'admin', 'root'],
+
+
+
     ],
 
 

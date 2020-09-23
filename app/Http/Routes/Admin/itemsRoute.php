@@ -18,6 +18,7 @@ Route::group(['prefix'=>'items'],function(){
         Route::get('/compra/{id}',              ['as'=>'admin.items.compra','uses'=>'Admin\ItemsController@compra']);
 
         Route::post('/updateEstado/{id?}',              ['as'=>'admin.items.updateEstado','uses'=>'Admin\ItemsController@updateEstado']);
+        Route::post('/updateSucursal/{id?}',              ['as'=>'admin.items.updateSucursal','uses'=>'Admin\ItemsController@updateSucursal']);
 
 
 

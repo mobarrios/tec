@@ -11,6 +11,7 @@ use App\Http\Repositories\Admin\ColorsRepo;
 use App\Http\Repositories\Admin\ItemsRepo as Repo;
 use App\Http\Repositories\Tecnica\StatesRepo;
 use App\Entities\Tecnica\ItemsStates;
+use App\Entities\Tecnica\ItemsBranches;
 use App\Http\Repositories\Tecnica\PurcharsesRepo;
 use App\Http\Repositories\Admin\ModelsRepo;
 use App\Http\Repositories\Configs\UsersRepo;
@@ -29,7 +30,7 @@ class ItemsController extends Controller
 
     protected  $certificatesRepo;
 
-    public function  __construct(Request $request, Repo $repo, Route $route, ModelsRepo $modelsRepo, ColorsRepo $colorsRepo ,  BrandsRepo $brandsRepo, UsersRepo $usersRepo, ClientsRepo $clientsRepo,  CompanyRepo $companyRepo, PurcharsesRepo $purcharsesRepo, BranchesRepo $branchesRepo, StatesRepo $statesRepo)
+    public function  __construct(Request $request, Repo $repo, Route $route, ModelsRepo $modelsRepo, ColorsRepo $colorsRepo ,  BrandsRepo $brandsRepo, UsersRepo $usersRepo, ClientsRepo $clientsRepo,  CompanyRepo $companyRepo, PurcharsesRepo $purcharsesRepo, BranchesRepo $branchesRepo, StatesRepo $statesRepo, ItemsBranches $itemsBranches)
     {
         $this->request  = $request;
         $this->repo     = $repo;
@@ -264,6 +265,51 @@ class ItemsController extends Controller
             return redirect()->back()->withErrors(['Regitro Agregado Correctamente. El Email no fue enviado al cliente.']);
         }
 
+        */
+
+        return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
+       
+    }
+
+     public function updateSucursal(Request $request){
+        
+
+        $state              = new ItemsBranches();
+        $state->items_id    = $request->get('items_id');
+        $state->users_id    = Auth::user()->id;
+        $state->sucursales_id   = $request->get('sucursales_id');
+        $state->save();
+
+        /*
+        //Si el cliente tiene email o enviar es verdadero
+        if(!empty($model->Cliente->email) && $data['estado']->enviar == true){
+
+            try{
+                //Envio de email
+                Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company'], 'models_id' => $idCrypt, 'tipo' => $tipo ], function($message) use ($data,$model,$letraChica,$company, $tasks, $vendedor)
+                {   
+
+                    $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');
+                    $message->to($model->Cliente->email, $model->Cliente->fullname);
+
+                    if($data['estado']->enviar_remito == true){
+                        $pdf        = PDF::loadView('admin.orders.reportes', compact('model','letraChica','company', 'tasks', 'vendedor'));
+                        $message->attachData($pdf->output(), 'remito.pdf', ['mime' => 'application/pdf']);
+                    }
+
+                });
+
+            }catch(Exception $e){
+
+                return redirect()->back()->withErrors(['No se ha podido enviar el email']);
+            }
+    
+            return redirect()->back()->withErrors(['Regitro Agregado Correctamente. Email enviado al cliente.']);
+
+        }else{
+         
+            return redirect()->back()->withErrors(['Regitro Agregado Correctamente. El Email no fue enviado al cliente.']);
+        }
         */
 
         return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
