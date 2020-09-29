@@ -117,6 +117,64 @@
             </div>
           </div>
         </div>
+
+        <div class="col-xs-12">
+          <div class="box box-solid">
+          <div class="box-header with-border">
+            <h3 class="box-title">  Sucursales </h3>
+          </div>
+          <div class="box-body">
+            <div class="col-lg-12">
+
+              
+              {!! Form::open(['route'=>('admin.items.updateSucursal')]) !!}
+              <div class="input-group">
+                
+                <select class="form-control select2" name="sucursales_id">
+                  <option value="">Seleccionar Sucursal</option>
+                  
+                  @foreach($branches as $key => $estado)
+                      <option value="{{ $key }}"> {{ $estado }} </option>
+                  @endforeach
+
+                </select>
+
+                {!! Form::hidden('items_id', $models->id) !!}
+
+                <span class="input-group-btn">
+                <button class="btn btn-default" type="submit"><span class="fa fa-plus"></span></button>
+                </span>
+                {!! Form::close() !!}
+
+              </div>
+            </div>
+            <div class="col-lg-12">
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th>Fecha</th>
+                    <th>Usuario</th>
+                    <th>Sucursal</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+
+                  @foreach($models->ItemsSucursales as $orden)
+                   
+                    <tr>
+                      <td>{{ $orden->created_at }}</td>
+                      <td>{{ isset($orden->User)  ? $orden->User->user_name : '' }}</td>
+                      <td>{{ isset($orden->Sucursal->name) ? $orden->Sucursal->name : '' }}</td>
+                     
+                    </tr>
+                  @endforeach
+                  </tbody>
+                </table>
+            </div>
+            </div>
+          </div>
+        </div>
+
       </div>
       </div>
 

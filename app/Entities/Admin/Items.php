@@ -5,6 +5,7 @@ namespace App\Entities\Admin;
 use App\Entities\Entity;
 use App\Entities\Tecnica\Purcharses;
 use App\Entities\Tecnica\ItemsStates;
+use App\Entities\Tecnica\ItemsBranches;
 use App\Entities\Tecnica\States;
 use App\Entities\Configs\User;
 use App\Entities\Configs\Branches;
@@ -92,6 +93,10 @@ use App\Entities\Configs\Company;
 
     public function lastItemsEstados(){
         return $this->hasMany(ItemsStates::getClass())->orderBy('id','DESC')->first();
+    }
+
+    public function ItemsSucursales(){
+        return $this->hasMany(ItemsBranches::getClass());
     }
 
  }

@@ -30,15 +30,17 @@
     </div>
 
 
-    <div class="col-xs-3 form-group">
+    <div class="col-xs-6 form-group">
       {!! Form::label('Compañia') !!}
       {!! Form::select('companies_id', $companies , auth()->user()->branchesActive->company->id ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Compañia']) !!}
     </div>
 
+    {{--
     <div class="col-xs-3 form-group">
       {!! Form::label('Sucursal de venta') !!}
       {!! Form::select('sucursales_id', $branches , isset($models->Sucursal) ? $models->Sucursal->id : '',['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Sucursal']) !!}
     </div>
+    --}}
 
     <div class="col-xs-12">
     <h4> Datos del producto</h4>

@@ -5,10 +5,10 @@
             <tr>
                 <td style="width: 1%"><input class="id_destroy" value="{{$model->id}}" type="checkbox"></td>
                 <td>{{$model->id}}</td>
-                <td>{{$model->Models->Brands->name }} <strong>{{$model->Models->name }}</strong><br></td>
-                <td>{{$model->Compra->color }}</td>
-                <td>{{$model->Compra->capacidad }}</td>
-                <td>Precio Venta <strong>$ {{$model->Compra->precio_venta}}</strong><br></td>
+                <td>{{ isset($model->Models->Brands->name) ? $model->Models->Brands->name : '' }} <strong>{{ isset($model->Models->name) ? $model->Models->name : '' }}</strong><br></td>
+                <td>{{ isset($model->Compra->color) ? $model->Compra->color : '' }}</td>
+                <td>{{ isset($model->Compra->capacidad) ? $model->Compra->capacidad : '' }}</td>
+                <td>Precio Venta <strong>$ {{ isset($model->Compra->precio_venta) ? $model->Compra->precio_venta : ''}}</strong><br></td>
                 <td><span class="label" style="background-color:{{ isset($model->lastItemsEstados()->States->color) ? $model->lastItemsEstados()->States->color : '' }} "> {{ isset($model->lastItemsEstados()->States->description) ? $model->lastItemsEstados()->States->description : '' }} </span></td>
                 <td>
                     @if($model->Sucursal)
