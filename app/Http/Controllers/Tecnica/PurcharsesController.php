@@ -44,7 +44,7 @@ class PurcharsesController extends Controller
     }
 
 
-      public function show(){
+    public function show(){
          
     	$this->data['models'] 		= $this->repo->find($this->route->getParameter('id'));
     

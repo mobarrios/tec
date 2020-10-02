@@ -83,7 +83,7 @@ class ItemsController extends Controller
         Session::put('export', ['model' => $this->repo->getModel()->getClass(),'section' => config('models.'.$this->section.'.sectionName')]);
 
         //pagina el query
-        $this->data['models'] = $model->paginate(config('models.'.$this->section.'.paginate'));
+        $this->data['models'] = $model->orderBy('id','DESC')->paginate(config('models.'.$this->section.'.paginate'));
 
         //return view($this->getConfig()->indexRoute)->with($this->data);
         return view(config('models.'.$this->section.'.indexRoute'))->with($this->data);
