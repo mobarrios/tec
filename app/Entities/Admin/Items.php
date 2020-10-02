@@ -99,6 +99,10 @@ use App\Entities\Configs\Company;
         return $this->hasMany(ItemsBranches::getClass());
     }
 
+    public function lastItemsSursales(){
+        return $this->hasMany(ItemsBranches::getClass())->orderBy('id','DESC')->first();
+    }
+
  }
 
 
