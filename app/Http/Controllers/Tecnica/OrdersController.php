@@ -57,7 +57,7 @@ class OrdersController extends Controller
         $this->data['models_id']    = $modelsRepo->ListsData('name','id');
         $this->data['brands']       = $brandsRepo->getAllWithModels();
         $this->data['services']     = $servicesRepo->getModel()->all();
-        $this->data['users']        = $usersRepo->ListsData('name','id');
+        $this->data['users']        = $usersRepo->getModel()->all()->lists('user_name','id');
      
     }
 
