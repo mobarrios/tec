@@ -266,8 +266,39 @@ class OrdersController extends Controller
         $tasks              = Tasks::all();
         $vendedor           = Auth::user();
         $letraChica         = $this->toPrintRepo->ultimo();
-      
+        
 
+        
+
+        for ($i=0; $i < 2 ; $i++) { 
+            
+            $emails = [ 'coderst@icase.com.ar', $model->Cliente->email ];
+
+            if( !empty($emails[$i]) ){
+
+            //Envio de email
+            Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company'], 'models_id' => $idCrypt ], function($message) use ($data,$model,$letraChica,$company,$tasks, $vendedor,$emails, $i)
+            {
+
+            $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');
+            $message->to( $emails[$i], $model->Cliente->fullname);
+
+            /*
+            if($data['estado']->enviar_remito == true ){
+                $pdf = PDF::loadView('admin.orders.reportes', compact('model','letraChica','company','tasks','vendedor'));
+                $message->attachData($pdf->output(), 'remito.pdf', ['mime' => 'application/pdf']);
+            }
+            */
+            });
+
+            }
+
+        }
+
+        return redirect()->route('admin.orders.details',$model->id)->withErrors(['Regitro Agregado Correctamente. Email enviado al cliente.']);
+
+
+        /*
         //Envio de mail
         if(!empty($model->Cliente->email) && $data['estado']->enviar == true){   
             
@@ -301,6 +332,7 @@ class OrdersController extends Controller
             //return redirect()->back()->withErrors(['Regitro Agregado Correctamente. El Email no fue enviado al cliente.']);
             return redirect()->route('admin.orders.details',$model->id)->withErrors(['Regitro Agregado Correctamente. El email no fue enviado al cliente']);
         }
+        */
 
     }
 
