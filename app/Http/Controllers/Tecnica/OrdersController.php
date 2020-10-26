@@ -283,12 +283,12 @@ class OrdersController extends Controller
             $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');
             $message->to( $emails[$i], $model->Cliente->fullname);
 
-            /*
+            
             if($data['estado']->enviar_remito == true ){
                 $pdf = PDF::loadView('admin.orders.reportes', compact('model','letraChica','company','tasks','vendedor'));
                 $message->attachData($pdf->output(), 'remito.pdf', ['mime' => 'application/pdf']);
             }
-            */
+            
             });
 
             }
