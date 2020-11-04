@@ -121,10 +121,22 @@
               {!! Form::text('insumos', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-4 form-group">
+              {!! Form::label('Capacidad') !!}
+              {!! Form::text('capacidad', null, ['class'=>'form-control']) !!}
+            </div>
+            <div class="col-xs-4 form-group">
+              {!! Form::label('Color') !!}
+              {!! Form::text('color', null, ['class'=>'form-control']) !!}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4 form-group">
               {!! Form::label('$ Presupuesto Estimado') !!}
               {!! Form::text('presupuesto_estimado', null, ['class'=>'form-control']) !!}
             </div>
           </div>
+
+          @if(!isset($models))
           <hr>
           <div class="row">
             <div class="col-xs-4 form-group">
@@ -160,6 +172,7 @@
 
             </div>
           </div>
+          @endif
 
 {{--             <div class="col-xs-2 form-group">
               <strong> Controles</strong>

@@ -55,14 +55,35 @@ return [
     'validationsStore' => [
 
           //'codigo_orden'    => 'required',
-          //'clients_id'      => 'required',
-          //'equipments_id'   => 'required',
+          'clients_id'      => 'required',
+        
           'clave_equipo'    => 'required',
+          'numero_serie'    => 'required',
+          'clave_equipo'    => 'required',
+          'serie_partes'    => 'required',
+          'falla_declarada'    => 'required',
+          'observaciones_tecnicas'    => 'required',
+          'partes'          => 'required',
+          'observaciones'   => 'required',
+          'insumos'         => 'required',
+          'presupuesto_estimado'    => 'required'
     
     ],
 
     'validationsUpdate' => [
 
+        'clients_id'      => 'required',
+        
+          'clave_equipo'    => 'required',
+          'numero_serie'    => 'required',
+          'clave_equipo'    => 'required',
+          'serie_partes'    => 'required',
+          'falla_declarada'    => 'required',
+          'observaciones_tecnicas'    => 'required',
+          'partes'          => 'required',
+          'observaciones'   => 'required',
+          'insumos'         => 'required',
+          'presupuesto_estimado'    => 'required'
     ],
 
 ];
