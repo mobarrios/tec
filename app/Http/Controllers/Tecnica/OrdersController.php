@@ -439,7 +439,7 @@ class OrdersController extends Controller
             $col = $diff;
             if($model->$diff != '')
                 //$model->Updateables()->create(['users_id' => Auth::user()->id, 'column' => $col, 'new_data' => $model->$diff, 'old_data' => $model->getOriginal($diff)]);
-                $model->Updateables()->create(['column' => $col, 'data_old' => $model->getOriginal($diff) ] );
+                $model->Updateables()->create(['column' => $col, 'data_old' => $model->getOriginal($diff), 'users_id' => Auth::user()->id ] );
         }
 
         /*

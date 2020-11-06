@@ -119,6 +119,12 @@
 							</strong>
 
 		                </span>
+		                <br><br>
+		                @if(isset($update->User))
+		                <i class="fa fa-user"></i>  {{ $update->User->fullname }}
+		                @endif
+
+
 		            </div>
 
 		           
