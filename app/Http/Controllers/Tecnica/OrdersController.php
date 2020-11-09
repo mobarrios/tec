@@ -237,7 +237,7 @@ class OrdersController extends Controller
     public function store()
     {
         //validar los campos
-        $this->validate($this->request,config('models.'.$this->section.'.validationsStore'), config('models.'.$this->section.'.messagesStore'));
+        $this->validate($this->request,config('models.'.$this->section.'.validationsStore'));
         //dd($this->request->all());
         //crea a traves del repo con el request
         $model = $this->repo->create($this->request);
