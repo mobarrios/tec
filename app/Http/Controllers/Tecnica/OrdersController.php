@@ -87,9 +87,13 @@ class OrdersController extends Controller
         
         $model            = $this->repo->find($request->get('orden_id')); 
         $model->users_id  = $request->get('users_id');
+        $this->updateable($model);
+
         $model->save();
 
         return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
+
+
 
     }
 
@@ -162,6 +166,9 @@ class OrdersController extends Controller
         $model                          = $this->repo->find($request->get('orden_id')); 
         $model->presupuesto_estimado    = $request->get('presupuesto_estimado');
         $model->pagado                  = $request->get('pagado');
+
+        $this->updateable($model);
+
         $model->save();
 
         return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
@@ -176,6 +183,7 @@ class OrdersController extends Controller
         $model->observaciones_tecnicas  = $request->get('observaciones_tecnicas');
         $model->partes                  = $request->get('partes');
         $model->observaciones_internas  = $request->get('observaciones_internas');
+        $this->updateable($model);
         $model->save();
 
         return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
@@ -258,6 +266,8 @@ class OrdersController extends Controller
         $state->save();
 
         //Envio de mail
+        $data['empresa']    = $model->Brancheables()->first()->branches->name;
+        $data['direccion']  = $model->Brancheables()->first()->branches->address;
         $data['estado']     = $this->statesRepo->find(1);
         $data['company']    = $this->companyRepo->getModel()->first();
         $letraChica         = $this->toPrintRepo->ultimo();
@@ -277,18 +287,19 @@ class OrdersController extends Controller
             if( !empty($emails[$i]) ){
 
             //Envio de email
-            Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company'], 'models_id' => $idCrypt ], function($message) use ($data,$model,$letraChica,$company,$tasks, $vendedor,$emails, $i)
+            Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company'], 'models_id' => $idCrypt, 'empresa' => $data['empresa'], 
+                'direccion' => $data['direccion'] ], function($message) use ($data,$model,$letraChica,$company,$tasks, $vendedor,$emails, $i)
             {
 
             $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');
             $message->to( $emails[$i], $model->Cliente->fullname);
 
-            
+            /*
             if($data['estado']->enviar_remito == true ){
                 $pdf = PDF::loadView('admin.orders.reportes', compact('model','letraChica','company','tasks','vendedor'));
                 $message->attachData($pdf->output(), 'remito.pdf', ['mime' => 'application/pdf']);
             }
-            
+            */
             });
 
             }
@@ -358,6 +369,7 @@ class OrdersController extends Controller
                 $tasksOrders->orders_id = $model->id;
                 $tasksOrders->tasks_id  = $key;
                 $tasksOrders->estado    = $value;
+                $this->updateable($model);
                 $tasksOrders->save();
 
             }
@@ -411,11 +423,48 @@ class OrdersController extends Controller
 
         $model               = $this->repo->find($this->request->get('orden_id')); 
         $model->vendedor_id  = $this->request->get('vendedor_id');
+        $this->updateable($model);
         $model->save();
 
         return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
 
     }
 
+    public function updateable($model){
+        
+        $diffs = array_diff_assoc($model->getAttributes(),$model->getOriginal());
+       
+        foreach ($diffs as $diff => $a)
+        {
+            $col = $diff;
+            if($model->$diff != '')
+                //$model->Updateables()->create(['users_id' => Auth::user()->id, 'column' => $col, 'new_data' => $model->$diff, 'old_data' => $model->getOriginal($diff)]);
+                $model->Updateables()->create(['column' => $col, 'data_old' => $model->getOriginal($diff), 'users_id' => Auth::user()->id ] );
+        }
+
+        /*
+        $a = $model['original'];
+        $c = $model['attributes'];
+
+
+        $diffs = array_diff($a, $c);
+
+        foreach ($diffs as $diff => $a)
+        {
+        $col = $diff;
+        $data = $a;
+
+        $model->Updateables()->create(['column' => $col, 'data_old' => $data]);
+        }
+        */
+
+    }
+
+    public function history(){
+
+        $this->data['model']     = $this->repo->find($this->route->getParameter('id'));
+        //dd($this->data['model']);
+        return view('admin.orders.history')->with($this->data);
+    }
 
 }

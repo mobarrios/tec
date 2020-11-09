@@ -58,14 +58,29 @@ return [
     'validationsStore' => [
 
           //'codigo_orden'    => 'required',
-          //'clients_id'      => 'required',
+          'clients_id'      => 'required',
           //'equipments_id'   => 'required',
           //'clave_equipo'    => 'required',
+          'companies_id'    => 'required',
+          'users_id'           => 'required',
+          'models_id'       => 'required',
+          'numero_serie'    => 'required',
+          'cantidad'        => 'required',
+          'precio_unitario' => 'required'
     
     ],
 
     'validationsUpdate' => [
-
+         //'codigo_orden'    => 'required',
+          'clients_id'      => 'required',
+          //'equipments_id'   => 'required',
+          //'clave_equipo'    => 'required',
+          'companies_id'    => 'required',
+          'users_id'        => 'required',
+          'models_id'       => 'required',
+          'numero_serie'    => 'required',
+          'cantidad'        => 'required',
+          'precio_unitario' => 'required'
     ],
 
 ];

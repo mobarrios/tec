@@ -25,9 +25,13 @@
                 </div>
             </div>
             --}}
+             
+
             <a href="{{route('admin.ordenes.reporte',$models->id)}}" target="_blank" class="btn btn-default pull-right" style="margin-left: 10px;" >Reporte</a>  
 
             <a href="{{route('admin.ordenes.remito',$models->id)}}" target="_blank" class="btn btn-default pull-right ">Remito</a>  
+
+            <a href="{{route('admin.ordenes.history',$models->id)}}"  class="btn btn-default pull-right" style="margin-right: 10px;" >Historial</a> 
             
           </div>
         </div>
@@ -91,6 +95,10 @@
             <span class="text-muted">Falla :</span> <strong> {{ $models->numero_serie  }}</strong>
             <br>
             <span class="text-muted">Insumos : </span> <strong>{{ $models->insumos  }}</strong>
+            <br>
+            <span class="text-muted">Capacidad : </span> <strong>{{ $models->capacidad  }}</strong>
+            <br>
+            <span class="text-muted">Color : </span> <strong> {{ $models->color  }}</strong>
             <br>
             <span class="text-muted">Presupuesto : </span> <strong>$ {{ $models->presupuesto_estimado  }}</strong>
             <br>

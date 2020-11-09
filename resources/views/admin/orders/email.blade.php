@@ -45,11 +45,15 @@ float: left!important;
     <div class="col-12 ">
         <div class="status panel">
 	       <div class="status-content">
-		      <h3 class="heading-small m-none">{!! $estado->description !!}</h3>
+     
+                <h1 style="text-align: center;"> {{ $empresa }}</h1>
+                <h5 style="text-align: center;"> {{ $direccion }}</h5>
+                
+                <h3 class="heading-small m-none">{!! $estado->description !!}</h3>
             </div>
         </div>
     </div>
-	
+
      <style>
     	.container {
         margin-left: auto;

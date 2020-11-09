@@ -48,15 +48,32 @@ return [
 
     'validationsStore' => [
 
-            'models_id'          => 'required',
-           // 'address'     => 'required',
+        'models_id'     => 'required',
+        'clients_id'    => 'required',
+        'users_id'      => 'required',
+        'companies_id'  => 'required',
+        'numero_serie'  => 'required',
+        'capacidad'     => 'required',
+        'color'         => 'required',
+        'accesorios'    => 'required',
+        'precio_venta'  => 'required',
+        'observacion'   => 'required'
+       // 'address'     => 'required',
 
     ],
 
     'validationsUpdate' => [
 
-            'models_id'          => 'required',
-            //'address'     => 'required',
+        'models_id'     => 'required',
+        'clients_id'    => 'required',
+        'users_id'      => 'required',
+        'companies_id'  => 'required',
+        'numero_serie'  => 'required',
+        'capacidad'     => 'required',
+        'color'         => 'required',
+        'accesorios'    => 'required',
+        'precio_venta'  => 'required',
+        'observacion'   => 'required'
 
     ],
 
