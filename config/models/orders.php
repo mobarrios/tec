@@ -56,14 +56,13 @@ return [
 
           //'codigo_orden'    => 'required',
           'clients_id'      => 'required',
-        
           'clave_equipo'    => 'required',
           'numero_serie'    => 'required',
           'clave_equipo'    => 'required',
           'serie_partes'    => 'required',
           'falla_declarada'    => 'required',
           'observaciones_tecnicas'    => 'required',
-          'partes'          => 'required',
+          //'partes'          => 'required',
           'observaciones'   => 'required',
           'insumos'         => 'required',
           'presupuesto_estimado'    => 'required'
@@ -72,18 +71,32 @@ return [
 
     'validationsUpdate' => [
 
-        'clients_id'      => 'required',
-        
+          'clients_id'      => 'required',
           'clave_equipo'    => 'required',
           'numero_serie'    => 'required',
-          'clave_equipo'    => 'required',
           'serie_partes'    => 'required',
           'falla_declarada'    => 'required',
           'observaciones_tecnicas'    => 'required',
-          'partes'          => 'required',
+        //  'partes'          => 'required',
           'observaciones'   => 'required',
           'insumos'         => 'required',
           'presupuesto_estimado'    => 'required'
     ],
+
+
+    'messagesStore' => [
+
+      'clients_id.required'      => 'El campo cliente es requerido',
+      'clave_equipo.required'    => 'El campo clave equipo es requerido',
+      'numero_serie.required'    => 'El campo serie/imei es requerido',
+      'clave_equipo.required'    => 'El campo clave equipo es requerido',
+      'serie_partes.required'    => 'El campo serie partes es requerido',
+      'falla_declarada.required'    => 'El campo falla declarada es requerido',
+      'observaciones_tecnicas.required'    => 'El campo informe tecnico inicial es requerido',
+    //  'partes.required'          => 'El campo informe tecnico final es requerido',
+      'observaciones.required'   => 'El campo observaciones es requerido',
+      'insumos.required'         => 'El campo insumos es requerido',
+      'presupuesto_estimado.required'    => 'El campo presupuesto estimado es requerido',
+    ]
 
 ];
