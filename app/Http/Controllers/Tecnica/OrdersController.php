@@ -244,7 +244,20 @@ class OrdersController extends Controller
         //$this->validate($this->request,config('models.'.$this->section.'.validationsStore'));
 
         //$this->validate($this->request ,config('models.'.$this->section.'.validationsStore'), config('models.'.$this->section.'.messagesStore'));
-        $validator = Validator::make($this->request->all(), config('models.'.$this->section.'.validationsStore'), config('models.'.$this->section.'.messagesStore'));
+        $validator = Validator::make($this->request->all(), config('models.'.$this->section.'.validationsStore'), [
+
+          'clients_id.required'      => 'El campo cliente es requerido',
+          'clave_equipo.required'    => 'El campo clave equipo es requerido',
+          'numero_serie.required'    => 'El campo serie/imei es requerido',
+          'clave_equipo.required'    => 'El campo clave equipo es requerido',
+          'serie_partes.required'    => 'El campo serie partes es requerido',
+          'falla_declarada.required'    => 'El campo falla declarada es requerido',
+          'observaciones_tecnicas.required'    => 'El campo informe tecnico inicial es requerido',
+        //  'partes.required'          => 'El campo informe tecnico final es requerido',
+          'observaciones.required'   => 'El campo observaciones es requerido',
+          'insumos.required'         => 'El campo insumos es requerido',
+          'presupuesto_estimado.required'    => 'El campo presupuesto estimado es requerido',
+        ]);
 
         if ($validator->fails()) {
             return redirect()->back()
