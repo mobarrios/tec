@@ -11,7 +11,7 @@ Route::group(['prefix'=>'orders'],function(){
         Route::post('/update/{id?}',    ['as'=>'admin.orders.update','uses'=>'Tecnica\OrdersController@update']);
 
         Route::get('/create/{cliente?}',           ['as'=>'admin.orders.create','uses'=>'Tecnica\OrdersController@create']);
-        Route::post('/store',           ['as'=>'admin.orders.store','uses'=>'Tecnica\OrdersController@store']);
+        Route::post('/store',           ['as'=>'admin.orders.store','uses'=>'Tecnica\OrdersController@storeOrder']);
         Route::get('/show',             ['as'=>'admin.orders.show','uses'=>'Tecnica\OrdersController@show']);
         Route::get('/index/{search?}',  ['as'=>'admin.orders.index','uses'=>'Tecnica\OrdersController@index']);
         Route::get('/pdf',              ['middleware'=>'permission:'.$section.'.list','as'=>'admin.orders.pdf','uses'=>'Tecnica\OrdersController@exportListToPdf']);
