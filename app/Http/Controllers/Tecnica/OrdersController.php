@@ -28,6 +28,7 @@ use PDF;
 use Auth;
 use Mail;
 use Crypt;
+use Validator;
 
 class OrdersController extends Controller
 {
@@ -242,8 +243,14 @@ class OrdersController extends Controller
         //validar los campos
         //$this->validate($this->request,config('models.'.$this->section.'.validationsStore'));
 
-        $this->validate($this->request ,config('models.'.$this->section.'.validationsStore'), config('models.'.$this->section.'.messagesStore'));
+        //$this->validate($this->request ,config('models.'.$this->section.'.validationsStore'), config('models.'.$this->section.'.messagesStore'));
+        $validator = Validator::make($this->request->all(), config('models.'.$this->section.'.validationsStore'), config('models.'.$this->section.'.messagesStore'));
 
+        if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
         //dd($this->request->all());
         //crea a traves del repo con el request
         $model = $this->repo->create($this->request);
@@ -439,14 +446,16 @@ class OrdersController extends Controller
     public function updateable($model){
         
         $diffs = array_diff_assoc($model->getAttributes(),$model->getOriginal());
-       
+      
         foreach ($diffs as $diff => $a)
         {
             $col = $diff;
-            if($model->$diff != '' && !is_null($model->getOriginal($diff)))
+            //dd($model->getOriginal($diff));
+            if( $model->getOriginal($diff) != '' ){
+                $model->Updateables()->create(['column' => $col, 'data_old' => $model->getOriginal($diff), 'users_id' => Auth::user()->id ] );
+            }
                
                 //$model->Updateables()->create(['users_id' => Auth::user()->id, 'column' => $col, 'new_data' => $model->$diff, 'old_data' => $model->getOriginal($diff)]);
-                $model->Updateables()->create(['column' => $col, 'data_old' => $model->getOriginal($diff), 'users_id' => Auth::user()->id ] );
         }
 
         /*
