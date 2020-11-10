@@ -108,6 +108,8 @@ class OrdersController extends Controller
 
         $data['estado']     = $statesRepo->find($request->get('estado_id'));
         $model              = $this->repo->find($request->get('orden_id'));
+        $data['empresa']    = $model->Brancheables()->first()->branches->name;
+        $data['direccion']  = $model->Brancheables()->first()->branches->address;
         $data['company']    = $companyRepo->getModel()->first();
         $tasks              = Tasks::all();
         $vendedor           = Auth::user();
@@ -121,7 +123,7 @@ class OrdersController extends Controller
 
             try{
                 //Envio de email
-                Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company'], 'models_id' => $idCrypt, 'tipo' => $tipo ], function($message) use ($data,$model,$letraChica,$company, $tasks, $vendedor)
+                Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company'], 'models_id' => $idCrypt, 'empresa' => $data['empresa'],'direccion' => $data['direccion'] ,'tipo' => $tipo ], function($message) use ($data,$model,$letraChica,$company, $tasks, $vendedor)
                 {   
 
                     $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');
@@ -234,10 +236,14 @@ class OrdersController extends Controller
         return redirect()->back()->withErrors(['Registro borrado correctamente']);
     }
 
-    public function store()
+    public function storeOrder()
     {
+
         //validar los campos
-        $this->validate($this->request,config('models.'.$this->section.'.validationsStore'));
+        //$this->validate($this->request,config('models.'.$this->section.'.validationsStore'));
+
+        $this->validate($this->request ,config('models.'.$this->section.'.validationsStore'), config('models.'.$this->section.'.messagesStore'));
+
         //dd($this->request->all());
         //crea a traves del repo con el request
         $model = $this->repo->create($this->request);
@@ -294,12 +300,12 @@ class OrdersController extends Controller
             $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');
             $message->to( $emails[$i], $model->Cliente->fullname);
 
-            /*
+           
             if($data['estado']->enviar_remito == true ){
                 $pdf = PDF::loadView('admin.orders.reportes', compact('model','letraChica','company','tasks','vendedor'));
                 $message->attachData($pdf->output(), 'remito.pdf', ['mime' => 'application/pdf']);
             }
-            */
+           
             });
 
             }
@@ -437,7 +443,8 @@ class OrdersController extends Controller
         foreach ($diffs as $diff => $a)
         {
             $col = $diff;
-            if($model->$diff != '')
+            if($model->$diff != '' && !is_null($model->getOriginal($diff)))
+               
                 //$model->Updateables()->create(['users_id' => Auth::user()->id, 'column' => $col, 'new_data' => $model->$diff, 'old_data' => $model->getOriginal($diff)]);
                 $model->Updateables()->create(['column' => $col, 'data_old' => $model->getOriginal($diff), 'users_id' => Auth::user()->id ] );
         }
