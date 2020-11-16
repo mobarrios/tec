@@ -253,10 +253,10 @@ class OrdersController extends Controller
           'clave_equipo.required'    => 'El campo clave equipo es requerido',
           'serie_partes.required'    => 'El campo serie partes es requerido',
           'falla_declarada.required'    => 'El campo falla declarada es requerido',
-          'observaciones_tecnicas.required'    => 'El campo informe tecnico inicial es requerido',
-        //  'partes.required'          => 'El campo informe tecnico final es requerido',
+            //'observaciones_tecnicas.required'    => 'El campo informe tecnico inicial es requerido',
+            //  'partes.required'          => 'El campo informe tecnico final es requerido',
           'observaciones.required'   => 'El campo observaciones es requerido',
-          'insumos.required'         => 'El campo insumos es requerido',
+          //'insumos.required'         => 'El campo insumos es requerido',
           'presupuesto_estimado.required'    => 'El campo presupuesto estimado es requerido',
         ]);
 
