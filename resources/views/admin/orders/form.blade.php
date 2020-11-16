@@ -97,7 +97,8 @@
           </div>
 
           <div class="row">  
-         
+            
+            {{--
             <div class="col-xs-4 form-group">
               {!! Form::label('Informe tecnico inicial') !!}
               {!! Form::textarea('observaciones_tecnicas', null, ['class'=>'form-control', 'rows' => 2, 'cols' => 40]) !!}
@@ -112,14 +113,17 @@
               {!! Form::label('Observaciones') !!}
               {!! Form::textarea('observaciones', null, ['class'=>'form-control', 'rows' => 2, 'cols' => 40]) !!}
             </div>
+              --}}
           
           </div>
           
           <div class="row">
+            {{--
             <div class="col-xs-4 form-group">
               {!! Form::label('Insumos') !!}
               {!! Form::text('insumos', null, ['class'=>'form-control']) !!}
             </div>
+            --}}
             <div class="col-xs-4 form-group">
               {!! Form::label('Capacidad') !!}
               {!! Form::text('capacidad', null, ['class'=>'form-control']) !!}
@@ -127,6 +131,10 @@
             <div class="col-xs-4 form-group">
               {!! Form::label('Color') !!}
               {!! Form::text('color', null, ['class'=>'form-control']) !!}
+            </div>
+            <div class="col-xs-4 form-group">
+              {!! Form::label('Observaciones') !!}
+              {!! Form::textarea('observaciones', null, ['class'=>'form-control', 'rows' => 2, 'cols' => 40]) !!}
             </div>
           </div>
           <div class="row">
