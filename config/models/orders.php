@@ -61,10 +61,10 @@ return [
           'clave_equipo'    => 'required',
           'serie_partes'    => 'required',
           'falla_declarada'    => 'required',
-          'observaciones_tecnicas'    => 'required',
+        //  'observaciones_tecnicas'    => 'required',
           //'partes'          => 'required',
           'observaciones'   => 'required',
-          'insumos'         => 'required',
+          //'insumos'         => 'required',
           'presupuesto_estimado'    => 'required'
     
     ],
@@ -76,10 +76,10 @@ return [
           'numero_serie'    => 'required',
           'serie_partes'    => 'required',
           'falla_declarada'    => 'required',
-          'observaciones_tecnicas'    => 'required',
+        //  'observaciones_tecnicas'    => 'required',
         //  'partes'          => 'required',
           'observaciones'   => 'required',
-          'insumos'         => 'required',
+          //'insumos'         => 'required',
           'presupuesto_estimado'    => 'required'
     ],
 
@@ -92,10 +92,10 @@ return [
       'clave_equipo.required'    => 'El campo clave equipo es requerido',
       'serie_partes.required'    => 'El campo serie partes es requerido',
       'falla_declarada.required'    => 'El campo falla declarada es requerido',
-      'observaciones_tecnicas.required'    => 'El campo informe tecnico inicial es requerido',
+    //  'observaciones_tecnicas.required'    => 'El campo informe tecnico inicial es requerido',
     //  'partes.required'          => 'El campo informe tecnico final es requerido',
       'observaciones.required'   => 'El campo observaciones es requerido',
-      'insumos.required'         => 'El campo insumos es requerido',
+      //'insumos.required'         => 'El campo insumos es requerido',
       'presupuesto_estimado.required'    => 'El campo presupuesto estimado es requerido',
     ]
 
