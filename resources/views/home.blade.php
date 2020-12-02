@@ -70,7 +70,7 @@
             </div>
         </div>
         --}}
-       
+
 
         {{--
 
@@ -90,7 +90,7 @@
         --}}
 
     <div class="row">
-        
+
         <div class="col-sm-2 ">
             <div class="box no-border">
                 <div class="box-body">
@@ -127,16 +127,16 @@
                 {{-- <h3>{{$orders_cerradas->count()}}</h3> --}}
                 <h3>0</h3>
                 <p>Ordenes Entregadas</p>
-                
+
                 </div>
                 <div class="icon">
                 <i class="ion ion-wrench"></i>
                 </div>
                 </div>
             </div>
-                            
-        
-    
+
+
+
         <div class="col-sm-12 col-xs-12">
             <div class="box">
                 <div class="box-header">
@@ -181,12 +181,11 @@
           </div>
         </div>
 
-        <div class="col-sm-12">
+        {{-- <div class="col-sm-12">
         <iframe src="http://coders.com.ar:3000/public/dashboard/dbb92d9a-82a3-44a0-b649-1b7b7ec86bcb" frameborder="0"  width="100%"  height="600" allowtransparency>
-            
+
         </iframe>
-            
-        </div>
+
+        </div> --}}
     </div>
 @endsection
-
