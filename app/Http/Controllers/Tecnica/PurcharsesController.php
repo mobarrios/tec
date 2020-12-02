@@ -12,6 +12,10 @@ use App\Http\Repositories\Admin\ItemsRepo;
 use App\Http\Repositories\Admin\BrandsRepo;
 use App\Http\Repositories\Configs\CompanyRepo;
 use App\Http\Repositories\Configs\UsersRepo;
+use App\Http\Repositories\Admin\PayMethodsRepo;
+use App\Http\Repositories\Admin\PaymentsRepo;
+use App\Entities\Admin\Payments;
+use App\Http\Helpers\ImagesHelper;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Auth;
@@ -19,7 +23,7 @@ use PDF;
 
 class PurcharsesController extends Controller
 {
-    public function  __construct(Request $request, Repo $repo, Route $route, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, BrandsRepo $brandsRepo, CompanyRepo $companyRepo, OrdersRepo $ordersRepo, UsersRepo $usersRepo, ItemsRepo $itemsRepo)
+    public function  __construct(Request $request, Repo $repo, Route $route, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, BrandsRepo $brandsRepo, CompanyRepo $companyRepo, OrdersRepo $ordersRepo, UsersRepo $usersRepo, ItemsRepo $itemsRepo, PayMethodsRepo $payMethodsRepo, PaymentsRepo $paymentsRepo)
     {
 
         $this->request  = $request;
@@ -40,6 +44,9 @@ class PurcharsesController extends Controller
         $this->companyRepo          = $companyRepo;
         $this->ordersRepo           = $ordersRepo;
         $this->itemsRepo            = $itemsRepo;
+        $this->itemsRepo            = $itemsRepo;
+        $this->paymentsRepo         = $paymentsRepo;
+        $this->data['paymethods']   = $payMethodsRepo->getModel()->all()->lists('name','id');
 
     }
 
@@ -77,27 +84,107 @@ class PurcharsesController extends Controller
     public function store()
     {
         //validar los campos
-        $this->validate($this->request,config('models.'.$this->section.'.validationsStore'));
+        //$this->validate($this->request,config('models.'.$this->section.'.validationsStore'));
         //crea a traves del repo con el request
-        
         //dd($this->request->all());
+        
         $model = $this->repo->create($this->request->all());
-        /*
-        $items = $this->itemsRepo->create([
 
-            'name' => 'prueba',
-            'status' => '1',
-            'models_id' => $model->models_id,
-            'purcharses_id' => $model->id,
-            'clients_id' => $model->clients_id,
-            'users_id' => $model->users_id
-        ]);
-        */
+        $payments = New Payments();
+        $payments->pay_methods_id = $this->request->pay_methods_id;
+        $payments->date = $this->request->date;
+        $payments->hora = $this->request->hora;
+        $payments->sales_id = $model->id;
+        $payments->term = $this->request->term;
+        $payments->number = $this->request->number;
+        $payments->nombre = $this->request->nombre;
+        $payments->apellido = $this->request->apellido;
+        $payments->amount = $this->request->amount;
+        $payments->save();
+        
+        //$p = $this->paymentsRepo->find(5);
+
+        $imagen = $this->request->image;
+
+        if(!empty($imagen))
+            foreach ($imagen as $valor){
+
+                $image = new ImagesHelper();
+                $time = time();
+                $name = $time.$valor->getClientOriginalName();
+                $image->upload( $name , $valor, config('models.payments.imagesPath'));
+                $payments->images()->create(['path' => config('models.payments.imagesPath').$name]);
+         
+            }
+       
         return redirect()->route(config('models.'.$this->section.'.postStoreRoute'),$model->id)->withErrors(['Regitro Agregado Correctamente']);
 
         //return view('admin.purcharses.index')->with($this->data);
 
 
+    }
+
+    public function update()
+    {   
+
+        //validar los campos
+        $this->validate($this->request,config('models.'.$this->section.'.validationsUpdate'));
+        $id = $this->route->getParameter('id');
+
+        //edita a traves del repo
+        $model = $this->repo->update($id,$this->request->all());
+        
+
+        foreach ($model->Pago->images as $imagen){
+
+            if(empty($this->request->imageOld)){
+                $image = new ImagesHelper();
+                $image->deleteFile($imagen->path);
+                $imagen->delete();
+            }
+
+            if( count($this->request->imageOld) > 0 ){
+                if( !in_array($imagen->path, $this->request->imageOld) ){
+                    $image = new ImagesHelper();
+                    $image->deleteFile($imagen->path);
+                    $imagen->delete();
+                }
+            }    
+
+        }
+
+        $payments =$this->paymentsRepo->update($model->Pago->id, $this->request->all());
+        
+        $imagen = $this->request->image;
+        if(!empty($imagen))
+            foreach ($imagen as $valor){
+
+                $image = new ImagesHelper();
+                $time = time();
+                $name = $time.$valor->getClientOriginalName();
+                $image->upload( $name , $valor, config('models.payments.imagesPath'));
+                $payments->images()->create(['path' => config('models.payments.imagesPath').$name]);
+         
+            }
+
+        //$pago  = $this->paymentsRepo->update($model->Pago, $this->request);
+
+              /*
+                //guarda imagenes
+                if(config('models.'.$this->section.'.is_imageable'))
+                    $this->createImage($model, $this->request);
+
+                //guarda log
+                if(config('models.'.$this->section.'.is_logueable'))
+                    $this->repo->createLog($model, 3);
+
+                //si va a una sucursal
+                if(config('models.'.$this->section.'.is_brancheable'))
+                    $this->repo->createBrancheables($model, Auth::user()->branches_active_id);
+
+              */
+
+        return redirect()->route(config('models.'.$this->section.'.postUpdateRoute'),$model->id)->withErrors(['Regitro Editado Correctamente']);
     }
 
 

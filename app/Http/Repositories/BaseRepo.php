@@ -355,12 +355,15 @@ abstract class BaseRepo
 
         if(isset($data->image) && !is_null($data->image) && !is_null($data->files) )
         {
+
             $time = time();
             $name = $time.$data->image->getClientOriginalName();
 
             $image->upload( $name , $data->file('image'), config('models.'.$model->section.'.imagesPath'));
             $this->createImageables($model, config('models.'.$model->section.'.imagesPath') . $name);
         }
+
+
     }
 
 
