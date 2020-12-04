@@ -103,49 +103,23 @@
 
       </strong>
       <br><br><hr>
-      {{--
-      @foreach($model->Documentos->chunk(3) as $key => $documento)
+      
 
-        <div class="row">
-
-          @foreach($documento as $key => $doc)
-            @if(isset($documento[$key]))
-            
-              <div class="col-lg-4 col-md-4 col-xs-6 thumb">
-              <a class="thumbnail" href="#" data-image-id="" data-toggle="modal"
-               data-image="{{ asset('img/visitas/' . $documento[$key]->imagen) }}"
-               data-target="#image-gallery">
-                <img class="img-thumbnail"
-                     src="{{ asset('img/visitas/' . $documento[$key]->imagen) }}"
-                     alt="Another alt text">
-              </a>
-              <br><br>
-              <p> <b>Tipo</b>  {{ $doc->tipo }}</p>
-              <p> <b>Latitud</b> {{ $doc->lat }} </p>
-              <p> <b>Longitud</b> {{ $doc->long }} </p>
-              <p> <b>Observaciones</b> {{ $doc->observaciones }} </p>
+      @if(isset($models->Pago))
+        @foreach($models->Pago->images->chunk(3) as $key => $imagen)
+          <div class="row">
+          @foreach($imagen as $key => $img)
+            @if(isset($imagen[$key]))
+              <div class="col-md-4 col-sm-4 col-xs-6">
+                <a href="" class="btn_imagen" data-toggle="modal" data-target="#myModal" data-img="{{ $img->path}}">
+                  <img src="{{ asset($img->path)}}" class="img-responsive">
+                </a>
               </div>
             @endif
           @endforeach
-           
-        </div> <br>
-      @endforeach
-      --}}
-
-      @foreach($models->Pago->images->chunk(3) as $key => $imagen)
-        <div class="row">
-        @foreach($imagen as $key => $img)
-          @if(isset($imagen[$key]))
-            <div class="col-md-4 col-sm-4 col-xs-6">
-              <a href="" class="btn_imagen" data-toggle="modal" data-target="#myModal" data-img="{{ $img->path}}">
-                <img src="{{ asset($img->path)}}" class="img-responsive">
-              </a>
-            </div>
-          @endif
+          </div>
         @endforeach
-        </div>
-      @endforeach
-
+      @endif
     </div>
   </div>
 </div>
