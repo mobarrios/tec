@@ -7,6 +7,7 @@ use App\Entities\Tecnica\Orders;
 use App\Entities\Admin\Clients;
 use App\Entities\Admin\Models;
 use App\Entities\Admin\Items;
+use App\Entities\Admin\Payments;
 use App\Entities\Configs\Company;
 use App\Entities\Entity;
 
@@ -38,7 +39,10 @@ class Purcharses extends Entity
 
     public function Venta(){
         return $this->hasOne(Items::getClass(), 'purcharses_id');
+    }
 
+    public function Pago(){
+        return $this->hasOne(Payments::getClass(), 'sales_id');
     }
 
 }
