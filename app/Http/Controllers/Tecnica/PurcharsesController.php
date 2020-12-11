@@ -40,7 +40,7 @@ class PurcharsesController extends Controller
         $this->data['models_id']    = $modelsRepo->ListsData('name','id');
         $this->data['companies']    = $companyRepo->getModel()->all()->lists('razon_social','id');
         $this->data['brands']       = $brandsRepo->getAllWithModels();
-        $this->data['users']        = $usersRepo->ListsData('name','id');
+        $this->data['users']        = $usersRepo->ListsData('user_name','id');
         $this->companyRepo          = $companyRepo;
         $this->ordersRepo           = $ordersRepo;
         $this->itemsRepo            = $itemsRepo;
@@ -86,7 +86,7 @@ class PurcharsesController extends Controller
         //validar los campos
         //$this->validate($this->request,config('models.'.$this->section.'.validationsStore'));
         //crea a traves del repo con el request
-        //dd($this->request->all());
+        
         
         $model = $this->repo->create($this->request->all());
 
@@ -134,27 +134,47 @@ class PurcharsesController extends Controller
         //edita a traves del repo
         $model = $this->repo->update($id,$this->request->all());
         
+        if(isset($model->pago)){
+            $payments =$this->paymentsRepo->update($model->Pago->id, $this->request->all());
+        }
+        else{
+            $payments = New Payments();
+            $payments->pay_methods_id = $this->request->pay_methods_id;
+            $payments->date = $this->request->date;
+            $payments->hora = $this->request->hora;
+            $payments->sales_id = $model->id;
+            $payments->term = $this->request->term;
+            $payments->number = $this->request->number;
+            $payments->nombre = $this->request->nombre;
+            $payments->apellido = $this->request->apellido;
+            $payments->amount = $this->request->amount;
+            $payments->save();
+        }
 
-        foreach ($model->Pago->images as $imagen){
 
-            if(empty($this->request->imageOld)){
-                $image = new ImagesHelper();
-                $image->deleteFile($imagen->path);
-                $imagen->delete();
-            }
+        if(isset($model->Pago)){
+            foreach ($model->Pago->images as $imagen){
 
-            if( count($this->request->imageOld) > 0 ){
-                if( !in_array($imagen->path, $this->request->imageOld) ){
+                if(empty($this->request->imageOld)){
                     $image = new ImagesHelper();
                     $image->deleteFile($imagen->path);
                     $imagen->delete();
                 }
-            }    
 
+                if( count($this->request->imageOld) > 0 ){
+                    if( !in_array($imagen->path, $this->request->imageOld) ){
+                        $image = new ImagesHelper();
+                        $image->deleteFile($imagen->path);
+                        $imagen->delete();
+                    }
+                }    
+
+            }
         }
 
-        $payments =$this->paymentsRepo->update($model->Pago->id, $this->request->all());
-        
+
+
+       
         $imagen = $this->request->image;
         if(!empty($imagen))
             foreach ($imagen as $valor){

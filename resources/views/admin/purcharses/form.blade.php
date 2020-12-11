@@ -32,9 +32,9 @@
       {!! Form::label('Vendedor') !!}
 
       @if(isset($ordenCompra))
-        {!! Form::select('users_id', $users , isset($ordenCompra->User) ? $ordenCompra->User->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Cliente']) !!}
+        {!! Form::select('users_id', $users , isset($ordenCompra->Vendedor) ? $ordenCompra->Vendedor->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Cliente']) !!}
       @else
-        {!! Form::select('users_id', $users , isset($models->User) ? $models->User->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Cliente']) !!}
+        {!! Form::select('users_id', $users , isset($models->Vendedor) ? $models->Vendedor->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Cliente']) !!}
       @endif
     </div>
 
@@ -143,6 +143,7 @@
 
     @if(isset($models))
 
+    @if(isset($models->Pago))
       @foreach($models->Pago->images->chunk(3) as $key => $imagen)
       <div class="row">
         @foreach($imagen as $key => $img)
@@ -160,6 +161,7 @@
       </div>
       @endforeach
       <br><br>
+    @endif 
       <div class="row">
         <div class="col-xs-12">
           <div id="coba"></div>

@@ -15,16 +15,21 @@ class Purcharses extends Entity
 {
 
     protected $table = 'purcharses';
-    protected $fillable = ['cantidad','precio_unitario','total', 'users_id', 'clients_id', 'models_id', 'observacion','numero_serie','companies_id','orders_id', 'capacidad', 'color', 'accesorios','precio_venta', 'vendedor_id', 'estado', 'insumos'];
+    protected $fillable = ['cantidad','precio_unitario','total', 'users_id', 'clients_id', 'models_id', 'observacion','numero_serie','companies_id','orders_id', 'capacidad', 'color', 'accesorios','precio_venta', 'estado', 'insumos'];
     protected $section = 'purcharses';
 
     public function Cliente(){
     	return $this->belongsTo(Clients::getClass(), 'clients_id');
     }
 
+    /*
 	public function User(){
 		return $this->belongsTo(User::getClass(),'users_id');
 	}
+    */
+    public function Vendedor(){
+        return $this->belongsTo(User::getClass(),'users_id');
+    }
 
 	public function Model(){
         return $this->belongsTo(Models::getClass(), 'models_id');
