@@ -22,6 +22,10 @@
             {!! Form::text('dni', null, ['class'=>'form-control']) !!}
         </div>
         <div class="col-xs-3 form-group">
+            {!! Form::label('CUIT') !!}
+            {!! Form::text('cuit', null, ['class'=>'form-control']) !!}
+        </div>
+        <div class="col-xs-3 form-group">
             {!! Form::label('Apellido') !!}
             {!! Form::text('last_name', null, ['class'=>'form-control']) !!}
         </div>
@@ -36,7 +40,6 @@
 
         <div class="col-xs-3 form-group posRelative">
             {!! Form::label('Localidad') !!}
-
             {!! Form::select('localidades_id',$localidades,null,['class' => 'filter form-control']) !!}
         </div>
 
