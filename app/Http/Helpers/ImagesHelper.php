@@ -21,9 +21,10 @@ class ImagesHelper
 
         $img = Image::make(public_path($path).$file);
 
-        $img->resize(640, null, function ($constraint) {
+        $img->resize(640, 480, function ($constraint) {
             $constraint->aspectRatio();
         });
+        //dd($img);
         //$img->resize(640,480);
         $img->save();
     }
