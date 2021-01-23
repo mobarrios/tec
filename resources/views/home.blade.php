@@ -145,7 +145,7 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div class="table-responsive">
-                          <table class="table table-striped" id="dataTable">
+                          <table class="table table-striped" id="dataTableHome">
                             <thead>
                               <th>Codigo Orden</th>
                               <th>Cliente</th>
@@ -189,3 +189,11 @@
         </div> --}}
     </div>
 @endsection
+@section('js')
+<script type="text/javascript">
+    $('#dataTableHome').dataTable({
+        "ordering": false
+    });
+</script>
+@endsection
+
