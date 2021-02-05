@@ -200,7 +200,7 @@
      Precio Venta : $ {{ $model->Compra->precio_venta }}
      </td>
      <td>
-     Método de Pago : {{ $model->Compra->Pago->PayMethods->name }}
+     Método de Pago : {{ isset($model->Compra->Pago->PayMethods) ? $model->Compra->Pago->PayMethods->name : '' }}
      </td>
     
   </tr>
