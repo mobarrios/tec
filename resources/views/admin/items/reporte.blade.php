@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Orden Venta {!! $model->id !!}</title>
+    <title>Nota de Entrega {!! $model->id !!}</title>
       <style>
 
         body{
@@ -82,7 +82,7 @@
       </style>
   </head>
   <body>
-
+  <p style="text-align:center;"><h1> Nota de Entrega </h1></p>
   <table style="width: 100%;">
       <tr>
           <td>
@@ -90,7 +90,7 @@
                   <tr>
                       <td style="width: 50%;">
                         
-                        @if($model->Company->images->count() > 0)
+                        @if(!empty($model->Company))
                             <img width="200px" src="{{ $model->Company->images->first()->path }}">
                         @endif 
                       </td>
@@ -106,23 +106,22 @@
           </td>
          
       </tr>
-  
       <tr>
           <td>
               <table style="width: 100%;">
                   <tr valign="top">
                    
                       <td style="font-size: 1.2em;">
-                         Dir: {{$model->Company->direccion}} <br>
-                         Tel: {{$model->Company->telefono}} <br>
-                         Cuit: {{$model->Company->cuit}}
+                         Dir: {{ isset($model->Company) ? $model->Company->direccion : '' }} <br>
+                         Tel: {{ isset($model->Company) ? $model->Company->telefono : '' }} <br>
+                         Cuit: {{ isset($model->Company) ? $model->Company->cuit : '' }}
                       </td>
                  
                    
                       <td style="font-size: 1.2em;">
                         Condición Frente al IVA: {{ isset($model->Company->IvaConditions) ?  $model->Company->IvaConditions->name : '' }} <br>
-                        Ingresos Brutos Nº: {{$model->Company->ingresos_brutos}} <br>
-                        Inicio de Actividades: {{$model->Company->inicio_actividades}} <br>
+                        Ingresos Brutos Nº: {{ isset($model->Company) ? $model->Company->ingresos_brutos : '' }} <br>
+                        Inicio de Actividades: {{ isset($model->Company) ? $model->Company->inicio_actividades : '' }} <br>
                       </td>
               </tr>
               </table>
@@ -131,6 +130,7 @@
   </table>
   <br/> 
   <br/>
+
   <fieldset style="font-size: 1.2em;">
     <legend>IDENTIFICACIÓN DEL VENDEDOR</legend>
       <table style="width: 100%; font-size: 1.2em;" >
@@ -196,47 +196,27 @@
 
   </tr>
   <tr>
-    
      <td>
      Precio Venta : $ {{ $model->Compra->precio_venta }}
      </td>
      <td>
-     Precio Compra : $ {{ $model->Compra->precio_unitario }}
+     Método de Pago : {{ isset($model->Compra->Pago->PayMethods) ? $model->Compra->Pago->PayMethods->name : '' }}
      </td>
+    
   </tr>
 
 </table>
 </fieldset>
 <legend style="font-size: 1.2em;"></legend> <br/><br/><br/><br/>
-<p style="text-align:center;">_______________________________________________</p>
-<p style="text-align:center;">FIRMA DEL VENDEDOR PRESTANDO CONFORMIDAD</p>
-</body>
+<p style="text-align:center;">EN CONFORMIDAD</p>
 
-{{--
-@if(!is_null($letraChica))
-  {!! $letraChica->descripcion !!}
-@endif
+<p> 1 - Ley de defensa del consumidor capítulo IV art. 11, la garantía a partir del momento de entrega será: de 90 días. </p>
+<p> 2 - La garantía no extensible a accesorios ni batería. </p>
+<p> 3 - Los equipos mojados, dañados o que presenten humedad no son cubiertos por la garantía, las fallas, modificaciones o actualizaciones de software no son cubiertas. </p>
+<p> 4 - Los datos o información son de exclusiva responsabilidad del propietario. La empresa no se responsabiliza por pérdida o traspaso de datos, quedando a cargo del dueño el correspondiente back up. </p>
+- La garantía no es transferible a terceras personas. <br><br>
+- La garantía será recepcionada y corrida por la empresa y sus subsidiarias, quedando a cargo del comprador los traslados.
 
-
-- CONTRASEÑA .................
-- LOS PRECIOS NO INCLUYEN IVA.
-- Cargo fijo por diagnostico $400.
-<p> 1) Este comprobante es el unico elemento válido para retirar el equipo.</p>
-<p> 2) El servicio de Hardware tiene 30 dias de garantía, los servicios de Software no poseen garantia alguna.</p>
-<p> 3) Transcurridos 90 dias de realizado el presupuesto el equipo, se considera como abandonado y sin derecho de reclamo alguno.</p>
-<p> 4) El cliente es el unico exclusivo responsable del origen y estado en todos sus aspectos.</p>
-<p> 5) Los Equipos que presentan daños por humedad y/o reciban sin encender no podran ser cubiertos por nuestra garantia no aceptandose reclamo alguno por parte del cliente.</p>
-<p> 6) Ante la cancelacion de un presupuesto la devolucion del equipo se realiza dentro de las 72 hs.</p>
-<p> 7) La empresa no se hara responsable por los daños que pudieran surgir con la manipulacion del equipo.</p>
-<p> 8) El horario de antecion del servicio tecnico es de lunes a viernes de 9 a 20 hs. y sabados de 10 a 16 hs.</p>
-<p> 9) ISTYLE no se hace responsable de las perdidas de datos , el cliente tiene la obligacion de realizar previamente backups o copias. de seguridad de la informacion.</p>
-<p> 10) ISTYLE no se hace responsable por los defectos ocultos no detectables al momento de la recepcion del equipo.
-Declaro bajo juramento que los objetos detallados precedentemente son de mi unica y exclusiva propiedad y que no pesan sobre
-ellos gravamenes o derechos de terceros de ninguna indole. ISTYLE no se responsabiliza por el soft incluido en los equipos ni por el
-estado en que se encuentran.</p>
-
-<p> Recibo conforme: .....................</p>
---}}
 
 </body>
 </html>

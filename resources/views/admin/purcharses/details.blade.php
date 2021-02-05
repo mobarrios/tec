@@ -91,7 +91,7 @@
 
       <span class="text-muted">Nombre completo : </span> <strong>{{ isset($models->Pago->nombre) ? $models->Pago->nombre : ''   }} {{ isset($models->Pago->apellido) ? $models->Pago->apellido : ''   }}</strong>
       <br><br>
-      <span class="text-muted">Fecha y hora  : </span> <strong>{{ isset($models->Pago->date) ? date('d/m/Y' ,strtotime($models->Pago->date)) : ''   }} {{ isset($models->Pago->hora) ? date('H:i' ,strtotime($models->Pago->hora)) : ''   }}</strong>
+      <span class="text-muted">Fecha y hora  : </span> <strong>{{ isset($models->Pago) ? date('d/m/Y' ,strtotime($models->Pago->created_at)) : ''   }} {{ isset($models->Pago) ? date('H:i' ,strtotime($models->Pago->created_at)) : ''   }}</strong>
       <br><br>
       <span class="text-muted">Forma de pago  : </span> <strong>{{ isset($models->Pago->PayMethods) ? $models->Pago->PayMethods->name : ''   }}
         {{ isset($models->Pago->term) ? $models->Pago->term : '' }}

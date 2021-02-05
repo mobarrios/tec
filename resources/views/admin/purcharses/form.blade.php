@@ -39,9 +39,8 @@
     </div>
 
     <div class="col-xs-6 form-group">
-      {!! Form::label('Compañia') !!}
-      {!! Form::select('companies_id', $companies , isset($models->Company) ? $models->Company->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Compañia']) !!}
-    
+      {!! Form::label('Sucursal') !!}
+      {!! Form::select('companies_id', $branches , isset($models->Sucursal) ? $models->Sucursal->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Compañia']) !!}
     </div>
 
     <div class="col-xs-12">
@@ -92,16 +91,6 @@
     <div class="col-xs-12">
     <h4> Datos de pago</h4>
     </div>
-   
-    <div class="col-xs-3 form-group">
-      {!! Form::label('Hora') !!}
-      {!! Form::time('hora',  isset($models->Pago->hora) ? $models->Pago->hora : '', ['class'=>'form-control']) !!}
-    </div>
-
-    <div class="col-xs-3 form-group">
-      {!! Form::label('Fecha') !!}
-      {!! Form::date('date',  isset($models->Pago->date) ? date('Y-m-d' ,strtotime($models->Pago->date)) : '', ['class'=>'form-control']) !!}
-    </div>
 
 
     <div class="col-xs-3 form-group">
@@ -123,11 +112,20 @@
       {!! Form::label('Apellido') !!}
       {!! Form::text('apellido',  isset($models->Pago->apellido) ? $models->Pago->apellido : '' , ['class'=>'form-control']) !!}
     </div>
+     <div class="col-xs-3 form-group">
+      {!! Form::label('Cuil') !!}
+      {!! Form::text('cuil',  isset($models->Pago->cuil) ? $models->Pago->cuil : '' , ['class'=>'form-control']) !!}
+    </div>
 
 
     <div class="col-xs-3 form-group">
-      {!! Form::label('CBU/Alias/Numero de cuenta') !!}
+      {!! Form::label('CBU/Numero de cuenta') !!}
       {!! Form::text('number', isset($models->Pago->number) ? $models->Pago->number : '',  ['class'=>'form-control']) !!}
+    </div>
+
+    <div class="col-xs-3 form-group">
+      {!! Form::label('Alias') !!}
+      {!! Form::text('alias', isset($models->Pago->alias) ? $models->Pago->alias : '',  ['class'=>'form-control']) !!}
     </div>
 
     <div class="col-xs-3 form-group">
@@ -136,6 +134,11 @@
     </div>
 
     <hr>
+
+    <div class="col-xs-12 form-group">
+      {!! Form::label('Observaciones') !!}
+      {!! Form::textarea('observacion', null,  ['class'=>'form-control', 'rows'=> '5']) !!}
+    </div>
 
     <div class="col-xs-12">
     <h4> Subir imágenes</h4>

@@ -57,6 +57,7 @@
             <div class="col-xs-4 form-group">
               {!! Form::label('Modelos') !!}
               <select name='models_id' class="select2 form-control" placeholder="seleccionar Cliente" >
+                <option value="">Seleccionar</option>
                 @foreach($brands as $br)
                     <optgroup label="{{$br->name}}">
                         @foreach($br->Models as $m)
@@ -149,11 +150,11 @@
           <div class="row">
             <div class="col-xs-4 form-group">
               {!! Form::label('Vendedor') !!}
-              {!! Form::select('vendedor_id',$users, isset($models->vendedor_id) ? $models->vendedor_id : null, ['class'=>'form-control select2']) !!}
+              {!! Form::select('vendedor_id',$users->prepend('Seleccionar', ''), isset($models->vendedor_id) ? $models->vendedor_id : null, ['class'=>'form-control select2']) !!}
             </div>
             <div class="col-xs-4 form-group">
               {!! Form::label('Técnico') !!}
-              {!! Form::select('users_id',$users, isset($models->users_id) ? $models->users_id : null, ['class'=>'form-control select2']) !!}
+              {!! Form::select('users_id',$users->prepend('Seleccionar', ''), isset($models->users_id) ? $models->users_id : null, ['class'=>'form-control select2']) !!}
             </div>
           </div>
 

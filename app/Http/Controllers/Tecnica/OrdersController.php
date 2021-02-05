@@ -17,6 +17,7 @@ use App\Http\Repositories\Tecnica\ToPrintRepo;
 use App\Http\Repositories\Tecnica\MovementsRepo;
 use App\Http\Repositories\Configs\UsersRepo;
 use App\Http\Repositories\Configs\CompanyRepo;
+use App\Http\Repositories\Configs\BranchesRepo;
 use App\Entities\Tecnica\OrderStates;
 use App\Entities\Tecnica\Tasks;
 use App\Entities\Tecnica\TasksOrders;
@@ -32,7 +33,7 @@ use Validator;
 
 class OrdersController extends Controller
 {
-    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, StatesRepo $statesRepo, EquipmentsRepo $equipmentsRepo, ServicesRepo $servicesRepo, UsersRepo $usersRepo, OrderServices $orderServices, MovementsRepo $movementsRepo, CompanyRepo $companyRepo, ToPrintRepo $toPrintRepo)
+    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, StatesRepo $statesRepo, EquipmentsRepo $equipmentsRepo, ServicesRepo $servicesRepo, UsersRepo $usersRepo, OrderServices $orderServices, MovementsRepo $movementsRepo, CompanyRepo $companyRepo, ToPrintRepo $toPrintRepo, BranchesRepo $branchesRepo)
     {
 
         $this->request      = $request;
@@ -59,6 +60,8 @@ class OrdersController extends Controller
         $this->data['brands']       = $brandsRepo->getAllWithModels();
         $this->data['services']     = $servicesRepo->getModel()->all();
         $this->data['users']        = $usersRepo->getModel()->all()->lists('user_name','id');
+        $this->data['branches']     = $branchesRepo->listsData('name', 'id');
+
      
     }
 
