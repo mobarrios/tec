@@ -14,6 +14,7 @@ use App\Http\Repositories\Configs\CompanyRepo;
 use App\Http\Repositories\Configs\UsersRepo;
 use App\Http\Repositories\Admin\PayMethodsRepo;
 use App\Http\Repositories\Admin\PaymentsRepo;
+use App\Http\Repositories\Configs\BranchesRepo;
 use App\Entities\Admin\Payments;
 use App\Http\Helpers\ImagesHelper;
 use Illuminate\Http\Request;
@@ -23,7 +24,7 @@ use PDF;
 
 class PurcharsesController extends Controller
 {
-    public function  __construct(Request $request, Repo $repo, Route $route, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, BrandsRepo $brandsRepo, CompanyRepo $companyRepo, OrdersRepo $ordersRepo, UsersRepo $usersRepo, ItemsRepo $itemsRepo, PayMethodsRepo $payMethodsRepo, PaymentsRepo $paymentsRepo)
+    public function  __construct(Request $request, Repo $repo, Route $route, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, BrandsRepo $brandsRepo, CompanyRepo $companyRepo, OrdersRepo $ordersRepo, UsersRepo $usersRepo, ItemsRepo $itemsRepo, PayMethodsRepo $payMethodsRepo, PaymentsRepo $paymentsRepo, BranchesRepo $branchesRepo)
     {
 
         $this->request  = $request;
@@ -47,6 +48,7 @@ class PurcharsesController extends Controller
         $this->itemsRepo            = $itemsRepo;
         $this->paymentsRepo         = $paymentsRepo;
         $this->data['paymethods']   = $payMethodsRepo->getModel()->all()->lists('name','id');
+        $this->data['branches']     = $branchesRepo->listsData('name', 'id');
 
     }
 
@@ -84,7 +86,7 @@ class PurcharsesController extends Controller
     public function store()
     {
         //validar los campos
-        //$this->validate($this->request,config('models.'.$this->section.'.validationsStore'));
+        $this->validate($this->request,config('models.'.$this->section.'.validationsStore'), config('models.'.$this->section.'.validationMessage'));
         //crea a traves del repo con el request
         
         
@@ -100,6 +102,7 @@ class PurcharsesController extends Controller
         $payments->nombre = $this->request->nombre;
         $payments->apellido = $this->request->apellido;
         $payments->amount = $this->request->amount;
+        $payments->alias = $this->request->alias;
         $payments->save();
         
         //$p = $this->paymentsRepo->find(5);
@@ -128,7 +131,7 @@ class PurcharsesController extends Controller
     {   
 
         //validar los campos
-        $this->validate($this->request,config('models.'.$this->section.'.validationsUpdate'));
+        $this->validate($this->request,config('models.'.$this->section.'.validationsUpdate'), config('models.'.$this->section.'.validationMessage'));
         $id = $this->route->getParameter('id');
 
         //edita a traves del repo
@@ -148,6 +151,7 @@ class PurcharsesController extends Controller
             $payments->nombre = $this->request->nombre;
             $payments->apellido = $this->request->apellido;
             $payments->amount = $this->request->amount;
+            $payments->alias = $this->request->alias;
             $payments->save();
         }
 

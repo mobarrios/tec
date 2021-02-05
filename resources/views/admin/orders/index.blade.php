@@ -13,7 +13,6 @@
                 <strong>{{ isset($model->Model->Brands->name) ? ': '.$model->Model->Brands->name : ''  }} </strong>
 
                 </td>                
-                <td>{{ $model->Brancheables() ?  $model->Brancheables()->first()->branches->name : 'sin sucursal' }}</td>
 
                 <td>{{$model->observaciones_internas}}</td>
                 <td>{{ isset($model->Cliente->fullname) ? $model->Cliente->fullname : '' }}</td>

@@ -9,13 +9,14 @@ use App\Entities\Admin\Models;
 use App\Entities\Admin\Items;
 use App\Entities\Admin\Payments;
 use App\Entities\Configs\Company;
+use App\Entities\Configs\Branches;
 use App\Entities\Entity;
 
 class Purcharses extends Entity
 {
 
     protected $table = 'purcharses';
-    protected $fillable = ['cantidad','precio_unitario','total', 'users_id', 'clients_id', 'models_id', 'observacion','numero_serie','companies_id','orders_id', 'capacidad', 'color', 'accesorios','precio_venta', 'estado', 'insumos'];
+    protected $fillable = ['cantidad','precio_unitario','total', 'users_id', 'clients_id', 'models_id', 'observacion','numero_serie','companies_id','orders_id', 'capacidad', 'color', 'accesorios','precio_venta', 'estado', 'insumos', 'observacion'];
     protected $section = 'purcharses';
 
     public function Cliente(){
@@ -34,8 +35,14 @@ class Purcharses extends Entity
 	public function Model(){
         return $this->belongsTo(Models::getClass(), 'models_id');
     }
+    /*
     public function Company(){
         return $this->belongsTo(Company::getClass(), 'companies_id');
+    }
+    */
+
+    public function Sucursal(){
+        return $this->belongsTo(Branches::getClass(), 'companies_id');
     }
 
     public function Orden(){
