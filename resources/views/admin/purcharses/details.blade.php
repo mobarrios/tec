@@ -55,7 +55,7 @@
       </div>
       <div class="box-body">
 
-        <span class="text-muted">Sucursal : </span> <strong>{{ isset($models->Company->razon_social) ? $models->Company->razon_social : '' }}</strong>
+        <span class="text-muted">Sucursal : </span> <strong>{{ isset($models->Sucursal) ? $models->Sucursal->name : '' }}</strong>
         <br><br> 
         <span class="text-muted">ID Reparación : </span> <strong>{{ isset($models->Orden) ? $models->Orden->id : '' }}</strong>
         <br><br> 
