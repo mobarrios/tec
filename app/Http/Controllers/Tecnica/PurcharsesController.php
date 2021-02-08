@@ -21,6 +21,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Auth;
 use PDF;
+use Validator;
+
 
 class PurcharsesController extends Controller
 {
@@ -86,7 +88,23 @@ class PurcharsesController extends Controller
     public function store()
     {
         //validar los campos
-        $this->validate($this->request,config('models.'.$this->section.'.validationsStore'), config('models.'.$this->section.'.validationMessage'));
+        //$this->validate($this->request,config('models.'.$this->section.'.validationsStore'), config('models.'.$this->section.'.validationMessage'));
+
+        $validator = Validator::make($this->request->all(), config('models.'.$this->section.'.validationsStore'), [
+            'alias.required' => 'El campo alias es obligatorio',
+            'companies_id.required' => 'El campo sucursal es obligatorio',
+            'number.required' => 'El campo cbu es obligatorio',
+            'number.numeric' => 'El campo cbu debe ser numerico',
+            'number.digits_between' => 'El campo cbu debe contener 22 dígitos',
+            'amount.required' => 'El campo monto es obligatorio',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
         //crea a traves del repo con el request
         
         
@@ -131,7 +149,24 @@ class PurcharsesController extends Controller
     {   
 
         //validar los campos
-        $this->validate($this->request,config('models.'.$this->section.'.validationsUpdate'), config('models.'.$this->section.'.validationMessage'));
+        //$this->validate($this->request,config('models.'.$this->section.'.validationsUpdate'), config('models.'.$this->section.'.validationMessage'));
+
+        $validator = Validator::make($this->request->all(), config('models.'.$this->section.'.validationsUpdate'), [
+            'alias.required' => 'El campo alias es obligatorio',
+            'companies_id.required' => 'El campo sucursal es obligatorio',
+            'number.required' => 'El campo cbu es obligatorio',
+            'number.numeric' => 'El campo cbu debe ser numerico',
+            'number.digits_between' => 'El campo cbu debe contener 22 dígitos',
+            'amount.required' => 'El campo monto es obligatorio',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+
         $id = $this->route->getParameter('id');
 
         //edita a traves del repo
