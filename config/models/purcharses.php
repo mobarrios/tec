@@ -67,8 +67,8 @@ return [
           'numero_serie'    => 'required',
           'cantidad'        => 'required',
           'precio_unitario' => 'required',
-          'number' =>   "numeric|required|digits_between:22,22",
-          'numero_serie' => 'required|numeric|digits_between:15,15',
+          'number' =>   "numeric|required|digits:22",
+          'numero_serie' => 'required|numeric|digits:15',
           'pay_methods_id' => 'required',
           'nombre' => 'required',
           'apellido' => 'required',
@@ -89,8 +89,8 @@ return [
           'numero_serie'    => 'required',
           'cantidad'        => 'required',
           'precio_unitario' => 'required',
-          'number' =>   "numeric|required|digits_between:22,22",
-          'numero_serie' => 'required|numeric|digits_between:15,15',
+          'number' =>   "numeric|required|digits:22",
+          'numero_serie' => 'required|numeric|digits:15',
           'pay_methods_id' => 'required',
           'nombre' => 'required',
           'apellido' => 'required',
@@ -98,7 +98,7 @@ return [
           'alias' => 'required',
           'cuil' => 'required|numeric|digits_between:10,11',
     ],
-
+    /*
     'validationMessage' => [
         'alias.required' => 'El campo Alias es obligatorio',
         'companies_id.required' => 'El campo Sucursal es obligatorio',
@@ -107,5 +107,6 @@ return [
         //'number.digits_betweens' => 'El campo Cbu debe contener entre 24 y 24 dígitos',
         'amount.required' => 'El campo Monto es obligatorio',
     ]
+    */
 
 ];

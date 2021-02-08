@@ -95,7 +95,7 @@ class PurcharsesController extends Controller
             'companies_id.required' => 'El campo sucursal es obligatorio',
             'number.required' => 'El campo cbu es obligatorio',
             'number.numeric' => 'El campo cbu debe ser numerico',
-            'number.digits_between' => 'El campo cbu debe contener 22 dígitos',
+            'number.digits' => 'El campo cbu debe contener 22 dígitos',
             'amount.required' => 'El campo monto es obligatorio',
         ]);
 
@@ -156,7 +156,7 @@ class PurcharsesController extends Controller
             'companies_id.required' => 'El campo sucursal es obligatorio',
             'number.required' => 'El campo cbu es obligatorio',
             'number.numeric' => 'El campo cbu debe ser numerico',
-            'number.digits_between' => 'El campo cbu debe contener 22 dígitos',
+            'number.digits' => 'El campo cbu debe contener 22 dígitos',
             'amount.required' => 'El campo monto es obligatorio',
         ]);
 
