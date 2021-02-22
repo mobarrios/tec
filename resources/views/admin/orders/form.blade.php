@@ -125,9 +125,13 @@
               {!! Form::text('insumos', null, ['class'=>'form-control']) !!}
             </div>
             --}}
-            <div class="col-xs-4 form-group">
+            <div class="col-xs-2 form-group">
               {!! Form::label('Capacidad') !!}
               {!! Form::text('capacidad', null, ['class'=>'form-control']) !!}
+            </div>
+            <div class="col-xs-2 form-group">
+              {!! Form::label('Bateria') !!}
+              {!! Form::text('bateria', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-4 form-group">
               {!! Form::label('Color') !!}
