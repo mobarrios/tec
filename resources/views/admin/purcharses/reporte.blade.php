@@ -89,10 +89,11 @@
              <table style="width: 100%;">
                   <tr>
                       <td style="width: 50%;">
-                        
-                        @if($model->Company->images->count() > 0)
+                       
+                        @if(isset($model->Company) && $model->Company->images->count() > 0)
                             <img width="200px" src="{{ $model->Company->images->first()->path }}">
                         @endif 
+
                       </td>
 
                       <td style="font-size: 1.5em;" >
@@ -114,16 +115,16 @@
                   <tr valign="top">
                    
                       <td style="font-size: 1.2em;">
-                         Dir: {{$model->Company->direccion}} <br>
-                         Tel: {{$model->Company->telefono}} <br>
-                         Cuit: {{$model->Company->cuit}}
+                         Dir: {{ isset($model->Company) ? $model->Company->direccion : '' }} <br>
+                         Tel: {{ isset($model->Company) ? $model->Company->telefono : ''  }} <br>
+                         Cuit: {{ isset($model->Company) ? $model->Company->cuit : ''  }}
                       </td>
                  
                    
                       <td style="font-size: 1.2em;">
                         Condición Frente al IVA: {{ isset($model->Company->IvaConditions) ?  $model->Company->IvaConditions->name : '' }} <br>
-                        Ingresos Brutos Nº: {{$model->Company->ingresos_brutos}} <br>
-                        Inicio de Actividades: {{$model->Company->inicio_actividades}} <br>
+                        Ingresos Brutos Nº: {{ isset($model->Company) ? $model->Company->ingresos_brutos : ''}} <br>
+                        Inicio de Actividades: {{ isset($model->Company) ? $model->Company->inicio_actividades : ''}} <br>
                       </td>
               </tr>
               </table>
@@ -150,6 +151,7 @@
 
   </table>
  </fieldset>
+
   <br/>
   <br/>
   <fieldset>
@@ -213,7 +215,6 @@
 </table>
 </fieldset>
 <legend style="font-size: 1.2em;"></legend> <br/><br/><br/><br/>
-
 <p style="text-align:center;">En conformidad</p>
 </body>
 
