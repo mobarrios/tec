@@ -89,11 +89,10 @@
              <table style="width: 100%;">
                   <tr>
                       <td style="width: 50%;">
-                       
-                        @if(isset($model->Company) && $model->Company->images->count() > 0)
-                            <img width="200px" src="{{ $model->Company->images->first()->path }}">
+                        
+                        @if($company->images->count() > 0)
+                            <img width="200px" src="{{ $company->images->first()->path }}">
                         @endif 
-
                       </td>
 
                       <td style="font-size: 1.5em;" >
@@ -115,16 +114,16 @@
                   <tr valign="top">
                    
                       <td style="font-size: 1.2em;">
-                         Dir: {{ isset($model->Company) ? $model->Company->direccion : '' }} <br>
-                         Tel: {{ isset($model->Company) ? $model->Company->telefono : ''  }} <br>
-                         Cuit: {{ isset($model->Company) ? $model->Company->cuit : ''  }}
+                         Dir: {{$company->direccion}} <br>
+                         Tel: {{$company->telefono}} <br>
+                         Cuit: {{$company->cuit}}
                       </td>
                  
                    
                       <td style="font-size: 1.2em;">
-                        Condición Frente al IVA: {{ isset($model->Company->IvaConditions) ?  $model->Company->IvaConditions->name : '' }} <br>
-                        Ingresos Brutos Nº: {{ isset($model->Company) ? $model->Company->ingresos_brutos : ''}} <br>
-                        Inicio de Actividades: {{ isset($model->Company) ? $model->Company->inicio_actividades : ''}} <br>
+                        Condición Frente al IVA: {{ isset($company->IvaConditions) ?  $company->IvaConditions->name : '' }} <br>
+                        Ingresos Brutos Nº: {{$company->ingresos_brutos}} <br>
+                        Inicio de Actividades: {{$company->inicio_actividades}} <br>
                       </td>
               </tr>
               </table>

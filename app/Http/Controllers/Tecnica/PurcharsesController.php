@@ -58,7 +58,7 @@ class PurcharsesController extends Controller
     public function show(){
          
     	$this->data['models'] 		= $this->repo->find($this->route->getParameter('id'));
-    
+        
     	
     	return view('admin.purcharses.details')->with($this->data);
 
@@ -70,6 +70,7 @@ class PurcharsesController extends Controller
         //$this->data['models']       = $this->repo->find($this->route->getParameter('id'));
         $model      = $this->repo->find($this->route->getParameter('id'));
         $company    = $this->companyRepo->getModel()->first();
+
         //$letraChica = $toPrintRepo->ultimo();
         $pdf        = PDF::loadView('admin.purcharses.reporte', compact('model','company'));
 
