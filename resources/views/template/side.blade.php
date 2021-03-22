@@ -106,6 +106,24 @@
                     
             </li>
 
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-wrench "></i> <span>Swoptech</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                <li><a href="{{route('admin.productos.index' )}}" class="menu"><span>Productos</span></a></li>
+                <li><a href="{{route('admin.caracteristicas.index' )}}" class="menu"><span>Caracteristicas</span></a></li>
+                <li><a href="{{route('admin.presupuestos.index' )}}" class="menu"><span>Presupuestos</span></a></li>
+             
+
+                </ul>
+                   
+                    
+            </li>
+
             {{--
             @permission('smallboxes.list')
             <li class="treeview {{ in_array(Request::segment(2), ["smallBoxes"]) ? 'active' : '' }}">

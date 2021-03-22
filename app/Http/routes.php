@@ -49,6 +49,9 @@ Route::group(['middleware'=>'auth'],function(){
         require(__DIR__ . '/Routes/Admin/smallBoxesRoute.php');
         require(__DIR__ . '/Routes/Admin/checkbooksRoute.php');
         require(__DIR__ . '/Routes/Admin/profilesRoute.php');
+        require(__DIR__ . '/Routes/Tecnica/productosRoute.php');
+        require(__DIR__ . '/Routes/Tecnica/caracteristicasRoute.php');
+        require(__DIR__ . '/Routes/Tecnica/presupuestosRoute.php');
         require(__DIR__ . '/Routes/Tecnica/ordersRoute.php');
         require(__DIR__ . '/Routes/Tecnica/statesRoute.php');
         require(__DIR__ . '/Routes/Tecnica/equipmentsRoute.php');    
@@ -77,4 +80,5 @@ Route::group(['prefix'=>'auth'],function(){
 
 });
 
- Route::get('/confirm/{id}/{estado}',     ['as'=>'admin.ordenes.confirm','uses'=>'Tecnica\ApiController@confirm']); 
+ Route::get('/confirm/{id}/{estado}',     ['as'=>'admin.ordenes.confirm','uses'=> 'Tecnica\ApiController@confirm']); 
+ Route::get('/presupuesto', ['as' => 'admin.presupuesto.form', 'uses' =>  'Tecnica\ApiController@presupuesto' ]);

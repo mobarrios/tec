@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Repositories\Tecnica\OrdersRepo as Repo;
 use App\Http\Repositories\Tecnica\PurcharsesRepo;
 use App\Http\Repositories\Tecnica\StatesRepo;
+use App\Http\Repositories\Tecnica\ProductosRepo;
+use App\Http\Repositories\Tecnica\CaracteristicasRepo;
 use App\Entities\Tecnica\OrderStates;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
@@ -53,11 +55,18 @@ class ApiController extends Controller
 
         }
     	
-
         return view('admin.orders.confirm')->with(['message' => $message]);   
 
 
     }
 
+
+
+    public function presupuesto(){
+
+
+        return view('admin.presupuestos.formPublic');
+
+    }
 
 }
