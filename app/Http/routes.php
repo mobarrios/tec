@@ -80,5 +80,12 @@ Route::group(['prefix'=>'auth'],function(){
 
 });
 
- Route::get('/confirm/{id}/{estado}',     ['as'=>'admin.ordenes.confirm','uses'=> 'Tecnica\ApiController@confirm']); 
- Route::get('/presupuesto', ['as' => 'admin.presupuesto.form', 'uses' =>  'Tecnica\ApiController@presupuesto' ]);
+Route::get('/confirm/{id}/{estado}',     ['as'=>'admin.ordenes.confirm','uses'=> 'Tecnica\ApiController@confirm']); 
+Route::get('/presupuesto', ['as' => 'admin.presupuesto.form', 'uses' =>  'Tecnica\ApiController@presupuesto' ]);
+Route::get('/swoptech', ['as' => 'admin.swoptech.formPublic', 'uses' =>  'Tecnica\ProductosController@swoptech' ]);
+Route::post('/cotizar', ['as' => 'admin.swoptech.postFormPublic', 'uses' =>  'Tecnica\ProductosController@postFormPublic' ]);
+Route::get('/obtenerPrecio', ['as' => 'admin.swoptech.obtenerPrecio', 'uses' =>  'Tecnica\ProductosController@obtenerPrecio' ]);
+
+Route::post('/postCotizar', ['as' => 'admin.swoptech.postCotizar', 'uses' =>  'Tecnica\ProductosController@postCotizar' ]);
+
+

@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Tecnica;
 
 use App\Http\Controllers\Controller;
-use App\Http\Repositories\Tecnica\EquipmentsRepo;
-use App\Http\Repositories\Tecnica\EquipmentsRepo as Repo;
+use App\Http\Repositories\Tecnica\PresupuestosRepo as Repo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 
