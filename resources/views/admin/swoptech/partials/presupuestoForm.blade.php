@@ -1,11 +1,18 @@
 @if(count($errors) > 0)
 
-@foreach($errors->all() as $error)
-<div class="alert alert-danger text-left">
-	{{$error}}  *
-</div>
-@endforeach
+	@foreach($errors->all() as $error)
+	<div class="alert alert-danger text-left">
+		{{$error}}  *
+	</div>
+	@endforeach
 @endif
+
+@if(isset($msgOK) || session()->has('msgOk'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <p class="small"><i class="mdi mdi-check"></i> {!! session('msgOk') !!}</p>
+    </div>
+@endif
+
 {{--
 <form id="contact-form" action="/winnie-pooh" method="post" class="form js-winnie-pooh-form mb-4" data-store="contact-form">
 
@@ -37,7 +44,7 @@ Completá los datos, cotización online en simples pasos.</h5> <br><br>
 
 	<div class="form-group col-md-6 pr-md-1">
 		<label class="form-label" for="email">Dni</label>
-	{!! Form::text('dni',null, ['class' => 'form-control']) !!}	
+	{!! Form::number('dni',null, ['class' => 'form-control']) !!}	
 </div>
 
 
@@ -53,7 +60,7 @@ Completá los datos, cotización online en simples pasos.</h5> <br><br>
 
 	<div class="form-group col-md-6 pr-md-1">
 		<label class="form-label " for="email">Celular</label>
-		{!! Form::text('celular',null, ['class' => 'form-control']) !!}
+		{!! Form::number('celular',null, ['class' => 'form-control']) !!}
 	</div>
 
 
@@ -101,21 +108,7 @@ Completá los datos, cotización online en simples pasos.</h5> <br><br>
 
 
 </div>
-{{--
-<div class="row">
-		
-	<div class="form-group col-md-12 pr-md-1">
-		<label class="form-label " for="email">Celular</label>
-		<select type="" id="email" class="form-control" autocorrect="off" autocapitalize="off" name="email">
-		<option value="">CONDICIÓN DE BATERÍA</option>
-		<option value="100">100 %</option>
-		<option value="90">90 %</option>
-		<option value="80">80 %</option>
-		<option value="menosde80">MENOS DE 80%</option>
-		</select>
-	</div>
-</div>
---}}
+
 
 <div class="row">
 	<div class="form-group col-md-12 pr-md-1">

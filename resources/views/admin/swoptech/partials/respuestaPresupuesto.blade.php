@@ -34,6 +34,7 @@
 <input type="hidden" name="dni" value="{{$dni}}">
 <input type="hidden" name="celular" value="{{$celular}}">
 <input type="hidden" name="modelos_id" value="{{$modelos_id}}">
+<input type="hidden" name="email" value="{{$email}}">
 
 
 

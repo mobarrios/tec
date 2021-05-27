@@ -45,7 +45,15 @@ class ProductosController extends Controller
     public function postFormPublic(){
 
 
-        $validator = Validator::make($this->request->all(), ['nombre' => 'required', 'apellido' => 'required', 'dni' => 'required', 'email' => 'required', 'celular' => 'required', 'modelo'=>'required'], [
+        $validator = Validator::make($this->request->all(), [
+            'nombre' => 'required', 
+            'apellido' => 'required', 
+            'dni' => 'required', 
+            'email' => 'required|email|unique:clients,email', 
+            'celular' => 'required', 
+            'modelo'=>'required'], 
+
+            [
             'nombre.required' => 'El campo Nombre es obligatorio',
             'apellido.required' => 'El campo Apellido es obligatorio',
             'dni.required' => 'El campo Dni es obligatorio',
@@ -110,6 +118,7 @@ class ProductosController extends Controller
             'email' => $this->request->email,
             'phone1' => $this->request->celular,
             'dni' => $this->request->dni,
+            'email' => $this->request->email,
 
         ]);
 
@@ -129,7 +138,7 @@ class ProductosController extends Controller
            $presupuesto->Caracteristicas()->sync($c); 
         }
 
-        return redirect()->route('admin.swoptech.formPublic');
+        return redirect()->route('admin.swoptech.formPublic')->with(['msgOk' => 'Se ha registro correctamente el producto.']);
 
         //return view('admin.swoptech.form')->with($this->data);
 
