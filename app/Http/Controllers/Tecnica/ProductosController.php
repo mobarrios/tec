@@ -125,7 +125,7 @@ class ProductosController extends Controller
         $modelo = $this->request->modelos_id;
 
 
-        $presupuesto = $this->presupuestoRepo->create([
+        $presupuesto = $this->presupuestoRepo->getModel()->create([
             'clients_id' => $cliente->id,
             'productos_id' => $modelo,
             'importe_presupuestado' => 100,
