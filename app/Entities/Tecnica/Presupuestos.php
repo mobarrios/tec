@@ -3,6 +3,8 @@ namespace App\Entities\Tecnica;
 
 
 use App\Entities\Tecnica\Equipments;
+use App\Entities\Admin\Clients;
+use App\Entities\Tecnica\Productos;
 use App\Entities\Entity;
 
 class Presupuestos extends Entity
@@ -16,6 +18,16 @@ class Presupuestos extends Entity
     public function Caracteristicas(){
 
         return $this->belongsToMany(Caracteristicas::getClass(), 'presupuestos_caracteristicas');
+
+    }
+
+    public function Cliente(){
+        return $this->belongsTo(Clients::getClass(), 'clients_id');
+
+    }
+
+    public function Producto(){
+        return $this->belongsTo(Productos::getClass(), 'productos_id');
 
     }
 

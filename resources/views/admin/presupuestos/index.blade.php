@@ -5,9 +5,11 @@
                 <td style="width: 1%"><input class="id_destroy" value="{{$model->id}}" type="checkbox"></td>
                 <td>{{$model->id}}</td>
                 <td>
-                    {{ isset($model->Model->name) ? $model->Model->name : '' }} 
-                <strong>{{ isset($model->Model->Brands->name) ? ': '.$model->Model->Brands->name : ''  }} </strong>
+                    {{ isset($model->Producto->Model->name) ? $model->Producto->Model->name : '' }} 
+                <strong>{{ isset($model->Producto->Model->Brands->name) ? ': '.$model->Producto->Model->Brands->name : ''  }} </strong>
                 </td>  
+                <td>{{ isset($model->Cliente) ? $model->Cliente->fullname : '' }}</td>
+
                 <td>$ {{$model->precio_final}}</td>
             </tr>
         @endforeach
