@@ -11,6 +11,7 @@
                 <td>{{ isset($model->Cliente) ? $model->Cliente->fullname : '' }}</td>
 
                 <td>$ {{$model->precio_final}}</td>
+                <td><a href="{{ route('admin.presupuestos.show', $model->id)}}" class="btn btn-sm btn-success"><span class="fa  fa-info-circle"></span></a></td>
             </tr>
         @endforeach
     @endsection

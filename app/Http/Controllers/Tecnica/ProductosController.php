@@ -49,7 +49,8 @@ class ProductosController extends Controller
             'nombre' => 'required', 
             'apellido' => 'required', 
             'dni' => 'required', 
-            'email' => 'required|email|unique:clients,email', 
+            //'email' => 'required|email|unique:clients,email', 
+            'email' => 'required|email',
             'celular' => 'required', 
             'modelo'=>'required'], 
 
@@ -112,15 +113,23 @@ class ProductosController extends Controller
 
     public function postCotizar(){
 
-        $cliente = $this->clientsRepo->getModel()->create([
-            'name' => $this->request->nombre,
-            'last_name' => $this->request->apellido,
-            'email' => $this->request->email,
-            'phone1' => $this->request->celular,
-            'dni' => $this->request->dni,
-            'email' => $this->request->email,
 
-        ]);
+        $c = $this->clientsRepo->getModel()->where('dni', $this->request->dni)->first();
+
+        if(empty($c)){
+            $cliente = $this->clientsRepo->getModel()->create([
+                'name' => $this->request->nombre,
+                'last_name' => $this->request->apellido,
+                'email' => $this->request->email,
+                'phone1' => $this->request->celular,
+                'dni' => $this->request->dni,
+                'email' => $this->request->email,
+            ]);
+        }else{
+            $cliente = $c;
+        }
+
+        
 
         $modelo = $this->request->modelos_id;
 
@@ -128,8 +137,8 @@ class ProductosController extends Controller
         $presupuesto = $this->presupuestoRepo->getModel()->create([
             'clients_id' => $cliente->id,
             'productos_id' => $modelo,
-            'importe_presupuestado' => 100,
-            'precio_final' => 100
+            //'importe_presupuestado' => 100,
+            'precio_final' =>  $this->request->total,
         ]);
 
 

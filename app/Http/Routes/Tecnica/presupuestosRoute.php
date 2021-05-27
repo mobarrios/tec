@@ -15,5 +15,7 @@ Route::group(['prefix'=>'presupuestos'],function(){
         Route::get('/details/{id}',             ['as'=>'admin.presupuestos.details','uses'=>'Tecnica\PresupuestosController@details']);
         Route::get('/index/{search?}',  ['as'=>'admin.presupuestos.index','uses'=>'Tecnica\PresupuestosController@index']);
         Route::get('/pdf',              ['middleware'=>'permission:'.$section.'.list','as'=>'admin.presupuestos.pdf','uses'=>'Tecnica\ToPrintController@exportListToPdf']);
+        Route::post('updateUser',     ['as'=>'admin.presupuestos.updateEstado','uses'=>'Tecnica\PresupuestosController@updateEstado']);
+
  
 });

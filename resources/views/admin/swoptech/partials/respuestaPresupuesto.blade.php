@@ -35,6 +35,7 @@
 <input type="hidden" name="celular" value="{{$celular}}">
 <input type="hidden" name="modelos_id" value="{{$modelos_id}}">
 <input type="hidden" name="email" value="{{$email}}">
+<input type="hidden" name="total" value="{{$total}}">
 
 
 
