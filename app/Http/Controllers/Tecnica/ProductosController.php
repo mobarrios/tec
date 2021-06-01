@@ -83,7 +83,7 @@ class ProductosController extends Controller
             $total = $sum + $total;
             
         }
-    
+        
         
         $this->data['cotizar'] = true;
         $this->data['total'] = $this->data['modelo']->precio_final - $total;
