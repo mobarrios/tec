@@ -156,6 +156,11 @@
          Número Serie :  {{ $model->numero_serie  }}
           </td>
       </tr>
+       <tr>
+        <td>Capacidad : {{ $model->capacidad  }} </td>
+        <td>Bateria: {{ $model->bateria  }} </td>  
+        <td>Color : {{ $model->color  }}</td>
+      </tr>
       <tr>
         <td>Parte : {{ $model->partes  }} </td>
         <td></td>  
