@@ -107,8 +107,8 @@ return [
         '43' => ['digital','vendedor', 'tecnico central', 'serviciotecnico', 'mecanico', 'admin', 'root'],
         '44' => ['digital','vendedor', 'tecnico central', 'serviciotecnico', 'mecanico', 'admin', 'root'],
         '45' => ['admin'],
-
-
+        '46' => ['digital','vendedor', 'tecnico central', 'serviciotecnico', 'mecanico', 'admin', 'root'],
+        '47' => ['digital','vendedor', 'tecnico central', 'serviciotecnico', 'mecanico', 'admin', 'root'],
 
     ],
 
