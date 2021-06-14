@@ -27,9 +27,10 @@
             --}}
              
 
-            <a href="{{route('admin.ordenes.reporte',$models->id)}}" target="_blank" class="btn btn-default pull-right" style="margin-left: 10px;" >Reporte</a>  
-
+            <a href="{{route('admin.ordenes.reporte',$models->id)}}" target="_blank" class="btn btn-default pull-right" style="margin-left: 10px;" >Remito</a>  
+            {{--
             <a href="{{route('admin.ordenes.remito',$models->id)}}" target="_blank" class="btn btn-default pull-right ">Remito</a>  
+            --}}
 
             <a href="{{route('admin.ordenes.history',$models->id)}}"  class="btn btn-default pull-right" style="margin-right: 10px;" >Historial</a> 
             
