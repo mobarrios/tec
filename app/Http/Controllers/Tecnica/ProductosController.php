@@ -46,12 +46,12 @@ class ProductosController extends Controller
 
 
         $validator = Validator::make($this->request->all(), [
-            'nombre' => 'required',
-            'apellido' => 'required',
-            'dni' => 'required',
+            'nombre' => 'required|max:100',
+            'apellido' => 'required|max:100',
+            'dni' => 'required|max:100',
             //'email' => 'required|email|unique:clients,email',
-            'email' => 'required|email',
-            'celular' => 'required',
+            'email' => 'required|email|max:100',
+            'celular' => 'required|max:100',
             'modelo'=>'required'],
 
             [

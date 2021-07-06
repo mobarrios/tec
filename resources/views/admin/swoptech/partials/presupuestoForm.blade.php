@@ -90,7 +90,10 @@ Completá los datos, cotización online en simples pasos.</h5> <br><br>
 		<label class="form-label " for="email">¿PRESENTA ALGUNA FALLA?</label>
 		<div class="row">
 
+
+
 		@foreach($caracteristicas->chunk(2) as $key => $c)
+			{{--
 			@if(isset($c[0]))
 			<div class="col-md-6">
 				<input type="checkbox" name="caracteristicas[]" value="{{  $c[0]->id }}">{{ $c[0]->nombre }} <br>
@@ -102,6 +105,26 @@ Completá los datos, cotización online en simples pasos.</h5> <br><br>
 				<input type="checkbox" name="caracteristicas[]" value="{{ $c[1]->id }}">{{ $c[1]->nombre }} <br>
 			</div>
 			@endif
+			--}}
+
+			@if(isset($c[0]))
+			<div class="col-md-6">
+				<label class="containerCheckbox">{{ $c[0]->nombre }} 
+				  <input type="checkbox" name="caracteristicas[]" value="{{  $c[0]->id }}">
+				  <span class="checkmark"></span>
+				</label>
+			</div>
+			@endif
+
+			@if(isset($c[1]))
+			<div class="col-md-6">
+				<label class="containerCheckbox">{{ $c[1]->nombre }} 
+				  <input type="checkbox" name="caracteristicas[]" value="{{  $c[1]->id }}">
+				  <span class="checkmark"></span>
+				</label>
+			</div>
+			@endif
+
 		@endforeach
 	</div>
 	</div>
