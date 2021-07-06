@@ -156,17 +156,34 @@
          Número Serie :  {{ $model->numero_serie  }}
           </td>
       </tr>
+<<<<<<< HEAD
        <tr>
         <td>Capacidad : {{ $model->capacidad  }} </td>
         <td>Bateria: {{ $model->bateria  }} </td>  
         <td>Color : {{ $model->color  }}</td>
       </tr>
+=======
+
+      <tr>
+         <td>
+        Capacidad: {{ $model->capacidad }}
+       </td>
+        <td>
+        Bateria: {{ $model->bateria }}
+       </td>
+        <td>
+        Color: {{ $model->color }}
+       </td>
+      </tr>
+
+>>>>>>> 4b0141c4d3a1c70ef8eba771970f1086ed6a9dae
       <tr>
         <td>Parte : {{ $model->partes  }} </td>
         <td></td>  
         <td>Serie partes : {{ $model->serie_partes  }}</td>
       </tr>
-       <tr>
+      
+      <tr>
         <td>Falla Declarada : {{ $model->falla_declarada  }} </td>
       </tr>
 

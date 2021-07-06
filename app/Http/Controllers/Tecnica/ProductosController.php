@@ -98,8 +98,6 @@ class ProductosController extends Controller
         $this->data['celular'] = $this->request->celular;
         $this->data['modelos_id'] = $this->request->modelo;
         $this->data['caracteristicas'] = $this->request->caracteristicas;
-
-
         $this->request->session()->put('caracteristicas', $this->request->caracteristicas);
 
 
