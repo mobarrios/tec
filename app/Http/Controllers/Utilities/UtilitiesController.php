@@ -20,6 +20,7 @@ class UtilitiesController extends Controller
         $datos = Session::get('export');
 
         $model = (new $datos['model'])->all();
+        dd($model);
         $company = Auth::user()->BranchesActive->company;
 
         $export = config('models.'.$model->first()->section.'.export');
