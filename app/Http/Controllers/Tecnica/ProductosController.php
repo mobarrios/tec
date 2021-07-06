@@ -46,13 +46,13 @@ class ProductosController extends Controller
 
 
         $validator = Validator::make($this->request->all(), [
-            'nombre' => 'required', 
-            'apellido' => 'required', 
-            'dni' => 'required', 
-            //'email' => 'required|email|unique:clients,email', 
+            'nombre' => 'required',
+            'apellido' => 'required',
+            'dni' => 'required',
+            //'email' => 'required|email|unique:clients,email',
             'email' => 'required|email',
-            'celular' => 'required', 
-            'modelo'=>'required'], 
+            'celular' => 'required',
+            'modelo'=>'required'],
 
             [
             'nombre.required' => 'El campo Nombre es obligatorio',
@@ -61,7 +61,7 @@ class ProductosController extends Controller
             'email.required' => 'El campo Email es obligatorio',
             'celular.required' => 'El campo Celular es obligatorio',
             'modelo.required' => 'El campo Modelo es obligatorio',
-           
+
         ]);
 
         if ($validator->fails()) {
@@ -78,13 +78,17 @@ class ProductosController extends Controller
         //->sum('importe');
         $total = 0;
         foreach ($totalCaracteristicas as $carac) {
-            
-            $sum = $carac->porcentaje * $carac->importe / 100;
-            $total = $sum + $total;
-            
+
+            //$sum = $carac->porcentaje * $carac->importe / 100 ;
+
+            $sum    = $this->data['modelo']->precio_final * $carac->porcentaje / 100;
+            $total  = $sum + $total ;
+
+          //  echo $sum . '<br>';
+          // echo $total;
         }
-        
-        
+
+      //  echo $total;
         $this->data['cotizar'] = true;
         $this->data['total'] = $this->data['modelo']->precio_final - $total;
         $this->data['nombre'] = $this->request->nombre;
@@ -94,8 +98,6 @@ class ProductosController extends Controller
         $this->data['celular'] = $this->request->celular;
         $this->data['modelos_id'] = $this->request->modelo;
         $this->data['caracteristicas'] = $this->request->caracteristicas;
-
-
         $this->request->session()->put('caracteristicas', $this->request->caracteristicas);
 
 
@@ -137,7 +139,7 @@ class ProductosController extends Controller
             $cliente = $c;
         }
 
-        
+
 
         $modelo = $this->request->modelos_id;
 
@@ -152,7 +154,7 @@ class ProductosController extends Controller
 
         if ($this->request->session()->has('caracteristicas')) {
            $c = $this->request->session()->get('caracteristicas');
-           $presupuesto->Caracteristicas()->sync($c); 
+           $presupuesto->Caracteristicas()->sync($c);
         }
 
         return redirect()->route('admin.swoptech.formPublic')->with(['msgOk' => 'Se ha registro correctamente el producto.']);
@@ -163,5 +165,5 @@ class ProductosController extends Controller
 
     }
 
-  
+
 }
