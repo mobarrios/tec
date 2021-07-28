@@ -119,16 +119,20 @@
 
 
     <div class="col-xs-3 form-group">
-      {!! Form::label('CBU/Numero de cuenta') !!}
+      {!! Form::label('CBU') !!}
       {!! Form::text('number', isset($models->Pago->number) ? $models->Pago->number : '',  ['class'=>'form-control']) !!}
     </div>
-
     <div class="col-xs-3 form-group">
+      {!! Form::label('Numero de cuenta') !!}
+      {!! Form::text('numero_cuenta', isset($models->Pago->numero_cuenta) ? $models->Pago->numero_cuenta : '',  ['class'=>'form-control']) !!}
+    </div>
+
+    <div class="col-xs-2 form-group">
       {!! Form::label('Alias') !!}
       {!! Form::text('alias', isset($models->Pago->alias) ? $models->Pago->alias : '',  ['class'=>'form-control']) !!}
     </div>
 
-    <div class="col-xs-3 form-group">
+    <div class="col-xs-1 form-group">
       {!! Form::label('Monto') !!}
       {!! Form::text('amount', isset($models->Pago->amount) ? $models->Pago->amount : '',  ['class'=>'form-control']) !!}
     </div>

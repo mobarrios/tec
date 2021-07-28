@@ -9,6 +9,7 @@
                     {{ isset($model->Model->name) ? $model->Model->name : '' }} 
                 <strong>{{ isset($model->Model->Brands->name) ? ': '.$model->Model->Brands->name : ''  }} </strong>
                 </td>  
+                <td>{{ !empty($model->capacidad) ? $model->capacidad . ' GB' : '' }} </td>
              
                 <td>$ {{$model->precio_final}}</td>
             </tr>

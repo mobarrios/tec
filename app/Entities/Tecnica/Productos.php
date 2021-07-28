@@ -14,7 +14,7 @@ class Productos extends Entity
 {
 
     protected $table = 'productos';
-    protected $fillable = ['brands_id','models_id','precio_final'];
+    protected $fillable = ['brands_id','models_id','precio_final','capacidad'];
     protected $section = 'productos';
 
   	public function States(){

@@ -97,11 +97,19 @@
         {{ isset($models->Pago->term) ? $models->Pago->term : '' }}
       </strong>
       <br><br>
-      <span class="text-muted">CBU/Alias/Numero De Cuenta  : </span> <strong>{{ isset($models->Pago->number) ? $models->Pago->number : ''   }}
+      <span class="text-muted">CBU  : </span> <strong>{{ isset($models->Pago->number) ? $models->Pago->number : ''   }}
 
       </strong>
       <br><br>
-      <span class="text-muted">Monto  : </span> <strong>{{ isset($models->Pago->amount) ? $models->Pago->amount : ''   }}
+      <span class="text-muted">Alias  : </span> <strong>{{ isset($models->Pago->alias) ? $models->Pago->alias : ''   }}
+
+      </strong>
+      <br><br>
+      <span class="text-muted">Numero De Cuenta  : </span> <strong>{{ isset($models->Pago->numero_cuenta) ? $models->Pago->numero_cuenta : ''   }}
+
+      </strong>
+      <br><br>
+      <span class="text-muted">Monto  : </span> <strong>$ {{ isset($models->Pago->amount) ? $models->Pago->amount : ''   }}
 
       </strong>
       <br><br><hr>

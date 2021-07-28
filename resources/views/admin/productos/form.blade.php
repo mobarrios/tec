@@ -24,7 +24,11 @@
                 @endforeach
               </select>
             </div> 
-            <div class="col-xs-12 form-group">
+            <div class="col-xs-6 form-group">
+                {!! Form::label('Capacidad') !!}
+                {!! Form::number('capacidad', null, ['class'=>'form-control']) !!}
+            </div>
+            <div class="col-xs-6 form-group">
               {!! Form::label('Precio') !!}
               {!! Form::text('precio_final', null, ['class'=>'form-control']) !!}
             </div>

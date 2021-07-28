@@ -16,10 +16,13 @@
         @endif
 
           <div class="row">
+            {{--
             <div class="col-xs-4 form-group">
               {!! Form::label('Numero de orden') !!}
               {!! Form::text('codigo_orden', null, ['class'=>'form-control']) !!}
             </div>
+            --}}
+
             <div class="col-xs-4 form-group">
               {!! Form::label('Fecha Inicio') !!}
               @if(isset($models))
@@ -37,6 +40,7 @@
               {!! Form::text('fecha_final',  date('d-m-Y'), ['class'=>'form-control datePicker']) !!}
             @endif
             </div>
+            
           
           </div>
           

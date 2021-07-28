@@ -10,7 +10,7 @@
 
      protected $table = 'payments';
 
-     protected $fillable = ['date','amount','banks_id','number','check_date','check_pay_date','check_types_id','term','transf_date','financials_id','sales_id','pay_methods_id', 'hora', 'nombre', 'apellido', 'alias', 'cuil'];
+     protected $fillable = ['date','amount','banks_id','number','check_date','check_pay_date','check_types_id','term','transf_date','financials_id','sales_id','pay_methods_id', 'hora', 'nombre', 'apellido', 'alias', 'cuil', 'numero_cuenta'];
 
      protected $section = 'payments';
 
