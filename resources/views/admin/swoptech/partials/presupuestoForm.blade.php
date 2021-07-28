@@ -73,7 +73,7 @@ Completá los datos, cotización online en simples pasos.</h5> <br><br>
 		<select id="modelo" class="form-control" name="modelo">
 		<option value="">¿CUÁL ES TU MODELO DE IPHONE?</option>
 		@foreach($productos as $p)
-		    <option value="{{$p->id}}"> {{ $p->Model->name }} </option>
+		    <option value="{{$p->id}}"> {{ $p->Model->name }} {{ $p->capacidad }} GB</option>
 		@endforeach
 
 		</select>
