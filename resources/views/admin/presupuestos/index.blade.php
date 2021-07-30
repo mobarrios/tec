@@ -7,8 +7,10 @@
                 <td>{{$model->id}}</td>
                 <td>
                     {{ isset($model->Producto->Model->name) ? $model->Producto->Model->name : '' }} 
-                <strong>{{ isset($model->Producto->Model->Brands->name) ? ': '.$model->Producto->Model->Brands->name : ''  }} </strong>
-                </td>  
+                <strong>{{ isset($model->Producto->Model->Brands->name) ? ': '.$model->Producto->Model->Brands->name : ''  }} {{ !empty($model->Producto->capacidad) ? $model->Producto->capacidad . ' GB' : '' }}</strong>
+                
+                </td> 
+
                 <td>{{ isset($model->Cliente) ? $model->Cliente->fullname : '' }}</td>
 
                 <td>$ {{$model->precio_final}}</td>
