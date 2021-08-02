@@ -13,6 +13,7 @@ use App\Entities\Configs\Logs;
 use App\Http\Helpers\ImagesHelper;
 use App\Http\Requests\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 abstract class BaseRepo
 {
@@ -67,7 +68,7 @@ abstract class BaseRepo
             $model->fill($data->all());
         else
             $model->fill($data);
-        
+
         $model->save();
 
         return $model;
@@ -78,7 +79,7 @@ abstract class BaseRepo
     public function update($id, $data)
     {
         $model = $this->model->find($id);
-        
+
         if(is_object($data))
             $model->fill($data->all());
         else
@@ -141,23 +142,50 @@ abstract class BaseRepo
     }
 
 
+    // public function ListAll($section = null)
+    // {
+    //     if (config('models.' . $section . '.is_brancheable')) {
+    //         return $this->model->whereHas('Brancheables', function ($q) {
+    //
+    //             // lista todos los branches del usuario
+    //             //$q->whereIn('branches_id',Auth::user()->branches_id );\
+    //
+    //             // lista en el branch actual del usuario
+    //             $q->where('branches_id', Auth::user()->branches_active_id);
+    //
+    //         });
+    //
+    //     } else {
+    //         return $this->model;
+    //     }
+    // }
+
     public function ListAll($section = null)
     {
-        if (config('models.' . $section . '.is_brancheable')) {
-            return $this->model->whereHas('Brancheables', function ($q) {
+        $class = $this->model->section;
 
-                // lista todos los branches del usuario
-                //$q->whereIn('branches_id',Auth::user()->branches_id );\
+        if (config('models.' . $section . '.is_brancheable'))
+        {
+            $table = DB::table($this->model['table'])
+                ->join('brancheables', function ($q) use ($class) {
+                    $q->on($this->model['table'] . '.id', '=', 'brancheables.entities_id')
+                        ->where('brancheables.entities_type', 'like', '%' . $class)
+                        ->where('branches_id', '=', Auth::user()->branches_active_id);
+                })
+                ->whereNull($this->model['table'].'.deleted_at')
+                ->select($this->model['table'] . '.id')
+                ->lists('id');
 
-                // lista en el branch actual del usuario
-                $q->where('branches_id', Auth::user()->branches_active_id);
+            $model = $this->model->whereIn('id', $table);
 
-            });
-
-        } else {
-            return $this->model;
+        }else{
+                $model = $this->model;
         }
+
+
+        return $model;
     }
+
 
     public function ListAllWhere($section = null, $columnAndValue = [])
     {
@@ -375,6 +403,6 @@ abstract class BaseRepo
     public function ultimo()
     {
         return  $this->model->orderBy('id', 'desc')->first();
-      
+
     }
 }

@@ -16,16 +16,16 @@ use Illuminate\Support\Facades\Session;
 abstract class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-    
+
     protected $request;
     protected $route;
     protected $config;
     protected $data;
     protected $section;
-    
+
     public function index()
-    {   
-        
+    {
+
         //breadcrumb activo
         $this->data['activeBread'] = 'Listar';
 
@@ -53,7 +53,7 @@ abstract class Controller extends BaseController
 
         //pagina el query
         $this->data['models'] = $model->orderBy('id','DESC')->paginate(config('models.'.$this->section.'.paginate'));
-       
+
         //return view($this->getConfig()->indexRoute)->with($this->data);
         return view(config('models.'.$this->section.'.indexRoute'))->with($this->data);
     }
@@ -122,7 +122,7 @@ abstract class Controller extends BaseController
     */
     //post de editar
     public function update()
-    {   
+    {
 
 
         //validar los campos
