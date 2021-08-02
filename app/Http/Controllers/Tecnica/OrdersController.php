@@ -62,7 +62,7 @@ class OrdersController extends Controller
         $this->data['users']        = $usersRepo->getModel()->all()->lists('user_name','id');
         $this->data['branches']     = $branchesRepo->listsData('name', 'id');
 
-     
+
     }
 
 
@@ -78,7 +78,7 @@ class OrdersController extends Controller
     }
 
     public function detail(UsersRepo $usersRepo, OrderServices $orderServices, ToPrintRepo $toPrintRepo){
-         
+
     	$this->data['models'] = $this->repo->find($this->route->getParameter('id'));
     	//$this->data['users']  = $usersRepo->ListsData('name','id');
         $this->data['letraChica'] = $toPrintRepo->ultimo();
@@ -88,8 +88,8 @@ class OrdersController extends Controller
     }
 
     public function updateUser(Request $request){
-        
-        $model            = $this->repo->find($request->get('orden_id')); 
+
+        $model            = $this->repo->find($request->get('orden_id'));
         $model->users_id  = $request->get('users_id');
         $this->updateable($model);
 
@@ -102,7 +102,7 @@ class OrdersController extends Controller
     }
 
     public function updateEstado(Request $request, StatesRepo $statesRepo, CompanyRepo $companyRepo){
-        
+
 
         $state              = new OrderStates();
         $state->orders_id   = $request->get('orden_id');
@@ -128,7 +128,7 @@ class OrdersController extends Controller
             try{
                 //Envio de email
                 Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company'], 'models_id' => $idCrypt, 'empresa' => $data['empresa'],'direccion' => $data['direccion'] ,'tipo' => $tipo ], function($message) use ($data,$model,$letraChica,$company, $tasks, $vendedor)
-                {   
+                {
 
                     $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');
                     $message->to($model->Cliente->email, $model->Cliente->fullname);
@@ -144,19 +144,19 @@ class OrdersController extends Controller
 
                 return redirect()->back()->withErrors(['No se ha podido enviar el email']);
             }
-    
+
             return redirect()->back()->withErrors(['Regitro Agregado Correctamente. Email enviado al cliente.']);
 
         }else{
-         
+
             return redirect()->back()->withErrors(['Regitro Agregado Correctamente. El Email no fue enviado al cliente.']);
         }
         //return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
-       
+
     }
 
     public function reporte(Route $route, ToPrintRepo $toPrintRepo, CompanyRepo $companyRepo){
-        
+
         $model      = $this->repo->find($route->getParameter('id'));
         $company    = $companyRepo->getModel()->first();
         $letraChica = $toPrintRepo->ultimo();
@@ -168,8 +168,8 @@ class OrdersController extends Controller
     }
 
     public function updatePagos(Request $request){
-       
-        $model                          = $this->repo->find($request->get('orden_id')); 
+
+        $model                          = $this->repo->find($request->get('orden_id'));
         $model->presupuesto_estimado    = $request->get('presupuesto_estimado');
         $model->pagado                  = $request->get('pagado');
 
@@ -179,11 +179,11 @@ class OrdersController extends Controller
 
         return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
 
-    }   
+    }
 
     public function updateObservaciones(Request $request){
-        
-        $model                          = $this->repo->find($request->get('orden_id')); 
+
+        $model                          = $this->repo->find($request->get('orden_id'));
         $model->observaciones           = $request->get('observaciones');
         $model->falla_declarada         = $request->get('falla_declarada');
         $model->observaciones_tecnicas  = $request->get('observaciones_tecnicas');
@@ -195,12 +195,12 @@ class OrdersController extends Controller
 
         return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
     }
-    
-    
+
+
     public function busquedaServicios(){
-        
+
         $services = Services::all();
-        return $services;    
+        return $services;
         /*
         $datarow
           while($datarow = mysqli_fetch_assoc($result)){
@@ -209,35 +209,35 @@ class OrdersController extends Controller
              $content = $datarow['content'];
              $shortcontent = substr($content, 0, 160)."...";
              $link = $datarow['link'];
-             
+
              $response_arr[] = array('id'=>$id,'title'=>$title,'shortcontent'=>$shortcontent,'content'=>$content,'link'=>$link);
-             
+
             }
 
             if(count($response_arr) > 0)
             echo json_encode($response_arr);
         */
 
-       // return json_encode($services);     
+       // return json_encode($services);
     }
     public function addServices(Request $request, OrderServicesRepo $orderServicesRepo)
-    {   
+    {
         $data['orders_id']      = $request->get('orders_id');
         $data['services_id']    = $request->get('services_id');
         $data['cantidad']       = $request->get('cantidad');
         $orderServices          = $orderServicesRepo->create($data);
-        
+
         return redirect()->back()->withErrors(['Registro agregado Correctamente']);
-        
+
 
     }
 
     public function deleteServices(Request $request, OrderServicesRepo $orderServicesRepo){
-        
+
         $id     = $this->route->getParameter('id');
         $model  = $orderServicesRepo->find($id);
         $model->delete();
-        
+
         return redirect()->back()->withErrors(['Registro borrado correctamente']);
     }
 
@@ -271,13 +271,13 @@ class OrdersController extends Controller
         //dd($this->request->all());
         //crea a traves del repo con el request
         $model = $this->repo->create($this->request);
-        
+
         //Tareas
         //$model->tasks()->sync($this->request->tareas);
         if($this->request->estado){
 
             foreach ($this->request->estado as $key => $value) {
-                
+
                 $tasksOrders = new TasksOrders();
 
                 $tasksOrders->orders_id = $model->id;
@@ -306,30 +306,30 @@ class OrdersController extends Controller
         $tasks              = Tasks::all();
         $vendedor           = Auth::user();
         $letraChica         = $this->toPrintRepo->ultimo();
-        
 
-        
 
-        for ($i=0; $i < 2 ; $i++) { 
-            
+
+
+        for ($i=0; $i < 2 ; $i++) {
+
             $emails = [ 'coderst@icase.com.ar', $model->Cliente->email ];
 
             if( !empty($emails[$i]) ){
 
             //Envio de email
-            Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company'], 'models_id' => $idCrypt, 'empresa' => $data['empresa'], 
+            Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company'], 'models_id' => $idCrypt, 'empresa' => $data['empresa'],
                 'direccion' => $data['direccion'] ], function($message) use ($data,$model,$letraChica,$company,$tasks, $vendedor,$emails, $i)
             {
 
             $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');
             $message->to( $emails[$i], $model->Cliente->fullname);
 
-           
+
             if($data['estado']->enviar_remito == true ){
                 $pdf = PDF::loadView('admin.orders.reportes', compact('model','letraChica','company','tasks','vendedor'));
                 $message->attachData($pdf->output(), 'remito.pdf', ['mime' => 'application/pdf']);
             }
-           
+
             });
 
             }
@@ -341,8 +341,8 @@ class OrdersController extends Controller
 
         /*
         //Envio de mail
-        if(!empty($model->Cliente->email) && $data['estado']->enviar == true){   
-            
+        if(!empty($model->Cliente->email) && $data['estado']->enviar == true){
+
             try{
                 //Envio de email
                 Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company'], 'models_id' => $idCrypt ], function($message) use ($data,$model,$letraChica,$company,$tasks, $vendedor)
@@ -361,14 +361,14 @@ class OrdersController extends Controller
             }catch(Exception $e){
 
                 return redirect()->route('admin.orders.details',$model->id)->withErrors(['No se ha podido enviar el email']);
-            }   
+            }
 
             return redirect()->route('admin.orders.details',$model->id)->withErrors(['Regitro Agregado Correctamente. Email enviado al cliente.']);
             //return redirect()->back()->withErrors(['Regitro Agregado Correctamente. Email enviado al cliente.']);
 
 
         }else{
-            
+
 
             //return redirect()->back()->withErrors(['Regitro Agregado Correctamente. El Email no fue enviado al cliente.']);
             return redirect()->route('admin.orders.details',$model->id)->withErrors(['Regitro Agregado Correctamente. El email no fue enviado al cliente']);
@@ -380,7 +380,7 @@ class OrdersController extends Controller
     public function updateTasks(){
 
         //$model = $this->repo->create($this->request);
-        
+
         $model = $this->repo->find($this->request->orden_id);
 
         foreach ($model->Tasks as $t) {
@@ -416,7 +416,7 @@ class OrdersController extends Controller
     }
 
     public function postMovimientos(){
-        
+
         $id     = $this->route->getParameter('id');
         $model  = $this->repo->find($id);
 
@@ -431,13 +431,13 @@ class OrdersController extends Controller
         }else{
             $model->Movements()->create($this->request->all());
         }
-        
+
         return redirect()->back()->withErrors(['Regitro Creado Correctamente']);
-        
+
     }
 
     public function remito(Route $route, ToPrintRepo $toPrintRepo, CompanyRepo $companyRepo){
-        
+
 
         $model      = $this->repo->find($route->getParameter('id'));
         $company    = $companyRepo->getModel()->first();
@@ -451,7 +451,7 @@ class OrdersController extends Controller
 
     public function updateVendedor(){
 
-        $model               = $this->repo->find($this->request->get('orden_id')); 
+        $model               = $this->repo->find($this->request->get('orden_id'));
         $model->vendedor_id  = $this->request->get('vendedor_id');
         $this->updateable($model);
         $model->save();
@@ -461,9 +461,9 @@ class OrdersController extends Controller
     }
 
     public function updateable($model){
-        
+
         $diffs = array_diff_assoc($model->getAttributes(),$model->getOriginal());
-      
+
         foreach ($diffs as $diff => $a)
         {
             $col = $diff;
@@ -471,7 +471,7 @@ class OrdersController extends Controller
             if( $model->getOriginal($diff) != '' ){
                 $model->Updateables()->create(['column' => $col, 'data_old' => $model->getOriginal($diff), 'users_id' => Auth::user()->id ] );
             }
-               
+
                 //$model->Updateables()->create(['users_id' => Auth::user()->id, 'column' => $col, 'new_data' => $model->$diff, 'old_data' => $model->getOriginal($diff)]);
         }
 
