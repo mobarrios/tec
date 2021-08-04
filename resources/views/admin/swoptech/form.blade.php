@@ -4828,7 +4828,7 @@ LS.ready.then(function(){
         	<a class="nav-list-link " href="https://www.swoptech.com.ar/tiendas/">Tiendas</a>
         </li>
 				<li class="nav-item nav-item-desktop">
-        	<a class="nav-list-link selected" href="/contacto/">Contacto</a>
+        	<a class="nav-list-link selected" href="https://www.swoptech.com.ar/contacto/">Contacto</a>
         </li>
 				<li class="nav-item nav-item-desktop">
         	<a class="nav-list-link " href="https://www.swoptech.com.ar/about-us/">¿Quiénes Somos?</a>
