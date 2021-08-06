@@ -74,23 +74,27 @@ class ProductosController extends Controller
 
         $totalCaracteristicas = $this->caracteristicasRepo->getModel()
         ->whereIn('id',$this->request->caracteristicas)
-        ->get();
-        //->sum('importe');
+        ->get()
+        ->sum('importe');
+        
+        /*
         $total = 0;
+
         foreach ($totalCaracteristicas as $carac) {
+            // por porcentaje
+            // $sum    = $this->data['modelo']->precio_final * $carac->porcentaje / 100;
 
-            //$sum = $carac->porcentaje * $carac->importe / 100 ;
-
-            $sum    = $this->data['modelo']->precio_final * $carac->porcentaje / 100;
+            // por importe
+            $sum    = $this->data['modelo']->precio_final - $carac->importe;
             $total  = $sum + $total ;
 
-          //  echo $sum . '<br>';
-          // echo $total;
+            echo $sum . '<br>';
+            echo $total;
         }
-
-      //  echo $total;
+        */
+        //dd($this->data['modelo']->precio_final, $totalCaracteristicas, $this->data['modelo']->precio_final - $totalCaracteristicas);
         $this->data['cotizar'] = true;
-        $this->data['total'] = $this->data['modelo']->precio_final - $total;
+        $this->data['total'] = $this->data['modelo']->precio_final - $totalCaracteristicas;
         $this->data['nombre'] = $this->request->nombre;
         $this->data['apellido'] = $this->request->apellido;
         $this->data['dni'] = $this->request->dni;
