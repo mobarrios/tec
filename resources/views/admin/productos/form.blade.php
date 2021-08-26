@@ -11,7 +11,7 @@
             {!! Form::open(['route'=> config('models.'.$section.'.storeRoute') , 'files' =>'true']) !!}
         @endif
 
-            <div class="col-xs-12 form-group">
+            <div class="col-xs-6 form-group">
               {!! Form::label('Modelos') !!}
               <select name='models_id' class="select2 form-control" placeholder="seleccionar Cliente" >
                 <option value="">Seleccionar</option>
@@ -32,5 +32,10 @@
               {!! Form::label('Precio') !!}
               {!! Form::text('precio_final', null, ['class'=>'form-control']) !!}
             </div>
+            <div class="col-xs-6 form-group">
+              {!! Form::label('Gama') !!}
+              {!! Form::select('gama', ['' => 'Seleccionar', 'alta' => 'alta', 'media' => 'media' , 'baja' => 'baja' ], null, ['class'=>'form-control']) !!}
+            </div>
+
        
 @endsection

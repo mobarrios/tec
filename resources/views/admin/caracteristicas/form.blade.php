@@ -27,5 +27,9 @@
                 {!! Form::label('Importe') !!}
                 {!! Form::text('importe', null, ['class'=>'form-control']) !!}
             </div>
+            <div class="col-xs-6 form-group">
+              {!! Form::label('Gama') !!}
+              {!! Form::select('gama', ['' => 'Seleccionar', 'alta' => 'alta', 'media' => 'media' , 'baja' => 'baja' ], null, ['class'=>'form-control']) !!}
+            </div>
 
 @endsection

@@ -12,7 +12,7 @@ class Caracteristicas extends Entity
 {
 
     protected $table = 'caracteristicas';
-    protected $fillable = ['nombre','tipo','porcentaje', 'importe'];
+    protected $fillable = ['nombre','tipo','porcentaje', 'importe', 'gama'];
     protected $section = 'caracteristicas';
 
   	public function States(){
