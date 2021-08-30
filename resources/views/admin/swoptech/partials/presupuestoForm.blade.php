@@ -73,7 +73,7 @@ Completá los datos, cotización online en simples pasos.</h5> <br><br>
 		<select id="modelo" class="form-control" name="modelo">
 		<option value="">¿CUÁL ES TU MODELO DE IPHONE?</option>
 		@foreach($productos as $p)
-		    <option value="{{$p->id}}"> {{ $p->Model->name }} {{ $p->capacidad }} GB</option>
+		    <option value="{{$p->id}}"> {{ strtoupper($p->Model->name) }} {{ $p->capacidad }} GB</option>
 		@endforeach
 
 		</select>
@@ -88,24 +88,12 @@ Completá los datos, cotización online en simples pasos.</h5> <br><br>
 
 	<div class="form-group col-md-12 pr-md-1">
 		<label class="form-label " for="email">¿PRESENTA ALGUNA FALLA?</label>
-		<div class="row">
+		<div class="row divCaracteristicas">
 
 
-
+		{{--
 		@foreach($caracteristicas->chunk(2) as $key => $c)
-			{{--
-			@if(isset($c[0]))
-			<div class="col-md-6">
-				<input type="checkbox" name="caracteristicas[]" value="{{  $c[0]->id }}">{{ $c[0]->nombre }} <br>
-			</div>
-			@endif
 			
-			@if(isset($c[1]))
-			<div class="col-md-6">
-				<input type="checkbox" name="caracteristicas[]" value="{{ $c[1]->id }}">{{ $c[1]->nombre }} <br>
-			</div>
-			@endif
-			--}}
 
 			@if(isset($c[0]))
 			<div class="col-md-6">
@@ -126,6 +114,7 @@ Completá los datos, cotización online en simples pasos.</h5> <br><br>
 			@endif
 
 		@endforeach
+		--}}
 	</div>
 	</div>
 
@@ -143,3 +132,4 @@ Completá los datos, cotización online en simples pasos.</h5> <br><br>
 
 <input class="btn btn-primary d-block m-auto" type="submit" value="COTIZAR" name="cotizar" />
 {!! Form::close() !!}
+

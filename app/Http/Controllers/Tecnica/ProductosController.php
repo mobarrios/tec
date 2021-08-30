@@ -169,5 +169,16 @@ class ProductosController extends Controller
 
     }
 
+    public function porGama(){
+
+        $modeloId = $this->request->modelos_id;
+        $modelo = $this->repo->find($modeloId);
+
+        $caracteristicas = $this->caracteristicasRepo->getModel()->where('gama', $modelo->gama)->orderBy('nombre', 'asc')->get();
+        $result = $caracteristicas->chunk(2);
+        
+        return response()->json($result);
+    }
+
 
 }
