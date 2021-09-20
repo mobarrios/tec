@@ -93,22 +93,22 @@
 		                	Dato anterior
 		                	<strong>
 		                	@if ( $update->column == 'models_id' ) 
-							    {{ $models_id[$update->data_old] }}
+							    {{ !empty($update->data_old) ? $models_id[$update->data_old] : '' }}
 							
 							@elseif ($update->column == 'users_id') 
-							    {{ $users[$update->data_old] }}
+							    {{ !empty($update->data_old) ? $users[$update->data_old] : '' }}
 
 							@elseif ($update->column == 'vendedor_id') 
-							    {{ $users[$update->data_old] }}
+							    {{ !empty($update->data_old) ? $users[$update->data_old] : '' }}
 
 							@elseif ($update->column == 'equipments_id') 
-							    {{ $equipments[$update->data_old] }}
+							    {{ !empty($update->data_old) ? $equipments[$update->data_old] : '' }}
 
 							@elseif ($update->column == 'clients_id') 
-							    {{ $clients[$update->data_old] }}
+							    {{ !empty($update->data_old) ? $clients[$update->data_old] : '' }}
 
 							@elseif ($update->column == 'brands_id') 
-							    {{ $brands[$update->data_old] }}
+							    {{ !empty($update->data_old) ? $brands[$update->data_old] : '' }}
 
 							@else
 
