@@ -1,13 +1,16 @@
 var modelo = $('select[name=modelo]')
 
 
-console.log(modelo)
 
 
 $(modelo).on('change', function(ev){
     ev.preventDefault();
   
     var modeloId = $(this).val();
+
+    if(modeloId == ''){
+        return false;
+    }
 
     //var cod_depto 	  = $('select[name=departamento_espacio_comunitario_id]').val();
 
@@ -35,12 +38,11 @@ $(modelo).on('change', function(ev){
             divCaracteristicas.empty();
 
             $.each(data, function(key, value){
-
-                if( value[0] !== 'undefined' ){
+                if (typeof value[0] !== 'undefined') {
                     divCaracteristicas.append( inputTemplate(value[0].nombre, value[0].id)  )
                 }
 
-                if( value[1] !== 'undefined' ){
+                if (typeof value[1] !== 'undefined') {
                     divCaracteristicas.append( inputTemplate(value[1].nombre, value[1].id)  )
                 }
               
@@ -67,7 +69,7 @@ function inputTemplate(nombre, id){
 }
 
 $('.btnTerminos').on('click', function(){
-	console.log('ds')
+	//console.log('ds')
 	var div = $('.divTerminos');
 	
 	if(div.css('display') == 'none' ){
@@ -80,7 +82,7 @@ $('.btnTerminos').on('click', function(){
 })
 
 $('.btnCoordinarCita').on('click', function(){
-    console.log('ds')
+    //console.log('ds')
     if( $("#radioTerminos").is(':checked') == false ) {  
         $('.divErrorTerminos').show();
         return false;

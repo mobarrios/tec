@@ -3830,7 +3830,7 @@ LS.ready.then(function(){
 	<div class="container">
 		<div class="row-fluid py-2">
 			<div class="col text-center text-primary">
-																						🔥 Hasta 18 cuotas sin interés en Reparaciones - Exclusivo Venta Telefónica 🔥 Asesoramiento por WhatsApp 11 7362-5083
+																						🔥 Hasta 18 cuotas sin interés en Reparaciones - Exclusivo Venta Telefónica 🔥 Asesoramiento por WhatsApp
 																		</div>
 		</div>
 	</div>
