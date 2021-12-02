@@ -249,7 +249,7 @@ class OrdersController extends Controller
         //$this->validate($this->request,config('models.'.$this->section.'.validationsStore'));
 
         //$this->validate($this->request ,config('models.'.$this->section.'.validationsStore'), config('models.'.$this->section.'.messagesStore'));
-        /*
+
         $validator = Validator::make($this->request->all(), config('models.'.$this->section.'.validationsStore'), [
 
           'clients_id.required'      => 'El campo cliente es requerido',
@@ -270,7 +270,7 @@ class OrdersController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }
-        */
+      
         //dd($this->request->all());
         //crea a traves del repo con el request
         $model = $this->repo->create($this->request);
