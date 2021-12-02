@@ -25,6 +25,7 @@ use App\Entities\Tecnica\OrderServices;
 use App\Entities\Tecnica\Movements;
 use App\Http\Repositories\Tecnica\ServicesRepo;
 use App\Entities\Tecnica\Services;
+use App\Http\Helpers\ImagesHelper;
 use PDF;
 use Auth;
 use Mail;
@@ -248,6 +249,7 @@ class OrdersController extends Controller
         //$this->validate($this->request,config('models.'.$this->section.'.validationsStore'));
 
         //$this->validate($this->request ,config('models.'.$this->section.'.validationsStore'), config('models.'.$this->section.'.messagesStore'));
+        /*
         $validator = Validator::make($this->request->all(), config('models.'.$this->section.'.validationsStore'), [
 
           'clients_id.required'      => 'El campo cliente es requerido',
@@ -268,6 +270,7 @@ class OrdersController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }
+        */
         //dd($this->request->all());
         //crea a traves del repo con el request
         $model = $this->repo->create($this->request);
@@ -335,6 +338,19 @@ class OrdersController extends Controller
             }
 
         }
+ 
+        $imagen = $this->request->image;
+
+        if(!empty($imagen))
+            foreach ($imagen as $valor){
+                $image = new ImagesHelper();
+                $time = time();
+                $name = $time.$valor->getClientOriginalName();
+                $image->upload( $name , $valor, config('models.orders.imagesPath'));
+                $model->images()->create(['path' => config('models.orders.imagesPath').$name]);
+         
+            }
+
 
         return redirect()->route('admin.orders.details',$model->id)->withErrors(['Regitro Agregado Correctamente. Email enviado al cliente.']);
 
@@ -374,6 +390,54 @@ class OrdersController extends Controller
             return redirect()->route('admin.orders.details',$model->id)->withErrors(['Regitro Agregado Correctamente. El email no fue enviado al cliente']);
         }
         */
+
+    }
+
+    public function update(){
+
+        //$this->validate($this->request,config('models.'.$this->section.'.validationsUpdate'));
+        $id = $this->route->getParameter('id');
+
+        //edita a traves del repo
+        $model = $this->repo->update($id,$this->request);
+
+        if(isset($model->images)){
+            foreach ($model->images as $imagen){
+
+                if(empty($this->request->imageOld)){
+                    $image = new ImagesHelper();
+                    $image->deleteFile($imagen->path);
+                    $imagen->delete();
+                }
+
+                if( !empty($this->request->imageOld)){
+                    if( !in_array($imagen->path, $this->request->imageOld) ){
+                        $image = new ImagesHelper();
+                        $image->deleteFile($imagen->path);
+                        $imagen->delete();
+                    }
+                }    
+
+            }
+        }
+
+
+
+       
+        $imagen = $this->request->image;
+        if(!empty($imagen))
+            foreach ($imagen as $valor){
+
+                $image = new ImagesHelper();
+                $time = time();
+                $name = $time.$valor->getClientOriginalName();
+                $image->upload( $name , $valor, config('models.payments.imagesPath'));
+                $model->images()->create(['path' => config('models.payments.imagesPath').$name]);
+         
+            }
+        return redirect()->route('admin.orders.details',$model->id)->withErrors(['Regitro Editado Correctamente']);
+
+
 
     }
 

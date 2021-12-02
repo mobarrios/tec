@@ -10,9 +10,9 @@
     
     @section('form_inputs')
         @if(isset($models))
-            {!! Form::model($models,['route'=> [config('models.'.$section.'.updateRoute'),$models->id]]) !!}
+            {!! Form::model($models,['route'=> [config('models.'.$section.'.updateRoute'),$models->id], 'files' =>'true']) !!}
         @else
-            {!! Form::open(['route'=>config('models.'.$section.'.storeRoute')]) !!}
+            {!! Form::open(['route'=>config('models.'.$section.'.storeRoute'), 'files' =>'true']) !!}
         @endif
 
           <div class="row">
@@ -191,6 +191,41 @@
           </div>
           @endif
 
+
+
+          <h3 class="box-title">Imágenes  </h3>
+          <hr>
+          @if(isset($models))
+            @if(isset($models->images))
+              @foreach($models->images->chunk(3) as $key => $imagen)
+              <div class="row">
+                @foreach($imagen as $key => $img)
+                  @if(isset($imagen[$key]))
+                  <div class="col-md-4 col-sm-4 col-xs-6">
+                    <a href="javascript:void(0)" data-spartanindexremove="0" style="right: 15px; top: 0px; background: rgb(237, 60, 32); border-radius: 3px; width: 25px; height: 25px; line-height: 25px; text-align: center; text-decoration: none; color: rgb(255, 255, 255); position: absolute !important;" class="spartan_remove_row"><i class="fa fa-times"></i></a>
+                 
+                    <a href="" class="btn_imagen" data-toggle="modal" data-target="#myModal" data-img="{{ $img->url}}">
+                      <img src="{{ asset($img->path)}}" class="img-responsive">
+                    </a>
+                    {!! Form::hidden('imageOld[]', $img->path) !!}
+                   </div>
+                  @endif
+                @endforeach
+              </div>
+              @endforeach
+              <br><br>
+            @endif 
+              <div class="row">
+                <div class="col-xs-12">
+                  <div id="coba"></div>
+                </div>
+              </div>
+
+            @else
+              <div id="coba"></div>
+            @endif
+
+
 {{--             <div class="col-xs-2 form-group">
               <strong> Controles</strong>
             </div>
@@ -215,5 +250,48 @@
           
           </div> --}}
           
+@endsection
+@section('js')
+<script type="text/javascript" src="{{ asset('js/multiUpload.js') }}"></script>
+<script type="text/javascript">
+
+  $("#coba").spartanMultiImagePicker({
+    fieldName:        'image[]',
+    maxCount:         5,
+    rowHeight:        '200px',
+    groupClassName:   'col-md-4 col-sm-4 col-xs-6',
+    maxFileSize:      '',
+    placeholderImage: {
+        image: '{{asset("images/add_image.png")}}',
+          width : '100%'
+    },
+    dropFileLabel : "Drop Here",
+    onAddRow:       function(index){
+      console.log(index);
+      console.log('add new row');
+    },
+    onRenderedPreview : function(index){
+      console.log(index);
+      console.log('preview rendered');
+    },
+    onRemoveRow : function(index){
+      console.log(index);
+    },
+    onExtensionErr : function(index, file){
+      console.log(index, file,  'extension err');
+      alert('Please only input png or jpg type file')
+    },
+    onSizeErr : function(index, file){
+      console.log(index, file,  'file size too big');
+      alert('File size too big');
+    }
+  });
+  
+  $(".spartan_remove_row" ).click(function(e) {       
+    console.log($(this).parent().remove())
+  });
+
+
+</script>
 @endsection
 

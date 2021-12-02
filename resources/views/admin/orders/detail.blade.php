@@ -429,6 +429,45 @@
   </div>
 </div>
 
+
+<div class="col-xs-4">
+  <div class="box box-solid">
+    <div class="box-header with-border">
+      <h3 class="box-title">Imágenes </h3>
+    </div>
+
+    <div class="box-body">
+
+      @if(isset($models->images))
+        @foreach($models->images->chunk(3) as $key => $imagen)
+          <div class="row">
+          @foreach($imagen as $key => $img)
+            @if(isset($imagen[$key]))
+              <div class="col-md-4 col-sm-4 col-xs-6">
+                <a href="" class="btn_imagen" data-toggle="modal" data-target="#myModal" data-img="{{ $img->path}}">
+                  <img src="{{ asset($img->path)}}" class="img-responsive">
+                </a>
+              </div>
+            @endif
+          @endforeach
+          </div>
+        @endforeach
+      @endif
+    </div>
+  </div>
+</div>
+
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+
+        </div>
+    </div>
+  </div>
+</div>
+
+
 @if( $models->estadoCompra($models->id, 35) )
 <div class="col-xs-12">
    <div class="box box-solid">
@@ -441,6 +480,7 @@
   </div>
 </div>
 @endif
+
 
 
 
@@ -499,6 +539,18 @@
 @section('js')
 <script> 
 $('#example1').DataTable() 
+</script>
+<script type="text/javascript" src="{{ asset('js/multiUpload.js') }}"></script>
+<script type="text/javascript">
+    $(".btn_imagen" ).click(function() {       
+    $('div.modal-body > img').remove();
+    //console.log($(this).data('img'))
+    //var row   = $(this).find('a');
+    var imagen  = $(this).data('img')
+    console.log(imagen);
+    $('.modal-body').append('<img src="'+imagen+'" class="img-responsive">');
+  });
+
 </script>
 @endsection
 
