@@ -9,6 +9,7 @@ use App\Http\Repositories\Tecnica\StatesRepo;
 use App\Http\Repositories\Tecnica\ProductosRepo;
 use App\Http\Repositories\Tecnica\CaracteristicasRepo;
 use App\Entities\Tecnica\OrderStates;
+use App\Entities\Tecnica\PurcherseState;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Crypt;
@@ -40,9 +41,16 @@ class ApiController extends Controller
         try{
             
             //$decrypted      = decrypt($encryptedValue);
-            $id             = Crypt::decrypt($this->route->parameter('id'));
-            $estado         = $this->route->parameter('estado');
-            $state          = OrderStates::where('orders_id', $id)->where('states_id', $estado)->first();
+            $id     = Crypt::decrypt($this->route->parameter('id'));
+            $estado = $this->route->parameter('estado');
+            $tipo   = $this->route->parameter('tipo');
+            
+            if($tipo == 'Compra'){
+                $state = PurcherseState::where('purcharses_id', $id)->where('states_id', $estado)->first();
+            }else{
+                $state = OrderStates::where('orders_id', $id)->where('states_id', $estado)->first();
+            }
+            
             $state->confirmar_cliente = 1;
             $state->save();
             

@@ -32,9 +32,9 @@
       {!! Form::label('Vendedor') !!}
 
       @if(isset($ordenCompra))
-        {!! Form::select('users_id', $users , isset($ordenCompra->Vendedor) ? $ordenCompra->Vendedor->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Cliente']) !!}
+        {!! Form::select('users_id', $users ,null ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Vendedor']) !!}
       @else
-        {!! Form::select('users_id', $users , isset($models->Vendedor) ? $models->Vendedor->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Cliente']) !!}
+        {!! Form::select('users_id', $users , isset($models->Vendedor) ? $models->Vendedor->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Vendedor']) !!}
       @endif
     </div>
 
@@ -79,7 +79,7 @@
 
     <div class="col-xs-3 form-group">
       {!! Form::label('Cantidad') !!}
-      {!! Form::text('cantidad', null, ['class'=>'form-control']) !!}
+      {!! Form::number('cantidad', null, ['class'=>'form-control']) !!}
     </div>
 
 
@@ -95,7 +95,7 @@
 
     <div class="col-xs-3 form-group">
       {!! Form::label('Forma de Pago') !!}
-      {!! Form::select('pay_methods_id',$paymethods, isset($models->Pago->PayMethods) ? $models->Pago->PayMethods->id : '',  ['class'=>'form-control']) !!}
+      {!! Form::select('pay_methods_id',$paymethods->prepend('Seleccionar', ''), isset($models->Pago->PayMethods) ? $models->Pago->PayMethods->id : '',  ['class'=>'form-control pay_methods_id']) !!}
     </div>
 
     <div class="col-xs-3 form-group">
@@ -103,16 +103,16 @@
       {!! Form::text('term', isset($models->Pago->term) ? $models->Pago->term : '' , ['class'=>'form-control']) !!}
     </div>
 
-    <div class="col-xs-3 form-group">
+    <div class="col-xs-2 form-group">
       {!! Form::label('Nombre') !!}
       {!! Form::text('nombre',  isset($models->Pago->nombre) ? $models->Pago->nombre : '' , ['class'=>'form-control']) !!}
     </div>
 
-    <div class="col-xs-3 form-group">
+    <div class="col-xs-2 form-group">
       {!! Form::label('Apellido') !!}
       {!! Form::text('apellido',  isset($models->Pago->apellido) ? $models->Pago->apellido : '' , ['class'=>'form-control']) !!}
     </div>
-     <div class="col-xs-3 form-group">
+     <div class="col-xs-2 form-group">
       {!! Form::label('Cuil') !!}
       {!! Form::text('cuil',  isset($models->Pago->cuil) ? $models->Pago->cuil : '' , ['class'=>'form-control']) !!}
     </div>
@@ -120,21 +120,39 @@
 
     <div class="col-xs-3 form-group">
       {!! Form::label('CBU') !!}
-      {!! Form::text('number', isset($models->Pago->number) ? $models->Pago->number : '',  ['class'=>'form-control']) !!}
+      {!! Form::text('number', isset($models->Pago->number) ? $models->Pago->number : '',  ['class'=>'form-control cbu', old('pay_methods_id') == 6 ? ''  : 'disabled']) !!}
     </div>
     <div class="col-xs-3 form-group">
       {!! Form::label('Numero de cuenta') !!}
-      {!! Form::text('numero_cuenta', isset($models->Pago->numero_cuenta) ? $models->Pago->numero_cuenta : '',  ['class'=>'form-control']) !!}
+      {!! Form::text('numero_cuenta', isset($models->Pago->numero_cuenta) ? $models->Pago->numero_cuenta : '',  ['class'=>'form-control numero_cuenta', old('pay_methods_id') == 6 ? ''  : 'disabled']) !!}
     </div>
+
 
     <div class="col-xs-2 form-group">
       {!! Form::label('Alias') !!}
-      {!! Form::text('alias', isset($models->Pago->alias) ? $models->Pago->alias : '',  ['class'=>'form-control']) !!}
+      {!! Form::text('alias', isset($models->Pago->alias) ? $models->Pago->alias : '',  ['class'=>'form-control alias', old('pay_methods_id') == 6 ? ''  : 'disabled']) !!}
+    </div>
+
+    <div class="col-xs-2 form-group">
+      {!! Form::label('Modelo') !!}
+      <select name='models_canje_id' class="select2 form-control models_canje_id" placeholder="seleccionar Modelo" {{ old('pay_methods_id') == 8 ? ''  : 'disabled' }} >
+        @foreach($brands as $br)
+            <optgroup label="{{$br->name}}">
+                @foreach($br->Models as $m)
+                  @if(isset($models))
+                  <option value="{{$m->id }}" @if(isset($models) && ($models->models_canje_id == $m->id)) selected="selected" @endif>{{$m->name}}</option>
+                  @else
+                  <option value="{{$m->id }}" @if(!is_null(old('models_canje_id')) && old('models_canje_id') == $m->id) selected="selected" @endif >{{$m->name}}</option>
+                  @endif
+                @endforeach
+            </optgroup>
+        @endforeach
+      </select>
     </div>
 
     <div class="col-xs-1 form-group">
       {!! Form::label('Monto') !!}
-      {!! Form::text('amount', isset($models->Pago->amount) ? $models->Pago->amount : '',  ['class'=>'form-control']) !!}
+      {!! Form::number('amount', isset($models->Pago->amount) ? $models->Pago->amount : '',  ['class'=>'form-control']) !!}
     </div>
 
     <hr>
@@ -178,7 +196,7 @@
     @else
       <div id="coba"></div>
     @endif
-     
+
   
             
 @endsection
@@ -187,9 +205,7 @@
 <script type="text/javascript" src="{{ asset('js/multiUpload.js') }}"></script>
 <script type="text/javascript">
   $('.btnVenta').on('click', function(e){
-
     $(".btnVenta").attr("disabled", true);
-
   });
 
   $("#coba").spartanMultiImagePicker({
@@ -228,6 +244,30 @@
     console.log($(this).parent().remove())
   });
 
+
+  $( ".pay_methods_id" ).change(function() {
+  // Check input( $( this ).val() ) for validity here
+  console.log( $(this).val() );
+    var pago = $(this).val()
+
+    if( pago == 6 ){
+      $('.cbu').attr('disabled', false)
+      $('.numero_cuenta').attr('disabled', false)
+      $('.alias').attr('disabled', false)
+
+      $('.models_canje_id').attr('disabled', true);
+    }
+
+    if( pago == 8 ){
+      $('.models_canje_id').attr('disabled', false);
+
+      $('.cbu').attr('disabled', true)
+      $('.numero_cuenta').attr('disabled', true)
+      $('.alias').attr('disabled', true)
+
+    }
+
+  });
 
 </script>
 @endsection

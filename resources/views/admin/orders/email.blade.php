@@ -81,7 +81,7 @@ float: left!important;
             <br>
             @if( $estado->confirmar_cliente === 1 || $estado->id === 1 )
                 <p>
-                    <a href="{{ route('admin.ordenes.confirm', [ 'id' => $models_id, 'estado' => $estado->id ] )}}" target="_blank" class="button">
+                    <a href="{{ route('admin.ordenes.confirm', [ 'id' => $models_id, 'estado' => $estado->id, 'tipo' => $tipo ] )}}" target="_blank" class="button">
                         <!--Confirmar recepción del equipo -->
                         EN CONFORMIDAD
 

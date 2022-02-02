@@ -66,7 +66,9 @@ return [
           //'partes'          => 'required',
           'observaciones'   => 'required',
           //'insumos'         => 'required',
-          'presupuesto_estimado'    => 'required'
+          'presupuesto_estimado'    => 'required',
+          'vendedor_id' => 'required',
+          'users_id' => 'required'
     
     ],
 
@@ -82,7 +84,9 @@ return [
         //  'partes'          => 'required',
           'observaciones'   => 'required',
           //'insumos'         => 'required',
-          'presupuesto_estimado'    => 'required'
+          'presupuesto_estimado'    => 'required',
+          'vendedor_id' => 'required',
+          'users_id' => 'required'
     ],
 
 

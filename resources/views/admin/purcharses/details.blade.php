@@ -10,7 +10,8 @@
     <div class="box box-solid">
       <div class="box-header">
         <div class="col-xs-8"><h3 class="box-title">  Compra # {{$models->id}}</h3></div>
-          <a href="{{route('admin.purcharses.reporte',$models->id)}}" target="_blank" class="btn btn-default pull-right" style="margin-left: 10px;" >Reporte</a>  
+          <a href="{{route('admin.purcharses.reporte',$models->id)}}" target="_blank" class="btn btn-default pull-right" style="margin-left: 10px;" >Reporte</a> 
+          <a href="{{route('admin.purcharses.remito',$models->id)}}" target="_blank" class="btn btn-default pull-right" style="margin-left: 10px;" >Remito</a>  
       </div>
     </div>
   </div>
@@ -81,6 +82,77 @@
 
 </div>
 
+
+<div class="col-xs-6">
+  <div class="box box-solid">
+  <div class="box-header with-border">
+    <h3 class="box-title">  Estados </h3>
+  </div>
+  <div class="box-body">
+    <div class="col-lg-12">
+
+      
+      {!! Form::open(['route'=>('admin.purcharses.updateEstado')]) !!}
+      <div class="input-group">
+        
+        <select class="form-control select2" name="estado_id">
+          <option value="">Seleccionar Estado</option>
+          
+          @foreach($states as $key => $estado)
+         
+            @if( is_array(config('models.roles.estados.'.$key)) && in_array ( Auth::user()->Roles()->first()->slug, config('models.roles.estados.'.$key), true ) ) 
+
+              <option value="{{ $key }}"> {{ $estado }} </option>
+            @else
+               <option value="{{ $key }}" disabled > {{ $estado }} </option>
+            @endif
+
+          @endforeach
+
+        </select>
+
+        {!! Form::hidden('items_id', $models->id) !!}
+
+        <span class="input-group-btn">
+        <button class="btn btn-default" type="submit"><span class="fa fa-plus"></span></button>
+        </span>
+        {!! Form::close() !!}
+
+      </div>
+    </div>
+
+    <div class="col-lg-12">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Usuario</th>
+            <th>Estado</th>
+          </tr>
+          </thead>
+          <tbody>
+          @foreach($models->Estados as $orden)
+
+            <tr>
+              <td>{{ $orden->created_at }}</td>
+              <td>{{ isset($orden->User)  ? $orden->User->user_name : '' }}</td>
+              <td>{{ isset($orden->States->description) ? $orden->States->description : '' }}</td>
+              <td>
+                @if($orden->confirmar_cliente == 1)
+                  <span class="label" style="background-color:green "> Confirmado por el cliente </span>
+                @endif
+              </td>
+            </tr>
+          @endforeach
+          </tbody>
+        </table>
+    </div>
+
+    </div>
+  </div>
+</div>
+
+
 <div class="col-xs-6">
   <div class="box box-solid">
     <div class="box-header with-border">
@@ -97,18 +169,26 @@
         {{ isset($models->Pago->term) ? $models->Pago->term : '' }}
       </strong>
       <br><br>
-      <span class="text-muted">CBU  : </span> <strong>{{ isset($models->Pago->number) ? $models->Pago->number : ''   }}
 
-      </strong>
-      <br><br>
-      <span class="text-muted">Alias  : </span> <strong>{{ isset($models->Pago->alias) ? $models->Pago->alias : ''   }}
+      @if($models->Pago->pay_methods_id == 8)
+        <span class="text-muted">Modelo de canje  : </span> <strong>{{ isset($models->Pago->ModelCanje) ? $models->Pago->ModelCanje->name : ''   }}
+        
+        </strong>
+        <br><br>
+      @else
+        <span class="text-muted">CBU  : </span> <strong>{{ isset($models->Pago->number) ? $models->Pago->number : ''   }}
 
-      </strong>
-      <br><br>
-      <span class="text-muted">Numero De Cuenta  : </span> <strong>{{ isset($models->Pago->numero_cuenta) ? $models->Pago->numero_cuenta : ''   }}
+        </strong>
+        <br><br>
+        <span class="text-muted">Alias  : </span> <strong>{{ isset($models->Pago->alias) ? $models->Pago->alias : ''   }}
 
-      </strong>
-      <br><br>
+        </strong>
+        <br><br>
+        <span class="text-muted">Numero De Cuenta  : </span> <strong>{{ isset($models->Pago->numero_cuenta) ? $models->Pago->numero_cuenta : ''   }}
+        </strong>
+        <br><br>
+      @endif
+
       <span class="text-muted">Monto  : </span> <strong>$ {{ isset($models->Pago->amount) ? $models->Pago->amount : ''   }}
 
       </strong>

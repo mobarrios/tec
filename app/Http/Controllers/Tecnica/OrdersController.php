@@ -263,6 +263,9 @@ class OrdersController extends Controller
           'observaciones.required'   => 'El campo observaciones es requerido',
           //'insumos.required'         => 'El campo insumos es requerido',
           'presupuesto_estimado.required'    => 'El campo presupuesto estimado es requerido',
+          'vendedor_id.required'    => 'El campo vendedor es requerido',
+          'users_id.required'    => 'El campo tecnico es requerido',
+
         ]);
 
         if ($validator->fails()) {
@@ -309,6 +312,7 @@ class OrdersController extends Controller
         $tasks              = Tasks::all();
         $vendedor           = Auth::user();
         $letraChica         = $this->toPrintRepo->ultimo();
+        $tipo               = 'Reparacion';
 
 
 
@@ -321,7 +325,7 @@ class OrdersController extends Controller
 
             //Envio de email
             Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company'], 'models_id' => $idCrypt, 'empresa' => $data['empresa'],
-                'direccion' => $data['direccion'] ], function($message) use ($data,$model,$letraChica,$company,$tasks, $vendedor,$emails, $i)
+                'direccion' => $data['direccion'], 'tipo' => $tipo ], function($message) use ($data,$model,$letraChica,$company,$tasks, $vendedor,$emails, $i)
             {
 
             $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');

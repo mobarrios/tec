@@ -15,6 +15,8 @@ use App\Http\Repositories\Configs\UsersRepo;
 use App\Http\Repositories\Admin\PayMethodsRepo;
 use App\Http\Repositories\Admin\PaymentsRepo;
 use App\Http\Repositories\Configs\BranchesRepo;
+use App\Http\Repositories\Tecnica\StatesRepo;
+use App\Entities\Tecnica\PurcherseState;
 use App\Entities\Admin\Payments;
 use App\Http\Helpers\ImagesHelper;
 use Illuminate\Http\Request;
@@ -22,11 +24,12 @@ use Illuminate\Routing\Route;
 use Auth;
 use PDF;
 use Validator;
-
+use Mail;
+use Crypt;
 
 class PurcharsesController extends Controller
 {
-    public function  __construct(Request $request, Repo $repo, Route $route, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, BrandsRepo $brandsRepo, CompanyRepo $companyRepo, OrdersRepo $ordersRepo, UsersRepo $usersRepo, ItemsRepo $itemsRepo, PayMethodsRepo $payMethodsRepo, PaymentsRepo $paymentsRepo, BranchesRepo $branchesRepo)
+    public function  __construct(Request $request, Repo $repo, Route $route, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, BrandsRepo $brandsRepo, CompanyRepo $companyRepo, OrdersRepo $ordersRepo, UsersRepo $usersRepo, ItemsRepo $itemsRepo, PayMethodsRepo $payMethodsRepo, PaymentsRepo $paymentsRepo, BranchesRepo $branchesRepo, StatesRepo $statesRepo)
     {
 
         $this->request  = $request;
@@ -51,6 +54,7 @@ class PurcharsesController extends Controller
         $this->paymentsRepo         = $paymentsRepo;
         $this->data['paymethods']   = $payMethodsRepo->getModel()->all()->lists('name','id');
         $this->data['branches']     = $branchesRepo->listsData('name', 'id');
+        $this->data['states']       = $statesRepo->getModel()->orderBy('description','ASC')->lists('description','id');
 
     }
 
@@ -98,6 +102,8 @@ class PurcharsesController extends Controller
             'number.numeric' => 'El campo cbu debe ser numerico',
             'number.digits' => 'El campo cbu debe contener 22 dígitos',
             'amount.required' => 'El campo monto es obligatorio',
+            'users_id.required' => 'El campo vendedor es obligatorio',
+            'pay_methods_id.required' => 'El campo forma de pago es obligatorio',
         ]);
 
         if ($validator->fails()) {
@@ -122,6 +128,8 @@ class PurcharsesController extends Controller
         $payments->apellido = $this->request->apellido;
         $payments->amount = $this->request->amount;
         $payments->alias = $this->request->alias;
+        $payments->cuil = $this->request->cuil;
+        $payments->models_canje_id = $this->request->models_canje_id;
         $payments->save();
         
         //$p = $this->paymentsRepo->find(5);
@@ -159,8 +167,10 @@ class PurcharsesController extends Controller
             'number.numeric' => 'El campo cbu debe ser numerico',
             'number.digits' => 'El campo cbu debe contener 22 dígitos',
             'amount.required' => 'El campo monto es obligatorio',
+            'users_id.required' => 'El campo vendedor es obligatorio',
+            'pay_methods_id.required' => 'El campo forma de pago es obligatorio',
         ]);
-
+        
         if ($validator->fails()) {
             return redirect()->back()
                         ->withErrors($validator)
@@ -186,8 +196,10 @@ class PurcharsesController extends Controller
             $payments->number = $this->request->number;
             $payments->nombre = $this->request->nombre;
             $payments->apellido = $this->request->apellido;
+            $payments->cuil = $this->request->cuil;
             $payments->amount = $this->request->amount;
             $payments->alias = $this->request->alias;
+            $payments->models_canje_id = $this->request->models_canje_id;
             $payments->save();
         }
 
@@ -247,7 +259,74 @@ class PurcharsesController extends Controller
         return redirect()->route(config('models.'.$this->section.'.postUpdateRoute'),$model->id)->withErrors(['Regitro Editado Correctamente']);
     }
 
+    public function remito(){
 
+        //$this->data['models']       = $this->repo->find($this->route->getParameter('id'));
+        $model      = $this->repo->find($this->route->getParameter('id'));
+        $company    = $this->companyRepo->getModel()->first();
+      
+        //$letraChica = $toPrintRepo->ultimo();
+        $pdf        = PDF::loadView('admin.purcharses.remito', compact('model','company'));
+
+        return $pdf->stream();
+        
+    
+    }
+
+    public function updateEstado(Request $request, StatesRepo $statesRepo, CompanyRepo $companyRepo){
+
+
+        $state              = new PurcherseState();
+ 
+        $state->purcharses_id   = $request->get('items_id');
+        $state->users_id    = $this->data['users_id'];
+        $state->states_id   = $request->get('estado_id');
+        $state->save();
+
+        $model = $this->repo->find($request->get('items_id'));
+        $data['estado']     = $statesRepo->find($request->get('estado_id'));
+        
+        $data['empresa']    = $model->Brancheables()->first()->branches->name;
+        $data['direccion']  = $model->Brancheables()->first()->branches->address;
+        $data['company']    = $companyRepo->getModel()->first();
+        $vendedor           = Auth::user();
+        //$letraChica         = $this->toPrintRepo->ultimo();
+        $company            = $this->companyRepo->getModel()->first();
+        $idCrypt            = Crypt::encrypt($model->id);
+        $tipo               = 'Compra';
+     
+        //Si el cliente tiene email o enviar es verdadero
+        if(!empty($model->Orden->Cliente->email) && $data['estado']->enviar == true){
+
+            try{
+                //Envio de email
+                Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company'], 'models_id' => $idCrypt, 'empresa' => $data['empresa'],'direccion' => $data['direccion'] ,'tipo' => $tipo ], function($message) use ($data,$model,$company, $vendedor)
+                {
+
+                    $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');
+                    $message->to($model->Cliente->email, $model->Cliente->fullname);
+
+                    if($data['estado']->enviar_remito == true){
+                        $pdf        = PDF::loadView('admin.purcharses.remito', compact('model','company', 'vendedor'));
+                        $message->attachData($pdf->output(), 'remito.pdf', ['mime' => 'application/pdf']);
+                    }
+
+                });
+
+            }catch(Exception $e){
+
+                return redirect()->back()->withErrors(['No se ha podido enviar el email']);
+            }
+
+            return redirect()->back()->withErrors(['Regitro Agregado Correctamente. Email enviado al cliente.']);
+
+        }else{
+
+            return redirect()->back()->withErrors(['Regitro Agregado Correctamente. El Email no fue enviado al cliente.']);
+        }
+
+
+    }
 
 
 }

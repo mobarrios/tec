@@ -10,7 +10,7 @@
 
      protected $table = 'payments';
 
-     protected $fillable = ['date','amount','banks_id','number','check_date','check_pay_date','check_types_id','term','transf_date','financials_id','sales_id','pay_methods_id', 'hora', 'nombre', 'apellido', 'alias', 'cuil', 'numero_cuenta'];
+     protected $fillable = ['date','amount','banks_id','number','check_date','check_pay_date','check_types_id','term','transf_date','financials_id','sales_id','pay_methods_id', 'hora', 'nombre', 'apellido', 'alias', 'cuil', 'numero_cuenta','models_canje_id'];
 
      protected $section = 'payments';
 
@@ -49,6 +49,11 @@
      public function Vouchers()
      {
          return $this->belongsToMany(Vouchers::class);
+     }
+
+     public function ModelCanje(){
+        return $this->belongsTo(Models::class, 'models_canje_id');
+    
      }
 
 

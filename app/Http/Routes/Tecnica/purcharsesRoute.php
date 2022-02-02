@@ -18,5 +18,8 @@ Route::group(['prefix'=>'purcharses'],function(){
         
         Route::get('/reporte/{id}',              ['as'=>'admin.purcharses.reporte','uses'=>'Tecnica\PurcharsesController@reporte']);
         Route::get('/compra/{id}',              ['as'=>'admin.purcharses.compra','uses'=>'Tecnica\PurcharsesController@ordenCompra']);
+        Route::get('/remito/{id}',     ['as'=>'admin.purcharses.remito','uses'=>'Tecnica\PurcharsesController@remito']);
+
+        Route::post('updateEstado',     ['as'=>'admin.purcharses.updateEstado','uses'=>'Tecnica\PurcharsesController@updateEstado']);
         
 });

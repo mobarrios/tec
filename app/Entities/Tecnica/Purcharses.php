@@ -10,6 +10,7 @@ use App\Entities\Admin\Items;
 use App\Entities\Admin\Payments;
 use App\Entities\Configs\Company;
 use App\Entities\Configs\Branches;
+use App\Entities\Admin\States;
 use App\Entities\Entity;
 
 class Purcharses extends Entity
@@ -55,6 +56,11 @@ class Purcharses extends Entity
 
     public function Pago(){
         return $this->hasOne(Payments::getClass(), 'sales_id');
+    }
+
+    public function Estados(){
+        return $this->hasMany(PurcherseState::getClass());
+
     }
 
 }
