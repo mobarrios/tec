@@ -55,6 +55,15 @@ class Orders extends Entity
         return $this->hasMany(OrderStates::class)->orderBy('id','DESC')->first();
     }
 
+    public function ultimoEstado(){
+        return DB::table('orders_states')
+                ->select('states.color', 'states.description')
+                ->join('states', 'orders_states.states_id', '=', 'states.id')
+                ->where('orders_states.orders_id', $this->attributes['id'])
+                ->orderBy('orders_states.id', 'desc')
+                ->first();
+    }
+
     public function Tasks(){
         return $this->belongsToMany(Tasks::getClass(), 'tasks_orders')->withPivot('estado');
     }
