@@ -95,6 +95,8 @@
             <br>
             <span class="text-muted">Partes Serie : </span> <strong>{{ $models->serie_partes  }}</strong>
             <br>
+            <span class="text-muted">Part Number : </span> <strong>{{ $models->part_number  }}</strong>
+            <br>
             <span class="text-muted">Falla :</span> <strong> {{ $models->numero_serie  }}</strong>
             <br>
             <span class="text-muted">Insumos : </span> <strong>{{ $models->insumos  }}</strong>
@@ -453,6 +455,26 @@
           </div>
         @endforeach
       @endif
+    </div>
+  </div>
+</div>
+
+<div class="col-xs-4">
+  <div class="box box-solid">
+    <div class="box-header with-border">
+      <h3 class="box-title">Uso interno </h3>
+    </div>
+
+    <div class="box-body">
+      {!! Form::open(['route'=>('admin.ordenes.updateUsoInterno')]) !!}
+     
+      <div class="form-group">
+        <textarea class="form-control" rows="5" name="uso_interno">{{$models->uso_interno}}</textarea>
+      </div>
+
+      {!! Form::hidden('orden_id', $models->id) !!}
+      <button type="submit" class="btn btn-primary pull-right">Guardar</button>
+      {!! Form::close() !!}
     </div>
   </div>
 </div>
