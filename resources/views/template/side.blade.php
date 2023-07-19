@@ -100,7 +100,7 @@
                 <li><a href="{{route('admin.orders.index' )}}" class="menu"><span>Ordenes Reparación</span></a></li>
                 <li><a href="{{route('admin.purcharses.index' )}}" class="menu"><span>Ordenes Compra</span></a></li>
                 <li><a href="{{route('admin.items.index' )}}" class="menu"><span>Ventas</span></a></li>
-
+                <li><a href="{{route('admin.herotech.index' )}}" class="menu"><span>Herotech</span></a></li>
                 </ul>
                    
                     
