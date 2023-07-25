@@ -197,6 +197,16 @@ class OrdersController extends Controller
         return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
     }
 
+    public function updateUsoInterno(Request $request){
+
+        $model = $this->repo->find($request->get('orden_id'));
+        $model->uso_interno = $request->get('uso_interno');
+        $this->updateable($model);
+        $model->save();
+
+        return redirect()->back()->withErrors(['Regitro Editado Correctamente']);
+    }
+
 
     public function busquedaServicios(){
 
@@ -242,9 +252,8 @@ class OrdersController extends Controller
         return redirect()->back()->withErrors(['Registro borrado correctamente']);
     }
 
-    public function storeOrder()
-    {
-
+    public function storeOrder(){
+        //dd($this->request->all());
         //validar los campos
         //$this->validate($this->request,config('models.'.$this->section.'.validationsStore'));
 

@@ -41,16 +41,19 @@
             @endif
             </div>
             
-          
-          </div>
-          
-          <div class="row">  
-
             <div class="col-xs-4 form-group">
               {!! Form::label('Cliente') !!}
               {!! Form::select('clients_id', $clients , isset($models->Cliente) ? $models->Cliente->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Cliente']) !!}
               {!! Form::hidden('users_id', $users_id) !!}
               {!! Form::hidden('vendedor_id', $users_id) !!}
+            </div>
+          
+          </div>
+          
+          <div class="row">  
+            <div class="col-xs-4 form-group">
+              {!! Form::label('Part number') !!}
+              {!! Form::text('part_number', null, ['class'=>'form-control']) !!}
             </div>
             {{--
             <div class="col-xs-4 form-group">
@@ -150,6 +153,11 @@
             <div class="col-xs-4 form-group">
               {!! Form::label('$ Presupuesto Estimado') !!}
               {!! Form::text('presupuesto_estimado', null, ['class'=>'form-control']) !!}
+            </div>
+
+            <div class="col-xs-4 form-group">
+              {!! Form::label('Uso interno') !!}
+              {!! Form::textarea('uso_interno', null, ['class'=>'form-control', 'rows' => 2, 'cols' => 40]) !!}
             </div>
           </div>
 
