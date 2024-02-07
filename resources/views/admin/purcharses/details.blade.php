@@ -184,8 +184,10 @@
 
         </strong>
         <br><br>
-        <span class="text-muted">Numero De Cuenta  : </span> <strong>{{ isset($models->Pago->numero_cuenta) ? $models->Pago->numero_cuenta : ''   }}
+        {{-- <span class="text-muted">Numero De Cuenta  : </span> <strong>{{ isset($models->Pago->numero_cuenta) ? $models->Pago->numero_cuenta : ''   }} --}}
+        <span class="text-muted">Cuil : </span> <strong>{{ isset($models->Pago->cuil) ? $models->Pago->cuil : '' }}
         </strong>
+       
         <br><br>
       @endif
 
