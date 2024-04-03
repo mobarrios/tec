@@ -45,7 +45,7 @@ class ItemsController extends Controller
 
         $this->data['brands']   = $brandsRepo->getAllWithModels();
         $this->data['users']    = $usersRepo->ListsData('name','id');
-        $this->data['clients']  = $clientsRepo->getModel()->all()->lists('fullname','id');
+        //$this->data['clients']  = $clientsRepo->getModel()->all()->lists('fullname','id');
         $this->data['companies']    = $companyRepo->getModel()->all()->lists('razon_social','id');
         $this->data['branches'] = $branchesRepo->listsData('name', 'id');
         $this->data['states'] = $statesRepo->getModel()->orderBy('description','ASC')->lists('description','id');
