@@ -43,7 +43,7 @@ class HerotechController extends Controller
         $this->data['tiposDocumento']  = [ '1' => 'DNI','2' => 'Doc. Extranjero','3' => 'Doc. Precaria','4' => 'Doc. Transitorio','5' => 'Doc. en Trámite','6' => 'Otros' ];
 
 
-        $this->data['clients']      = $clientsRepo->getModel()->all()->lists('fullname','id');
+        //$this->data['clients']      = $clientsRepo->getModel()->all()->lists('fullname','id');
         $this->data['users_id']     = Auth::user()->id;
         $this->data['models_id']    = $modelsRepo->ListsData('name','id');
         $this->data['companies']    = $companyRepo->getModel()->all()->lists('razon_social','id');
