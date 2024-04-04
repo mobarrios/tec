@@ -43,7 +43,14 @@
             
             <div class="col-xs-4 form-group">
               {!! Form::label('Cliente') !!}
-              {!! Form::select('clients_id', $clients , isset($models->Cliente) ? $models->Cliente->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Cliente']) !!}
+              @if(isset($models))
+                <select name="clients_id" class="form-control select2 search-client">
+                  <option value="{{$models->Cliente->id}}"> {{$models->Cliente->name}}  {{$models->Cliente->last_name}} {{$models->Cliente->dni}} </option> 
+                </select>
+              @else
+                {!! Form::select('clients_id',[],null,['class'=> 'form-control select2 search-client']) !!}
+              @endif
+              {{-- {!! Form::select('clients_id', $clients , isset($models->Cliente) ? $models->Cliente->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Cliente']) !!} --}}
               {!! Form::hidden('users_id', $users_id) !!}
               {!! Form::hidden('vendedor_id', $users_id) !!}
             </div>
@@ -261,6 +268,7 @@
 @endsection
 @section('js')
 <script type="text/javascript" src="{{ asset('js/multiUpload.js') }}"></script>
+<script src="js/buscadorClientes.js"></script>
 <script type="text/javascript">
 
   $("#coba").spartanMultiImagePicker({
@@ -298,7 +306,6 @@
   $(".spartan_remove_row" ).click(function(e) {       
     console.log($(this).parent().remove())
   });
-
 
 </script>
 @endsection

@@ -184,4 +184,18 @@ class AjaxController extends Controller
 
     }
 
+    public function findClients(){
+
+        $search = $this->request->q;
+
+        $localidades = $this->clientsRepo->getModel()
+            ->where('name','LIKE',"%$search%")
+            ->orWhere('last_name','LIKE',"%$search%")
+            ->orWhere('dni','LIKE',"%$search%")
+            ->get();
+
+        return response()->json($localidades,200);
+    
+    }
+
 }

@@ -70,7 +70,8 @@ class OrdersController extends Controller
 
     public function create(){
 
-
+        //$this->data['clients']      = $this->clienteRepo->getModel()->all()->lists('fullname','id');
+      
         $this->data['activeBread']  = 'Nuevo';
         if($this->route->getParameter('cliente'))
             $this->data['clientSelect'] = $this->clienteRepo->find($this->route->getParameter('cliente'));

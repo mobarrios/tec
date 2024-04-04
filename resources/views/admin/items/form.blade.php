@@ -16,11 +16,17 @@
          <div class="col-xs-12">
     <h4> Detalles de la venta</h4>
     </div>
-
+    
     <div class="col-xs-3 form-group">
       {!! Form::label('Cliente') !!}
-      {!! Form::select('clients_id', $clients , isset($models->Cliente) ? $models->Cliente->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Cliente']) !!}
- 
+      {{-- {!! Form::select('clients_id', $clients , isset($models->Cliente) ? $models->Cliente->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Cliente']) !!} --}}
+      @if(isset($models))
+        <select name="clients_id" class="form-control select2 search-client">
+          <option value="{{$models->Cliente->id}}"> {{$models->Cliente->name}}  {{$models->Cliente->last_name}} {{$models->Cliente->dni}} </option> 
+        </select>
+      @else
+        {!! Form::select('clients_id',[],isset($models->Cliente) ? $models->Cliente->id : '',['class'=> 'form-control select2 search-client']) !!}
+      @endif
     </div>
 
     <div class="col-xs-3 form-group">
@@ -103,5 +109,8 @@
 
 @endsection
 
+@section('js')
+<script src="js/buscadorClientes.js"></script>
+@endsection
 
 

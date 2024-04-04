@@ -20,10 +20,9 @@
 
       @if(isset($ordenCompra))
         {!! Form::hidden('orders_id', $ordenCompra->id) !!}
-        {!! Form::select('clients_id', $clients , isset($ordenCompra->Cliente) ? $ordenCompra->Cliente->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Cliente']) !!}
-  
+        {!! Form::select('clients_id', [] , isset($ordenCompra->Cliente) ? $ordenCompra->Cliente->id : '' ,['class'=>'select2 form-control search-client', 'placeholder' => 'seleccionar Cliente']) !!}
       @else
-        {!! Form::select('clients_id', $clients , isset($models->Cliente) ? $models->Cliente->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Cliente']) !!}
+        {!! Form::select('clients_id', [] , isset($models->Cliente) ? $models->Cliente->id : '' ,['class'=>'select2 form-control search-client ', 'placeholder' => 'seleccionar Cliente']) !!}
       @endif
 
     </div>
@@ -203,6 +202,7 @@
 
 @section('js')
 <script type="text/javascript" src="{{ asset('js/multiUpload.js') }}"></script>
+<script src="js/buscadorClientes.js"></script>
 <script type="text/javascript">
   $('.btnVenta').on('click', function(e){
     $(".btnVenta").attr("disabled", true);
