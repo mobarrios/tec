@@ -443,16 +443,23 @@
       @if(isset($models->images))
         @foreach($models->images->chunk(3) as $key => $imagen)
           <div class="row">
-          @foreach($imagen as $key => $img)
-            @if(isset($imagen[$key]))
-              <div class="col-md-4 col-sm-4 col-xs-6">
-                <a href="" class="btn_imagen" data-toggle="modal" data-target="#myModal" data-img="{{ $img->path}}">
-                  <img src="{{ asset($img->path)}}" class="img-responsive">
-                </a>
-              </div>
-            @endif
-          @endforeach
+            @foreach($imagen as $key => $img)
+              @if(isset($imagen[$key]))
+                <div class="col-md-4 col-sm-4 col-xs-6">
+                  <h5>
+                    {{$img->types_id == 1 ? 'IMEI': '' }}
+                    {{$img->types_id == 2 ? 'IMEI 2': '' }}
+                    {{$img->types_id == '' ? 'Imágenes adicionales': '' }}
+                  </h5>
+                  <a href="" class="btn_imagen" data-toggle="modal" data-target="#myModal" data-img="{{ $img->path}}">
+                    <img src="{{ asset($img->path)}}" class="img-responsive">
+                  </a>
+                </div>
+              @endif
+            @endforeach
+
           </div>
+       
         @endforeach
       @endif
     </div>
@@ -502,8 +509,6 @@
   </div>
 </div>
 @endif
-
-
 
 
 </div>

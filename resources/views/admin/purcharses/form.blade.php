@@ -22,7 +22,10 @@
         {!! Form::hidden('orders_id', $ordenCompra->id) !!}
         {!! Form::select('clients_id', [] , isset($ordenCompra->Cliente) ? $ordenCompra->Cliente->id : '' ,['class'=>'select2 form-control search-client', 'placeholder' => 'seleccionar Cliente']) !!}
       @else
-        {!! Form::select('clients_id', [] , isset($models->Cliente) ? $models->Cliente->id : '' ,['class'=>'select2 form-control search-client ', 'placeholder' => 'seleccionar Cliente']) !!}
+        <select name="clients_id" class="form-control select2 search-client">
+          <option value="{{$models->Cliente->id}}"> {{$models->Cliente->name}}  {{$models->Cliente->last_name}} {{$models->Cliente->dni}} </option> 
+        </select>
+        {{-- {!! Form::select('clients_id', [] , isset($models->Cliente) ? $models->Cliente->id : '' ,['class'=>'select2 form-control search-client ', 'placeholder' => 'seleccionar Cliente']) !!} --}}
       @endif
 
     </div>

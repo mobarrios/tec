@@ -254,12 +254,8 @@ class OrdersController extends Controller
     }
 
     public function storeOrder(){
-        //dd($this->request->all());
-        //validar los campos
-        //$this->validate($this->request,config('models.'.$this->section.'.validationsStore'));
-
-        //$this->validate($this->request ,config('models.'.$this->section.'.validationsStore'), config('models.'.$this->section.'.messagesStore'));
-
+        //dd($this->request->imei);
+        
         $validator = Validator::make($this->request->all(), config('models.'.$this->section.'.validationsStore'), [
 
           'clients_id.required'      => 'El campo cliente es requerido',
@@ -268,13 +264,12 @@ class OrdersController extends Controller
           'clave_equipo.required'    => 'El campo clave equipo es requerido',
           'serie_partes.required'    => 'El campo serie partes es requerido',
           'falla_declarada.required'    => 'El campo falla declarada es requerido',
-            //'observaciones_tecnicas.required'    => 'El campo informe tecnico inicial es requerido',
-            //  'partes.required'          => 'El campo informe tecnico final es requerido',
           'observaciones.required'   => 'El campo observaciones es requerido',
-          //'insumos.required'         => 'El campo insumos es requerido',
           'presupuesto_estimado.required'    => 'El campo presupuesto estimado es requerido',
           'vendedor_id.required'    => 'El campo vendedor es requerido',
           'users_id.required'    => 'El campo tecnico es requerido',
+          'imei.required'    => 'El campo imei es requerido',
+          'imei2.required'    => 'El campo imei2 es requerido',
 
         ]);
 
@@ -284,7 +279,6 @@ class OrdersController extends Controller
                         ->withInput();
         }
       
-        //dd($this->request->all());
         //crea a traves del repo con el request
         $model = $this->repo->create($this->request);
 
@@ -324,9 +318,20 @@ class OrdersController extends Controller
         $letraChica         = $this->toPrintRepo->ultimo();
         $tipo               = 'Reparacion';
 
+        $imagen = $this->request->image;
+        $imei =  $this->request->imei;
+        $imei2 =  $this->request->imei2;
+
+        $imei ? $this->uploadImage($imei, $model, 1) : '';
+        $imei2 ? $this->uploadImage($imei2, $model, 2) : '';
 
 
+        if(!empty($imagen))
+            foreach ($imagen as $valor){
+                $this->uploadImage($valor, $model);
+            }
 
+        /*
         for ($i=0; $i < 2 ; $i++) {
 
             $emails = [ 'coderst@icase.com.ar', $model->Cliente->email ];
@@ -352,106 +357,79 @@ class OrdersController extends Controller
             }
 
         }
+        */
  
-        $imagen = $this->request->image;
-
-        if(!empty($imagen))
-            foreach ($imagen as $valor){
-                $image = new ImagesHelper();
-                $time = time();
-                $name = $time.$valor->getClientOriginalName();
-                $image->upload( $name , $valor, config('models.orders.imagesPath'));
-                $model->images()->create(['path' => config('models.orders.imagesPath').$name]);
-         
-            }
-
 
         return redirect()->route('admin.orders.details',$model->id)->withErrors(['Regitro Agregado Correctamente. Email enviado al cliente.']);
 
+    }
 
-        /*
-        //Envio de mail
-        if(!empty($model->Cliente->email) && $data['estado']->enviar == true){
+    public function uploadImage($valor, $model, $type = ''){
+        $image = new ImagesHelper();
+        $time = time();
+        $name = $time.$valor->getClientOriginalName();
+        $image->upload( $name , $valor, config('models.orders.imagesPath'));
+        $model->images()->create(['path' => config('models.orders.imagesPath').$name, 'types_id' => $type ]);
+    }
 
-            try{
-                //Envio de email
-                Mail::send('admin.orders.email', ['estado' => $data['estado'],'company' => $data['company'], 'models_id' => $idCrypt ], function($message) use ($data,$model,$letraChica,$company,$tasks, $vendedor)
-                {
-                    //$pdf        = PDF::loadView('admin.orders.remito', compact('model','company'));
-                    $message->from(env('CONTACT_MAIL'), env('CONTACT_NAME'))->subject('Servicio Técnico');
-                    $message->to($model->Cliente->email, $model->Cliente->fullname);
-
-                    if($data['estado']->enviar_remito == true ){
-                        $pdf = PDF::loadView('admin.orders.reportes', compact('model','letraChica','company','tasks','vendedor'));
-                        $message->attachData($pdf->output(), 'remito.pdf', ['mime' => 'application/pdf']);
-                    }
-
-                });
-
-            }catch(Exception $e){
-
-                return redirect()->route('admin.orders.details',$model->id)->withErrors(['No se ha podido enviar el email']);
-            }
-
-            return redirect()->route('admin.orders.details',$model->id)->withErrors(['Regitro Agregado Correctamente. Email enviado al cliente.']);
-            //return redirect()->back()->withErrors(['Regitro Agregado Correctamente. Email enviado al cliente.']);
-
-
-        }else{
-
-
-            //return redirect()->back()->withErrors(['Regitro Agregado Correctamente. El Email no fue enviado al cliente.']);
-            return redirect()->route('admin.orders.details',$model->id)->withErrors(['Regitro Agregado Correctamente. El email no fue enviado al cliente']);
-        }
-        */
-
+    public function deleteImage($imagen){
+       
+        $image = new ImagesHelper();
+        $image->deleteFile($imagen->path);
+        $imagen->delete();
     }
 
     public function update(){
 
         //$this->validate($this->request,config('models.'.$this->section.'.validationsUpdate'));
         $id = $this->route->getParameter('id');
-
+       
         //edita a traves del repo
         $model = $this->repo->update($id,$this->request);
-
+        
         if(isset($model->images)){
+           
+            //dd($model->images, $this->request->imageOld);
             foreach ($model->images as $imagen){
-
-                if(empty($this->request->imageOld)){
-                    $image = new ImagesHelper();
-                    $image->deleteFile($imagen->path);
-                    $imagen->delete();
-                }
-
-                if( !empty($this->request->imageOld)){
-                    if( !in_array($imagen->path, $this->request->imageOld) ){
-                        $image = new ImagesHelper();
-                        $image->deleteFile($imagen->path);
-                        $imagen->delete();
+                
+                // solo para imagenes adicionales
+                if($imagen->types_id == ''){
+                    if(empty($this->request->imageOld)){
+                        $this->deleteImage($imagen);
                     }
-                }    
-
-            }
-        }
-
-
-
-       
-        $imagen = $this->request->image;
-        if(!empty($imagen))
-            foreach ($imagen as $valor){
-
-                $image = new ImagesHelper();
-                $time = time();
-                $name = $time.$valor->getClientOriginalName();
-                $image->upload( $name , $valor, config('models.payments.imagesPath'));
-                $model->images()->create(['path' => config('models.payments.imagesPath').$name]);
+                    
+                    if( !empty($this->request->imageOld)){
+                    
+                        if( !in_array($imagen->path, $this->request->imageOld) ){
+                            $this->deleteImage($imagen);
+                        }
+                    }
+                }
+                
+                // borro imei si viene una imangen nueva
+                if(!empty($this->request->imei) && $imagen->types_id == 1)
+                    $this->deleteImage($imagen);
+                
+                // borro imei2 si viene una imangen nueva
+                if(!empty($this->request->imei2) && $imagen->types_id == 2)
+                    $this->deleteImage($imagen);
          
             }
+        }
+     
+        $imagen = $this->request->image;
+        $imei =  $this->request->imei;
+        $imei2 =  $this->request->imei2;
+
+        $imei ? $this->uploadImage($imei, $model, 1) : '';
+        $imei2 ? $this->uploadImage($imei2, $model, 2) : '';
+
+        if(!empty($imagen))
+            foreach ($imagen as $valor){
+                $this->uploadImage($valor, $model);
+            }
+
         return redirect()->route('admin.orders.details',$model->id)->withErrors(['Regitro Editado Correctamente']);
-
-
 
     }
 

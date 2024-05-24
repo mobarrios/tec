@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class Images extends Entity
 {
-    protected $fillable = ['path'];
+    protected $fillable = ['path', 'types_id'];
 
     protected $table = 'images';
 
