@@ -318,6 +318,7 @@ class OrdersController extends Controller
         $letraChica         = $this->toPrintRepo->ultimo();
         $tipo               = 'Reparacion';
 
+        //imagenes para emei y emei 2
         $imagen = $this->request->image;
         $imei =  $this->request->imei;
         $imei2 =  $this->request->imei2;
@@ -330,8 +331,9 @@ class OrdersController extends Controller
             foreach ($imagen as $valor){
                 $this->uploadImage($valor, $model);
             }
-
-        /*
+        
+        // envio de email despues de crear una orden
+        
         for ($i=0; $i < 2 ; $i++) {
 
             $emails = [ 'coderst@icase.com.ar', $model->Cliente->email ];
@@ -357,9 +359,7 @@ class OrdersController extends Controller
             }
 
         }
-        */
- 
-
+        
         return redirect()->route('admin.orders.details',$model->id)->withErrors(['Regitro Agregado Correctamente. Email enviado al cliente.']);
 
     }
