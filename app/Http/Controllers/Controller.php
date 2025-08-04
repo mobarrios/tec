@@ -28,7 +28,7 @@ abstract class Controller extends BaseController
 
         //breadcrumb activo
         $this->data['activeBread'] = 'Listar';
-        
+
         //si request de busqueda
         if( isset($this->request->search) && !is_null($this->request->filter))
         {

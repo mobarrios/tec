@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Session;
 use League\Flysystem\Config;
 use PDF;
 use Auth;
+use DB;
 
 class ItemsController extends Controller
 {
@@ -45,6 +46,7 @@ class ItemsController extends Controller
 
         $this->data['brands']   = $brandsRepo->getAllWithModels();
         $this->data['users']    = $usersRepo->ListsData('name','id');
+        $this->clientsRepo = $clientsRepo;
         //$this->data['clients']  = $clientsRepo->getModel()->all()->lists('fullname','id');
         $this->data['companies']    = $companyRepo->getModel()->all()->lists('razon_social','id');
         $this->data['branches'] = $branchesRepo->listsData('name', 'id');
@@ -90,6 +92,7 @@ class ItemsController extends Controller
 
 
     }
+    
 
     public function store()
     {
@@ -169,6 +172,21 @@ class ItemsController extends Controller
         
         return view('admin.items.details')->with($this->data);
 
+    }
+
+     public function edit()
+    {
+        //breadcrumb activo
+        $this->data['activeBread'] = 'Editar';
+
+        // id desde route
+        $id = $this->route->getParameter('id');
+        //$this->data['clients']  = $this->clientsRepo->getModel()->all()->lists('fullname','id');
+        //$this->data['clients'] = DB::table('clients')->select('id', 'name')->get();
+        
+        $this->data['models'] = $this->repo->find($id);
+
+        return view(config('models.'.$this->section.'.editView'))->with($this->data);
     }
 
 

@@ -53,6 +53,8 @@ Route::post('/removeAdditionals/', 'Admin\AjaxController@removeAdditionals');
 //Localidades por municipio y provincia
 Route::get('/findLocalidades', 'Admin\AjaxController@findLocalidades');
 
+//buscar clientes
+Route::get('/findClients', 'Admin\AjaxController@findClients');
 
 //FinancialDues
 Route::get('/findDues/{id?}','Admin\AjaxController@findDues');

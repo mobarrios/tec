@@ -47,46 +47,40 @@ return [
             'Nombre'    => 'name',
             'Apellido'  => 'last_name',
             'DNI'       => 'dni'
-
-            // 'Apellido'  => 'last_name' ,
-            // 'Email'     => 'email'
     ],
 
     'validationsStore' => [
 
-          //'codigo_orden'    => 'required',
           'clients_id'      => 'required',
-          'clave_equipo'    => 'required',
-          'numero_serie'    => 'required',
-          'clave_equipo'    => 'required',
-          'serie_partes'    => 'required',
-          'falla_declarada'    => 'required',
+          //'clave_equipo'    => 'required',
+          //'numero_serie'    => 'required',
+          //'clave_equipo'    => 'required',
+          //'serie_partes'    => 'required',
+          //'falla_declarada'    => 'required',
           'models_id' => 'required',
-        //  'observaciones_tecnicas'    => 'required',
-          //'partes'          => 'required',
-          'observaciones'   => 'required',
-          //'insumos'         => 'required',
-          'presupuesto_estimado'    => 'required',
+          //'observaciones'   => 'required',
+          //'presupuesto_estimado'    => 'required',
           'vendedor_id' => 'required',
-          'users_id' => 'required'
-    
+          'users_id' => 'required',
+          'imei' => 'required',
+          'imei2' => 'required',
+
     ],
 
     'validationsUpdate' => [
 
           'clients_id'      => 'required',
-          'clave_equipo'    => 'required',
-          'numero_serie'    => 'required',
-          'serie_partes'    => 'required',
-          'falla_declarada'    => 'required',
+          //'clave_equipo'    => 'required',
+          //'numero_serie'    => 'required',
+          //'serie_partes'    => 'required',
+          //'falla_declarada'    => 'required',
           'models_id' => 'required',
-        //  'observaciones_tecnicas'    => 'required',
-        //  'partes'          => 'required',
-          'observaciones'   => 'required',
-          //'insumos'         => 'required',
-          'presupuesto_estimado'    => 'required',
+          //'observaciones'   => 'required',
+          //'presupuesto_estimado'    => 'required',
           'vendedor_id' => 'required',
-          'users_id' => 'required'
+          'users_id' => 'required',
+          'imei' => 'required',
+          'imei2' => 'required',
     ],
 
 
@@ -98,10 +92,7 @@ return [
       'clave_equipo.required'    => 'El campo clave equipo es requerido',
       'serie_partes.required'    => 'El campo serie partes es requerido',
       'falla_declarada.required'    => 'El campo falla declarada es requerido',
-    //  'observaciones_tecnicas.required'    => 'El campo informe tecnico inicial es requerido',
-    //  'partes.required'          => 'El campo informe tecnico final es requerido',
-      'observaciones.required'   => 'El campo observaciones es requerido',
-      //'insumos.required'         => 'El campo insumos es requerido',
+      'observaciones.required'   => 'El campo observaciones es requerido', 
       'presupuesto_estimado.required'    => 'El campo presupuesto estimado es requerido',
     ]
 

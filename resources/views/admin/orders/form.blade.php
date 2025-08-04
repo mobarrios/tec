@@ -43,7 +43,14 @@
             
             <div class="col-xs-4 form-group">
               {!! Form::label('Cliente') !!}
-              {!! Form::select('clients_id', $clients , isset($models->Cliente) ? $models->Cliente->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Cliente']) !!}
+              @if(isset($models))
+                <select name="clients_id" class="form-control select2 search-client">
+                  <option value="{{$models->Cliente->id}}"> {{$models->Cliente->name}}  {{$models->Cliente->last_name}} {{$models->Cliente->dni}} </option> 
+                </select>
+              @else
+                {!! Form::select('clients_id',[],null,['class'=> 'form-control select2 search-client']) !!}
+              @endif
+              {{-- {!! Form::select('clients_id', $clients , isset($models->Cliente) ? $models->Cliente->id : '' ,['class'=>'select2 form-control ', 'placeholder' => 'seleccionar Cliente']) !!} --}}
               {!! Form::hidden('users_id', $users_id) !!}
               {!! Form::hidden('vendedor_id', $users_id) !!}
             </div>
@@ -199,79 +206,84 @@
           </div>
           @endif
 
-
-
+       
+          
           <h3 class="box-title">Imágenes  </h3>
           <hr>
+
+          {{-- cuando viene un modelo que ya existe --}}
           @if(isset($models))
-            @if(isset($models->images))
-              @foreach($models->images->chunk(3) as $key => $imagen)
-              <div class="row">
-                @foreach($imagen as $key => $img)
-                  @if(isset($imagen[$key]))
-                  <div class="col-md-4 col-sm-4 col-xs-6">
-                    <a href="javascript:void(0)" data-spartanindexremove="0" style="right: 15px; top: 0px; background: rgb(237, 60, 32); border-radius: 3px; width: 25px; height: 25px; line-height: 25px; text-align: center; text-decoration: none; color: rgb(255, 255, 255); position: absolute !important;" class="spartan_remove_row"><i class="fa fa-times"></i></a>
-                 
-                    <a href="" class="btn_imagen" data-toggle="modal" data-target="#myModal" data-img="{{ $img->url}}">
-                      <img src="{{ asset($img->path)}}" class="img-responsive">
-                    </a>
-                    {!! Form::hidden('imageOld[]', $img->path) !!}
-                   </div>
+           
+             {{-- edicion del imei imei2 --}}
+            <div class="row">
+              <div class="col-xs-4">
+                <h4 class="text-left" style="margin-left: 15px;">Imei</h4>
+                <div id="imei">
+                  @if($models->images()->where('types_id', 1)->first())
+                  {!! Form::hidden('imei_old', $models->images()->where('types_id', 1)->first()->path) !!}
                   @endif
-                @endforeach
-              </div>
-              @endforeach
-              <br><br>
-            @endif 
-              <div class="row">
-                <div class="col-xs-12">
-                  <div id="coba"></div>
                 </div>
               </div>
+              <div class="col-xs-4">
+                <h4 class="text-left" style="margin-left: 15px;">Imei 2 (caso inferior al XS cargar foto del teléfono)</h4>
+                <div id="imei2">
+                  @if($models->images()->where('types_id', 2)->first())
 
-            @else
-              <div id="coba"></div>
-            @endif
-
-
-{{--             <div class="col-xs-2 form-group">
-              <strong> Controles</strong>
+                  {!! Form::hidden('imei2_old', $models->images()->where('types_id', 2)->first()->path) !!}
+                  @endif
+                </div>
+              </div>
             </div>
-            <div class="col-xs-2 form-group">
-              <strong> Testeo</strong>
-            </div>
-          </div> --}}
-          {{-- div class="row">
+      
+            {{-- imagenes adicionales --}}
          
-            @foreach($tasks as $task)
-            <div class="col-xs-2 form-group">
-              {!! $task->descripcion !!}
+            @if(isset($models->images))
+              @include('admin.orders.formImage')
+            @endif 
 
-            </div>
-            <div class="col-xs-2 form-group">
+          @else
 
-              <input class="checkbox" type="checkbox" name="estado[{{ $task->id }}]" value="1" >
+              <div class="row">
+                <div class="col-xs-4">
+                  <h4 class="text-left" style="margin-left: 15px;">Imei</h4>
+                  <div id="imei"></div>
+                </div>
+                <div class="col-xs-4">
+                  <h4 class="text-left" style="margin-left: 15px;">Imei 2 (caso inferior al XS cargar foto del teléfono)</h4>
+                  <div id="imei2"></div>
+                </div>
+              
+                <div class="col-xs-12">
+                  <h4 class="text-left" style="margin-left: 15px;">Fotos adicionales</h4>
+                  <div id="coba"></div>
+                </div>
 
-            </div>
-            
-            @endforeach
-          
-          </div> --}}
+              </div>
+
+          @endif
           
 @endsection
 @section('js')
 <script type="text/javascript" src="{{ asset('js/multiUpload.js') }}"></script>
+<script src="js/buscadorClientes.js"></script>
 <script type="text/javascript">
 
-  $("#coba").spartanMultiImagePicker({
-    fieldName:        'image[]',
-    maxCount:         5,
+
+$("#imei").spartanMultiImagePicker({
+    isRemove: false,
+    fieldName:        'imei',
+    maxCount:         1,
     rowHeight:        '200px',
-    groupClassName:   'col-md-4 col-sm-4 col-xs-6',
+    groupClassName:   'col-md-12 col-sm-12 col-xs-12',
     maxFileSize:      '',
+   
     placeholderImage: {
+      @if(isset($models) && $models->images()->where('types_id', 1)->first())
+        image: '{{ asset($models->images()->where('types_id', 1)->first()->path) }}',
+      @else
         image: '{{asset("images/add_image.png")}}',
-          width : '100%'
+      @endif
+      width : '100%'
     },
     dropFileLabel : "Drop Here",
     onAddRow:       function(index){
@@ -294,11 +306,80 @@
       alert('File size too big');
     }
   });
+
+  $("#imei2").spartanMultiImagePicker({
+    isRemove: false,
+    fieldName:        'imei2',
+    maxCount:         1,
+    rowHeight:        '200px',
+    groupClassName:   'col-md-12 col-sm-12 col-xs-12',
+    maxFileSize:      '',
+    placeholderImage: {
+      @if(isset($models) && $models->images()->where('types_id', 2)->first())
+        image: '{{ asset($models->images()->where('types_id', 2)->first()->path) }}',
+      @else
+        image: '{{asset("images/add_image.png")}}',
+      @endif
+        width : '100%'
+    },
+    dropFileLabel : "Drop Here",
+    onAddRow:       function(index){
+      console.log(index);
+      console.log('add new row');
+    },
+    onRenderedPreview : function(index){
+      console.log(index);
+      console.log('preview rendered');
+    },
+    onRemoveRow : function(index){
+      console.log(index);
+    },
+    onExtensionErr : function(index, file){
+      console.log(index, file,  'extension err');
+      alert('Please only input png or jpg type file')
+    },
+    onSizeErr : function(index, file){
+      console.log(index, file,  'file size too big');
+      alert('File size too big');
+    }
+  });
+
+  $("#coba").spartanMultiImagePicker({
+    isRemove: true,
+    fieldName:        'image[]',
+    maxCount:         5,
+    rowHeight:        '200px',
+    groupClassName:   'col-md-4 col-sm-4 col-xs-4',
+    maxFileSize:      '',
+    placeholderImage: {
+        image: '{{asset("images/add_image.png")}}',
+          width : '100%'
+    },
+    dropFileLabel : "Drop Here",
+    onAddRow:       function(index){
+      console.log(index);
+      console.log('add new row');
+    },
+    onRenderedPreview : function(index){
+      console.log(index);
+      console.log('preview rendered');
+    },
+    onRemoveRow : function(index, settings, input, parent){
+      console.log(index, settings, input, parent);
+    },
+    onExtensionErr : function(index, file){
+      console.log(index, file,  'extension err');
+      alert('Please only input png or jpg type file')
+    },
+    onSizeErr : function(index, file){
+      console.log(index, file,  'file size too big');
+      alert('File size too big');
+    }
+  });
   
   $(".spartan_remove_row" ).click(function(e) {       
     console.log($(this).parent().remove())
   });
-
 
 </script>
 @endsection
