@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ./docker/apache
+    container_name: tec_app
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "8080:80"
+    networks:
+      - laravel
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html/public
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+networks:
+  laravel:
+    driver: bridge
