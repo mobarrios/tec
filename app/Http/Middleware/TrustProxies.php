@@ -15,10 +15,11 @@ class TrustProxies
      */
     public function handle($request, Closure $next)
     {
-        // Confiar en todos los proxies (Nginx, Load Balancers, Cloudflare, etc.)
-        $request->setTrustedProxies([$request->getClientIp()], 
-            \Illuminate\Http\Request::HEADER_X_FORWARDED_ALL
-        );
+        // Para Laravel 5.1, configuramos manualmente los proxies de confianza
+        // Esto permite que Laravel detecte correctamente HTTPS detrás de un proxy
+        
+        // Confiar en el proxy actual
+        $request->setTrustedProxies(['127.0.0.1', $request->getClientIp()]);
 
         return $next($request);
     }

@@ -37,40 +37,34 @@ APP_URL=https://tudominio.com
 
 Si tu aplicación está detrás de un proxy, también necesitas confiar en los headers del proxy.
 
-Edita `/app/Http/Middleware/TrustProxies.php` (si no existe, créalo):
+El middleware `/app/Http/Middleware/TrustProxies.php` ya fue creado con esta configuración para Laravel 5.1:
 
 ```php
 <?php
 
 namespace App\Http\Middleware;
 
-use Illuminate\Http\Request;
-use Fideloper\Proxy\TrustProxies as Middleware;
+use Closure;
 
-class TrustProxies extends Middleware
+class TrustProxies
 {
-    /**
-     * Los proxies de confianza para esta aplicación.
-     *
-     * @var array
-     */
-    protected $proxies = '*';  // Confiar en todos los proxies
-
-    /**
-     * Los headers que deben usarse para detectar proxies.
-     *
-     * @var int
-     */
-    protected $headers = Request::HEADER_X_FORWARDED_ALL;
+    public function handle($request, Closure $next)
+    {
+        // Confiar en el proxy actual
+        $request->setTrustedProxies(['127.0.0.1', $request->getClientIp()]);
+        
+        return $next($request);
+    }
 }
 ```
 
-Y registrarlo en `/app/Http/Kernel.php`:
+Y está registrado en `/app/Http/Kernel.php`:
 
 ```php
 protected $middleware = [
+    \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+    \App\Http\Middleware\TrustProxies::class,  // <-- Agregado
     // ...
-    \App\Http\Middleware\TrustProxies::class,
 ];
 ```
 
