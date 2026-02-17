@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Collective\Html\FormBuilder;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,7 +15,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-       
+        // Forzar HTTPS en producción
+        if (config('app.env') === 'production') {
+            URL::forceScheme('https');
+        }
+        
+        // O forzar HTTPS siempre si tu servidor está detrás de un proxy/load balancer
+        // URL::forceScheme('https');
     }
 
     /**
