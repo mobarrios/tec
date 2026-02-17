@@ -29,3 +29,10 @@ COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY --from=composer:2.0 /usr/bin/composer /usr/bin/
 # Copy custom PHP config
 COPY php.ini /usr/local/etc/php/conf.d/99-custom.ini
+
+# Copiar y configurar entrypoint personalizado
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+# Usar el entrypoint personalizado
+ENTRYPOINT ["docker-entrypoint.sh"]

@@ -1,45 +1,28 @@
-# ✅ Cambios finales - HTTPS Support Fixed
+# ✅ Cambios finales - HTTPS Support + DOMPDF Fix
 
-## Problema resuelto
-El middleware `TrustProxies` tenía una constante incompatible con Laravel 5.1.
+## Problemas resueltos
 
-## Solución aplicada
-
-### Archivo: `app/Http/Middleware/TrustProxies.php`
-
-**Versión FINAL (Compatible con Laravel 5.1):**
-
-```php
-<?php
-
-namespace App\Http\Middleware;
-
-use Closure;
-
-class TrustProxies
-{
-    public function handle($request, Closure $next)
-    {
-        // Para Laravel 5.1, configuramos manualmente los proxies de confianza
-        // Esto permite que Laravel detecte correctamente HTTPS detrás de un proxy
-        
-        // Confiar en el proxy actual
-        $request->setTrustedProxies(['127.0.0.1', $request->getClientIp()]);
-
-        return $next($request);
-    }
-}
-```
+1. ✅ **DOMPDF error:** "continue targeting switch" 
+2. ✅ **HTTPS:** CSS no carga con HTTPS
+3. ✅ **TrustProxies error:** HEADER_X_FORWARDED_ALL incompatible con Laravel 5.1
+4. ✅ **Assets:** Configuración de Apache para servir correctamente
 
 ## Archivos modificados (versión final):
 
-1. ✅ `app/Providers/AppServiceProvider.php` - URL::forceScheme('https') en producción
-2. ✅ `app/Http/Middleware/TrustProxies.php` - Middleware compatible con Laravel 5.1
-3. ✅ `app/Http/Kernel.php` - TrustProxies registrado
-4. ✅ `docker/apache/000-default.conf` - Configuración de Apache para assets
-5. ✅ `docker/apache/Dockerfile` - Copia la configuración de Apache
-6. ✅ `docker/apache/fix-dompdf.sh` - Script para parchar DOMPDF
-7. ✅ `composer.json` - Hooks post-install para aplicar parches
+### 1. DOMPDF Patch - Automático en Docker
+- `docker/apache/fix-dompdf.sh` - Script que parchea DOMPDF
+- `docker/apache/docker-entrypoint.sh` - **NUEVO** - Aplica el parche al iniciar el contenedor
+- `docker/apache/Dockerfile` - Configurado para usar el entrypoint personalizado
+- `composer.json` - Hook post-install/update para aplicar el parche
+
+### 2. HTTPS Support
+- `app/Providers/AppServiceProvider.php` - URL::forceScheme('https') en producción
+- `app/Http/Middleware/TrustProxies.php` - Compatible con Laravel 5.1
+- `app/Http/Kernel.php` - TrustProxies registrado
+
+### 3. Apache Configuration
+- `docker/apache/000-default.conf` - Configuración correcta para servir assets
+- `docker/apache/Dockerfile` - Copia la configuración
 
 ## Para deployar en VPS:
 
