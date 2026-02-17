@@ -120,9 +120,16 @@ APP_URL=https://tudominio.com
 
 ### DOMPDF sigue fallando
 ```bash
-# Ejecutar manualmente el parche
+# Ejecutar manualmente el parche (parchea ambos archivos)
 docker-compose exec app bash /var/www/html/docker/apache/fix-dompdf.sh
+
+# O si no usas Docker:
+bash docker/apache/fix-dompdf.sh
 ```
+
+**Archivos que se parchean:**
+- `vendor/dompdf/dompdf/src/Dompdf.php`
+- `vendor/dompdf/dompdf/lib/Cpdf.php`
 
 ### CSS no carga con HTTPS
 ```bash
