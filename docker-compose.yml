@@ -19,3 +19,10 @@ services:
 networks:
   laravel:
     driver: bridge
+
+#     networks:
+#       - localhost_net
+
+# networks:
+#   localhost_net:
+#     external: true
