@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     libonig-dev \
     && docker-php-ext-install pdo pdo_mysql zip mbstring tokenizer xml gd
-    
+
 # Habilitar mod_rewrite
 RUN a2enmod rewrite
 
