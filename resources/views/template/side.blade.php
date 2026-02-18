@@ -98,15 +98,15 @@
                 </a>
                 <ul class="treeview-menu">
                 <li><a href="{{route('admin.orders.index' )}}" class="menu"><span>Ordenes Reparación</span></a></li>
-                <li><a href="{{route('admin.purcharses.index' )}}" class="menu"><span>Ordenes Compra</span></a></li>
+                <!-- <li><a href="{{route('admin.purcharses.index' )}}" class="menu"><span>Ordenes Compra</span></a></li>
                 <li><a href="{{route('admin.items.index' )}}" class="menu"><span>Ventas</span></a></li>
-                <li><a href="{{route('admin.herotech.index' )}}" class="menu"><span>Herotech</span></a></li>
+                <li><a href="{{route('admin.herotech.index' )}}" class="menu"><span>Herotech</span></a></li> -->
                 </ul>
                    
                     
             </li>
 
-            <li class="treeview">
+            <!-- <li class="treeview">
                 <a href="#">
                     <i class="fa fa-wrench "></i> <span>Swoptech</span>
                     <span class="pull-right-container">
@@ -122,7 +122,7 @@
                 </ul>
                    
                     
-            </li>
+            </li> -->
 
             {{--
             @permission('smallboxes.list')
