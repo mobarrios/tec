@@ -24,9 +24,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        // Force HTTPS scheme for URLs
-        \URL::forceScheme('https');
-
         parent::boot($router);
     }
 
