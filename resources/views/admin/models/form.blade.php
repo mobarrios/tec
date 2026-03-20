@@ -27,7 +27,7 @@
         {!! Form::label('Categorias') !!}
         {!! Form::select('categories_id[]', $categories , null ,['class'=>'selectMulti form-control' ,'multiple'=>'']) !!}
     </div>
-
+<!-- 
     <div class="col-xs-6 form-group">
         {!! Form::label('Proveedores') !!}
 
@@ -37,9 +37,12 @@
             {!! Form::select('providers_id[]', $providers , $models->providers_id,['class'=>'select2 form-control','multiple'=>'']) !!}
         @else
             {!! Form::select('providers_id[]', $providers , null ,['class'=>'select2 form-control','multiple'=>'']) !!}
-        @endif
+        @endif 
     </div>
-
+    
+        -->
+        <input type="hidden" name="providers_id[]" value="1">
+    
     <div class="col-xs-3 form-group">
         {!! Form::label('Estado') !!}
         {!! Form::select('status', $status ,null, ['class'=>'select2 form-control']) !!}
@@ -47,7 +50,7 @@
 
 
 
-    <div class="col-xs-3 form-group">
+    <!-- <div class="col-xs-3 form-group">
         {!! Form::label('Stock Min') !!}
         {!! Form::text('min_stock', null, ['class'=>'form-control']) !!}
     </div>
@@ -55,7 +58,7 @@
     <div class="col-xs-3 form-group">
         {!! Form::label('Descuenta Stock ') !!}
         {!! Form::select('stock_discount',[ 1 => 'Si' , 0 => 'No' ],null, ['class'=>'form-control']) !!}
-    </div>
+    </div> -->
 
 
     <div class="col-xs-3 form-group">
@@ -63,7 +66,7 @@
         {!! Form::file('image') !!}
     </div>
 
-    <div class="col-xs-12">
+    <!-- <div class="col-xs-12">
         <div class="col-xs-12 col-md-6">
             <h4>Stock Actual</h4>
             <table class="table">
@@ -87,7 +90,7 @@
                 <div class="input-group">
                     <div class="input-group-btn" style="font-size: 12px !important;">
                         {!! Form::select('additionals_id',$additionals,null,['class' => 'btn btn-default select2']) !!}
-                    </div><!-- /btn-group -->
+                    </div>
                     {!! Form::number('amount',null,['class' => 'form-control','placeholder' => '$']) !!}
                     {!! Form::hidden('entity',$section) !!}
                     {!! Form::hidden('id',$models->id) !!}
@@ -98,7 +101,7 @@
                         </button>
                     </div>
 
-                </div><!-- /input-group -->
+                </div>
                 <br>
 
 
@@ -118,7 +121,7 @@
                 </table>
             </div>
         @endif
-    </div>
+    </div> -->
 
 @endsection
 

@@ -58,10 +58,10 @@
           </div>
           
           <div class="row">  
-            <div class="col-xs-4 form-group">
+            <!-- <div class="col-xs-4 form-group">
               {!! Form::label('Part number') !!}
               {!! Form::text('part_number', null, ['class'=>'form-control']) !!}
-            </div>
+            </div> -->
             {{--
             <div class="col-xs-4 form-group">
               {!! Form::label('Modelo') !!}
@@ -99,10 +99,10 @@
               {!! Form::text('clave_equipo', null, ['class'=>'form-control']) !!}
             </div>
            
-            <div class="col-xs-4 form-group">
+            <!-- <div class="col-xs-4 form-group">
               {!! Form::label('Numero serie partes') !!}
               {!! Form::text('serie_partes', null, ['class'=>'form-control']) !!}
-            </div>
+            </div> -->
             <div class="col-xs-4 form-group">
               {!! Form::label('Descripción de la Falla') !!}
               {!! Form::textarea('falla_declarada', null, ['class'=>'form-control', 'rows' => 2, 'cols' => 40 ]) !!}
@@ -133,8 +133,8 @@
           </div>
           
           <div class="row">
-            {{--
-            <div class="col-xs-4 form-group">
+            
+            <!-- <div class="col-xs-4 form-group">
               {!! Form::label('Insumos') !!}
               {!! Form::text('insumos', null, ['class'=>'form-control']) !!}
             </div>
@@ -150,7 +150,7 @@
             <div class="col-xs-4 form-group">
               {!! Form::label('Color') !!}
               {!! Form::text('color', null, ['class'=>'form-control']) !!}
-            </div>
+            </div> -->
             <div class="col-xs-4 form-group">
               {!! Form::label('Observaciones') !!}
               {!! Form::textarea('observaciones', null, ['class'=>'form-control', 'rows' => 2, 'cols' => 40]) !!}
@@ -206,16 +206,19 @@
           </div>
           @endif
 
-       
+            {!! Form::hidden('imei', 'a') !!}
+            {!! Form::hidden('imei2','b') !!}
           
-          <h3 class="box-title">Imágenes  </h3>
+            
+          
+          <!-- <h3 class="box-title">Imágenes  </h3>
           <hr>
 
           {{-- cuando viene un modelo que ya existe --}}
           @if(isset($models))
            
-             {{-- edicion del imei imei2 --}}
-            <div class="row">
+             {{-- edicion del imei imei2 --}} -->
+            <!-- <div class="row">
               <div class="col-xs-4">
                 <h4 class="text-left" style="margin-left: 15px;">Imei</h4>
                 <div id="imei">
@@ -233,11 +236,10 @@
                   @endif
                 </div>
               </div>
-            </div>
-      
-            {{-- imagenes adicionales --}}
+            </div> -->
+
          
-            @if(isset($models->images))
+            <!-- @if(isset($models->images))
               @include('admin.orders.formImage')
             @endif 
 
@@ -260,7 +262,7 @@
 
               </div>
 
-          @endif
+          @endif -->
           
 @endsection
 @section('js')
@@ -268,7 +270,7 @@
 <script src="js/buscadorClientes.js"></script>
 <script type="text/javascript">
 
-
+/*
 $("#imei").spartanMultiImagePicker({
     isRemove: false,
     fieldName:        'imei',
@@ -380,7 +382,7 @@ $("#imei").spartanMultiImagePicker({
   $(".spartan_remove_row" ).click(function(e) {       
     console.log($(this).parent().remove())
   });
-
+*/
 </script>
 @endsection
 

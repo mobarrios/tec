@@ -6,7 +6,11 @@
             <td>{{$model->id}}</td>
             <td class="col-xs-1">
                 <div class="image">
-                    <img src="{{$model->images()->first()['path']}}" class="img-rounded" alt="Imagen" width="60px">
+                    @if($model->images()->first())
+                        <img src="{{$model->images()->first()['path']}}" class="img-rounded" alt="Imagen" width="60px" >
+                    @else
+                        <i class="fa fa-image fa-2x text-muted" title="Sin imagen"></i>
+                    @endif
                 </div>
             </td>
             <td>
@@ -31,7 +35,7 @@
             </td>
 
 
-            <td>
+            <!-- <td>
                 @if($model->stock == 0 )
                     <label class="label label-danger">Sin Stock</label>
                 @else
@@ -39,7 +43,7 @@
                     <label class="label label-success">{{$model->stock}}</label>
                 @endif
 
-            </td>
+            </td> -->
 
         </tr>
     @endforeach

@@ -432,7 +432,7 @@
 </div>
 
 
-<div class="col-xs-4">
+<!-- <div class="col-xs-4">
   <div class="box box-solid">
     <div class="box-header with-border">
       <h3 class="box-title">Imágenes </h3>
@@ -464,7 +464,7 @@
       @endif
     </div>
   </div>
-</div>
+</div> -->
 
 <div class="col-xs-4">
   <div class="box box-solid">

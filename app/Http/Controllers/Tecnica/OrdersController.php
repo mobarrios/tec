@@ -323,14 +323,14 @@ class OrdersController extends Controller
         $imei =  $this->request->imei;
         $imei2 =  $this->request->imei2;
 
-        $imei ? $this->uploadImage($imei, $model, 1) : '';
-        $imei2 ? $this->uploadImage($imei2, $model, 2) : '';
+        // $imei ? $this->uploadImage($imei, $model, 1) : '';
+        // $imei2 ? $this->uploadImage($imei2, $model, 2) : '';
 
 
-        if(!empty($imagen))
-            foreach ($imagen as $valor){
-                $this->uploadImage($valor, $model);
-            }
+        // if(!empty($imagen))
+        //     foreach ($imagen as $valor){
+        //         $this->uploadImage($valor, $model);
+        //     }
         
         // envio de email despues de crear una orden
         

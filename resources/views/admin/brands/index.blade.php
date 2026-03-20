@@ -7,7 +7,11 @@
                 <td>{{$model->id}}</td>
                 <td class="col-xs-1">
                     <div class="image">
-                        <img src="{{$model->images()->first()['path']}}" class="img-rounded" alt="Imagen" width="60px" >
+                        @if($model->images()->first())
+                            <img src="{{$model->images()->first()['path']}}" class="img-rounded" alt="Imagen" width="60px" >
+                        @else
+                            <i class="fa fa-image fa-2x text-muted" title="Sin imagen"></i>
+                        @endif
                     </div>
                 </td>
                 <td>{{$model->name }}</td>
