@@ -1,4 +1,4 @@
-version: '3.'
+version: '3.3'
 
 services:
   app:
@@ -9,13 +9,14 @@ services:
       - .:/var/www/html
     ports:
       - "8080:80"
-    networks:
-      - localhost_net
+        #networks:
+        # - localhost_net
     environment:
       - APACHE_DOCUMENT_ROOT=/var/www/html/public
     # extra_hosts:
     #   - "host.docker.internal:host-gateway"
 
 networks:
-  localhost_net:
-    external: true
+  default:
+    external:
+      name: donweb
