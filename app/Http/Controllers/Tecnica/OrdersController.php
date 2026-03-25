@@ -144,7 +144,7 @@ class OrdersController extends Controller
 
             }catch(Exception $e){
 
-                return redirect()->back()->withErrors(['No se ha podido enviar el email']);
+                return redirect()->back()->withErrors(['No se ha podido enviar el email al cliente. Error: '.$e->getMessage()]);
             }
 
             return redirect()->back()->withErrors(['Regitro Agregado Correctamente. Email enviado al cliente.']);

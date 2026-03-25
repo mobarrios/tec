@@ -7,7 +7,8 @@ rel='stylesheet' type='text/css'>
     <div class="container">
         <div class="row">
             <div class="col text-left">
-                <img alt="iCase" title="iCase" src="{{ URL::asset('/images/email/iCase-Fix-bco.svg') }}" class="headbar-logo-img">
+                <!-- <img alt="iCase" title="iCase" src="{{ URL::asset('/images/email/iCase-Fix-bco.svg') }}" class="headbar-logo-img"> -->
+                <h1>Carcasa</h1>
             </div>
             <div class="col d-none d-md-block text-right"></div>
         </div>
@@ -17,6 +18,7 @@ rel='stylesheet' type='text/css'>
 <style>
 
 .headbar{ width: 100%; min-height:150px; background-color: black; margin:0% 2% 2% 0%; float:left; box-sizing: border-box}
+.headbar h1{ color: white; }
 
 .headbar-logo-img {
 max-width: 100%;
@@ -123,7 +125,7 @@ float: left!important;
             
                                 
                                 
-        <div class="col">
+        <!-- <div class="col">
         <h4 class="h3-footer-menu">iCase</h4>
         <ul class="footer-menu">
 
@@ -251,7 +253,7 @@ float: left!important;
                 </div>
                 </div>
                 
-            </div>
+            </div> -->
 
  <style>
 
