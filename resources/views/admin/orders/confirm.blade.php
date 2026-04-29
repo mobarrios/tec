@@ -62,7 +62,6 @@
         </div>
         <hr>
         <p class="login-box-msg">{!! $message['msgOk'] !!} <br>
-        &mdash; iCase
         </p>
 
         <hr>

@@ -112,10 +112,12 @@
                   <tr valign="top">
                    
                       <td style="font-size: 1.2em;">
-                         Dir: {{$company->direccion}} <br>
-                         Tel: {{$company->telefono}} <br>
-                         Cuit: {{$company->cuit}}
-                      </td>
+                         Dir: {{ $model->Brancheables() ?  $model->Brancheables()->first()->branches->address : '' }}<br>
+                         Tel: {{ $model->Brancheables() ?  $model->Brancheables()->first()->branches->phone : '' }} <br>
+                         Cuit: {{$company->cuit}}<br>
+                         Email: {{ $model->Brancheables() ?  $model->Brancheables()->first()->branches->email : '' }} <br>
+  
+                    </td>
                   </tr>
               </table>
           </td>
