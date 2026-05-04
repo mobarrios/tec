@@ -188,11 +188,11 @@
                             <li class={{ Request::segment(2) == "financials" ? 'active' : '' }}><a href="{{route('admin.financials.index')}}"><span>Financiamientos</span></a></li>
                         @endpermission
                         --}}
-                        {{-- 
+                        
                         @permission('paymethods.list')
                             <li class={{ Request::segment(2) == "payMethods" ? 'active' : '' }}><a href="{{route('admin.payMethods.index')}}"><span>Metodos de Pago</span></a></li>
                         @endpermission
-                        --}}
+                       
                         {{--
                         @permission('checkbooks.list')
                             <li class={{ Request::segment(2) == "checkbooks" ? 'active' : '' }}><a href="{{route('admin.checkbooks.index')}}"><span>Chequera</span></a></li>

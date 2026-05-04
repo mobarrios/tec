@@ -350,7 +350,7 @@
 
             </div>
 
-
+            
 
           {{-- 
               @foreach($tasks as $task)
@@ -417,6 +417,13 @@
                   </div>
                 </td>
               </tr>
+              <tr>
+                <td width="45%">Método de Pago</td>
+                <td>
+                  {!! Form::select('pay_methods_id[]', $payMethods, isset($models->PayMethods) ? $models->PayMethods->pluck('id')->toArray() : null, ['class'=>'form-control select2', 'multiple'=>'multiple']) !!}
+                </td>
+              </tr>
+
               <tr>
                 <td></td>
                 <td><button type="submit" class="btn btn-primary pull-right">Guardar</button></td>

@@ -3,11 +3,11 @@ namespace App\Entities\Tecnica;
 
 
 use App\Entities\Admin\Brands;
-use App\Entities\Configs\User;
-use App\Entities\Tecnica\Orders;
-use App\Entities\Tecnica\Purcharses;
 use App\Entities\Admin\Clients;
 use App\Entities\Admin\Models;
+use App\Entities\Admin\PayMethods;
+use App\Entities\Configs\User;
+use App\Entities\Tecnica\Purcharses;
 use App\Entities\Tecnica\Equipments;
 use App\Entities\Entity;
 use DB;
@@ -49,6 +49,11 @@ class Orders extends Entity
 
     public function Services(){
         return $this->belongsToMany(Services::getClass())->withPivot('cantidad','id');
+    }
+
+    public function PayMethods()
+    {
+        return $this->belongsToMany(PayMethods::getClass(), 'orders_pay_methods', 'orders_id', 'pay_methods_id')->withTimestamps();
     }
 
     public function lasTOrdenEstados(){

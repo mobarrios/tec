@@ -18,6 +18,7 @@ use App\Http\Repositories\Tecnica\MovementsRepo;
 use App\Http\Repositories\Configs\UsersRepo;
 use App\Http\Repositories\Configs\CompanyRepo;
 use App\Http\Repositories\Configs\BranchesRepo;
+use App\Http\Repositories\Admin\PayMethodsRepo;
 use App\Entities\Tecnica\OrderStates;
 use App\Entities\Tecnica\Tasks;
 use App\Entities\Tecnica\TasksOrders;
@@ -34,7 +35,7 @@ use Validator;
 
 class OrdersController extends Controller
 {
-    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, StatesRepo $statesRepo, EquipmentsRepo $equipmentsRepo, ServicesRepo $servicesRepo, UsersRepo $usersRepo, OrderServices $orderServices, MovementsRepo $movementsRepo, CompanyRepo $companyRepo, ToPrintRepo $toPrintRepo, BranchesRepo $branchesRepo)
+    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo, ModelsRepo $modelsRepo, StatesRepo $statesRepo, EquipmentsRepo $equipmentsRepo, ServicesRepo $servicesRepo, UsersRepo $usersRepo, OrderServices $orderServices, MovementsRepo $movementsRepo, CompanyRepo $companyRepo, ToPrintRepo $toPrintRepo, BranchesRepo $branchesRepo, PayMethodsRepo $payMethodsRepo)
     {
 
         $this->request      = $request;
@@ -62,7 +63,8 @@ class OrdersController extends Controller
         $this->data['services']     = $servicesRepo->getModel()->all();
         $this->data['users']        = $usersRepo->getModel()->all()->lists('user_name','id');
         $this->data['branches']     = $branchesRepo->listsData('name', 'id');
-
+        $this->data['payMethods']     = $payMethodsRepo->listsData('name', 'id');
+      
 
     }
 
@@ -84,7 +86,7 @@ class OrdersController extends Controller
     	$this->data['models'] = $this->repo->find($this->route->getParameter('id'));
     	//$this->data['users']  = $usersRepo->ListsData('name','id');
         $this->data['letraChica'] = $toPrintRepo->ultimo();
-
+        
     	return view('admin.orders.detail')->with($this->data);
 
     }
@@ -176,8 +178,9 @@ class OrdersController extends Controller
         $model->pagado                  = $request->get('pagado');
 
         $this->updateable($model);
-
         $model->save();
+
+        $model->PayMethods()->sync($request->get('pay_methods_id', []));
 
         return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
 

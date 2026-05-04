@@ -3,6 +3,7 @@
 
 
  use App\Entities\Configs\Vouchers;
+ use App\Entities\Tecnica\Orders;
  use App\Entities\Entity;
 
  class Payments extends Entity
@@ -49,6 +50,11 @@
      public function Vouchers()
      {
          return $this->belongsToMany(Vouchers::class);
+     }
+
+     public function Orders()
+     {
+         return $this->belongsToMany(Orders::getClass(), 'orders_payments', 'payments_id', 'orders_id')->withTimestamps();
      }
 
      public function ModelCanje(){
