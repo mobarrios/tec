@@ -391,7 +391,7 @@
                 <td>
                   <div class="input-group">
                     <span class="input-group-addon">$</span>
-                    <input type="text" class="form-control input-sm" name="presupuesto_estimado" value="{{$models->presupuesto_estimado}}">
+                    <input type="text" class="form-control input-sm" name="presupuesto_estimado" value="{{$models->presupuesto_estimado}}" readonly>
 
                     <span class="input-group-addon">.00</span>
                   </div>
@@ -406,12 +406,13 @@
                   @endif
                 </td>
               </tr>
+              
               <tr>
                 <td width="45%">Abonado</td>
                 <td>
                   <div class="input-group">
                     <span class="input-group-addon">$</span>
-                    <input type="text" class="form-control input-sm" value="{{$models->pagado}}" name="pagado">
+                    <input type="text" class="form-control input-sm" name="pagado">
                     <span class="input-group-addon">.00</span>
                     {!! Form::hidden('orden_id', $models->id) !!}
                   </div>
@@ -420,7 +421,7 @@
               <tr>
                 <td width="45%">Método de Pago</td>
                 <td>
-                  {!! Form::select('pay_methods_id[]', $payMethods, isset($models->PayMethods) ? $models->PayMethods->pluck('id')->toArray() : null, ['class'=>'form-control select2', 'multiple'=>'multiple']) !!}
+                  {!! Form::select('pay_methods_id[]', $payMethods, null, ['class'=>'form-control select2']) !!}
                 </td>
               </tr>
 
@@ -435,6 +436,27 @@
           </div>
         </div>
     </div>
+    
+    @if(count($models->PayMethods) > 0)
+    <div class="col-xs-4">
+      <div class="box box-secondary box-solid">
+          <div class="box-body">
+            <table class="table table-striped">
+              <tbody>
+              @foreach($models->PayMethods as $model)
+              <tr>
+                
+                <td> {{ $model->name }}</td>
+                <td> $ {{ $model->pivot->presupuesto }}</td>
+                <td> {{ date("d-m-Y", strtotime($model->pivot->created_at )) }} </td>
+              </tr>
+              @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      @endif
   </div>
 </div>
 

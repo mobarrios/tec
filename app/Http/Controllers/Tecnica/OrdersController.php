@@ -174,13 +174,18 @@ class OrdersController extends Controller
     public function updatePagos(Request $request){
 
         $model                          = $this->repo->find($request->get('orden_id'));
-        $model->presupuesto_estimado    = $request->get('presupuesto_estimado');
-        $model->pagado                  = $request->get('pagado');
+        $payMethodId = $request->get('pay_methods_id');
+        //$model->presupuesto_estimado    = $request->get('presupuesto');
+        //$model->pagado                  = $request->get('pagado');
+        
+        //$this->updateable($model);
+        //$model->save();
 
-        $this->updateable($model);
-        $model->save();
+        //$model->PayMethods()->sync($request->get('pay_methods_id', []), $request->get('pagado'));
 
-        $model->PayMethods()->sync($request->get('pay_methods_id', []));
+        $model->PayMethods()->attach($payMethodId, [
+            'presupuesto' => $request->get('pagado')
+        ]);
 
         return redirect()->back()->withErrors(['Regitro Agregado Correctamente']);
 

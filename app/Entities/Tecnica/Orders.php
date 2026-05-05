@@ -53,7 +53,7 @@ class Orders extends Entity
 
     public function PayMethods()
     {
-        return $this->belongsToMany(PayMethods::getClass(), 'orders_pay_methods', 'orders_id', 'pay_methods_id')->withTimestamps();
+        return $this->belongsToMany(PayMethods::getClass(), 'orders_pay_methods', 'orders_id', 'pay_methods_id')->withPivot('presupuesto')->withTimestamps();
     }
 
     public function lasTOrdenEstados(){
