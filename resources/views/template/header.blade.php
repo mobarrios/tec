@@ -1,12 +1,12 @@
 <header class="main-header">
     <!-- Logo -->
     <a href="" class="logo">
-
+        {{-- {{ dd(auth()->user()->branchesActive->company->images) }} --}}
 
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini">
             <span class="fa-stack fa-xs">
-
+                {{-- {{ dd(auth()->user()->branchesActive->company) }} --}}
                 @if(auth()->user()->branchesActive->company->images->count() > 0)
                     <img src="{!! auth()->user()->branchesActive->company->images->first()->path !!}" alt="logo" class="img-responsive">
                 @endif

@@ -82,7 +82,8 @@
       </style>
   </head>
   <body>
-
+   
+  {{-- {{ dd( $company->images->first()->path) }} --}}
   <table style="width: 100%;">
       <tr>
           <td>
@@ -105,7 +106,7 @@
           </td>
          
       </tr>
-  
+
       <tr>
           <td>
               <table style="width: 100%;">

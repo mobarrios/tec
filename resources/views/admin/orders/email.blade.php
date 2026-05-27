@@ -4,27 +4,49 @@
 rel='stylesheet' type='text/css'>
 
 <div class="headbar">
-    <div class="container">
-        <div class="row">
-            <div class="col text-left">
-                <!-- <img alt="iCase" title="iCase" src="{{ URL::asset('/images/email/iCase-Fix-bco.svg') }}" class="headbar-logo-img"> -->
-                <h1>Carcasa</h1>
-            </div>
-            <div class="col d-none d-md-block text-right"></div>
-        </div>
-    </div>
+
+    <img 
+        alt="Carcasa Logo" 
+        title="Carcasa Logo" 
+        src="{{ $message->embed(public_path('images/carcasa/logo1/logo_blanco.png')) }}"
+        class="headbar-logo-img"
+    >
+
+    {{-- <img 
+        alt="Carcasa Iso" 
+        title="Carcasa Iso" 
+        src="{{ $message->embed(public_path('images/carcasa/iso/blanco.png')) }}"
+        class="headbar-iso-img"
+    > --}}
+
 </div>
 
 <style>
 
-.headbar{ width: 100%; min-height:150px; background-color: black; margin:0% 2% 2% 0%; float:left; box-sizing: border-box}
-.headbar h1{ color: white; }
+.headbar {
+    width: 100%;
+    background-color: #000000;
+    text-align: center;
+    padding: 35px 0 25px 0;
+    border-bottom: 4px solid #e5e5e5;
+}
 
 .headbar-logo-img {
-max-width: 100%;
-max-height: 150px;
-float: left!important;
+    width: 300px;
+    max-width: 80%;
+    height: auto;
+    display: block;
+    margin: 0 auto 10px auto;
 }
+
+.headbar-iso-img {
+    width: 35px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    opacity: 0.9;
+}
+
 .button {
   background-color: black;
   border: none;
@@ -56,7 +78,7 @@ float: left!important;
         </div>
     </div>
 
-     <style>
+    <style>
     	.container {
         margin-left: auto;
         margin-right: auto;
@@ -121,140 +143,10 @@ float: left!important;
 <footer>                            
     <div class="container-fluid px-md-5">
         <div class="row element-footer">
-            
-            
-                                
-                                
-        <!-- <div class="col">
-        <h4 class="h3-footer-menu">iCase</h4>
-        <ul class="footer-menu">
-
-            <li class="footer-menu-item">
-            <p>Alto Palermo</p>
-        </li>
-        
-            <li class="footer-menu-item">
-            <p>Abasto Shopping</p>
-        </li>
-            <li class="footer-menu-item">
-            <p>F. Parque Brown</p>
-        </li>
-            <li class="footer-menu-item">
-            <p>El Solar Shopping</p>
-        </li>
-            <li class="footer-menu-item">
-           <p>Devoto Shopping</p>
-        </li>
-            <li class="footer-menu-item">
-           <p>Galerias Pacífico</p>
-        </li>
-            <li class="footer-menu-item">
-            <p>Dot Baires</p>
-        </li>
-            <li class="footer-menu-item">
-            <p>Caballito Shopping Center</p>
-        </li>
-            <li class="footer-menu-item">
-            <p>Nordelta Centro Comercial</p>
-        </li>
-            
-    </ul>                   </div>
-
-                
-         <div class="col">
-         <h4 class="h3-footer-menu">.</h4>
-         <ul class="footer-menu">
-
-        <li class="footer-menu-item">
-            </li><li class="footer-menu-item">
-            <p>Unicenter</p>
-        </li>
-            <li class="footer-menu-item">
-           <p>Boulevard Shopping</p>
-        </li>
-            <li class="footer-menu-item">
-           <p>Alto Avellaneda</p>
-        </li>
-                <li class="footer-menu-item">
-            <p>Plaza Oeste</p>
-        </li>
-            <li class="footer-menu-item">
-            <p>Caballito, Av. Cabildo 2302</p>
-        </li>
-            <li class="footer-menu-item">
-           <p>Flores, Av. Rivadavia 6795</p>
-        </li>
-            <li class="footer-menu-item">
-           <p>Belgrano, Av. Cabildo 2302</p>
-        </li>
-            <li class="footer-menu-item">
-           <p>Alto Rosario</p>
-        </li></div>
-
-
-
-                <div class="col">
-                <h4 class="h3-footer-menu">Fix Station</h4>
-                <ul class="footer-menu">
-            <li class="footer-menu-item">
-            <p>Abasto Shopping</p>
-        </li>
-            <li class="footer-menu-item">
-            <p>F. Parque Brown</p>
-        </li>
-            <li class="footer-menu-item">
-            <p>Alto Palermo</p>
-        </li>
-            <li class="footer-menu-item">
-            <p>Dot Baires</p>
-        </li>
-            <li class="footer-menu-item">
-           <p>Unicenter</p>
-        </li>
-            <li class="footer-menu-item">
-           <p>Alto Avellaneda</p>
-        </li>
-            <li class="footer-menu-item">
-            <p>Plaza Oeste</p>
-
-        </li>
-            <li class="footer-menu-item">
-            <p>Belgrano, Av. Cabildo 2216</p>
-        </li>
-            <li class="footer-menu-item">
-            <p>Alto Rosario</p>
-        </li>
-
-
-    </ul></div></div>
-
-     </div>
-
-
-<div class="footer-legal">
-        <div class="container-fluid px-md-5">
-            <div class="row">
-            
-                <div class="col">
-
-            <li class="footer-menu-item">
-                  <p8>Línea directa de Whatssap</p8>
-
-              <a href="https://wa.me/5491139177183" target="_blank" class="btn-whatsapp" aria-label="Comunicate por WhatsApp">
-        <svg class="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"></path></svg></a>
-
-
-
-
-              </li>
-                </div>
-
-                                            
-                </div>
-                </div>
-                
-            </div> -->
-
+                              
+        </div>
+    </div>
+</footer>
  <style>
 
 .row {

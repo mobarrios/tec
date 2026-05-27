@@ -10,7 +10,7 @@
     @else
         {!! Form::open(['route'=>config('models.'.$section.'.storeRoute'),'files' => 'true']) !!}
     @endif
-
+   
     <div class="col-xs-12 form-group">
         {!! Form::label('Razón Social') !!}
         {!! Form::text('razon_social', null, ['class'=>'form-control']) !!}
@@ -44,7 +44,7 @@
         {!! Form::label('Inicio Actividad') !!}
         {!! Form::text('inicio_actividades', null, ['class'=>'form-control datePicker']) !!}
     </div>
-
+    
     <div class="col-xs-6 form-group">
         {!! Form::label('Logo') !!}
         {!! Form::file('image') !!}
